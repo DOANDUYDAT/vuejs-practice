@@ -1,12 +1,9 @@
 <template>
   <v-app-bar
-    color="#fcb69f"
+    color="blue"
     dark
-    :shrink-on-scroll="$vuetify.breakpoint.smAndUp"
-    :dense="$vuetify.breakpoint.smAndDown"
-    src="https://picsum.photos/1920/1080?random"
+    dense
     app
-    
   >
     <template v-slot:img="{ props }">
       <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
@@ -26,31 +23,45 @@
       <v-icon>mdi-cart-plus</v-icon>
     </v-btn>
 
-    <v-btn icon>
+    <v-btn icon v-if="loginStatus" @click="logout">
       <v-icon>mdi-account-circle</v-icon>
     </v-btn>
 
-    
+    <template v-if="!loginStatus && $vuetify.breakpoint.smAndUp">
+      <login-dialog></login-dialog>
+      <register-dialog></register-dialog>
+    </template>
 
     <!-- <v-btn icon>
       <v-icon>mdi-dots-vertical</v-icon>
-    </v-btn> -->
+    </v-btn>-->
   </v-app-bar>
 </template>
 
 <script>
+import LoginDialog from "./LoginDialog";
+import RegisterDialog from "./RegisterDialog";
+
+import { mapState } from "vuex";
+
 export default {
-  data() {
-    return {
-      
-    }
+  components: {
+    LoginDialog,
+    RegisterDialog
   },
- 
+  data() {
+    return {};
+  },
+
   computed: {
-    
-  }, 
+    ...mapState({
+      loginStatus: state => state.login.loginStatus
+    })
+  },
   methods: {
-  
+    logout() {
+      this.$store.dispatch("login/logout");
+    }
   }
 };
 </script>

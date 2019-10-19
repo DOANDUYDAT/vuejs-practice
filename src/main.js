@@ -1,10 +1,10 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
-import router from './router';
-import vuetify from '@/plugins/vuetify';
+import router from './router'
+import vuetify from '@/plugins/vuetify'
 
-
-import App from './App';
+import store from './store'
+import App from './App'
 
 
 // Vue.config.productionTip = false
@@ -16,6 +16,7 @@ new Vue({
   template: '<App/>',
   components: { App },
   router: router,
-  vuetify: vuetify
+  vuetify: vuetify,
+  store: store
 });
 
