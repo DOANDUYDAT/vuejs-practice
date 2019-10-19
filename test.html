@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<script>
-import axios from 'axios'
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-axios.get('http://it4421.pythonanywhere.com/products/')
-.then(function (response) {
-// handle success
-console.log(response);
-})
-.catch(function (error) {
-// handle error
-console.log(error);
-})
-.then(function () {
-// always executed
-});
-</script>
+</head>
+
+<body>
+    <div id="info"></div>
+</body>
+
+</html>
+<script src="./test.js"></script>

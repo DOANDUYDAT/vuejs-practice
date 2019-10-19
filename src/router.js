@@ -1,7 +1,8 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld.vue';
-import TodoList from '@/components/TodoList.vue';
+import TodoList from '@/components/TodoList'
+import ProductList from '@/components/ProductList'
 
 Vue.use(Router);
 
@@ -15,7 +16,7 @@ export default new Router({
         {
             path: '/home',
             name: 'Home',
-            component: TodoList
+            component: ProductList
         },
         {
             path: '/todo-app',
