@@ -7,7 +7,12 @@ import Login from './components/Login'
 
 
 
-// Vue.config.productionTip = false
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full';
+
+// No 'extend' is needed
+
+// Use the provider immediately
+Vue.component('ValidationProvider', ValidationProvider);
 
 /* eslint-disable no-new */
 

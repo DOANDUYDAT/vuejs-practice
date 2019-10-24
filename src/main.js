@@ -6,8 +6,12 @@ import vuetify from '@/plugins/vuetify'
 import store from './store'
 import App from './App'
 
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full';
 
-// Vue.config.productionTip = false
+// No 'extend' is needed
+
+// Use the provider immediately
+Vue.component('ValidationProvider', ValidationProvider);
 
 /* eslint-disable no-new */
 
