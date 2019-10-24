@@ -1,12 +1,15 @@
 <template>
+<v-app>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-btn text v-on="on">Đăng nhập</v-btn>
     </template>
     <v-card flat>
-      <v-card-title class="layout justify-center">
-        <span class="headline">ĐĂNG NHẬP</span>
-      </v-card-title>
+        <v-toolbar color="primary" dark flat>
+            <v-card-title class="layout justify-center">
+                <span class="headline">ĐĂNG NHẬP</span>
+            </v-card-title>
+        </v-toolbar>
       <v-card-text>
         <v-container>
           <v-row>
@@ -24,10 +27,10 @@
                 required
               ></v-text-field>
             </v-col> -->
-            <v-col cols="8">
+            <v-col md="8" offset-md="2">
               <v-text-field prepend-icon="mdi-email" label="Email*" required></v-text-field>
             </v-col>
-            <v-col cols="8">
+            <v-col md="8" offset-md="2">
               <v-text-field prepend-icon="mdi-lock" label="Password*" type="password" required></v-text-field>
             </v-col>
             <!-- <v-col cols="12" sm="6">
@@ -40,20 +43,21 @@
                 multiple
               ></v-autocomplete>
             </v-col> -->
+            <v-col md="6" offset-md="3">
+              <v-card-actions>
+                <v-btn color="primary" class="layout justify-center" @click="login">Login</v-btn>
+              </v-card-actions>
+            </v-col>
           </v-row>
         </v-container>
-        <small>*indicates required field</small>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="login">Login</v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
+  </v-app>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+
 
 export default {
   data() {
@@ -61,15 +65,11 @@ export default {
       dialog: false
     };
   },
-  computed: {
-    ...mapState({
-      loginStatus: state => state.login.loginStatus
-    })
-  },
+  
   methods: {
     login() {
         this.dialog = false
-        this.$store.dispatch('login/login')
+        
     }
   }
 };
