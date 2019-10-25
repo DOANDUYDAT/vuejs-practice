@@ -19,24 +19,27 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field prepend-icon="mdi-email" label="Email*" v-model="email"></v-text-field>
-                <span>{{ errors[0] }}</span>
+                <v-text-field prepend-icon="mdi-email" label="Email" v-model="email"></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+                <!-- <ul>
+                  <li v-for="error in errors"> {{ error}}</li>
+                </ul> -->
               </ValidationProvider>
             </v-col>
             <v-col md="8" offset-md="2">
               <ValidationProvider
                 name="password"
-                rules="required|min:8"
+                rules="required|min:8|alpha_num"
                 v-slot="{ errors }"
                 :bails="false"
               >
                 <v-text-field
                   prepend-icon="mdi-lock"
-                  label="Password*"
+                  label="Password"
                   type="password"
                   v-model="password"
                 ></v-text-field>
-                <span>{{ errors[0] }}</span>
+                <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
             <v-col md="6" offset-md="3">
@@ -65,7 +68,13 @@ export default {
   methods: {
     login() {
       this.dialog = false;
+      this.email = '';
+      this.password = ''
     }
   }
 };
 </script>
+
+<style scoped>
+
+</style>

@@ -8,8 +8,7 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        // app: './src/main.js',
-        login: './src/login.js'
+        app: './src/main.js',
     },
     
     output: {
