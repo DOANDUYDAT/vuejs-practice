@@ -3,7 +3,7 @@ import Vue from 'vue'
 import router from './router'
 import vuetify from '@/plugins/vuetify'
 
-import store from './store'
+import store from './_store'
 import App from './App'
 
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full';
@@ -14,6 +14,9 @@ import { ValidationProvider } from 'vee-validate/dist/vee-validate.full';
 Vue.component('ValidationProvider', ValidationProvider);
 
 /* eslint-disable no-new */
+
+
+
 
 new Vue({
   el: '#app',
