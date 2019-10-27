@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue';
+
+import HelloWorld from '@/components/HelloWorld.vue'
 import TodoList from '@/components/TodoList'
 import ProductList from '@/components/ProductList'
+import ShoppingCartPage from '@/cart/ShoppingCartPage'
 
 Vue.use(Router);
 
@@ -24,6 +26,10 @@ export default new Router({
                 default: HelloWorld,
                
             }
+        },
+        {
+            path: '/shopping-cart-page',
+            component: ShoppingCartPage
         }
     ],
     
