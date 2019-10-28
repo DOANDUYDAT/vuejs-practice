@@ -29,15 +29,18 @@
             <v-col cols="12" md="8" class="mx-auto">
               <ValidationProvider
                 name="password"
-                rules="required|min:8|alpha_num"
+                rules="required|min:8"
                 v-slot="{ errors }"
                 :bails="false"
               >
                 <v-text-field
-                  prepend-icon="mdi-lock"
+                  :type="showPassword ? 'text' : 'password'" 
                   label="Password"
-                  type="password"
                   v-model="password"
+                  counter="16"
+                  prepend-icon="mdi-lock"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="showPassword = !showPassword"
                 ></v-text-field>
 
                 <span class="red--text">{{ errors[0] }}</span>
@@ -69,6 +72,7 @@ export default {
     return {
       dialog: false,
       email: "",
+      showPassword: false,
       password: "",
       checkbox: "",
       value: ""
