@@ -18,15 +18,17 @@
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-
+ <template>
+      <cart-dialog>
     <v-btn icon>
       <v-icon>mdi-cart-plus</v-icon>
     </v-btn>
-
+    </cart-dialog>
+  </template>
     <v-btn icon v-if="loginStatus" @click="logout">
       <v-icon>mdi-account-circle</v-icon>
     </v-btn>
-
+   
     <template v-if="!loginStatus && $vuetify.breakpoint.smAndUp">
       <login-dialog></login-dialog>
       <register-dialog></register-dialog>
@@ -41,13 +43,15 @@
 <script>
 import LoginDialog from "./LoginDialog";
 import RegisterDialog from "./RegisterDialog";
+import CartDialog from "./CartDialog";
 
 import { mapState } from "vuex";
 
 export default {
   components: {
     LoginDialog,
-    RegisterDialog
+    RegisterDialog, 
+    CartDialog
   },
   data() {
     return {};
