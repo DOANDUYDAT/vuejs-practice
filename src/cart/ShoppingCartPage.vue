@@ -17,6 +17,7 @@ export default {
     components: {
         ProductList1,
         ShoppingCart
-    }
+    },
+
 }
 </script>

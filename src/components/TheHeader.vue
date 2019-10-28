@@ -1,10 +1,5 @@
 <template>
-  <v-app-bar
-    color="blue"
-    dark
-    dense
-    app
-  >
+  <v-app-bar color="blue" dark dense app>
     <template v-slot:img="{ props }">
       <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
     </template>
@@ -18,21 +13,18 @@
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
- <template>
-      <cart-dialog>
-    <v-btn icon>
-      <v-icon>mdi-cart-plus</v-icon>
-    </v-btn>
-    </cart-dialog>
-  </template>
+    <template>
+      <cart-dialog></cart-dialog>
+    </template>
+   
     <v-btn icon v-if="loginStatus" @click="logout">
       <v-icon>mdi-account-circle</v-icon>
     </v-btn>
-   
-    <template v-if="!loginStatus && $vuetify.breakpoint.smAndUp">
-      <login-dialog></login-dialog>
-      <register-dialog></register-dialog>
-    </template>
+
+    <!-- <template v-if="!loginStatus && $vuetify.breakpoint.smAndUp"> -->
+    <login-dialog></login-dialog>
+    <register-dialog></register-dialog>
+    <!-- </template> -->
 
     <!-- <v-btn icon>
       <v-icon>mdi-dots-vertical</v-icon>
@@ -50,7 +42,7 @@ import { mapState } from "vuex";
 export default {
   components: {
     LoginDialog,
-    RegisterDialog, 
+    RegisterDialog,
     CartDialog
   },
   data() {

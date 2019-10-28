@@ -10,11 +10,16 @@ const state = {
 // getters
 const getters = {
   cartProducts: (state, getters, rootState) => {
+    if (!state.items.length) {
+      return [];
+    }
     return state.items.map(({ id, quantity }) => {
       const product = rootState.products.all.find(product => product.id === id)
       return {
+        id: product.id,
         title: product.title,
         price: product.price,
+        image: product.image,
         quantity
       }
     })
@@ -69,9 +74,18 @@ const mutations = {
     })
   },
 
+  removeProductFromCart (state, { id }) {
+    state.items = state.items.filter(item => item.id !== id)
+  },
+
   incrementItemQuantity (state, { id }) {
     const cartItem = state.items.find(item => item.id === id)
     cartItem.quantity++
+  },
+
+  decrementItemQuantity (state, { id }) {
+    const cartItem = state.items.find(item => item.id === id)
+    cartItem.quantity--
   },
 
   setCartItems (state, { items }) {
