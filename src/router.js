@@ -30,6 +30,10 @@ export default new Router({
         {
             path: '/shopping-cart-page',
             component: ShoppingCartPage
+        },
+        {
+            path: '/shopping-cart-page-2',
+            component: ShoppingCartPage
         }
     ],
     

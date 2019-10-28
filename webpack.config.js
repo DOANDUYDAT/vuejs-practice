@@ -10,7 +10,7 @@ module.exports = {
     entry: {
         app: './src/main.js',
     },
-    
+
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
@@ -29,7 +29,7 @@ module.exports = {
             // Or if using full build of Vue (runtime + compiler)
             'vue$': 'vue/dist/vue.esm.js',     // 'vue/dist/vue.common.js' for webpack 1
             '@': path.resolve(__dirname, 'src'),
-            
+
         }
     },
     module: {
@@ -78,6 +78,12 @@ module.exports = {
                             outputPath: 'fonts/'
                         }
                     }
+                ],
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader',
                 ],
             },
         ],
