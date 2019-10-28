@@ -47,7 +47,7 @@
             </v-col>
           </v-row>
           <v-row align="center" justify="center">
-            <v-col cols="12" md="5" class="py-0">
+            <v-col cols="12" md="10" class="py-0">
               <v-menu
                 v-model="menudate"
                 :close-on-content-click="false"
@@ -67,13 +67,13 @@
                 <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
               </v-menu>
             </v-col>
-            <v-col cols="12" md="5" class="py-0">
+            <!-- <v-col cols="12" md="5" class="py-0">
               <v-autocomplete
                 :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                 label="Address"
                 
               ></v-autocomplete>
-            </v-col>
+            </v-col> -->
           </v-row>
           <v-row>
             <v-col cols="12" md="10" class="mx-auto py-0">
@@ -149,12 +149,15 @@ export default {
     return {
       dialog: false,
       email: "",
-      showPassword: false,
-      showConfirmPassword: false,
+      confirmPassword: "",
       password: "",
+      lastName: "",
+      firstName: "",
       value: "",
       date: null,
       menudate: false,
+      showPassword: false,
+      showConfirmPassword: false,
     };
   },
   computed: {
