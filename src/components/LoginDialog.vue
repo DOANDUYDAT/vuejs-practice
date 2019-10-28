@@ -4,73 +4,91 @@
       <v-btn text v-on="on">Đăng nhập</v-btn>
     </template>
     <v-card flat>
-      <v-card-title class="layout justify-center">
-        <span class="headline">ĐĂNG NHẬP</span>
-      </v-card-title>
+      <v-toolbar color="primary" dark flat>
+        <v-card-title class="layout justify-center">
+          <span class="headline">ĐĂNG NHẬP</span>
+        </v-card-title>
+      </v-toolbar>
       <v-card-text>
         <v-container>
           <v-row>
-            <!-- <v-col cols="12" sm="6" md="4">
-              <v-text-field label="Legal first name*" required></v-text-field>
+            <v-col cols="12" md="8" class="mx-auto">
+              <ValidationProvider
+                name="email"
+                rules="required|email"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field prepend-icon="mdi-email" label="Email" v-model="email"></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+                <!-- <ul>
+                  <li v-for="error in errors"> {{ error}}</li>
+                </ul>-->
+              </ValidationProvider>
             </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
+            <v-col cols="12" md="8" class="mx-auto">
+              <ValidationProvider
+                name="password"
+                rules="required|min:8"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  :type="showPassword ? 'text' : 'password'" 
+                  label="Password"
+                  v-model="password"
+                  counter="16"
+                  prepend-icon="mdi-lock"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="showPassword = !showPassword"
+                ></v-text-field>
+
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
             </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                label="Legal last name*"
-                hint="example of persistent helper text"
-                persistent-hint
-                required
-              ></v-text-field>
-            </v-col> -->
-            <v-col cols="8">
-              <v-text-field prepend-icon="mdi-email" label="Email*" required></v-text-field>
-            </v-col>
-            <v-col cols="8">
-              <v-text-field prepend-icon="mdi-lock" label="Password*" type="password" required></v-text-field>
-            </v-col>
-            <!-- <v-col cols="12" sm="6">
-              <v-select :items="['0-17', '18-29', '30-54', '54+']" label="Age*" required></v-select>
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-autocomplete
-                :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                label="Interests"
-                multiple
-              ></v-autocomplete>
-            </v-col> -->
           </v-row>
+          <v-row align="center" justify="center">
+            <v-col cols="12" md="4">
+              <v-checkbox v-model="checkbox" :label="'Duy trì đăng nhập'"></v-checkbox>
+            </v-col>
+            <v-col cols="12" md="4" class="text-md-end">
+              <a href>Quên mật khẩu?</a>
+            </v-col>
+          </v-row>
+          <v-col md="6" offset-md="3">
+            <v-card-actions>
+              <v-btn color="primary" class="layout justify-center" @click="login">Login</v-btn>
+            </v-card-actions>
+          </v-col>
         </v-container>
-        <small>*indicates required field</small>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="login">Login</v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   data() {
     return {
-      dialog: false
+      dialog: false,
+      email: "",
+      showPassword: false,
+      password: "",
+      checkbox: "",
+      value: ""
     };
-  },
-  computed: {
-    ...mapState({
-      loginStatus: state => state.login.loginStatus
-    })
   },
   methods: {
     login() {
-        this.dialog = false
-        this.$store.dispatch('login/login')
+      this.dialog = false;
+    },
+    clear() {
+      this.password = "";
+      this.email = "";
     }
   }
 };
 </script>
+
+<style scoped>
+</style>

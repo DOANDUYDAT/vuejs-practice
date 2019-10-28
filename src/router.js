@@ -22,9 +22,7 @@ export default new Router({
             path: '/todo-app',
             components: {
                 default: HelloWorld,
-                view1: HelloWorld, 
-                view2: HelloWorld,
-                view3: HelloWorld
+               
             }
         }
     ],

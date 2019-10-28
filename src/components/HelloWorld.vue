@@ -1,68 +1,92 @@
 <template>
-  <v-container>
-    <v-row no-gutters>
-      <v-col cols="12">
-        <v-row no-gutters class="grey lighten-5" style="height: 300px;">
-          <v-card v-for="n in 3" :key="n" class="ma-3 pa-6" outlined tile>
-            <p class="text-break">SUBDERMATOGLYPHIChellothoango</p>Column
-          </v-card>
-        </v-row>
-      </v-col>
-      <v-col cols="12">
-        <v-row justify="center">
-          <v-col cols="6" md="2">
-            <v-select label="Align"></v-select>
-          </v-col>
+  <v-dialog v-model="dialog" max-width="600px">
+    <template v-slot:activator="{ on }">
+      <v-btn text v-on="on">Đăng nhập</v-btn>
+    </template>
+    <v-card flat>
+      <v-toolbar color="primary" dark flat>
+        <v-card-title>
+          <span class="headline">ĐĂNG NHẬP</span>
+        </v-card-title>
+      </v-toolbar>
+      <v-card-text>
+        <v-container>
+          <v-row>
+            <v-col cols="12" md="8" class="mx-auto">
+              <ValidationProvider
+                name="email"
+                rules="required|email"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field prepend-icon="mdi-email" label="Email" v-model="email"></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+                <!-- <ul>
+                  <li v-for="error in errors"> {{ error}}</li>
+                </ul>-->
+              </ValidationProvider>
+            </v-col>
+            <v-col cols="12" md="8" class="mx-auto">
+              <ValidationProvider
+                name="password"
+                rules="required|min:8|alpha_num"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  prepend-icon="mdi-lock"
+                  label="Password"
+                  type="password"
+                  v-model="password"
+                ></v-text-field>
 
-          <v-col cols="6" md="2">
-            <v-select label="Justify"></v-select>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row align="center" justify="center">
+            <v-col cols="12" md="4">
+              <v-checkbox v-model="checkbox" :label="'Duy trì đăng nhập'"></v-checkbox>
+            </v-col>
+            <v-col cols="12" md="4" class="text-md-end">
+              <a href>Quên mật khẩu?</a>
+            </v-col>
+          </v-row>
+          <v-col md="6" offset-md="3">
+            <v-card-actions>
+              <v-btn color="primary" class="layout justify-center" @click="login">Login</v-btn>
+            </v-card-actions>
           </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-    <v-btn @click="loadData">loading</v-btn>
-  </v-container>
+          <!-- </v-row> -->
+        </v-container>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  name: "HelloWorld",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      dialog: false,
+      email: "",
+      password: "",
+      checkbox: false
     };
   },
-  mounted() {
-    this.$nextTick(function() {
-      // Code that will run only after the
-      // entire view has been rendered
-
-      axios.get('http://it4421.pythonanywhere.com/products/')
-    });
-  },
   methods: {
-    loadData: function() {}
+    login() {
+      // this.dialog = false;
+      this.$validator.validateAll();
+    },
+    clear() {
+      this.password = "";
+      this.email = "";
+      this.$validator.reset();
+    }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

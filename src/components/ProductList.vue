@@ -38,24 +38,24 @@ export default {
     }
   },
   mounted() {
-    axios
-      .get(
-        "https://gorest.co.in/public-api/photos?access-token=SLlGFifk6F6MSa8ZjPTKcQN_qOXxpOlbjw6r",
-        {
-          mode: "cors"
-        }
-      )
-      .then(response => {
-        console.log(response.data.result);
-        this.allProduct = response.data.result;
-        console.log("all product: " + this.allProduct.length);
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
-      .finally(function() {
-        // always executed
-      });
+    // axios
+    //   .get(
+    //     "https://gorest.co.in/public-api/photos?access-token=SLlGFifk6F6MSa8ZjPTKcQN_qOXxpOlbjw6r",
+    //     {
+    //       mode: "cors"
+    //     }
+    //   )
+    //   .then(response => {
+    //     console.log(response.data.result);
+    //     this.allProduct = response.data.result;
+    //     console.log("all product: " + this.allProduct.length);
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   })
+    //   .finally(function() {
+    //     // always executed
+    //   });
   }
 };
 </script>
