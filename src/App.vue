@@ -15,7 +15,10 @@
             <router-link to="/todo-app">Todo App</router-link>
           </v-col>
           <v-col>
-            <router-link to="/home">Home</router-link>
+            <router-link to="/shopping-cart-page">shopping cart page</router-link>
+          </v-col>
+          <v-col>
+            <router-link to="/shopping-cart-page-2">shopping cart page 2</router-link>
           </v-col>
         </v-row>
       </v-container>

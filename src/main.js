@@ -15,7 +15,9 @@ Vue.component('ValidationProvider', ValidationProvider);
 
 /* eslint-disable no-new */
 
+import { currency } from './currency'
 
+Vue.filter('currency', currency)
 
 
 new Vue({

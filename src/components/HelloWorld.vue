@@ -1,5 +1,7 @@
 <template>
+  
   <v-dialog v-model="dialog" max-width="600px">
+    <v-img :src="require('../assets/logo.png')"></v-img>
     <template v-slot:activator="{ on }">
       <v-btn text v-on="on">Đăng nhập</v-btn>
     </template>
