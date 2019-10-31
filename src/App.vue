@@ -3,10 +3,13 @@
   <v-app>
     <the-header></the-header>
     <!-- Sizes your content based upon application components -->
+    <!-- <alert v-for="(alert, id) in alerts" :key="id" :alert="alert"></alert> -->
+    
     <v-content>
       <!-- Provides the application the proper gutter -->
-
+      <alert-list></alert-list>
       <v-container>
+        
         <v-row no-gutters>
           <v-col>
             <router-link to="/">Home</router-link>
@@ -26,7 +29,7 @@
         <v-row>
           <v-col cols="2">
             <ul>
-              <li v-for="i in 10" :key="i"> item {{ i }}</li>
+              <li v-for="i in 10" :key="i">item {{ i }}</li>
             </ul>
           </v-col>
           <v-col cols="10">
@@ -50,16 +53,39 @@
 import TodoList from "./components/TodoList";
 import TheHeader from "./components/TheHeader";
 import TheFooter from "./components/TheFooter";
+import AlertList from "./components/AlertList";
+
+import { mapState } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      // alerts: [
+      //   {
+      //     type: "success",
+      //     message: "alert success"
+      //   },
+      //   {
+      //     type: "error",
+      //     message: "alert error"
+      //   }
+      // ]
+    };
   },
 
   components: {
     TodoList,
     TheHeader,
-    TheFooter
+    TheFooter,
+    AlertList
+  },
+  computed: {
+    ...mapState({
+      alerts: state => state.alert.all
+    }),
+    // alertReverse() {
+    //   return this.alerts.reverse()
+    // }
   },
   methods: {
     clickBar: function() {

@@ -1,94 +1,41 @@
 <template>
-  
-  <v-dialog v-model="dialog" max-width="600px">
-    <v-img :src="require('../assets/logo.png')"></v-img>
-    <template v-slot:activator="{ on }">
-      <v-btn text v-on="on">Đăng nhập</v-btn>
-    </template>
-    <v-card flat>
-      <v-toolbar color="primary" dark flat>
-        <v-card-title>
-          <span class="headline">ĐĂNG NHẬP</span>
-        </v-card-title>
-      </v-toolbar>
-      <v-card-text>
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="8" class="mx-auto">
-              <ValidationProvider
-                name="email"
-                rules="required|email"
-                v-slot="{ errors }"
-                :bails="false"
-              >
-                <v-text-field prepend-icon="mdi-email" label="Email" v-model="email"></v-text-field>
-                <span class="red--text">{{ errors[0] }}</span>
-                <!-- <ul>
-                  <li v-for="error in errors"> {{ error}}</li>
-                </ul>-->
-              </ValidationProvider>
-            </v-col>
-            <v-col cols="12" md="8" class="mx-auto">
-              <ValidationProvider
-                name="password"
-                rules="required|min:8|alpha_num"
-                v-slot="{ errors }"
-                :bails="false"
-              >
-                <v-text-field
-                  prepend-icon="mdi-lock"
-                  label="Password"
-                  type="password"
-                  v-model="password"
-                ></v-text-field>
+  <div>
+    <ValidationObserver ref="observer" v-slot="{ invalid, passes }">
+      <ValidationProvider vid="field1" v-slot="{ errors }">
+        <input style="border: 1px solid black;" type="text" v-model="field1" />
+        <span id="error1">{{ errors[0] }}</span>
+      </ValidationProvider>
 
-                <span class="red--text">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </v-col>
-          </v-row>
-          <v-row align="center" justify="center">
-            <v-col cols="12" md="4">
-              <v-checkbox v-model="checkbox" :label="'Duy trì đăng nhập'"></v-checkbox>
-            </v-col>
-            <v-col cols="12" md="4" class="text-md-end">
-              <a href>Quên mật khẩu?</a>
-            </v-col>
-          </v-row>
-          <v-col md="6" offset-md="3">
-            <v-card-actions>
-              <v-btn color="primary" class="layout justify-center" @click="login">Login</v-btn>
-            </v-card-actions>
-          </v-col>
-          <!-- </v-row> -->
-        </v-container>
-      </v-card-text>
-    </v-card>
-  </v-dialog>
+      <ValidationProvider vid="field2" v-slot="{ errors }">
+        <input style="border: 1px solid black;" type="text" v-model="field2" />
+        <span id="error2">{{ errors[0] }}</span>
+      </ValidationProvider>
+    </ValidationObserver>
+  </div>
 </template>
 
 <script>
+// import { ValidationObserver } from 'vee-validate/dist/vee-validate.full';
 export default {
   data() {
     return {
-      dialog: false,
-      email: "",
-      password: "",
-      checkbox: false
+      field1: '',
+      field2: '',
     };
   },
+  
   methods: {
-    login() {
-      // this.dialog = false;
-      this.$validator.validateAll();
-    },
-    clear() {
-      this.password = "";
-      this.email = "";
-      this.$validator.reset();
+    submit() {
+      // No need to worry about form state
+      // as this is only runs when the form is valid
+      // 🐿 ship it
+      this.$refs.observer.validate();
+      this.$refs.observer.setErrors({
+        field1: ["wrong"],
+        field2: ["whoops"]
+      });
     }
   }
 };
+// Somewhere in a method, set the errors for each field.
 </script>
-
-<style scoped>
-</style>

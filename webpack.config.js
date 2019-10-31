@@ -98,5 +98,10 @@ module.exports = {
             inject: true
         }),
     ],
-
+    externals: {
+        // global app config object
+        config: JSON.stringify({
+            apiUrl: 'http://it4421.pythonanywhere.com'
+        })
+    }
 };

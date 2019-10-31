@@ -11,55 +11,62 @@
       </v-toolbar>
       <v-card-text>
         <v-container>
-          <v-row>
-            <v-col cols="12" md="8" class="mx-auto">
-              <ValidationProvider
-                name="email"
-                rules="required|email"
-                v-slot="{ errors }"
-                :bails="false"
-              >
-                <v-text-field prepend-icon="mdi-email" label="Email" v-model="email"></v-text-field>
-                <span class="red--text">{{ errors[0] }}</span>
-                <!-- <ul>
+          <ValidationObserver ref="observer" v-slot="{ invalid }" tag="form">
+            <v-row>
+              <v-col cols="12" md="8" class="mx-auto">
+                <ValidationProvider
+                  name="email"
+                  rules="required|email"
+                  v-slot="{ errors }"
+                  :bails="false"
+                >
+                  <v-text-field prepend-icon="mdi-email" label="Email" v-model="email"></v-text-field>
+                  <span class="red--text">{{ errors[0] }}</span>
+                  <!-- <ul>
                   <li v-for="error in errors"> {{ error}}</li>
-                </ul>-->
-              </ValidationProvider>
-            </v-col>
-            <v-col cols="12" md="8" class="mx-auto">
-              <ValidationProvider
-                name="password"
-                rules="required|min:8"
-                v-slot="{ errors }"
-                :bails="false"
-              >
-                <v-text-field
-                  :type="showPassword ? 'text' : 'password'" 
-                  label="Password"
-                  v-model="password"
-                  counter="16"
-                  prepend-icon="mdi-lock"
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="showPassword = !showPassword"
-                ></v-text-field>
+                  </ul>-->
+                </ValidationProvider>
+              </v-col>
+              <v-col cols="12" md="8" class="mx-auto">
+                <ValidationProvider
+                  name="password"
+                  rules="required|min:8"
+                  v-slot="{ errors }"
+                  :bails="false"
+                >
+                  <v-text-field
+                    :type="showPassword ? 'text' : 'password'"
+                    label="Password"
+                    v-model="password"
+                    counter="16"
+                    prepend-icon="mdi-lock"
+                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                    @click:append="showPassword = !showPassword"
+                  ></v-text-field>
 
-                <span class="red--text">{{ errors[0] }}</span>
-              </ValidationProvider>
+                  <span class="red--text">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+            <v-row align="center" justify="center">
+              <v-col cols="12" md="4">
+                <v-checkbox v-model="checkbox" :label="'Duy trì đăng nhập'"></v-checkbox>
+              </v-col>
+              <v-col cols="12" md="4" class="text-md-end">
+                <a href>Quên mật khẩu?</a>
+              </v-col>
+            </v-row>
+            <v-col md="6" offset-md="3">
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  class="layout justify-center"
+                  @click="submit"
+                  :disabled="invalid"
+                >Login</v-btn>
+              </v-card-actions>
             </v-col>
-          </v-row>
-          <v-row align="center" justify="center">
-            <v-col cols="12" md="4">
-              <v-checkbox v-model="checkbox" :label="'Duy trì đăng nhập'"></v-checkbox>
-            </v-col>
-            <v-col cols="12" md="4" class="text-md-end">
-              <a href>Quên mật khẩu?</a>
-            </v-col>
-          </v-row>
-          <v-col md="6" offset-md="3">
-            <v-card-actions>
-              <v-btn color="primary" class="layout justify-center" @click="login">Login</v-btn>
-            </v-card-actions>
-          </v-col>
+          </ValidationObserver>
         </v-container>
       </v-card-text>
     </v-card>
@@ -75,17 +82,26 @@ export default {
       showPassword: false,
       password: "",
       checkbox: "",
-      value: ""
+      
     };
   },
   methods: {
-    login() {
-      this.dialog = false;
+    async submit() {
+      try {
+        const isValid = await this.$refs.observer.validate();
+        this.$store.dispatch("alert/addAlert", {
+          type: "success",
+          message: "Login successfully!"
+        });
+        this.dialog = false;
+      } catch (error) {
+        this.$store.dispatch("alert/addAlert", {
+          type: "error",
+          message: "Login error!"
+        });
+      }
     },
-    clear() {
-      this.password = "";
-      this.email = "";
-    }
+    
   }
 };
 </script>
