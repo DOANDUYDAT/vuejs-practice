@@ -5,6 +5,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import TodoList from '@/components/TodoList'
 import ProductList from '@/components/ProductList'
 import ChangePasswordPage from '@/change-password/ChangePasswordPage'
+import ShoppingCartPage from '@/cart/ShoppingCartPage'
 
 Vue.use(Router);
 
