@@ -39,6 +39,7 @@
                     </v-card>
                   </td>
                   <td class="text-center">{{ product.title }}</td>
+                  
 
                   <td class="text-center">
                     <v-card flat class="py-12">
@@ -67,7 +68,7 @@
                       </v-card-text>
                     </v-card>
                   </td>
-                  <td class="text-end">{{ product.price }}</td>
+                  <td class="text-end">{{ formatCurrency(product.price) }}đ</td>
                   <td class="text-center">
                     <v-btn text color="red" @click="removeProductFromCart({ id: product.id })">
                       <v-icon>mdi-delete</v-icon>
@@ -86,7 +87,7 @@
                   </v-card-text>
                 </td>
                 <td class="text-end">
-                  <span style="color: red" data-tongtien>{{ total | currency }}</span>
+                  <span style="color: red" data-tongtien>{{ total }}đ</span>
                 </td>
               </tfoot>
             </v-simple-table>
@@ -135,6 +136,7 @@
 </template>
   <script>
 import { mapGetters, mapState, mapMutations } from "vuex";
+import { formatCurrency } from '../_api/format-currency';
 
 export default {
   data() {
@@ -156,7 +158,7 @@ export default {
         numberProduct += product.quantity;
       });
       return numberProduct;
-    }
+    },
   },
   methods: {
     checkout(products) {
@@ -166,7 +168,10 @@ export default {
       "incrementItemQuantity",
       "decrementItemQuantity",
       "removeProductFromCart"
-    ])
+    ]),
+    formatCurrency(total) {
+      return formatCurrency(total);
+    }
   }
 };
 </script>

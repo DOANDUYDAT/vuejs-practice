@@ -1,5 +1,5 @@
 import shop from '../../_api/shop'
-
+import { formatCurrency } from '../../_api/format-currency'
 // initial state
 // shape: [{ id, quantity }]
 const state = {
@@ -18,17 +18,19 @@ const getters = {
       return {
         id: product.id,
         title: product.title,
-        price: product.price,
-        image: product.image,
+        price: product.gia_khuyen_mai.length > 0 ? product.gia_khuyen_mai : product.gia_ban_le,
+        image: product.images[0],
         quantity
       }
     })
   },
 
   cartTotalPrice: (state, getters) => {
-    return getters.cartProducts.reduce((total, product) => {
+    let total =  getters.cartProducts.reduce((total, product) => {
       return total + product.price * product.quantity
-    }, 0)
+    }, 0);
+    let result = formatCurrency(total);
+    return result;
   }
 }
 

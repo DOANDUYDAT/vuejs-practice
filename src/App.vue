@@ -26,10 +26,10 @@
         </v-row>
       </v-container>
       <v-container>
-        <v-row>
+        <v-row no-gutters>
           <v-col cols="2">
-            <ul>
-              <li v-for="i in 10" :key="i">item {{ i }}</li>
+            <ul style="padding: 0;">
+              <li style="list-style: none;" v-for="i in 10" :key="i">item {{ i }}</li>
             </ul>
           </v-col>
           <v-col cols="10">
