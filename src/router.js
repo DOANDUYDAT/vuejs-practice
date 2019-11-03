@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld.vue'
 import TodoList from '@/components/TodoList'
 import ProductList from '@/components/ProductList'
-import ShoppingCartPage from '@/cart/ShoppingCartPage'
+import ChangePasswordPage from '@/change-password/ChangePasswordPage'
 
 Vue.use(Router);
 
@@ -32,8 +32,8 @@ export default new Router({
             component: ShoppingCartPage
         },
         {
-            path: '/shopping-cart-page-2',
-            component: ShoppingCartPage
+            path: '/change-password',
+            component: ChangePasswordPage
         }
     ],
     

@@ -21,7 +21,7 @@
             <router-link to="/shopping-cart-page">shopping cart page</router-link>
           </v-col>
           <v-col>
-            <router-link to="/shopping-cart-page-2">shopping cart page 2</router-link>
+            <router-link to="/change-password">change password</router-link>
           </v-col>
         </v-row>
       </v-container>
