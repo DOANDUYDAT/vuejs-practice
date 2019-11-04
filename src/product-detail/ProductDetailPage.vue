@@ -1,13 +1,21 @@
 <template>
-  <v-row>
-    <slide-image-product :product="product"></slide-image-product>
+  <v-container>
+    <v-row style="background-color: white">
+      <v-col cols="5">
+        <slide-image-product :product="product"></slide-image-product>
+      </v-col>
+      <v-col cols="7">
+        <info-order-product :product="product"></info-order-product>
+      </v-col>
+    </v-row>
     <spec-product-table :product="product"></spec-product-table>
-  </v-row>
+  </v-container>
 </template>
 
 <script>
 import SlideImageProduct from "./SlideImageProduct";
 import SpecProductTable from "./SpecProductTable";
+import InfoOrderProduct from "./InfoOrderProduct";
 
 export default {
   data() {
@@ -17,7 +25,8 @@ export default {
   },
   components: {
     SlideImageProduct,
-    SpecProductTable
+    SpecProductTable,
+    InfoOrderProduct
   },
   mounted() {
     this.product = {
@@ -33,7 +42,8 @@ export default {
         "https://file.services.teko.vn/media/62/22/1566006603.4493387_190800499-1.jpg",
         "https://file.services.teko.vn/media/8/26/1566006603.6469312_190800499-2.jpg",
         "https://file.services.teko.vn/media/51/91/1566006603.8728101_190800499-3.jpg",
-        "https://file.services.teko.vn/media/10/88/1566006604.0197575_190800499-4.jpg"
+        "https://file.services.teko.vn/media/10/88/1566006604.0197575_190800499-4.jpg",
+        
       ],
       thong_so_ky_thuat: {
         thong_tin_chung: {

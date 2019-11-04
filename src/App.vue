@@ -30,12 +30,8 @@
       </v-container>
       <v-container>
         <v-row no-gutters>
-          <v-col cols="2">
-            <ul style="padding: 0;">
-              <li style="list-style: none;" v-for="i in 10" :key="i">item {{ i }}</li>
-            </ul>
-          </v-col>
-          <v-col cols="10">
+          
+          <v-col cols="12">
             <template>
               <router-view></router-view>
               <router-view name="view1"></router-view>

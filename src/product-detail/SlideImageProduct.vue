@@ -1,29 +1,29 @@
 <template>
-  <v-container>
+  <v-col>
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-img 
-          height="300"
+          height="auto"
           width="auto"
           contain
           :src="imageBig ? imageBig : firstImage"
-          class="mx-auto"
+          
         ></v-img>
         
       </v-col>
     </v-row>
     <v-row align="center" justify="center">
       <template v-for="(image, index) in productImages">
-        <v-col cols="1" class="px-1" :key="index">
+        <v-col cols="2" class="px-1" :key="index">
           <v-hover v-slot:default="{ hover }">
             <v-card :class="{ 'on-hover': hover }" hover raised>
-              <v-img height="auto" width="auto" :src="image" @mouseover="mouseOver(image)"></v-img>
+              <v-img height="auto" width="auto" :src="image" @mouseover="mouseOver(image)" contain></v-img>
             </v-card>
           </v-hover>
         </v-col>
       </template>
     </v-row>
-  </v-container>
+  </v-col>
 </template>
 
 <script>
