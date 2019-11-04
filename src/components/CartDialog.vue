@@ -49,7 +49,7 @@
                           <v-btn-toggle dense>
                             <v-btn
                               :disabled="product.quantity > 1 ? false : true"
-                              @click="decrementItemQuantity({ id: product.id })"
+                              @click="decrementItemQuantity({ id: product.id, quantity: 1 })"
                               min-width="2rem"
                             >
                               <span>-</span>
@@ -58,7 +58,7 @@
                               <span>{{ product.quantity > 1 ? product.quantity : 1 }}</span>
                             </v-btn>
                             <v-btn
-                              @click="incrementItemQuantity({ id: product.id })"
+                              @click="incrementItemQuantity({ id: product.id, quantity: 1 })"
                               min-width="2rem"
                             >
                               <span>+</span>

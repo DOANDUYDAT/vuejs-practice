@@ -23,9 +23,10 @@ const mutations = {
     state.all = products
   },
 
-  decrementProductInventory (state, { id }) {
+  decrementProductInventory (state, { id, quantity }) {
     const product = state.all.find(product => product.id === id)
-    product.inventory--
+    product.inventory -= quantity
+    console.log(product.inventory)
   }
 }
 

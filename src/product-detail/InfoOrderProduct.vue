@@ -31,7 +31,7 @@
     <v-divider></v-divider>
     <v-row align="center">
       <v-col cols="3">Chọn số lượng</v-col>
-      <v-col cols="9">
+      <v-col cols="3">
         <v-btn-toggle dense>
           <v-btn
             :disabled="quantity > 1 ? false : true"
@@ -48,14 +48,12 @@
           </v-btn>
         </v-btn-toggle>
       </v-col>
+      <v-col cols="6">Có sẵn {{ product.inventory }} sản phẩm</v-col>
     </v-row>
     <v-row>
-      <v-col cols="4" >
-      <v-btn color="red" dark>mua ngay</v-btn>
-
-      </v-col>
+      
       <v-col cols="8">
-      <v-btn outlined color="red">
+      <v-btn outlined color="red" :disabled="!product.inventory" @click="addProductToCart({ product: product, quantity: quantity })">
         <v-icon>mdi-cart-plus</v-icon>Thêm vào giỏ hàng
       </v-btn>
       </v-col>
@@ -65,6 +63,7 @@
 
 <script>
 import { formatCurrency } from "../_api/format-currency";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -104,7 +103,8 @@ export default {
     },
     decrementItemQuantity() {
       this.quantity--;
-    }
+    },
+    ...mapActions("cart", ["addProductToCart"])
   }
 };
 </script>
