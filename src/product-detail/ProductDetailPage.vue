@@ -1,18 +1,23 @@
 <template>
-  <slide-image-product :product="product"></slide-image-product>
+  <v-row>
+    <slide-image-product :product="product"></slide-image-product>
+    <spec-product-table :product="product"></spec-product-table>
+  </v-row>
 </template>
 
 <script>
 import SlideImageProduct from "./SlideImageProduct";
+import SpecProductTable from "./SpecProductTable";
 
 export default {
   data() {
     return {
-        product: {}
+      product: {}
     };
   },
   components: {
-    SlideImageProduct
+    SlideImageProduct,
+    SpecProductTable
   },
   mounted() {
     this.product = {

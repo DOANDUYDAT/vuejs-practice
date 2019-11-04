@@ -2,20 +2,14 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-img v-if="imageBig"
+        <v-img 
           height="300"
           width="auto"
           contain
-          :src="imageBig"
+          :src="imageBig ? imageBig : firstImage"
           class="mx-auto"
         ></v-img>
-        <v-img v-else
-          height="300"
-          width="auto"
-          contain
-          :src="firstImage"
-          class="mx-auto"
-        ></v-img>
+        
       </v-col>
     </v-row>
     <v-row align="center" justify="center">
