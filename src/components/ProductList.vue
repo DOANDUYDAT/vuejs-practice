@@ -32,7 +32,7 @@ export default {
           topProduct.push(this.products[i]);
         }
       }
-      console.log(topProduct);
+      // console.log(topProduct);
       return topProduct;
     },
     ...mapState({

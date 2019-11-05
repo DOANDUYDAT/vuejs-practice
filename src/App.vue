@@ -31,20 +31,20 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-container>
-        <v-row no-gutters>
+      <!-- <v-container> -->
+        <!-- <v-row no-gutters> -->
           
-          <v-col cols="12">
-            <template>
+          <!-- <v-col cols="12"> -->
+            <!-- <template> -->
               <router-view></router-view>
               <router-view name="view1"></router-view>
               <router-view name="view2"></router-view>
               <router-view name="view3"></router-view>
-            </template>
-          </v-col>
-        </v-row>
+            <!-- </template> -->
+          <!-- </v-col> -->
+        <!-- </v-row> -->
         <!-- If using vue-router -->
-      </v-container>
+      <!-- </v-container> -->
     </v-content>
 
     <the-footer></the-footer>
