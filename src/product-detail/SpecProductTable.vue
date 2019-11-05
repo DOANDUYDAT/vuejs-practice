@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="5" class="mx-auto">
+  <v-col class="mx-auto">
     <v-simple-table v-if="specProduct !== undefined">
       <template v-slot:default>
         <thead>
