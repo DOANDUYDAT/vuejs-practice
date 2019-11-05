@@ -9,7 +9,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
 
-      <v-btn :disabled="!product.inventory" @click="addProductToCart(product)">MUA</v-btn>
+      <v-btn :disabled="!product.inventory" @click="addProductToCart({ product: product, quantity: 1 })">MUA</v-btn>
       <!-- <v-btn @click="addProductToCart(product)">MUA</v-btn> -->
     </v-card-actions>
   </v-card>
