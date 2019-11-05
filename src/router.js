@@ -7,6 +7,7 @@ import ProductList from '@/components/ProductList'
 import ChangePasswordPage from '@/change-password/ChangePasswordPage'
 import ShoppingCartPage from '@/cart/ShoppingCartPage'
 import ProductDetailPage from '@/product-detail/ProductDetailPage'
+import ProfilePage from '@/profile/ProfilePage'
 
 Vue.use(Router);
 
@@ -40,6 +41,10 @@ export default new Router({
         {
             path: '/product-detail-page',
             component: ProductDetailPage
+        },
+        {
+            path: '/profile',
+            component: ProfilePage
         }
     ],
     

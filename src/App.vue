@@ -26,6 +26,9 @@
           <v-col>
             <router-link to="/product-detail-page">Product detail</router-link>
           </v-col>
+          <v-col>
+            <router-link to="/profile">Profile</router-link>
+          </v-col>
         </v-row>
       </v-container>
       <v-container>

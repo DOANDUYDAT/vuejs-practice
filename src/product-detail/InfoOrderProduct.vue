@@ -3,6 +3,15 @@
     <v-row>
       <v-col cols="12">
         <h2>{{ product.title }}</h2>
+        <v-rating
+          v-model="rating"
+          color="red"
+          background-color="grey lighten-2"
+          empty-icon="mdi-heart-outline"
+          full-icon="mdi-heart"
+          half-icon="mdi-heart-half-full"
+          half-increments
+        ></v-rating>
       </v-col>
     </v-row>
     <v-divider></v-divider>
@@ -51,11 +60,15 @@
       <v-col cols="6">Có sẵn {{ product.inventory }} sản phẩm</v-col>
     </v-row>
     <v-row>
-      
       <v-col cols="8">
-      <v-btn outlined color="red" :disabled="!product.inventory" @click="addProductToCart({ product: product, quantity: quantity })">
-        <v-icon>mdi-cart-plus</v-icon>Thêm vào giỏ hàng
-      </v-btn>
+        <v-btn
+          outlined
+          color="red"
+          :disabled="!product.inventory"
+          @click="addProductToCart({ product: product, quantity: quantity })"
+        >
+          <v-icon>mdi-cart-plus</v-icon>Thêm vào giỏ hàng
+        </v-btn>
       </v-col>
     </v-row>
   </v-col>
@@ -68,6 +81,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      rating: 4.5,
       quantity: 1
     };
   },
