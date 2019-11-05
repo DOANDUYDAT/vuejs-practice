@@ -2,7 +2,7 @@
   <v-container>
     <comment-list-item v-for="(comment, index) in listComment" :key="index" :comment="comment"></comment-list-item>
     <div class="text-center my-4">
-      <v-pagination v-model="page" :length="lenAllComments" total-visible="5"></v-pagination>
+      <v-pagination v-model="page" :length="lenAllComments" total-visible="8"></v-pagination>
     </div>
   </v-container>
 </template>
@@ -48,7 +48,7 @@ export default {
     listComment() {
       let listComment = [];
       let index = this.page - 1;
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 3; i++) {
         if (index < this.lenAllComments) {
           listComment.push(this.allComments[index]);
           index++;
