@@ -1,5 +1,6 @@
 <template>
   <v-col class="mx-auto">
+    <div class="headline">Thông số kỹ thuật</div>
     <v-simple-table v-if="specProduct !== undefined">
       <template v-slot:default>
         <thead>
@@ -60,7 +61,7 @@
         </template>
         <v-card tile class="spec-product">
           <v-toolbar flat>
-            <v-toolbar-title class="flex-grow-1 text-center">Thông số kỹ thuật</v-toolbar-title>
+            <v-toolbar-title class="flex-grow-1 text-center headline">Thông số kỹ thuật</v-toolbar-title>
             <v-btn icon @click="dialog = false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
