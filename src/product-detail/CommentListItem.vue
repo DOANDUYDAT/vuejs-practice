@@ -1,5 +1,5 @@
 <template>
-  <v-card tile elevation="10" outlined>
+  <v-card tile elevation="2" outlined>
     <v-card-title>{{ comment.username }}</v-card-title>
     <v-card-text>
       <v-rating
