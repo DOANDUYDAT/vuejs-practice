@@ -9,6 +9,7 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
+    <suggest-product></suggest-product>
     <v-row>
       <v-col cols="12">
         <rating-product :product="product"></rating-product>
@@ -17,6 +18,9 @@
       <v-col cols="5">
         <spec-product-table :product="product"></spec-product-table>
       </v-col>
+      <!-- <v-col cols="12"> -->
+
+      <!-- </v-col> -->
     </v-row>
   </v-container>
 </template>
@@ -27,6 +31,7 @@ import SpecProductTable from "./SpecProductTable";
 import InfoOrderProduct from "./InfoOrderProduct";
 import CommentList from "./CommentList";
 import RatingProduct from "./RatingProduct";
+import SuggestProduct from "./SuggestProduct";
 import { mapState } from "vuex";
 
 export default {
@@ -40,7 +45,8 @@ export default {
     SpecProductTable,
     InfoOrderProduct,
     CommentList,
-    RatingProduct
+    RatingProduct,
+    SuggestProduct
   },
   computed: {
     ...mapState({

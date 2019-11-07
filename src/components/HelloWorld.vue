@@ -1,34 +1,51 @@
 <template>
-  <div>
-    <test-component @addSize="addSize"></test-component>
-    <p :style="{fontSize: postSize + 'rem'}">hello</p>
-  </div>
+  <v-sheet
+    class="mx-auto"
+    elevation="8"
+    max-width="800"
+  >
+    <v-slide-group
+      v-model="model"
+      class="pa-4"
+      active-class="success"
+      show-arrows
+    >
+      <v-slide-item
+        v-for="n in 15"
+        :key="n"
+        v-slot:default="{ active, toggle }"
+      >
+        <v-card
+          :color="active ? undefined : 'grey lighten-1'"
+          class="ma-4"
+          height="200"
+          width="100"
+          @click="toggle"
+        >
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
+          >
+            <v-scale-transition>
+              <v-icon
+                v-if="active"
+                color="white"
+                size="48"
+                v-text="'mdi-close-circle-outline'"
+              ></v-icon>
+            </v-scale-transition>
+          </v-row>
+        </v-card>
+      </v-slide-item>
+    </v-slide-group>
+  </v-sheet>
 </template>
-<script>
-import TestComponent from "./TestComponent";
 
-export default {
-  components: {
-    TestComponent
-  },
-  data() {
-    return {
-      tab: 1,
-      postSize: 1
-    };
-  },
-  methods: {
-    handleChange(number1) {
-      console.log("helsda " + this.tab);
-      console.log(number1);
-    },
-    handleClick(ClickEvent) {
-      console.log(JSON.stringify(ClickEvent) + " click");
-    },
-    addSize(number) {
-      console.log(number);
-      this.postSize += number;
-    }
+<script>
+  export default {
+    data: () => ({
+      model: null,
+    }),
   }
-};
 </script>

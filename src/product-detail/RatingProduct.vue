@@ -2,7 +2,7 @@
   <v-container>
     <div class="headline mb-2">Đánh giá sản phẩm</div>
     <v-row>
-      <v-col cols="4">
+      <v-col cols="5">
         <v-card class="mx-auto" height="100%" flat>
           <v-img height="200px" :src="product.images[0]" contain></v-img>
           <v-card-text>

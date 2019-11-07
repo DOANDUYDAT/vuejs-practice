@@ -4,12 +4,11 @@
     <the-header></the-header>
     <!-- Sizes your content based upon application components -->
     <!-- <alert v-for="(alert, id) in alerts" :key="id" :alert="alert"></alert> -->
-    
+
     <v-content>
       <!-- Provides the application the proper gutter -->
       <alert-list></alert-list>
       <v-container>
-        
         <v-row no-gutters>
           <v-col>
             <router-link to="/">Home</router-link>
@@ -31,20 +30,12 @@
           </v-col>
         </v-row>
       </v-container>
-      <!-- <v-container> -->
-        <!-- <v-row no-gutters> -->
-          
-          <!-- <v-col cols="12"> -->
-            <!-- <template> -->
-              <router-view></router-view>
-              <router-view name="view1"></router-view>
-              <router-view name="view2"></router-view>
-              <router-view name="view3"></router-view>
-            <!-- </template> -->
-          <!-- </v-col> -->
-        <!-- </v-row> -->
-        <!-- If using vue-router -->
-      <!-- </v-container> -->
+      <template>
+        <router-view></router-view>
+        <router-view name="view1"></router-view>
+        <router-view name="view2"></router-view>
+        <router-view name="view3"></router-view>
+      </template>
     </v-content>
 
     <the-footer></the-footer>
@@ -84,7 +75,7 @@ export default {
   computed: {
     ...mapState({
       alerts: state => state.alert.all
-    }),
+    })
     // alertReverse() {
     //   return this.alerts.reverse()
     // }
