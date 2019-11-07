@@ -1,8 +1,11 @@
 <template>
   <v-container>
     <v-card>
-      <v-tabs grow v-model="tab">
-        <v-tab v-for="(filter, i) in filterFollowStar" :key="i">{{ filter.star }}({{ filter.number }})</v-tab>
+      <v-tabs grow v-model="tab" @change="changeTab">
+        <v-tab
+          v-for="(filter, i) in filterFollowStar"
+          :key="i"
+        >{{ filter.star }}({{ filter.number }})</v-tab>
       </v-tabs>
     </v-card>
     <comment-list-item v-for="(comment, index) in listComment" :key="index" :comment="comment"></comment-list-item>
@@ -25,7 +28,7 @@ export default {
       allComments: [...allComments],
       page: 1,
       tab: 0,
-      
+
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     };
@@ -54,6 +57,7 @@ export default {
     },
     commentFollowStar() {
       let commentFollowStar = [];
+
       switch (this.tab) {
         case 1:
           commentFollowStar = this.comment_5_Star;
@@ -74,6 +78,7 @@ export default {
           commentFollowStar = [...this.allComments];
           break;
       }
+
       return commentFollowStar;
     },
     listComment() {
@@ -116,8 +121,18 @@ export default {
         }
       ];
       return filterFollowStar;
+    },
+    defaultPageNumber() {
+      if (this.page > this.lenPaginantion) {
+        return 1;
+      }
     }
   },
-  methods: {}
+
+  methods: {
+    changeTab(number) {
+      this.page = 1;
+    }
+  }
 };
 </script>

@@ -1,41 +1,34 @@
 <template>
   <div>
-    <ValidationObserver ref="observer" v-slot="{ invalid, passes }">
-      <ValidationProvider vid="field1" v-slot="{ errors }">
-        <input style="border: 1px solid black;" type="text" v-model="field1" />
-        <span id="error1">{{ errors[0] }}</span>
-      </ValidationProvider>
-
-      <ValidationProvider vid="field2" v-slot="{ errors }">
-        <input style="border: 1px solid black;" type="text" v-model="field2" />
-        <span id="error2">{{ errors[0] }}</span>
-      </ValidationProvider>
-    </ValidationObserver>
+    <test-component @addSize="addSize"></test-component>
+    <p :style="{fontSize: postSize + 'rem'}">hello</p>
   </div>
 </template>
-
 <script>
-// import { ValidationObserver } from 'vee-validate/dist/vee-validate.full';
+import TestComponent from "./TestComponent";
+
 export default {
+  components: {
+    TestComponent
+  },
   data() {
     return {
-      field1: '',
-      field2: '',
+      tab: 1,
+      postSize: 1
     };
   },
-  
   methods: {
-    submit() {
-      // No need to worry about form state
-      // as this is only runs when the form is valid
-      // 🐿 ship it
-      this.$refs.observer.validate();
-      this.$refs.observer.setErrors({
-        field1: ["wrong"],
-        field2: ["whoops"]
-      });
+    handleChange(number1) {
+      console.log("helsda " + this.tab);
+      console.log(number1);
+    },
+    handleClick(ClickEvent) {
+      console.log(JSON.stringify(ClickEvent) + " click");
+    },
+    addSize(number) {
+      console.log(number);
+      this.postSize += number;
     }
   }
 };
-// Somewhere in a method, set the errors for each field.
 </script>
