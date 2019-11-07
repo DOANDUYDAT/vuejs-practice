@@ -15,7 +15,15 @@
                   <v-subheader>First Name</v-subheader>
                 </v-col>
                 <v-col cols="12" md="9">
-                  <v-text-field label="First Name" solo v-model="firstName"></v-text-field>
+                  <ValidationProvider
+                    name="first name"
+                    rules="required|alpha"
+                    v-slot="{ errors }"
+                    :bails="false"
+                  >
+                    <v-text-field label="First name" solo v-model="firstName" counter="16"></v-text-field>
+                    <span class="red--text">{{ errors[0] }}</span>
+                  </ValidationProvider>
                 </v-col>
               </v-row>
               <v-row no-gutters justify="center">
@@ -23,7 +31,15 @@
                   <v-subheader>Last Name</v-subheader>
                 </v-col>
                 <v-col cols="12" md="9">
-                  <v-text-field label="Last Name" solo v-model="lastName"></v-text-field>
+                  <ValidationProvider
+                    name="last name"
+                    rules="required|alpha"
+                    v-slot="{ errors }"
+                    :bails="false"
+                  >
+                    <v-text-field label="Last name" solo v-model="lastName" counter="16"></v-text-field>
+                    <span class="red--text">{{ errors[0] }}</span>
+                  </ValidationProvider>
                 </v-col>
               </v-row>
               <v-row no-gutters justify="center">
@@ -31,7 +47,15 @@
                   <v-subheader>Số điện thoại</v-subheader>
                 </v-col>
                 <v-col cols="12" md="9">
-                  <v-text-field value label="Số điện thoại" solo disabled v-model="phone"></v-text-field>
+                  <ValidationProvider
+                    name="phone number"
+                    :rules="{required: true, regex:/^(0|\+84)[0-9]{9}$/}"
+                    v-slot="{ errors }"
+                    :bails="false"
+                  >
+                    <v-text-field label="Số điện thoại" solo v-model="phone"></v-text-field>
+                    <span class="red--text">{{ errors[0] }}</span>
+                  </ValidationProvider>
                 </v-col>
               </v-row>
               <v-row no-gutters justify="center">
@@ -47,7 +71,7 @@
                   <v-subheader>Địa chỉ</v-subheader>
                 </v-col>
                 <v-col cols="12" md="9">
-                  <v-text-field value label="Địa chỉ" solo v-model="address"></v-text-field>
+                  <v-text-field label="Địa chỉ" solo v-model="address"></v-text-field>
                 </v-col>
               </v-row>
               <v-row no-gutters justify="center">
@@ -98,13 +122,13 @@
             </v-col>
             <v-col cols="4">
               <div class="my-avatar">
-              <!-- <v-row justify="center">
-                <v-col> -->
-                  <v-avatar class="profile" color="grey" size="164" tile>
-                    <v-img :src="avatar"></v-img>
-                  </v-avatar>
+                <!-- <v-row justify="center">
+                <v-col>-->
+                <v-avatar class="profile" color="grey" size="164" tile>
+                  <v-img :src="avatar"></v-img>
+                </v-avatar>
                 <!-- </v-col>
-              </v-row> -->
+                </v-row>-->
               </div>
             </v-col>
           </v-row>
@@ -119,11 +143,11 @@ export default {
   data() {
     return {
       row: "",
-      firstName: '',
-      lastName: '',
-      phone: '',
-      email: '',
-      address: '',
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      address: "",
       date: null,
       menudate: false,
       avatar: "https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
@@ -135,7 +159,7 @@ export default {
     }
   },
   mounted() {
-      this.firstName = ""
+    this.firstName = "";
   }
 };
 </script>
@@ -146,9 +170,9 @@ export default {
   margin: auto;
 }
 .my-avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 </style>

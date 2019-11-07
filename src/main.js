@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import vuetify from '@/plugins/vuetify'
+import vuetify from '@/_plugins/vuetify'
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'

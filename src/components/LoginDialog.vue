@@ -42,6 +42,7 @@
                     prepend-icon="mdi-lock"
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                     @click:append="showPassword = !showPassword"
+                    @keyup.enter="submit"
                   ></v-text-field>
 
                   <span class="red--text">{{ errors[0] }}</span>
@@ -49,10 +50,10 @@
               </v-col>
             </v-row>
             <v-row align="center" justify="center">
-              <v-col cols="12" md="4">
+              <v-col cols="12" md="5">
                 <v-checkbox v-model="checkbox" :label="'Duy trì đăng nhập'"></v-checkbox>
               </v-col>
-              <v-col cols="12" md="4" class="text-md-end">
+              <v-col cols="12" md="3" class="text-md-end">
                 <a href>Quên mật khẩu?</a>
               </v-col>
             </v-row>
