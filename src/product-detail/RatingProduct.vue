@@ -2,7 +2,7 @@
   <v-container>
     <div class="headline mb-2">Đánh giá sản phẩm</div>
     <v-row>
-      <v-col cols="4">
+      <v-col cols="5">
         <v-card class="mx-auto" height="100%" flat>
           <v-img height="200px" :src="product.images[0]" contain></v-img>
           <v-card-text>
@@ -38,22 +38,24 @@
           half-increments
         ></v-rating>
         <div class="body-1 mb-3">Nội dung đánh giá</div>
-        <ValidationProvider
-          name="rating comment"
-          rules="required|max:300"
-          v-slot="{ errors }"
-          :bails="false"
-        >
-          <v-textarea outlined v-model="ratingComment" counter="300" label="Viết đánh giá ở đây"></v-textarea>
-          <span class="red--text">{{ errors[0] }}</span>
-        </ValidationProvider>
-        <div class="my-4">
-          <v-btn
-            color="primary"
-            @click="submit"
-            :disabled="ratingNumber > 0 ? false : true"
-          >Gửi đánh giá</v-btn>
-        </div>
+        <ValidationObserver ref="observer" v-slot="{ invalid }" tag="form">
+          <ValidationProvider
+            name="rating comment"
+            rules="required|max:300"
+            v-slot="{ errors }"
+            :bails="false"
+          >
+            <v-textarea outlined v-model="ratingComment" counter="300" label="Viết đánh giá ở đây"></v-textarea>
+            <span class="red--text">{{ errors[0] }}</span>
+          </ValidationProvider>
+          <div class="my-4">
+            <v-btn
+              color="primary"
+              @click="submit"
+              :disabled="(ratingNumber > 0 ? false : true) || invalid" 
+            >Gửi đánh giá</v-btn>
+          </div>
+        </ValidationObserver>
       </v-col>
     </v-row>
   </v-container>

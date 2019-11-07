@@ -1,41 +1,51 @@
 <template>
-  <div>
-    <ValidationObserver ref="observer" v-slot="{ invalid, passes }">
-      <ValidationProvider vid="field1" v-slot="{ errors }">
-        <input style="border: 1px solid black;" type="text" v-model="field1" />
-        <span id="error1">{{ errors[0] }}</span>
-      </ValidationProvider>
-
-      <ValidationProvider vid="field2" v-slot="{ errors }">
-        <input style="border: 1px solid black;" type="text" v-model="field2" />
-        <span id="error2">{{ errors[0] }}</span>
-      </ValidationProvider>
-    </ValidationObserver>
-  </div>
+  <v-sheet
+    class="mx-auto"
+    elevation="8"
+    max-width="800"
+  >
+    <v-slide-group
+      v-model="model"
+      class="pa-4"
+      active-class="success"
+      show-arrows
+    >
+      <v-slide-item
+        v-for="n in 15"
+        :key="n"
+        v-slot:default="{ active, toggle }"
+      >
+        <v-card
+          :color="active ? undefined : 'grey lighten-1'"
+          class="ma-4"
+          height="200"
+          width="100"
+          @click="toggle"
+        >
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
+          >
+            <v-scale-transition>
+              <v-icon
+                v-if="active"
+                color="white"
+                size="48"
+                v-text="'mdi-close-circle-outline'"
+              ></v-icon>
+            </v-scale-transition>
+          </v-row>
+        </v-card>
+      </v-slide-item>
+    </v-slide-group>
+  </v-sheet>
 </template>
 
 <script>
-// import { ValidationObserver } from 'vee-validate/dist/vee-validate.full';
-export default {
-  data() {
-    return {
-      field1: '',
-      field2: '',
-    };
-  },
-  
-  methods: {
-    submit() {
-      // No need to worry about form state
-      // as this is only runs when the form is valid
-      // 🐿 ship it
-      this.$refs.observer.validate();
-      this.$refs.observer.setErrors({
-        field1: ["wrong"],
-        field2: ["whoops"]
-      });
-    }
+  export default {
+    data: () => ({
+      model: null,
+    }),
   }
-};
-// Somewhere in a method, set the errors for each field.
 </script>

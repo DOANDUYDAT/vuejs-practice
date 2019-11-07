@@ -1,6 +1,6 @@
 <template>
-  <v-card class="mx-auto" hover height="100%">
-    <v-img height="200px" :src="product.images[0]" contain></v-img>
+  <v-card  hover height="100%" :max-width="maxWidthItem">
+    <v-img :height="heightImage" :src="product.images[0]" contain></v-img>
 
     <v-card-text>
       <v-rating
@@ -12,20 +12,20 @@
         half-icon="mdi-star-half"
         half-increments
         small
+        dense
         readonly
       ></v-rating>
       <p>{{ descriptionProduct }}</p>
       <strong>{{ priceProduct }}đ</strong>
     </v-card-text>
-    <v-card-actions>
+    <!-- <v-card-actions>
       <v-spacer></v-spacer>
 
       <v-btn
         :disabled="!product.inventory"
         @click="addProductToCart({ product: product, quantity: 1 })"
       >MUA</v-btn>
-      <!-- <v-btn @click="addProductToCart(product)">MUA</v-btn> -->
-    </v-card-actions>
+    </v-card-actions> -->
   </v-card>
 </template>
 
@@ -40,7 +40,17 @@ export default {
     };
   },
   props: {
-    product: {}
+    product: {},
+    maxWidthItem: {
+      type: Number,
+      required: false,
+      default: 500
+    },
+    heightImage: {
+      type: Number,
+      required: false,
+      default: 200
+    },
   },
   computed: {
     descriptionProduct() {
@@ -63,4 +73,8 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+</style>
 

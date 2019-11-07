@@ -1,0 +1,49 @@
+<template>
+  <v-container>
+    <div class="headline pa-3">Sản phẩm tương tự</div>
+    <v-slide-group v-model="model" class show-arrows max="10">
+      <v-slide-item v-for="productItem in suggestProduct" :key="productItem.id" class="mx-2">
+        <product-list-item :product="productItem" :maxWidthItem="180" :heightImage="80"></product-list-item>
+      </v-slide-item>
+    </v-slide-group>
+  </v-container>
+</template>
+<script>
+import ProductListItem from "../components/ProductListItem";
+import { mapState } from "vuex";
+
+export default {
+  components: {
+    ProductListItem
+  },
+  data() {
+    return {
+      model: null,
+      rating: 3.5
+    };
+  },
+  computed: {
+    ...mapState({
+      products: state => state.products.all
+    }),
+    product() {
+      return this.products[0];
+    },
+    suggestProduct() {
+      console.log(this.suggestProductFollowBrand.length);
+      return this.suggestProductFollowBrand;
+    },
+    suggestProductFollowBrand() {
+      let brand = this.product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu;
+      let suggestProductFollowBrand = this.products.filter(
+        product =>
+          product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu === brand
+      );
+      return suggestProductFollowBrand;
+    }
+  }
+};
+</script>
+
+<style scoped>
+</style>
