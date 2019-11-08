@@ -8,7 +8,7 @@
         >{{ filter.star }}({{ filter.number }})</v-tab>
       </v-tabs>
     </v-card>
-    <review-list-item v-for="(comment, index) in listComment" :key="index" :comment="comment"></review-list-item>
+    <review-list-item v-for="(review, index) in listReview" :key="index" :review="review"></review-list-item>
     <div class="text-center my-4">
       <v-pagination v-model="page" :length="lenPaginantion" total-visible="6"></v-pagination>
     </div>
@@ -16,16 +16,16 @@
 </template>
 
 <script>
-import { fakeComments } from "../_helpers/fake-comment";
+import { fakeReviews } from "../_helpers/fake-review";
 
-let allComments = fakeComments();
+let allReviews = fakeReviews();
 
 import ReviewListItem  from "./ReviewListItem";
 
 export default {
   data() {
     return {
-      allComments: [...allComments],
+      allReviews: [...allReviews],
       page: 1,
       tab: 0,
 
@@ -38,86 +38,86 @@ export default {
   },
   computed: {
     lenPaginantion() {
-      return Math.ceil(this.commentFollowStar.length / 3);
+      return Math.ceil(this.reviewFollowStar.length / 3);
     },
-    comment_5_Star() {
-      return this.allComments.filter(comment => comment.rating === 5);
+    review_5_Star() {
+      return this.allReviews.filter(review => review.rating === 5);
     },
-    comment_4_Star() {
-      return this.allComments.filter(comment => comment.rating === 4);
+    review_4_Star() {
+      return this.allReviews.filter(review => review.rating === 4);
     },
-    comment_3_Star() {
-      return this.allComments.filter(comment => comment.rating === 3);
+    review_3_Star() {
+      return this.allReviews.filter(review => review.rating === 3);
     },
-    comment_2_Star() {
-      return this.allComments.filter(comment => comment.rating === 2);
+    review_2_Star() {
+      return this.allReviews.filter(review => review.rating === 2);
     },
-    comment_1_Star() {
-      return this.allComments.filter(comment => comment.rating === 1);
+    review_1_Star() {
+      return this.allReviews.filter(review => review.rating === 1);
     },
-    commentFollowStar() {
-      let commentFollowStar = [];
+    reviewFollowStar() {
+      let reviewFollowStar = [];
 
       switch (this.tab) {
         case 1:
-          commentFollowStar = this.comment_5_Star;
+          reviewFollowStar = this.review_5_Star;
           break;
         case 2:
-          commentFollowStar = this.comment_4_Star;
+          reviewFollowStar = this.review_4_Star;
           break;
         case 3:
-          commentFollowStar = this.comment_3_Star;
+          reviewFollowStar = this.review_3_Star;
           break;
         case 4:
-          commentFollowStar = this.comment_2_Star;
+          reviewFollowStar = this.review_2_Star;
           break;
         case 5:
-          commentFollowStar = this.comment_1_Star;
+          reviewFollowStar = this.review_1_Star;
           break;
         default:
-          commentFollowStar = [...this.allComments];
+          reviewFollowStar = [...this.allReviews];
           break;
       }
 
-      return commentFollowStar;
+      return reviewFollowStar;
     },
-    listComment() {
-      let listComment = [];
+    listReview() {
+      let listReview = [];
       let index = this.page * 3 - 3;
 
       for (let i = 0; i < 3; i++) {
-        if (index < this.commentFollowStar.length) {
-          listComment.push(this.commentFollowStar[index]);
+        if (index < this.reviewFollowStar.length) {
+          listReview.push(this.reviewFollowStar[index]);
           index++;
         }
       }
-      return listComment;
+      return listReview;
     },
     filterFollowStar() {
       let filterFollowStar = [
         {
           star: "Tất cả",
-          number: this.allComments.length
+          number: this.allReviews.length
         },
         {
           star: "5 sao",
-          number: this.comment_5_Star.length
+          number: this.review_5_Star.length
         },
         {
           star: "4 sao",
-          number: this.comment_4_Star.length
+          number: this.review_4_Star.length
         },
         {
           star: "3 sao",
-          number: this.comment_3_Star.length
+          number: this.review_3_Star.length
         },
         {
           star: "2 sao",
-          number: this.comment_2_Star.length
+          number: this.review_2_Star.length
         },
         {
           star: "1 sao",
-          number: this.comment_1_Star.length
+          number: this.review_1_Star.length
         }
       ];
       return filterFollowStar;

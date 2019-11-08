@@ -12,8 +12,7 @@
     <suggest-product></suggest-product>
     <v-row>
       <v-col cols="12">
-        <rating-product :product="product"></rating-product>
-        <review-list></review-list>
+        <review-product></review-product>
       </v-col>
       <v-col cols="5">
         <spec-product-table :product="product"></spec-product-table>
@@ -29,8 +28,8 @@
 import SlideImageProduct from "./SlideImageProduct";
 import SpecProductTable from "./SpecProductTable";
 import InfoOrderProduct from "./InfoOrderProduct";
-import ReviewList from "./ReviewList";
-import RatingProduct from "./RatingProduct";
+import ReviewProduct from "./ReviewProduct";
+
 import SuggestProduct from "./SuggestProduct";
 import { mapState } from "vuex";
 
@@ -44,8 +43,7 @@ export default {
     SlideImageProduct,
     SpecProductTable,
     InfoOrderProduct,
-    ReviewList,
-    RatingProduct,
+    ReviewProduct,
     SuggestProduct
   },
   computed: {
