@@ -9,7 +9,7 @@
   </v-container>
 </template>
 <script>
-import ProductListItem from "../components/ProductListItem";
+import ProductListItem from "@/home/ProductListItem";
 import { mapState } from "vuex";
 
 export default {

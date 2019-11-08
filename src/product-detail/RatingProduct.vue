@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import ProductListItem from "../components/ProductListItem";
+
 
 export default {
   data() {
@@ -74,7 +74,7 @@ export default {
     };
   },
   components: {
-    ProductListItem
+    
   },
   props: {
     product: {}

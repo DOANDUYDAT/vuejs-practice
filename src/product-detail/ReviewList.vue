@@ -8,7 +8,7 @@
         >{{ filter.star }}({{ filter.number }})</v-tab>
       </v-tabs>
     </v-card>
-    <comment-list-item v-for="(comment, index) in listComment" :key="index" :comment="comment"></comment-list-item>
+    <review-list-item v-for="(comment, index) in listComment" :key="index" :comment="comment"></review-list-item>
     <div class="text-center my-4">
       <v-pagination v-model="page" :length="lenPaginantion" total-visible="6"></v-pagination>
     </div>
@@ -20,7 +20,7 @@ import { fakeComments } from "../_helpers/fake-comment";
 
 let allComments = fakeComments();
 
-import CommentListItem from "./CommentListItem";
+import ReviewListItem  from "./ReviewListItem";
 
 export default {
   data() {
@@ -34,7 +34,7 @@ export default {
     };
   },
   components: {
-    CommentListItem
+    ReviewListItem
   },
   computed: {
     lenPaginantion() {
