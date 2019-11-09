@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <v-card>
       <v-tabs grow v-model="tab" @change="changeTab">
         <v-tab
@@ -12,7 +12,7 @@
     <div class="text-center my-4">
       <v-pagination v-model="page" :length="lenPaginantion" total-visible="6"></v-pagination>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>

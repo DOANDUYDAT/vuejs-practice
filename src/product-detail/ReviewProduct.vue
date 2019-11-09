@@ -1,8 +1,8 @@
 <template>
-  <v-container>
+  <div>
     <rating-product :product="product"></rating-product>
     <review-list></review-list>
-  </v-container>
+  </div>
 </template>
 
 <script>
