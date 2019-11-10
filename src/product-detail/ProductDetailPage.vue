@@ -11,16 +11,19 @@
     <v-divider></v-divider>
     <suggest-product></suggest-product>
     <v-row>
-      <v-col cols="12">
-        <rating-product :product="product"></rating-product>
-        <comment-list></comment-list>
+      <v-col cols="10">
+        <review-product></review-product>
       </v-col>
+    </v-row>
+    <v-row>
       <v-col cols="5">
         <spec-product-table :product="product"></spec-product-table>
       </v-col>
-      <!-- <v-col cols="12"> -->
-
-      <!-- </v-col> -->
+    </v-row>
+    <v-row no-gutters>
+      <v-col cols="10">
+        <comment-product></comment-product>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -29,9 +32,9 @@
 import SlideImageProduct from "./SlideImageProduct";
 import SpecProductTable from "./SpecProductTable";
 import InfoOrderProduct from "./InfoOrderProduct";
-import CommentList from "./CommentList";
-import RatingProduct from "./RatingProduct";
+import ReviewProduct from "./ReviewProduct";
 import SuggestProduct from "./SuggestProduct";
+import CommentProduct from "./CommentProduct";
 import { mapState } from "vuex";
 
 export default {
@@ -44,9 +47,9 @@ export default {
     SlideImageProduct,
     SpecProductTable,
     InfoOrderProduct,
-    CommentList,
-    RatingProduct,
-    SuggestProduct
+    ReviewProduct,
+    SuggestProduct,
+    CommentProduct
   },
   computed: {
     ...mapState({

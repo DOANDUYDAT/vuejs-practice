@@ -1,137 +1,78 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-tabs grow v-model="tab" @change="changeTab">
-        <v-tab
-          v-for="(filter, i) in filterFollowStar"
-          :key="i"
-        >{{ filter.star }}({{ filter.number }})</v-tab>
-      </v-tabs>
-    </v-card>
-    <comment-list-item v-for="(comment, index) in listComment" :key="index" :comment="comment"></comment-list-item>
-    <div class="text-center my-4">
-      <v-pagination v-model="page" :length="lenPaginantion" total-visible="6"></v-pagination>
-    </div>
-  </v-container>
+  <!-- <v-container> -->
+  <!-- <v-row>
+  <v-col cols="7">-->
+  <div>
+    <comment-list-item v-for="(comment, index) in commentShow" :key="index" :comment="comment"></comment-list-item>
+    <v-btn
+      class="mx-auto my-2"
+      color="primary"
+      text
+      v-if="showButtonMore"
+      @click="getMoreComment"
+    >Xem thêm 5 bình luận</v-btn>
+  </div>
+  <!-- </v-col>
+  </v-row>-->
+  <!-- </v-container> -->
 </template>
 
 <script>
-import { fakeComments } from "../_helpers/fake-comment";
+import CommentListItem from "./CommentListItem";
+import { fakeComments } from "@/_helpers/fake-comment";
 
 let allComments = fakeComments();
-
-import CommentListItem from "./CommentListItem";
+function initComment() {
+  let commentList = [];
+  for (let i = 0; i < 5; i++) {
+    if (i < allComments.length) {
+      commentList.push(allComments[i]);
+    }
+  }
+  return commentList;
+}
 
 export default {
   data() {
     return {
       allComments: [...allComments],
-      page: 1,
-      tab: 0,
 
-      text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      commentShow: initComment()
     };
   },
   components: {
     CommentListItem
   },
   computed: {
-    lenPaginantion() {
-      return Math.ceil(this.commentFollowStar.length / 3);
-    },
-    comment_5_Star() {
-      return this.allComments.filter(comment => comment.rating === 5);
-    },
-    comment_4_Star() {
-      return this.allComments.filter(comment => comment.rating === 4);
-    },
-    comment_3_Star() {
-      return this.allComments.filter(comment => comment.rating === 3);
-    },
-    comment_2_Star() {
-      return this.allComments.filter(comment => comment.rating === 2);
-    },
-    comment_1_Star() {
-      return this.allComments.filter(comment => comment.rating === 1);
-    },
-    commentFollowStar() {
-      let commentFollowStar = [];
-
-      switch (this.tab) {
-        case 1:
-          commentFollowStar = this.comment_5_Star;
-          break;
-        case 2:
-          commentFollowStar = this.comment_4_Star;
-          break;
-        case 3:
-          commentFollowStar = this.comment_3_Star;
-          break;
-        case 4:
-          commentFollowStar = this.comment_2_Star;
-          break;
-        case 5:
-          commentFollowStar = this.comment_1_Star;
-          break;
-        default:
-          commentFollowStar = [...this.allComments];
-          break;
-      }
-
-      return commentFollowStar;
-    },
-    listComment() {
-      let listComment = [];
-      let index = this.page * 3 - 3;
-
-      for (let i = 0; i < 3; i++) {
-        if (index < this.commentFollowStar.length) {
-          listComment.push(this.commentFollowStar[index]);
-          index++;
-        }
-      }
-      return listComment;
-    },
-    filterFollowStar() {
-      let filterFollowStar = [
-        {
-          star: "Tất cả",
-          number: this.allComments.length
-        },
-        {
-          star: "5 sao",
-          number: this.comment_5_Star.length
-        },
-        {
-          star: "4 sao",
-          number: this.comment_4_Star.length
-        },
-        {
-          star: "3 sao",
-          number: this.comment_3_Star.length
-        },
-        {
-          star: "2 sao",
-          number: this.comment_2_Star.length
-        },
-        {
-          star: "1 sao",
-          number: this.comment_1_Star.length
-        }
-      ];
-      return filterFollowStar;
-    },
-    defaultPageNumber() {
-      if (this.page > this.lenPaginantion) {
-        return 1;
-      }
+    // top_10_comment() {
+    //   let top_10_comment = [];
+    //   for (let i = 0; i < 8; i++) {
+    //     if (i < this.allComments.length) {
+    //       top_10_comment.push(this.allComments[i]);
+    //     }
+    //   }
+    //   this.offsetComment = top_10_comment.length;
+    //   return top_10_comment;
+    // },
+    showButtonMore() {
+      return this.commentShow.length < this.allComments.length ? true : false;
     }
+    // commentShowList() {
+    //   return this.commentShow.length > 0
+    //     ? this.commentShow
+    //     : this.top_10_comment;
+    // }
   },
-
   methods: {
-    changeTab(number) {
-      this.page = 1;
+    getMoreComment() {
+      let offsetComment = this.commentShow.length;
+
+      for (let i = 0; i < 5; i++) {
+        if (offsetComment < this.allComments.length) {
+          this.commentShow.push(this.allComments[offsetComment]);
+          offsetComment++;
+        }
+      }
     }
   }
 };

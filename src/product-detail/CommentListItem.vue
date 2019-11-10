@@ -1,47 +1,37 @@
 <template>
-  <v-card tile elevation="2" outlined>
-    <v-card-title>{{ comment.username }}</v-card-title>
-    <v-card-text>
-      <v-rating
-        :value="comment.rating"
-        color="amber"
-        background-color="grey"
-        empty-icon="mdi-star-outline"
-        full-icon="mdi-star"
-        half-icon="mdi-star-half"
-        dense
-        readonly
-        size="14"
-      ></v-rating>
+  <v-card tile elevation="2" outlined class="px-6">
+    <v-card-title class="pt-1 pb-0">{{ comment.username }}</v-card-title>
+    <v-card-text class="pb-0">
       <div style="text-align: justify;" class="mt-2">{{ comment.content }}</div>
-      <div class="my-4 caption black--text">{{ comment.time }}</div>
+      <div class="my-2 caption black--text">{{ comment.time }}</div>
     </v-card-text>
-    <!-- <v-card-actions>
+    <v-card-actions class="py-0">
       <v-btn text @click="show = !show">Trả lời</v-btn>
     </v-card-actions>
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
-
-        <v-card-text>I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.</v-card-text>
+        <!-- <v-row>
+        <v-col cols="12" md="8"  class="mx-auto">-->
+        <comment-box></comment-box>
+        <!-- </v-col>
+        </v-row>-->
       </div>
-    </v-expand-transition>-->
+    </v-expand-transition>
   </v-card>
 </template>
 
 <script>
+import CommentBox from "./CommentBox";
+
 export default {
   data() {
     return {
       show: false
-      //   comment: {
-      //     username: "john" + Math.floor(Math.random() * 25) + 1,
-      //     rating: Math.floor(Math.random() * 5) + 1,
-      //     time: new Date(Date.now()),
-      //     content:
-      //       "Sản phẩm dùng đã được sử dụng 2 ngày, nhìn chung khá tốt, chưa có hiện tượng gì xảy ra. Dịch vụ tư vấn khá tốt. Cho 5 sao!!! <3 Sản phẩm dùng đã được sử dụng 2 ngày, nhìn chung khá tốt, chưa có hiện tượng gì xảy ra. Dịch vụ tư vấn khá tốt. Cho 5 sao!!! <3"
-      //   }
     };
+  },
+  components: {
+    CommentBox
   },
   props: {
     comment: {}

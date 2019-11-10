@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import HelloWorld from '@/components/HelloWorld.vue'
 import TodoList from '@/components/TodoList'
-import ProductList from '@/components/ProductList'
+import HomePage from '@/home/HomePage'
 import ChangePasswordPage from '@/change-password/ChangePasswordPage'
 import ShoppingCartPage from '@/cart/ShoppingCartPage'
 import ProductDetailPage from '@/product-detail/ProductDetailPage'
@@ -21,7 +21,7 @@ export default new Router({
         {
             path: '/home',
             name: 'Home',
-            component: ProductList
+            component: HomePage
         },
         {
             path: '/todo-app',

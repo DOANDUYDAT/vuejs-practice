@@ -2,14 +2,14 @@
   <v-container>
     <div class="headline pa-3">Sản phẩm tương tự</div>
     <v-slide-group v-model="model" class show-arrows max="10">
-      <v-slide-item v-for="productItem in suggestProduct" :key="productItem.id" class="mx-2">
-        <product-list-item :product="productItem" :maxWidthItem="180" :heightImage="80"></product-list-item>
+      <v-slide-item v-for="productItem in suggestProduct" :key="productItem.id">
+        <product-list-item :product="productItem" :maxWidthItem="175" :heightImage="80"></product-list-item>
       </v-slide-item>
     </v-slide-group>
   </v-container>
 </template>
 <script>
-import ProductListItem from "../components/ProductListItem";
+import ProductListItem from "@/home/ProductListItem";
 import { mapState } from "vuex";
 
 export default {
