@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <slider-ads :topProduct="topProduct"></slider-ads>
-    <v-row>
+    <v-row no-gutters>
       <v-col v-for="product in products" :key="product.id" cols="12" sm="6" md="4" lg="3">
         <product-list-item :product="product"></product-list-item>
       </v-col>
@@ -68,3 +68,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.container {
+  border-left: 1px solid #ddd;
+}
+</style>

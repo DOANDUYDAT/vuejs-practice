@@ -1,13 +1,13 @@
 <template>
-  <v-container>
+  <div>
     <div class="headline">Bình luận</div>
-    <v-row no-gutters>
-      <v-col cols="7">
-        <comment-box></comment-box>
-        <comment-list></comment-list>
-      </v-col>
-    </v-row>
-  </v-container>
+    <!-- <v-row no-gutters>
+    <v-col cols="7">-->
+    <comment-box></comment-box>
+    <comment-list></comment-list>
+    <!-- </v-col>
+    </v-row>-->
+  </div>
 </template>
 
 <script>

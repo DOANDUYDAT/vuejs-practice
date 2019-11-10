@@ -1,8 +1,8 @@
 <template>
-  <v-card  hover height="100%" :max-width="maxWidthItem">
-    <v-img :height="heightImage" :src="product.images[0]" contain></v-img>
+  <v-card  hover height="100%" :max-width="maxWidthItem" flat>
+    <img :height="heightImage" :src="product.images[0]" contain />
 
-    <v-card-text>
+    <v-card-text class="py-0">
       <v-rating
         :value="rating"
         color="amber"
@@ -15,8 +15,8 @@
         dense
         readonly
       ></v-rating>
-      <p>{{ descriptionProduct }}</p>
-      <strong>{{ priceProduct }}đ</strong>
+      <p class="mb-0">{{ descriptionProduct }}</p>
+      <div class="py-2 font-weight-black">{{ priceProduct }}đ</div>
     </v-card-text>
     <!-- <v-card-actions>
       <v-spacer></v-spacer>
@@ -49,15 +49,15 @@ export default {
     heightImage: {
       type: Number,
       required: false,
-      default: 200
+      default: 180
     },
   },
   computed: {
     descriptionProduct() {
       let description =
-        this.product.title.length < 40
+        this.product.title.length < 30
           ? this.product.title
-          : this.product.title.slice(0, 40) + "...";
+          : this.product.title.slice(0, 30) + "...";
       return description;
     },
     priceProduct() {

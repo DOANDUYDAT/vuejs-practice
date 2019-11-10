@@ -11,7 +11,7 @@
     <v-divider></v-divider>
     <suggest-product></suggest-product>
     <v-row>
-      <v-col cols="7">
+      <v-col cols="10">
         <review-product></review-product>
       </v-col>
     </v-row>
@@ -21,7 +21,7 @@
       </v-col>
     </v-row>
     <v-row no-gutters>
-      <v-col cols="12">
+      <v-col cols="10">
         <comment-product></comment-product>
       </v-col>
     </v-row>
