@@ -1,16 +1,18 @@
 <template>
   <!-- <v-container> -->
-  <!-- <v-row>
-  <v-col cols="7">-->
+  <!-- <v-row no-gutters>
+  <v-col cols="12">-->
   <div>
     <comment-list-item v-for="(comment, index) in commentShow" :key="index" :comment="comment"></comment-list-item>
-    <v-btn
-      class="mx-auto my-2"
-      color="primary"
-      text
-      v-if="showButtonMore"
-      @click="getMoreComment"
-    >Xem thêm 5 bình luận</v-btn>
+    <v-row>
+      <v-btn
+        class="mx-auto my-2"
+        color="primary"
+        text
+        v-if="showButtonMore"
+        @click="getMoreComment"
+      >Xem thêm 5 bình luận</v-btn>
+    </v-row>
   </div>
   <!-- </v-col>
   </v-row>-->

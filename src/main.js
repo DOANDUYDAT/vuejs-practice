@@ -4,7 +4,7 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full'
 
-import router from './router'
+import { router } from './_router'
 import store from './_store'
 import App from './App'
 import { currency } from './currency'
@@ -31,4 +31,5 @@ new Vue({
   vuetify: vuetify,
   store: store
 });
+
 

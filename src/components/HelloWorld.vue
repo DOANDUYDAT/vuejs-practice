@@ -1,45 +1,10 @@
 <template>
-  <v-sheet
-    class="mx-auto"
-    elevation="8"
-    max-width="800"
-  >
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      active-class="success"
-      show-arrows
-    >
-      <v-slide-item
-        v-for="n in 15"
-        :key="n"
-        v-slot:default="{ active, toggle }"
-      >
-        <v-card
-          :color="active ? undefined : 'grey lighten-1'"
-          class="ma-4"
-          height="200"
-          width="100"
-          @click="toggle"
-        >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
-            <v-scale-transition>
-              <v-icon
-                v-if="active"
-                color="white"
-                size="48"
-                v-text="'mdi-close-circle-outline'"
-              ></v-icon>
-            </v-scale-transition>
-          </v-row>
-        </v-card>
-      </v-slide-item>
-    </v-slide-group>
-  </v-sheet>
+  <v-container>
+    <router-link to="/todo/profile">Profile</router-link>
+    <router-link to="/todo/change">Profile</router-link>
+    <router-link to="/todo/history">Profile</router-link>
+    <router-view></router-view>
+  </v-container>
 </template>
 
 <script>

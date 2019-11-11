@@ -14,7 +14,7 @@
             <router-link to="/">Home</router-link>
           </v-col>
           <v-col>
-            <router-link to="/todo-app">Todo App</router-link>
+            <router-link to="/todo">Todo App</router-link>
           </v-col>
           <v-col>
             <router-link to="/shopping-cart-page">shopping cart page</router-link>
@@ -32,9 +32,6 @@
       </v-container>
       <template>
         <router-view></router-view>
-        <router-view name="view1"></router-view>
-        <router-view name="view2"></router-view>
-        <router-view name="view3"></router-view>
       </template>
     </v-content>
 

@@ -14,12 +14,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
+        publicPath: '/'
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist',
-        hot: true,
-        historyApiFallback: true
+        contentBase: './dist/',
+        historyApiFallback: true,
     },
     resolve: {
         extensions: ['.js', '.vue'],
