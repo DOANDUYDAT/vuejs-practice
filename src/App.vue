@@ -71,7 +71,8 @@ export default {
   },
   computed: {
     ...mapState({
-      alerts: state => state.alert.all
+      alerts: state => state.alert.all,
+      loggedIn: state => state.authentication.status.loggedIn,
     })
     // alertReverse() {
     //   return this.alerts.reverse()
@@ -85,16 +86,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "./variables.scss";
+<style scoped>
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-h1 {
-  text-align: center;
-}
 </style>

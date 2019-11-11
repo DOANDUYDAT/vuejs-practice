@@ -1,30 +1,38 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
+import axios from 'axios';
 
 export const userService = {
     login,
     logout,
-    getAll
+    // getAll
 };
 
-function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
+async function login(email, password) {
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/user/login`,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        data: {
+            email,
+            password
+        }
     };
-
-    return fetch(`${config.apiUrl}/user/login`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-
+    console.log('log in service')
+    try {
+        const response = await axios(options);
+        // login successful if there's a jwt token in the response
+        console.log(response.data.token);
+        if (response.data.token) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            const user = { token: response.data.token };
+            console.log(JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(user));
             return user;
-        });
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function logout() {
@@ -32,14 +40,6 @@ function logout() {
     localStorage.removeItem('user');
 }
 
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/user/profile`, requestOptions).then(handleResponse);
-}
 
 function handleResponse(response) {
     return response.text().then(text => {
