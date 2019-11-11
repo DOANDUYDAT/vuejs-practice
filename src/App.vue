@@ -14,7 +14,7 @@
             <router-link to="/">Home</router-link>
           </v-col>
           <v-col>
-            <router-link to="/todo-app">Todo App</router-link>
+            <router-link to="/todo">Todo App</router-link>
           </v-col>
           <v-col>
             <router-link to="/shopping-cart-page">shopping cart page</router-link>
@@ -32,9 +32,6 @@
       </v-container>
       <template>
         <router-view></router-view>
-        <router-view name="view1"></router-view>
-        <router-view name="view2"></router-view>
-        <router-view name="view3"></router-view>
       </template>
     </v-content>
 
@@ -74,7 +71,8 @@ export default {
   },
   computed: {
     ...mapState({
-      alerts: state => state.alert.all
+      alerts: state => state.alert.all,
+      loggedIn: state => state.authentication.status.loggedIn,
     })
     // alertReverse() {
     //   return this.alerts.reverse()
@@ -88,16 +86,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "./variables.scss";
+<style scoped>
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-h1 {
-  text-align: center;
-}
 </style>

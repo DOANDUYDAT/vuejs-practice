@@ -30,7 +30,7 @@
               <v-col cols="12" md="8" class="mx-auto">
                 <ValidationProvider
                   name="password"
-                  rules="required|min:8"
+                  rules="required|min:4"
                   v-slot="{ errors }"
                   :bails="false"
                 >
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -82,27 +84,34 @@ export default {
       email: "",
       showPassword: false,
       password: "",
-      checkbox: "",
-      
+      checkbox: ""
     };
+  },
+  computed: {
+    ...mapState({
+      loggedIn: state => state.authentication.status.loggedIn
+    })
   },
   methods: {
     async submit() {
       try {
         const isValid = await this.$refs.observer.validate();
-        this.$store.dispatch("alert/addAlert", {
-          type: "success",
-          message: "Login successfully!"
-        });
-        this.dialog = false;
+        if (isValid) {
+          const { email, password } = this;
+          if (email && password) {
+            await this.$store.dispatch("authentication/login", {
+              email,
+              password
+            });
+            this.dialog = false;
+          }
+        }
       } catch (error) {
-        this.$store.dispatch("alert/addAlert", {
-          type: "error",
+        this.$store.dispatch("alert/error", {
           message: "Login error!"
         });
       }
-    },
-    
+    }
   }
 };
 </script>
