@@ -20,13 +20,10 @@
             <router-link to="/shopping-cart-page">shopping cart page</router-link>
           </v-col>
           <v-col>
-            <router-link to="/change-password">change password</router-link>
-          </v-col>
-          <v-col>
             <router-link to="/product-detail-page">Product detail</router-link>
           </v-col>
           <v-col>
-            <router-link to="/profile">Profile</router-link>
+            <router-link to="/account">account</router-link>
           </v-col>
         </v-row>
       </v-container>
@@ -34,7 +31,7 @@
         <router-view></router-view>
       </template>
     </v-content>
-
+    
     <the-footer></the-footer>
   </v-app>
 </template>
@@ -72,7 +69,7 @@ export default {
   computed: {
     ...mapState({
       alerts: state => state.alert.all,
-      loggedIn: state => state.authentication.status.loggedIn,
+      loggedIn: state => state.authentication.status.loggedIn
     })
     // alertReverse() {
     //   return this.alerts.reverse()

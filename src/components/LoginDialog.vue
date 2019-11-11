@@ -98,18 +98,24 @@ export default {
         const isValid = await this.$refs.observer.validate();
         if (isValid) {
           const { email, password } = this;
-          if (email && password) {
-            await this.$store.dispatch("authentication/login", {
-              email,
-              password
+          const user = await this.$store.dispatch("authentication/login", {
+            email,
+            password
+          });
+          // console.log("user: " + user);
+          if (user) {
+            this.$store.dispatch("alert/success", {
+              message: "Login Successfully!"
             });
             this.dialog = false;
           }
         }
       } catch (error) {
-        this.$store.dispatch("alert/error", {
-          message: "Login error!"
-        });
+        if (error) {
+          this.$store.dispatch("alert/error", {
+            message: "Login failed!"
+          });
+        }
       }
     }
   }

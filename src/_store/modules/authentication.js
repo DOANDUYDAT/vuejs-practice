@@ -14,35 +14,35 @@ const getters = {};
 const actions = {
     async login({ dispatch, commit }, { email, password }) {
         console.log('action login');
-        // commit('loginRequest', { email });
+        
         try {
             const user = await userService.login(email, password);
-            console.log('user: ' + user);
+            // console.log('user: ' + user);
             if (user) {
                 commit('loginSuccess', user)
-                dispatch('alert/success', {
-                    message: 'Login Successfully!'
-                }, { root: true })
+                return user;
             }
         } catch (error) {
-            console.log(error);
+            // console.log('action error')
             commit('loginFailure', error)
-            dispatch('alert/error', {
-                message: 'Login failed!'
-            }, { root: true })
+            
+            throw error;
         }
     },
-    async logout({ commit }) {
+    async logout({ commit, dispatch }) {
         await userService.logout();
         commit('logout');
+        dispatch('alert/success', {
+            message: "You are logged out!"
+        }, { root: true });
     },
 };
 
 const mutations = {
-    loginRequest(state, user) {
-        state.status = { loggingIn: true };
-        state.user = user;
-    },
+    // loginRequest(state, user) {
+    //     state.status = { loggingIn: true };
+    //     state.user = user;
+    // },
     loginSuccess(state, user) {
         state.status = { loggedIn: true };
         state.user = user;
