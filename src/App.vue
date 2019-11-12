@@ -26,12 +26,13 @@
             <router-link to="/account">account</router-link>
           </v-col>
         </v-row>
+        <v-btn @click="clickBar">click</v-btn>
       </v-container>
-      <template>
-        <router-view></router-view>
-      </template>
+      <!-- <transition name="fade" mode="out-in"> -->
+      <router-view></router-view>
+      <!-- </transition> -->
     </v-content>
-    
+
     <the-footer></the-footer>
   </v-app>
 </template>
@@ -47,16 +48,7 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      // alerts: [
-      //   {
-      //     type: "success",
-      //     message: "alert success"
-      //   },
-      //   {
-      //     type: "error",
-      //     message: "alert error"
-      //   }
-      // ]
+      // transitionName: "slide-left"
     };
   },
 
@@ -69,20 +61,24 @@ export default {
   computed: {
     ...mapState({
       alerts: state => state.alert.all,
-      loggedIn: state => state.authentication.status.loggedIn
+      loggedIn: state => state.authentication.status.loggedIn,
+      products: state => state.products.all
     })
     // alertReverse() {
     //   return this.alerts.reverse()
     // }
   },
+
   methods: {
     clickBar: function() {
-      console.log("thoa ngo");
+      console.log(this.products);
     }
+  },
+  created() {
+    this.$store.dispatch("products/getAllProducts");
   }
 };
 </script>
 
 <style scoped>
-
 </style>

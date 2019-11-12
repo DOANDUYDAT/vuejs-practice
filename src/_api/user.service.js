@@ -8,17 +8,18 @@ export const userService = {
     // getAll
 };
 
-async function login(email, password) {
+async function login(email, password, remember) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/user/login`,
         headers: { 'Content-Type': 'application/json' },
         data: {
             email,
-            password
+            password,
+            remember
         }
     };
-    console.log('log in service')
+    // console.log('log in service')
     try {
         const response = await axios(options);
         // login successful if there's a jwt token in the response

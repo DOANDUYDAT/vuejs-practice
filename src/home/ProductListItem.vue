@@ -1,5 +1,5 @@
 <template>
-  <v-card  hover height="100%" :max-width="maxWidthItem" flat>
+  <v-card  hover height="100%" :max-width="maxWidthItem" flat :to="linkToProduct" exact>
     <img :height="heightImage" :src="product.images[0]" contain />
 
     <v-card-text class="py-0">
@@ -66,6 +66,9 @@ export default {
           ? this.product.gia_khuyen_mai
           : this.product.gia_ban_le;
       return formatCurrency(price);
+    },
+    linkToProduct() {
+      return '/products/' + this.product.id
     }
   },
   methods: {

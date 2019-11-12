@@ -12,11 +12,11 @@ const state = initialState;
 const getters = {};
 
 const actions = {
-    async login({ dispatch, commit }, { email, password }) {
+    async login({ dispatch, commit }, { email, password, remember }) {
         console.log('action login');
         
         try {
-            const user = await userService.login(email, password);
+            const user = await userService.login(email, password, remember);
             // console.log('user: ' + user);
             if (user) {
                 commit('loginSuccess', user)
