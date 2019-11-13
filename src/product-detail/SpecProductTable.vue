@@ -190,7 +190,10 @@ export default {
     };
   },
   props: {
-    product: {}
+    product: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
     specProduct() {

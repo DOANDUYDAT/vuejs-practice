@@ -40,7 +40,10 @@ export default {
     };
   },
   props: {
-    product: {},
+    product: {
+      type: Object,
+      required: true
+    },
     maxWidthItem: {
       type: Number,
       required: false,

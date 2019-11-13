@@ -26,7 +26,7 @@
             <router-link to="/account">account</router-link>
           </v-col>
         </v-row>
-        <v-btn @click="clickBar">click</v-btn>
+        <!-- <v-btn @click="clickBar">click</v-btn> -->
       </v-container>
       <!-- <transition name="fade" mode="out-in"> -->
       <router-view></router-view>
@@ -43,12 +43,13 @@ import TheHeader from "./components/TheHeader";
 import TheFooter from "./components/TheFooter";
 import AlertList from "./components/AlertList";
 
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
     return {
       // transitionName: "slide-left"
+      product: {}
     };
   },
 
@@ -70,12 +71,35 @@ export default {
   },
 
   methods: {
-    clickBar: function() {
-      console.log(this.products);
-    }
+    // clickBar: function() {
+    //   this.product = this.products[0];
+    //   console.log(this.product)
+    // },
+    // ...mapMutations({
+    //   setDataForVuex: 'products/setProducts'
+    // })
   },
   created() {
-    this.$store.dispatch("products/getAllProducts");
+    console.log('app created')
+    // this.product = null
+    this.$store.dispatch("products/getAllProducts")
+    .then(resolve => {
+      console.log('app dispatch resolve: ' + resolve)
+    })
+    .catch(error => console.log('app dispatch reject: ' + error))
+
+    // this.product = this.products[0];
+    // console.log('app created products: ' + this.products);
+    // console.log('app created product: ' + JSON.stringify(this.product));
+  },
+  mounted() {
+    console.log('app mounted ');
+    // console.log('app mounted products: ' + this.products);
+    // console.log('app mounted product: ' + JSON.stringify(this.product));
+  },
+  updated() {
+    console.log('app updated products: ' + this.products);
+    console.log('app updated product: ' + JSON.stringify(this.product));
   }
 };
 </script>

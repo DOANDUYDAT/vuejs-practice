@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-col v-if="product">
     <v-row>
       <v-col cols="12">
         <v-img height="auto" width="auto" contain :src="imageBig ? imageBig : firstImage"></v-img>
@@ -38,7 +38,10 @@ export default {
     };
   },
   props: {
-    product: {}
+    product: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
     productImages() {
