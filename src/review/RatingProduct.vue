@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="!checkProductEmpty()">
     <div class="headline mb-2">Đánh giá sản phẩm</div>
     <v-row>
       <v-col cols="5">
@@ -52,7 +52,7 @@
             <v-btn
               color="primary"
               @click="submit"
-              :disabled="(ratingNumber > 0 ? false : true) || invalid" 
+              :disabled="(ratingNumber > 0 ? false : true) || invalid"
             >Gửi đánh giá</v-btn>
           </div>
         </ValidationObserver>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-
+import _ from "lodash";
 
 export default {
   data() {
@@ -73,11 +73,15 @@ export default {
       ratingNumber: 0
     };
   },
-  components: {
-    
-  },
+  components: {},
   props: {
-    product: {}
+    product: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    
   },
   methods: {
     async submit() {
@@ -94,6 +98,9 @@ export default {
           message: "Login error!"
         });
       }
+    },
+    checkProductEmpty() {
+      return _.isEmpty(this.product);
     }
   }
 };

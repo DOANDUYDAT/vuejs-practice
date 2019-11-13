@@ -17,11 +17,17 @@ export default {
     RatingProduct
   },
   computed: {
-    ...mapState({
-      products: state => state.products.all
-    }),
-    product() {
-      return this.products[0];
+    // ...mapState({
+    //   products: state => state.products.all
+    // }),
+    // product() {
+    //   return this.products[0];
+    // }
+  },
+  props: {
+    product: {
+      type: Object,
+      required: true
     }
   }
 };

@@ -51,7 +51,7 @@
             </v-row>
             <v-row align="center" justify="center">
               <v-col cols="12" md="5">
-                <v-checkbox v-model="checkbox" :label="'Duy trì đăng nhập'"></v-checkbox>
+                <v-checkbox v-model="remember" :label="'Duy trì đăng nhập'"></v-checkbox>
               </v-col>
               <v-col cols="12" md="3" class="text-md-end">
                 <a href>Quên mật khẩu?</a>
@@ -84,7 +84,7 @@ export default {
       email: "",
       showPassword: false,
       password: "",
-      checkbox: ""
+      remember: false,
     };
   },
   computed: {
@@ -97,19 +97,26 @@ export default {
       try {
         const isValid = await this.$refs.observer.validate();
         if (isValid) {
-          const { email, password } = this;
-          if (email && password) {
-            await this.$store.dispatch("authentication/login", {
-              email,
-              password
+          const { email, password, remember } = this;
+          const user = await this.$store.dispatch("authentication/login", {
+            email,
+            password,
+            remember
+          });
+          // console.log("user: " + user);
+          if (user) {
+            this.$store.dispatch("alert/success", {
+              message: "Login Successfully!"
             });
             this.dialog = false;
           }
         }
       } catch (error) {
-        this.$store.dispatch("alert/error", {
-          message: "Login error!"
-        });
+        if (error) {
+          this.$store.dispatch("alert/error", {
+            message: "Login failed!"
+          });
+        }
       }
     }
   }

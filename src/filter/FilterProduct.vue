@@ -13,7 +13,7 @@
       <!-- <v-btn :loading="loading" :disabled="loading" @click="loader = 'loading'">Accept Terms 2</v-btn> -->
     </v-btn-toggle>
     <v-expansion-panels accordion multiple>
-        <v-expansion-panel>
+      <v-expansion-panel>
         <v-expansion-panel-header>Giá</v-expansion-panel-header>
         <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
       </v-expansion-panel>
@@ -50,7 +50,6 @@
         <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-    
   </div>
 </template>
 
@@ -60,9 +59,7 @@ export default {
     return {
       //   toggle_exclusive: undefined,
       //   loader: null,
-      loading: false,
-      
-      
+      loading: false
     };
   },
   //   watch: {
@@ -83,5 +80,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

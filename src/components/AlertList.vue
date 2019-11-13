@@ -25,8 +25,9 @@ export default {
 
 <style scoped>
 ul {
-  position: absolute;
+  position: fixed;
   right: 0;
+  z-index: 999;
   /* left: 0; */
 }
 

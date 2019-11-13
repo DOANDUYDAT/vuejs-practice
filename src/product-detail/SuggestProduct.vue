@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="!checkProductEmpty()">
     <div class="headline pa-3">Sản phẩm tương tự</div>
     <v-slide-group v-model="model" class show-arrows max="10">
       <v-slide-item v-for="productItem in suggestProduct" :key="productItem.id">
@@ -10,6 +10,7 @@
 </template>
 <script>
 import ProductListItem from "@/home/ProductListItem";
+import _ from 'lodash';
 import { mapState } from "vuex";
 
 export default {
@@ -22,24 +23,38 @@ export default {
       rating: 3.5
     };
   },
+  props: {
+    product: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     ...mapState({
       products: state => state.products.all
     }),
-    product() {
-      return this.products[0];
-    },
+    // product() {
+    //   return this.products[0];
+    // },
     suggestProduct() {
-      console.log(this.suggestProductFollowBrand.length);
+      // console.log(this.suggestProductFollowBrand.length);
       return this.suggestProductFollowBrand;
     },
     suggestProductFollowBrand() {
-      let brand = this.product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu;
+      if (!_.isEmpty(this.product)) {
+        let brand = this.product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu;
       let suggestProductFollowBrand = this.products.filter(
         product =>
           product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu === brand
       );
       return suggestProductFollowBrand;
+      }
+      
+    }
+  },
+  methods: {
+    checkProductEmpty() {
+      return _.isEmpty(this.product);
     }
   }
 };
