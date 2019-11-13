@@ -199,6 +199,12 @@ export default {
     specProduct() {
       return this.product.thong_so_ky_thuat;
     }
+  },
+  mounted() {
+    console.log('SpecProductTable mounted');
+  },
+  updated() {
+    console.log('SpecProductTable updated');
   }
 };
 </script>

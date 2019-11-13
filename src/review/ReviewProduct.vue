@@ -29,6 +29,12 @@ export default {
       type: Object,
       required: true
     }
+  },
+  mounted() {
+    console.log('ReviewProduct mounted');
+  },
+  updated() {
+    console.log('ReviewProduct updated');
   }
 };
 </script>

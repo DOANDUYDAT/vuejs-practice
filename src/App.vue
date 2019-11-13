@@ -20,9 +20,6 @@
             <router-link to="/shopping-cart-page">shopping cart page</router-link>
           </v-col>
           <v-col>
-            <router-link to="/product-detail-page">Product detail</router-link>
-          </v-col>
-          <v-col>
             <router-link to="/account">account</router-link>
           </v-col>
         </v-row>
@@ -98,8 +95,8 @@ export default {
     // console.log('app mounted product: ' + JSON.stringify(this.product));
   },
   updated() {
-    console.log('app updated products: ' + this.products);
-    console.log('app updated product: ' + JSON.stringify(this.product));
+  //   console.log('app updated products: ' + this.products);
+  //   console.log('app updated product: ' + JSON.stringify(this.product));
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-card  hover height="100%" :max-width="maxWidthItem" flat :to="linkToProduct" exact>
+  <v-card v-if="!checkProductEmpty" hover height="100%" :max-width="maxWidthItem" flat :to="linkToProduct" exact>
     <img :height="heightImage" :src="product.images[0]" contain />
 
     <v-card-text class="py-0">
@@ -32,6 +32,7 @@
 <script>
 import { mapActions } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
+import _ from 'lodash';
 
 export default {
   data() {
@@ -72,6 +73,9 @@ export default {
     },
     linkToProduct() {
       return '/products/' + this.product.id
+    },
+    checkProductEmpty() {
+      return _.isEmpty(this.product);
     }
   },
   methods: {
