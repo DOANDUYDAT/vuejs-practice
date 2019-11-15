@@ -1,6 +1,7 @@
 <template>
   <v-card v-if="!checkProductEmpty" hover height="100%" :max-width="maxWidthItem" flat :to="linkToProduct" exact>
-    <img :height="heightImage" :src="product.images[0]" contain />
+    <!-- eager giúp force các ảnh được load hết -->
+    <v-img :height="heightImage" :src="product.images[0]" contain eager></v-img>
 
     <v-card-text class="py-0">
       <v-rating

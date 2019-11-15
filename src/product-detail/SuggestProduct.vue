@@ -1,7 +1,8 @@
 <template>
   <v-container v-if="!checkProductEmpty">
     <div class="headline pa-3">Sản phẩm tương tự</div>
-    <v-slide-group v-model="model" class show-arrows max="10">
+    <!-- mandatory yêu cầu 1 value luôn được chọn, giúp slide tự cuộn lại khi thay đổi list slide-item -->
+    <v-slide-group mandatory class show-arrows>
       <v-slide-item v-for="productItem in suggestProduct" :key="productItem.id">
         <product-list-item :product="productItem" :maxWidthItem="175" :heightImage="80"></product-list-item>
       </v-slide-item>
@@ -19,7 +20,7 @@ export default {
   },
   data() {
     return {
-      model: null,
+      model: 0,
       rating: 3.5
     };
   },
@@ -37,7 +38,6 @@ export default {
       return _.isEmpty(this.product);
     },
     suggestProduct() {
-      // console.log(this.suggestProductFollowBrand.length);
       return this.suggestProductFollowBrand;
     },
     suggestProductFollowBrand() {
@@ -49,15 +49,14 @@ export default {
         );
         return suggestProductFollowBrand;
       }
-    },
-    
+    }
   },
   methods: {},
   mounted() {
-    console.log('SuggestProduct mounted');
+    console.log("SuggestProduct mounted");
   },
   updated() {
-    console.log('SuggestProduct updated');
+    console.log("SuggestProduct updated");
   }
 };
 </script>
