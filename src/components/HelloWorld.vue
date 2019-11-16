@@ -8,9 +8,9 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      model: null,
-    }),
-  }
+export default {
+  data: () => ({
+    model: null
+  })
+};
 </script>
