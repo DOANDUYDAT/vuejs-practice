@@ -1,6 +1,12 @@
 <template>
   <div class="text-center">
-    <v-menu open-on-hover bottom offset-y class="color:white mx-auto center">
+    <v-menu
+      open-on-hover
+      bottom
+      offset-y
+      class="color:white mx-auto center"
+      style="background-color: white"
+    >
       <template v-slot:activator="{ on }">
         <v-btn v-on="on" icon>
           <v-badge overlap color="red">
@@ -12,7 +18,11 @@
         </v-btn>
       </template>
 
-      <v-responsive class="mx-auto" max-width="450px">
+      <v-responsive
+        class="mx-auto"
+        max-width="450px"
+        style="background-color: white"
+      >
         <!-- <v-toolbar color="primary" style="width=300px" class="mx-auto color:white">
           <v-card-title class="layout justify-center; mx-auto" style="color: white">
             <span class="mx-auto">GIỎ HÀNG CỦA BẠN</span>
@@ -31,15 +41,15 @@
           </thead>
           <tbody>
             <tr v-for="product in products" :key="product.id">
-              <td class="text-center">
-                <v-card max-width="150px" max-height="150px">
+              <td class="center">
+                <v-card max-width="100px" max-height="100px">
                   <v-img :src="product.image"></v-img>
                 </v-card>
               </td>
               <td class="text-center">
                 {{ product.title }}
                 <br />
-                <b>x{{product.quantity}}</b>
+                <b>x{{ product.quantity }}</b>
               </td>
 
               <!-- <td class="text-center">
@@ -93,19 +103,24 @@
         </v-simple-table>
 
         <v-card-text style="color:white">
-          <v-row class="mx-auto pt-0">
-            <v-col class="mx-auto pt-0 px-0 justify-left">
+          <v-row class="mx-auto pt-0 mdi-format-float-center">
+            <v-col
+              class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center"
+            >
               <v-card-actions>
                 <v-btn
                   color="red"
                   class="ma-2"
                   outlined
                   :disabled="!products.length"
-                  @click="chitietdonhang()"
-                >Xem chi tiết</v-btn>
+                  @click="xemchitietdonhang()"
+                  >Xem chi tiết</v-btn
+                >
               </v-card-actions>
             </v-col>
-            <v-col class="mx-auto pt-0 px-0 justify-right">
+            <v-col
+              class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center"
+            >
               <v-card-actions>
                 <v-btn
                   color="red"
@@ -114,7 +129,8 @@
                   class="ma-2"
                   :disabled="!products.length"
                   @click="checkout(products)"
-                >Đặt hàng ngay</v-btn>
+                  >Đặt hàng ngay</v-btn
+                >
               </v-card-actions>
               <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
             </v-col>
@@ -124,7 +140,7 @@
     </v-menu>
   </div>
 </template>
-  <script>
+<script>
 import { mapGetters, mapState, mapMutations } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
 
@@ -154,6 +170,7 @@ export default {
     checkout(products) {
       this.$store.dispatch("cart/checkout", products);
     },
+
     ...mapMutations("cart", [
       "incrementItemQuantity",
       "decrementItemQuantity",
@@ -165,7 +182,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 v-btn-tpggle v-btn {

@@ -1,20 +1,22 @@
 <template>
   <div class="filter-product">
-    <v-btn-toggle>
-      <v-btn class="my-2" depressed style="width:150px">Xóa bộ lọc</v-btn>
-      <v-btn
-        class="my-2"
-        depressed
-        style="width:147px"
-        color="red"
-        :loading="loading"
-        :disabled="loading"
-        @click="loader"
-        >Áp dụng</v-btn
-      >
-      <!-- <v-btn :loading="loading" :disabled="loading" @click="loader = 'loading'">Accept Terms 2</v-btn> -->
-    </v-btn-toggle>
-    <v-expansion-panels accordion multiple>
+    <ValidationObserver ref="observer">
+      <v-btn-toggle>
+        <v-btn @click="reset" class="my-2" depressed style="width:150px"
+          >Xóa bộ lọc</v-btn
+        >
+        <v-btn
+          class="my-2"
+          depressed
+          style="width:147px"
+          color="red"
+          :loading="loading"
+          :disabled="loading"
+          @click="loader"
+          >Áp dụng</v-btn
+        >
+        <!-- <v-btn :loading="loading" :disabled="loading" @click="loader = 'loading'">Accept Terms 2</v-btn> -->
+      </v-btn-toggle>
       <v-container fluid>
         <v-row align="center">
           <v-col class="d-flex" cols="12" sm="12">
@@ -85,7 +87,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-expansion-panels>
+    </ValidationObserver>
   </div>
 </template>
 
@@ -173,20 +175,25 @@ export default {
   //       this.loader = null;
   //     }
   //   },
+  // watch: {
+  //   menu() {
+  //     this.$refs.form.reset();
+  //   }
+  // },
   methods: {
     loader() {
       (this.loading = true), setTimeout(() => (this.loading = false), 2000);
+    },
+    reset() {
+      this.$refs.form.reset();
     }
   }
 };
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .label {
   color: black;
   font-weight: bold;
 }
-=======
->>>>>>> db9fbfb57b96ebd3537fc2410d445dfae9baf6ae
 </style>

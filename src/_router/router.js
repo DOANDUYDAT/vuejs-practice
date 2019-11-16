@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import HelloWorld from "@/components/HelloWorld.vue";
+import HelloWorld from "@/components/HelloWorld";
 import HomePage from "@/home/HomePage";
 import ShoppingCartPage from "@/cart/ShoppingCartPage";
 import ProductDetailPage from "@/product-detail/ProductDetailPage";
@@ -11,15 +11,7 @@ import ChangePasswordPage from "@/change-password/ChangePasswordPage";
 import HistoryPage from "@/history/HistoryPage";
 
 
-import HelloWorld from '@/components/HelloWorld.vue'
-import HomePage from '@/home/HomePage'
-import ShoppingCartPage from '@/cart/ShoppingCartPage'
-import ProductDetailPage from '@/product-detail/ProductDetailPage'
-import AccountPage from "@/account/AccountPage"
-import ProfilePage from '@/profile/ProfilePage'
-import ChangePasswordPage from '@/change-password/ChangePasswordPage'
-import HistoryPage from '@/history/HistoryPage'
-import ErrorPage from '@/error/ErrorPage'
+import ErrorPage from '@/error/ErrorPage';
 
 Vue.use(VueRouter);
 
@@ -29,15 +21,15 @@ export const router = new VueRouter({
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (savedPosition) {
-          resolve(savedPosition)
+          resolve(savedPosition);
         } else {
           resolve({
             x: 0,
             y: 0
-          })
+          });
         }
-      }, 200)
-    })
+      }, 200);
+    });
     // if (savedPosition) {
     //     return savedPosition
     // } else {
@@ -110,7 +102,7 @@ export const router = new VueRouter({
   ],
 
 
-})
+});
 
 
 
