@@ -54,7 +54,7 @@
                 <v-checkbox v-model="remember" :label="'Duy trì đăng nhập'"></v-checkbox>
               </v-col>
               <v-col cols="12" md="3" class="text-md-end">
-                <a href>Quên mật khẩu?</a>
+                <a >Quên mật khẩu?</a>
               </v-col>
             </v-row>
             <v-col md="6" offset-md="3">
@@ -113,6 +113,7 @@ export default {
         }
       } catch (error) {
         if (error) {
+          console.log('error:  ' + error)
           this.$store.dispatch("alert/error", {
             message: "Login failed!"
           });

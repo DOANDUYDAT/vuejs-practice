@@ -6,6 +6,7 @@ import cart from './modules/cart'
 import products from './modules/products'
 import alert from './modules/alert'
 import authentication from './modules/authentication'
+import admin from './modules/admin'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     cart,
     products,
     alert,
-    authentication
+    authentication,
+    admin
   },
   strict: debug,
 
