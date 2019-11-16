@@ -87,7 +87,10 @@ export default {
     };
   },
   props: {
-    product: {}
+    product: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
     oldPrice() {
@@ -120,6 +123,12 @@ export default {
       this.quantity--;
     },
     ...mapActions("cart", ["addProductToCart"])
+  },
+  mounted() {
+    console.log('InfoOrderProduct mounted');
+  },
+  updated() {
+    console.log('InfoOrderProduct updated');
   }
 };
 </script>

@@ -8,21 +8,22 @@ export const userService = {
     // getAll
 };
 
-async function login(email, password) {
+async function login(email, password, remember) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/user/login`,
         headers: { 'Content-Type': 'application/json' },
         data: {
             email,
-            password
+            password,
+            remember
         }
     };
-    console.log('log in service')
+    // console.log('log in service')
     try {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
-        console.log(response.data.token);
+        // console.log(response.data.token);
         if (response.data.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             const user = { token: response.data.token };
@@ -31,7 +32,8 @@ async function login(email, password) {
             return user;
         }
     } catch (error) {
-        console.log(error);
+        // console.log('errr: ' + error);
+        if (error) throw error;
     }
 }
 

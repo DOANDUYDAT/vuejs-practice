@@ -1,6 +1,7 @@
 <template>
-  <v-card  hover height="100%" :max-width="maxWidthItem" flat>
-    <img :height="heightImage" :src="product.images[0]" contain />
+  <v-card v-if="!checkProductEmpty" hover height="100%" :max-width="maxWidthItem" flat :to="linkToProduct" exact>
+    <!-- eager giúp force các ảnh được load hết -->
+    <v-img :height="heightImage" :src="product.images[0]" contain eager></v-img>
 
     <v-card-text class="py-0">
       <v-rating
@@ -32,6 +33,7 @@
 <script>
 import { mapActions } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
+import _ from 'lodash';
 
 export default {
   data() {
@@ -40,7 +42,10 @@ export default {
     };
   },
   props: {
-    product: {},
+    product: {
+      type: Object,
+      required: true
+    },
     maxWidthItem: {
       type: Number,
       required: false,
@@ -66,6 +71,12 @@ export default {
           ? this.product.gia_khuyen_mai
           : this.product.gia_ban_le;
       return formatCurrency(price);
+    },
+    linkToProduct() {
+      return '/products/' + this.product.id
+    },
+    checkProductEmpty() {
+      return _.isEmpty(this.product);
     }
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="product">
     <v-row>
       <v-col cols="5">
         <slide-image-product :product="product"></slide-image-product>
@@ -9,10 +9,10 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <suggest-product></suggest-product>
+    <suggest-product :product="product"></suggest-product>
     <v-row>
       <v-col cols="10">
-        <review-product></review-product>
+        <review-product :product="product"></review-product>
       </v-col>
     </v-row>
     <v-row>
@@ -32,15 +32,15 @@
 import SlideImageProduct from "./SlideImageProduct";
 import SpecProductTable from "./SpecProductTable";
 import InfoOrderProduct from "./InfoOrderProduct";
-import ReviewProduct from "./ReviewProduct";
+import ReviewProduct from "@/review/ReviewProduct";
 import SuggestProduct from "./SuggestProduct";
-import CommentProduct from "./CommentProduct";
+import CommentProduct from "@/comment/CommentProduct";
 import { mapState } from "vuex";
 
 export default {
   data() {
     return {
-      // product: {}
+      product: {}
     };
   },
   components: {
@@ -52,11 +52,54 @@ export default {
     CommentProduct
   },
   computed: {
-    ...mapState({
-      products: state => state.products.all
-    }),
-    product() {
-      return this.products[0];
+    // ...mapState({
+    //   products: state => state.products.all
+    //   // product: state => state.products.product
+    // })
+    // product() {
+    //   return this.products[0];
+    // }
+  },
+  created() {
+    // this.getProduct()
+    console.log("pdp created ");
+    this.getProduct()
+    // this.product = this.products[productId];
+
+    // console.log("pdp created products: " + this.products);
+    // console.log("pdp created product: " + JSON.stringify(this.product));
+  },
+  mounted() {
+    console.log("ProductDetailPage mounted: ");
+    // console.log("pdp mounted products: " + this.products);
+    // console.log("pdp mounted product: " + JSON.stringify(this.product));
+  },
+  updated() {
+    console.log("ProductDetailPage updated: ");
+  },
+  watch: {
+    // call again the method if the route changes
+    // $route(to, from) {
+    //   const productId = this.$route.params.product_id;
+    //   console.log("$route: " + productId);
+    //   this.product = this.products[productId];
+    // }
+    $route: 'getProduct'
+  },
+
+  methods: {
+    getProduct() {
+      const productId = this.$route.params.product_id;
+      this.$store
+        .dispatch("products/getProduct", { id: productId })
+        .then(resolve => {
+          console.log(resolve.images)
+          this.product = Object.assign({}, this.product, resolve);
+          console.log("pdp dispatch resolve" + resolve);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

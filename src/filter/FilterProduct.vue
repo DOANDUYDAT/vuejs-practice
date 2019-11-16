@@ -10,29 +10,56 @@
         :loading="loading"
         :disabled="loading"
         @click="loader"
-      >Áp dụng</v-btn>
+        >Áp dụng</v-btn
+      >
       <!-- <v-btn :loading="loading" :disabled="loading" @click="loader = 'loading'">Accept Terms 2</v-btn> -->
     </v-btn-toggle>
     <v-expansion-panels accordion multiple>
       <v-container fluid>
         <v-row align="center">
           <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items1" attach chips label="Giá" multiple></v-select>
+            <v-select
+              :items="items1"
+              attach
+              chips
+              label="Giá"
+              multiple
+            ></v-select>
           </v-col>
           <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items2" chips label="Thương hiệu" multiple></v-select>
+            <v-select
+              :items="items2"
+              chips
+              label="Thương hiệu"
+              multiple
+            ></v-select>
           </v-col>
           <v-col class="d-flex" cols="12" sm="12">
             <v-select :items="items3" chips label="Màu sắc" multiple></v-select>
           </v-col>
           <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items4" chips label="Bộ nhớ trong điện thoại" multiple></v-select>
+            <v-select
+              :items="items4"
+              chips
+              label="Bộ nhớ trong điện thoại"
+              multiple
+            ></v-select>
           </v-col>
           <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items5" chips label="Camera sau điện thoại" multiple></v-select>
+            <v-select
+              :items="items5"
+              chips
+              label="Camera sau điện thoại"
+              multiple
+            ></v-select>
           </v-col>
           <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items6" chips label="Camera trước điện thoại" multiple></v-select>
+            <v-select
+              :items="items6"
+              chips
+              label="Camera trước điện thoại"
+              multiple
+            ></v-select>
           </v-col>
           <!-- <v-col class="d-flex" cols="12" sm="12">
             <v-select :items="items7" label="Chip điện thoại"></v-select>
@@ -41,10 +68,20 @@
             <v-select :items="items8" label="Cổng sạc điện thoại"></v-select>
           </v-col>-->
           <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items9" chips label="Hệ điều hành điện thoại" multiple></v-select>
+            <v-select
+              :items="items9"
+              chips
+              label="Hệ điều hành điện thoại"
+              multiple
+            ></v-select>
           </v-col>
           <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items10" chips label="RAM điện thoại" multiple></v-select>
+            <v-select
+              :items="items10"
+              chips
+              label="RAM điện thoại"
+              multiple
+            ></v-select>
           </v-col>
         </v-row>
       </v-container>
@@ -145,8 +182,11 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .label {
   color: black;
   font-weight: bold;
 }
+=======
+>>>>>>> db9fbfb57b96ebd3537fc2410d445dfae9baf6ae
 </style>
