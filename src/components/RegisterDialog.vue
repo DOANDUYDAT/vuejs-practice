@@ -139,6 +139,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { userService } from "@/_api";
 
 export default {
   data() {
@@ -160,14 +161,35 @@ export default {
     async submit() {
       try {
         const isValid = await this.$refs.observer.validate();
-        this.$store.dispatch("alert/addAlert", {
-          type: "success",
-          message: "Register successfully!"
-        });
-        this.dialog = false;
+        if (isValid) {
+          const {
+            lastName,
+            firstName,
+            date,
+            email,
+            password,
+            confirmPassword
+          } = this;
+          const userInfo = {
+            firstName,
+            lastName,
+            date,
+            email,
+            password,
+            confirmPassword
+          };
+          console.log(userInfo)
+          const user = await userService.register(userInfo);
+          if (uer) {
+            this.$store.dispatch("alert/error", {
+              message: "Register successfully!"
+            });
+            this.dialog = false;
+          }
+        }
       } catch (error) {
-        this.$store.dispatch("alert/addAlert", {
-          type: "error",
+        console.log(error);
+        this.$store.dispatch("alert/error", {
           message: "Register error!"
         });
       }

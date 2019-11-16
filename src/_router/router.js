@@ -10,10 +10,11 @@ import ProfilePage from '@/profile/ProfilePage'
 import ChangePasswordPage from '@/change-password/ChangePasswordPage'
 import HistoryPage from '@/history/HistoryPage'
 import ErrorPage from '@/error/ErrorPage'
+import AdminPage from '@/admin/AdminPage'
 
 Vue.use(VueRouter);
 
-export const router = new VueRouter({
+export default new VueRouter({
     mode: 'history',
     scrollBehavior(to, from, savedPosition) {
         return new Promise((resolve, reject) => {
@@ -90,6 +91,10 @@ export const router = new VueRouter({
             ]
         },
         {
+            path: '/admin',
+            component: AdminPage
+        },
+        {
             path: '*',
             component: ErrorPage
         }
@@ -98,7 +103,18 @@ export const router = new VueRouter({
 
 })
 
-
+// Bootstrap Analytics
+// Set in .env
+// https://github.com/MatteoGabriele/vue-analytics
+if (process.env.GOOGLE_ANALYTICS) {
+    Vue.use(VueAnalytics, {
+      id: process.env.GOOGLE_ANALYTICS,
+      router,
+      autoTracking: {
+        page: process.env.NODE_ENV !== 'development'
+      }
+    })
+  }
 
 // router.beforeEach((to, from, next) => {
 //     if (to.matched.some(record => record.meta.requiresAuth)) {

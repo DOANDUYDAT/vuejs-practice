@@ -20,7 +20,7 @@ const actions = {
         return allProducts;
       }
     } catch (error) {
-      return error
+      throw error;
     }
     // }
   },
@@ -33,7 +33,7 @@ const actions = {
         return product;
       }
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 }
