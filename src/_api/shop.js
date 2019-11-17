@@ -33,7 +33,7 @@ export default {
   getAllProducts() {
     return new Promise( (resolve, reject) => {
       setTimeout(() => {
-        console.log('getAllProducts api');
+        // console.log('getAllProducts api');
         if(_products) {
           resolve(_products)
         } else {
@@ -56,7 +56,7 @@ export default {
   getProduct(id) {
     return new Promise( (resolve, reject) => {
       setTimeout(() => {
-        console.log('getProduct api');
+        // console.log('getProduct api');
         const product = _products[id]
         if(product) {
           resolve(_products[id])

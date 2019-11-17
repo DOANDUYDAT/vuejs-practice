@@ -123,6 +123,12 @@ export default {
       this.quantity--;
     },
     ...mapActions("cart", ["addProductToCart"])
+  },
+  mounted() {
+    console.log('InfoOrderProduct mounted');
+  },
+  updated() {
+    console.log('InfoOrderProduct updated');
   }
 };
 </script>

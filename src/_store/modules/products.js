@@ -12,7 +12,7 @@ const getters = {}
 // actions
 const actions = {
   async getAllProducts({ commit }) {
-    console.log('getAllProduct actions');
+    // console.log('getAllProduct actions');
     try {
       const allProducts = await shop.getAllProducts();
       if (allProducts) {
@@ -20,12 +20,12 @@ const actions = {
         return allProducts;
       }
     } catch (error) {
-      return error
+      throw error;
     }
     // }
   },
   async getProduct({ commit }, { id }) {
-    console.log('getProduct action');
+    // console.log('getProduct action');
     try {
       const product = await shop.getProduct(id);
       if (product) {
@@ -33,7 +33,7 @@ const actions = {
         return product;
       }
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 }
@@ -41,11 +41,11 @@ const actions = {
 // mutations
 const mutations = {
   setAllProducts(state, products) {
-    console.log('setAllProducts mutation');
+    // console.log('setAllProducts mutation');
     state.all = products;
   },
   setProduct(state, product) {
-    console.log('setProduct mutation');
+    // console.log('setProduct mutation');
     state.product = product;
   },
   decrementProductInventory(state, { id, quantity }) {

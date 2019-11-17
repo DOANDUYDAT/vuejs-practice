@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!checkProductEmpty()">
+  <v-container v-if="!checkProductEmpty">
     <div class="headline mb-2">Đánh giá sản phẩm</div>
     <v-row>
       <v-col cols="5">
@@ -81,7 +81,9 @@ export default {
     }
   },
   computed: {
-    
+    checkProductEmpty() {
+      return _.isEmpty(this.product);
+    }
   },
   methods: {
     async submit() {
@@ -99,9 +101,7 @@ export default {
         });
       }
     },
-    checkProductEmpty() {
-      return _.isEmpty(this.product);
-    }
+    
   }
 };
 </script>

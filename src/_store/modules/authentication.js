@@ -1,4 +1,4 @@
-import { userService } from '../../_api';
+import { userService } from '@/_api';
 
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -13,11 +13,11 @@ const getters = {};
 
 const actions = {
     async login({ dispatch, commit }, { email, password, remember }) {
-        console.log('action login');
+        // console.log('action login');
         
         try {
             const user = await userService.login(email, password, remember);
-            // console.log('user: ' + user);
+            // console.log('user: ' + typeof user);
             if (user) {
                 commit('loginSuccess', user)
                 return user;

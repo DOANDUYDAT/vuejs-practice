@@ -1,7 +1,8 @@
 <template>
-  <v-container v-if="!checkProductEmpty()">
+  <v-container v-if="!checkProductEmpty">
     <div class="headline pa-3">Sản phẩm tương tự</div>
-    <v-slide-group v-model="model" class show-arrows max="10">
+    <!-- mandatory yêu cầu 1 value luôn được chọn, giúp slide tự cuộn lại khi thay đổi list slide-item -->
+    <v-slide-group mandatory class show-arrows>
       <v-slide-item v-for="productItem in suggestProduct" :key="productItem.id">
         <product-list-item :product="productItem" :maxWidthItem="175" :heightImage="80"></product-list-item>
       </v-slide-item>
@@ -10,7 +11,7 @@
 </template>
 <script>
 import ProductListItem from "@/home/ProductListItem";
-import _ from 'lodash';
+import _ from "lodash";
 import { mapState } from "vuex";
 
 export default {
@@ -19,7 +20,7 @@ export default {
   },
   data() {
     return {
-      model: null,
+      model: 0,
       rating: 3.5
     };
   },
@@ -33,29 +34,29 @@ export default {
     ...mapState({
       products: state => state.products.all
     }),
-    // product() {
-    //   return this.products[0];
-    // },
+    checkProductEmpty() {
+      return _.isEmpty(this.product);
+    },
     suggestProduct() {
-      // console.log(this.suggestProductFollowBrand.length);
       return this.suggestProductFollowBrand;
     },
     suggestProductFollowBrand() {
       if (!_.isEmpty(this.product)) {
         let brand = this.product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu;
-      let suggestProductFollowBrand = this.products.filter(
-        product =>
-          product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu === brand
-      );
-      return suggestProductFollowBrand;
+        let suggestProductFollowBrand = this.products.filter(
+          product =>
+            product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu === brand
+        );
+        return suggestProductFollowBrand;
       }
-      
     }
   },
-  methods: {
-    checkProductEmpty() {
-      return _.isEmpty(this.product);
-    }
+  methods: {},
+  mounted() {
+    console.log("SuggestProduct mounted");
+  },
+  updated() {
+    console.log("SuggestProduct updated");
   }
 };
 </script>
