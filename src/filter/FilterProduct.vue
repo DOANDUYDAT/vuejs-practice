@@ -26,7 +26,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="model" multiple>
+              <v-list-item-group v-model="selected" multiple>
                 <template v-for="(item1, i) in item1s">
                   <v-divider v-if="!item1" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -61,7 +61,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="model" multiple>
+              <v-list-item-group v-model="selected" multiple>
                 <template v-for="(item2, i) in item2s">
                   <v-divider v-if="!item2" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -96,7 +96,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="model" multiple>
+              <v-list-item-group v-model="selected" multiple>
                 <template v-for="(item3, i) in item3s">
                   <v-divider v-if="!item3" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -131,7 +131,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="model" multiple>
+              <v-list-item-group v-model="selected" multiple>
                 <template v-for="(item4, i) in item4s">
                   <v-divider v-if="!item4" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -166,7 +166,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="model" multiple>
+              <v-list-item-group v-model="selected" multiple>
                 <template v-for="(item5, i) in item5s">
                   <v-divider v-if="!item5" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -201,7 +201,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="model" multiple>
+              <v-list-item-group v-model="selected" multiple>
                 <template v-for="(item6, i) in item6s">
                   <v-divider v-if="!item6" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -236,7 +236,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="model" multiple>
+              <v-list-item-group v-model="selected" multiple>
                 <template v-for="(item9, i) in item9s">
                   <v-divider v-if="!item9" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -271,7 +271,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="model" multiple>
+              <v-list-item-group v-model="selected" multiple>
                 <template v-for="(item10, i) in item10s">
                   <v-divider v-if="!item10" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -308,6 +308,7 @@
 export default {
   data() {
     return {
+      selected: [],
       //   toggle_exclusive: undefined,
       //   loader: null,
       loading: false
