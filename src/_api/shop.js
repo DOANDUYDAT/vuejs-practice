@@ -30,8 +30,19 @@ let _products = [{"id":0,"inventory":100,"title":"Điện thoại SAMSUNG Galaxy
 
 
 export default {
-  getProducts(cb) {
-    setTimeout(() => cb(_products), 100)
+  getAllProducts() {
+    return new Promise( (resolve, reject) => {
+      setTimeout(() => {
+        // console.log('getAllProducts api');
+        if(_products) {
+          resolve(_products)
+        } else {
+          reject('backend fail')
+        }
+
+      }, 100)
+    })
+    
   },
 
   buyProducts(products, cb, errorCb) {
@@ -41,5 +52,18 @@ export default {
         ? cb()
         : errorCb()
     }, 100)
+  },
+  getProduct(id) {
+    return new Promise( (resolve, reject) => {
+      setTimeout(() => {
+        // console.log('getProduct api');
+        const product = _products[id]
+        if(product) {
+          resolve(_products[id])
+        } else {
+          reject('backend fail')
+        }
+      }, 100)
+    })
   }
 }

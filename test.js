@@ -1,40 +1,52 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
+Vue.use(VueRouter)
 
-// let a = 22100000;
-// let astr = a.toString();
-// let my_arr = astr.split('');
-// console.log(my_arr)
-// // let lena = astr.length;
-// let total = [];
-// let my_arr_reverse = my_arr.reverse();
-// console.log(my_arr_reverse);
+const Foo = { template: `<div class="foo"><h1>foo</h1></div>` }
+const Bar = { template: `<div class="bar"><h1>bar</h1></div>` }
 
-// let my_arr_reverse_str = my_arr_reverse.join('');
-// console.log(my_arr_reverse_str);
-// for (let i = 0; i < my_arr_reverse_str.length; i += 3) {
-//     total.push(my_arr_reverse_str.substr(i, 3));
-// }
+const childRouter = new VueRouter({
+  mode: 'abstract',
+  routes: [
+    { path: '/foo', component: Foo },
+    { path: '/bar', component: Bar }
+  ]
+})
 
-// console.log(total);
-// let total_reverse = total.reverse();
-// console.log(total_reverse);
-// let result = '';
-// result = total_reverse.join('.');
-// console.log(result);
-
-let b = 205000;
-let b_str = b.toString();
-let b_du = Math.floor(b_str.length / 3);
-let b_start = b_str.length - 3 * b_du;
-console.log(b_du);
-let total = [];
-for(let i = b_start; i < b_str.length; i += 3) {
-    total.push(b_str.substr(i, 3));
+const Nested = {
+  router: childRouter,
+  template: `<div class="child">
+    <p>Child router path: {{ $route.fullPath }}</p>
+    <ul>
+      <li><router-link to="/foo">/foo</router-link></li>
+      <li><router-link to="/bar">/bar</router-link></li>
+    </ul>
+    <router-view/>
+  </div>`
 }
-let result = '';
-if (b_start > 0) {
-    result = b_str.substr(0, b_start) + '.' + total.join('.');
-} else {
-    result = total.join('.');
-}
-console.log(result);
+
+const router = new VueRouter({
+  mode: 'history',
+  base: __dirname,
+  routes: [
+    { path: '/nested-router', component: Nested },
+    { path: '/foo', component: Foo },
+    { path: '/bar', component: Bar }
+  ]
+})
+
+new Vue({
+  router,
+  template: `
+    <div id="app">
+      <p>Root router path: {{ $route.fullPath }}</p>
+      <ul>
+        <li><router-link to="/nested-router">/nested-router</router-link></li>
+        <li><router-link to="/foo">/foo</router-link></li>
+        <li><router-link to="/bar">/bar</router-link></li>
+      </ul>
+      <router-view></router-view>
+    </div>
+  `
+}).$mount('#app')

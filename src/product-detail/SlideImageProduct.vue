@@ -1,59 +1,79 @@
 <template>
-  <v-col>
+  <v-col v-if="!checkProductEmpty">
     <v-row>
       <v-col cols="12">
-        <v-img 
-          height="auto"
-          width="auto"
-          contain
-          :src="imageBig ? imageBig : firstImage"
-          
-        ></v-img>
-        
+        <v-img height="auto" width="auto" contain :src="imageBig"></v-img>
       </v-col>
     </v-row>
-    <v-row align="center" justify="center">
-      <template v-for="(image, index) in productImages">
-        <v-col cols="2" class="px-1" :key="index">
-          <v-hover v-slot:default="{ hover }">
-            <v-card :class="{ 'on-hover': hover }" hover raised>
-              <v-img height="auto" width="auto" :src="image" @mouseover="mouseOver(image)" contain></v-img>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </template>
-    </v-row>
+
+    <v-slide-group show-arrows mandatory>
+      <v-slide-item v-for="(image, index) in productImages" :key="index">
+        <v-hover v-slot:default="{ hover }">
+          <v-card :class="{ 'on-hover': hover }" hover raised>
+            <v-img
+              height="auto"
+              width="70"
+              :src="image"
+              @mouseover="mouseOver(image)"
+              contain
+              eager
+            ></v-img>
+          </v-card>
+        </v-hover>
+      </v-slide-item>
+    </v-slide-group>
   </v-col>
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
   data() {
     return {
-      imageBig: ""
+      imageBig: "",
+      keyA: 0
     };
   },
   props: {
-    product: {}
+    product: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
-    productImages() {
-      return this.product.images;
+    checkProductEmpty() {
+      return _.isEmpty(this.product);
     },
-    firstImage() {
-        if (this.productImages === undefined) {
-            return '';
-        } else {
-            return this.productImages[0];
+    productImages() {
+      const images = this.product.images;
+      let productImages = [];
+      for (let i = 0; i < 6; i++) {
+        if (i < images.length) {
+          productImages.push(images[i]);
         }
+      }
+      return productImages;
     }
   },
   methods: {
     mouseOver(image) {
       this.imageBig = image;
+    },
+    initImageBig() {
+      this.imageBig = this.product.images[0];
     }
   },
-  
+  mounted() {
+    console.log("SlideImageProduct mounted");
+  },
+  updated() {
+    console.log("SlideImageProduct updated");
+  },
+
+  watch: {
+    product: "initImageBig"
+  }
 };
 </script>
 

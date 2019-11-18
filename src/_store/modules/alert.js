@@ -1,4 +1,4 @@
-
+/// {type, message}
 const state = {
     all: []
 }
@@ -12,8 +12,29 @@ const actions = {
     },
     deleteAlert({ commit }) {
         commit("removeAlert")
+    },
+    success({ dispatch }, { message }) {
+        const alert = {
+            type: 'success',
+            message
+        };
+        dispatch('addAlert', alert);
+    },
+    error({ dispatch }, { message }) {
+        const alert = {
+            type: 'error',
+            message
+        };
+        dispatch('addAlert', alert);
+    },
+    warning( { dispatch }, { message }) {
+        const alert = {
+            type: 'warning',
+            message
+        };
+        dispatch('addAlert', message);
     }
-   
+
 }
 
 const mutations = {
@@ -26,7 +47,7 @@ const mutations = {
     removeAlert(state) {
         state.all.pop()
     }
-    
+
 }
 
 

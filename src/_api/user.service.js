@@ -1,30 +1,46 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
+import axios from 'axios';
 
 export const userService = {
     login,
     logout,
-    getAll
+    register
 };
 
-function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+const headers = {
+    'Content-Type': 'application/json',
+    // "Host": 'http://127.0.0.1:8000'
+        
+}
+
+async function login(email, password, remember) {
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/user/login`,
+        headers: headers,
+        data: {
+            email,
+            password,
+            remember
+        }
     };
-
-    return fetch(`${config.apiUrl}/user/login`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-
+    // console.log('log in service')
+    try {
+        const response = await axios(options);
+        // login successful if there's a jwt token in the response
+        // console.log(response.data.token);
+        if (response.data.token) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            const user = { token: response.data.token };
+            console.log(JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(user));
             return user;
-        });
+        }
+    } catch (error) {
+        // console.log('errr: ' + error);
+        if (error) throw error;
+    }
 }
 
 function logout() {
@@ -32,14 +48,32 @@ function logout() {
     localStorage.removeItem('user');
 }
 
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
+async function register(userInfo) {
+    console.log(userInfo)
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/user/register`,
+        headers: headers,
+        data: JSON.stringify(userInfo)
     };
-
-    return fetch(`${config.apiUrl}/user/profile`, requestOptions).then(handleResponse);
+    // console.log('log in service')
+    try {
+        const response = await axios(options);
+        // login successful if there's a jwt token in the response
+        // console.log(response.data.token);
+        if (response.data.token) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            const user = { token: response.data.token };
+            console.log(JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(user));
+            return user;
+        }
+    } catch (error) {
+        // console.log('errr: ' + error);
+        if (error) throw error;
+    }
 }
+
 
 function handleResponse(response) {
     return response.text().then(text => {

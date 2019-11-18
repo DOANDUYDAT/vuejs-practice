@@ -1,18 +1,23 @@
 <template>
+  <!-- <v-container>
+    <v-row>
+      
+  <v-col cols="12" md="8" class="mx-auto">-->
+
   <v-card flat>
-    <v-toolbar color="primary" dark flat>
+    <v-toolbar color="primary" dark flat dense>
       <v-card-title>
-        <span class="headline">Đổi Mật Khẩu</span>
+        <span class="headline">Đổi mật khẩu</span>
       </v-card-title>
     </v-toolbar>
     <v-card-text>
       <v-container>
         <ValidationObserver ref="observer" v-slot="{ invalid }" tag="form">
-          <v-row>
-            <v-col cols="3" offset-md="1">
-              <v-subheader>Mật Khẩu Hiện Tại</v-subheader>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Mật Khẩu Hiện Tại</v-subheader>
             </v-col>
-            <v-col cols="9" md="6" class="mx-auto ml-0 pl-0">
+            <v-col cols="12" md="7">
               <ValidationProvider
                 name="old password"
                 rules="required|min:8"
@@ -32,10 +37,12 @@
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
-            <v-col cols="3" offset-md="1">
-              <v-subheader>Mật Khẩu Mới</v-subheader>
+          </v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Mật Khẩu Mới</v-subheader>
             </v-col>
-            <v-col cols="9" md="6" class="mx-auto ml-0 pl-0">
+            <v-col cols="12" md="7">
               <ValidationProvider
                 name="password"
                 rules="required|min:8"
@@ -54,10 +61,12 @@
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
-            <v-col cols="3" offset-md="1">
-              <v-subheader>Xác Nhận Mật Khẩu</v-subheader>
+          </v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Xác Nhận Mật Khẩu</v-subheader>
             </v-col>
-            <v-col cols="9" md="6" class="mx-auto ml-0 pl-0">
+            <v-col cols="12" md="7">
               <ValidationProvider
                 name="confirm password"
                 rules="required|min:8|confirmed:password"
@@ -77,15 +86,21 @@
               </ValidationProvider>
             </v-col>
           </v-row>
-          <v-col md="6" offset-md="4" class="pl-0">
-            <v-card-actions class="pl-0">
-              <v-btn color="primary" @click="submit" :disabled="invalid">Xác nhận</v-btn>
-            </v-card-actions>
-          </v-col>
+          <v-card-actions>
+            <v-row no-gutters>
+              <!-- <v-col cols="3"></v-col> -->
+              <!-- <v-col cols="12"> -->
+              <v-btn color="primary" class="mx-auto" @click="submit" :disabled="invalid">Xác nhận</v-btn>
+              <!-- </v-col> -->
+            </v-row>
+          </v-card-actions>
         </ValidationObserver>
       </v-container>
     </v-card-text>
   </v-card>
+  <!-- </v-col>
+    </v-row>
+  </v-container>-->
 </template>
 
 <script>
@@ -115,8 +130,7 @@ export default {
           message: "Reset Password error!"
         });
       }
-    },
-    
+    }
   }
 };
 </script>

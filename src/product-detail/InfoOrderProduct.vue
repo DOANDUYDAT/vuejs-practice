@@ -4,13 +4,14 @@
       <v-col cols="12">
         <h2>{{ product.title }}</h2>
         <v-rating
-          v-model="rating"
-          color="red"
-          background-color="grey lighten-2"
-          empty-icon="mdi-heart-outline"
-          full-icon="mdi-heart"
-          half-icon="mdi-heart-half-full"
+          :value="rating"
+          color="amber"
+          background-color="grey"
+          empty-icon="mdi-star-outline"
+          full-icon="mdi-star"
+          half-icon="mdi-star-half"
           half-increments
+          readonly
         ></v-rating>
       </v-col>
     </v-row>
@@ -81,12 +82,15 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      rating: 4.5,
+      rating: 3.5,
       quantity: 1
     };
   },
   props: {
-    product: {}
+    product: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
     oldPrice() {
@@ -119,6 +123,12 @@ export default {
       this.quantity--;
     },
     ...mapActions("cart", ["addProductToCart"])
+  },
+  mounted() {
+    console.log('InfoOrderProduct mounted');
+  },
+  updated() {
+    console.log('InfoOrderProduct updated');
   }
 };
 </script>
