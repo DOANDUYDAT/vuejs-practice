@@ -17,7 +17,9 @@
             <router-link to="/todo">Todo App</router-link>
           </v-col>
           <v-col>
-            <router-link to="/shopping-cart-page">shopping cart page</router-link>
+            <router-link to="/shopping-cart-page"
+              >shopping cart page</router-link
+            >
           </v-col>
           <v-col>
             <router-link to="/account">account</router-link>
@@ -77,29 +79,29 @@ export default {
     // })
   },
   created() {
-    console.log('app created')
+    console.log("app created");
     // this.product = null
-    this.$store.dispatch("products/getAllProducts")
-    .then(resolve => {
-      console.log('app dispatch resolve: ' + resolve)
-    })
-    .catch(error => console.log('app dispatch reject: ' + error))
+    this.$store
+      .dispatch("products/getAllProducts")
+      .then(resolve => {
+        console.log("app dispatch resolve: " + resolve);
+      })
+      .catch(error => console.log("app dispatch reject: " + error));
 
     // this.product = this.products[0];
     // console.log('app created products: ' + this.products);
     // console.log('app created product: ' + JSON.stringify(this.product));
   },
   mounted() {
-    console.log('app mounted ');
+    console.log("app mounted ");
     // console.log('app mounted products: ' + this.products);
     // console.log('app mounted product: ' + JSON.stringify(this.product));
   },
   updated() {
-  //   console.log('app updated products: ' + this.products);
-  //   console.log('app updated product: ' + JSON.stringify(this.product));
+    //   console.log('app updated products: ' + this.products);
+    //   console.log('app updated product: ' + JSON.stringify(this.product));
   }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

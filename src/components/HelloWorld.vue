@@ -5,7 +5,11 @@
 
     <v-sheet class="mx-auto" elevation="8" max-width="800">
       <v-slide-group v-model="model" class="pa-4" show-arrows>
-        <v-slide-item v-for="n in 15" :key="n" v-slot:default="{ active, toggle }">
+        <v-slide-item
+          v-for="n in 15"
+          :key="n"
+          v-slot:default="{ active, toggle }"
+        >
           <v-card
             :color="active ? 'primary' : 'grey lighten-1'"
             class="ma-4"
@@ -15,7 +19,12 @@
           >
             <v-row class="fill-height" align="center" justify="center">
               <v-scale-transition>
-                <v-icon v-if="active" color="white" size="48" v-text="'mdi-close-circle-outline'"></v-icon>
+                <v-icon
+                  v-if="active"
+                  color="white"
+                  size="48"
+                  v-text="'mdi-close-circle-outline'"
+                ></v-icon>
               </v-scale-transition>
             </v-row>
           </v-card>
@@ -30,8 +39,6 @@
         </v-sheet>
       </v-expand-transition>
     </v-sheet>
-
-
   </div>
 </template>
 
@@ -47,7 +54,7 @@ export default {
           "https://file.services.teko.vn/media/96/81/1565062519.771172_190800033-1.jpg"
         ]
       },
-      model: null,
+      model: null
     };
   },
   methods: {
