@@ -1,126 +1,120 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-import HelloWorld from "@/components/HelloWorld";
-import HomePage from "@/home/HomePage";
-import ShoppingCartPage from "@/cart/ShoppingCartPage";
-import ProductDetailPage from "@/product-detail/ProductDetailPage";
-import AccountPage from "@/account/AccountPage";
-import ProfilePage from "@/profile/ProfilePage";
-import ChangePasswordPage from "@/change-password/ChangePasswordPage";
-import HistoryPage from "@/history/HistoryPage";
-import AdminPage from "@/admin/AdminPage";
-import ErrorPage from "@/error/ErrorPage";
+import HelloWorld from '@/components/HelloWorld.vue'
+import HomePage from '@/home/HomePage'
+import ShoppingCartPage from '@/cart/ShoppingCartPage'
+import ProductDetailPage from '@/product-detail/ProductDetailPage'
+import AccountPage from "@/account/AccountPage"
+import ProfilePage from '@/profile/ProfilePage'
+import ChangePasswordPage from '@/change-password/ChangePasswordPage'
+import HistoryPage from '@/history/HistoryPage'
+import ErrorPage from '@/error/ErrorPage'
+import AdminPage from '@/admin/AdminPage'
 
 Vue.use(VueRouter);
 
-export default new VueRouter(
-  {
-    mode: "history",
+export default new VueRouter({
+    mode: 'history',
     scrollBehavior(to, from, savedPosition) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (savedPosition) {
-            resolve(savedPosition);
-          } else {
-            resolve({
-              x: 0,
-              y: 0
-            });
-          }
-        }, 200);
-      });
-      // if (savedPosition) {
-      //     return savedPosition
-      // } else {
-      //     return { x: 0, y: 0 }
-      // }
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (savedPosition) {
+                resolve(savedPosition)
+              } else {
+                resolve({ x: 0, y: 0 })
+              }
+          }, 200)
+        })
+        // if (savedPosition) {
+        //     return savedPosition
+        // } else {
+        //     return { x: 0, y: 0 }
+        // }
     },
     routes: [
-      {
-        path: "/home",
-        name: "home",
-        component: HomePage,
-        alias: ["/", "/products"]
-      },
-      {
-        path: "/products/:product_id",
-        component: ProductDetailPage
-      },
-      {
-        path: "change",
-        component: ChangePasswordPage
-      },
-      {
-        path: "history",
-        component: HistoryPage
-      }
-    ]
-  },
-  {
-    path: "/shopping-cart-page",
-    component: ShoppingCartPage
-  },
-  {
-    path: "/product-detail-page",
-    component: ProductDetailPage
-  },
-  {
-    path: "/account",
-    component: AccountPage,
-    children: [
-      {
-        path: "profile",
-        component: ProfilePage,
-        alias: ""
-      },
-      {
-        path: "change-password",
-        component: ChangePasswordPage
-      },
-      {
-        path: "/account",
-        component: AccountPage,
-        children: [
-          {
-            path: "profile",
-            component: ProfilePage,
-            alias: ""
-          },
-          {
-            path: "change-password",
-            component: ChangePasswordPage
-          },
-          {
-            path: "/admin",
+
+        {
+            path: '/home',
+            name: 'home',
+            component: HomePage,
+            alias: ['/', '/products']
+        },
+        {
+            path: '/products/:product_id',
+            component: ProductDetailPage
+        },
+        {
+            path: '/todo',
+            component: HelloWorld,
+            children: [
+                {
+                    path: 'profile',
+                    component: ProfilePage,
+                    alias: ''
+                },
+                {
+                    path: 'change',
+                    component: ChangePasswordPage
+                },
+                {
+                    path: 'history',
+                    component: HistoryPage
+                }
+            ]
+        },
+        {
+            path: '/shopping-cart-page',
+            component: ShoppingCartPage
+        },
+        {
+            path: '/product-detail-page',
+            component: ProductDetailPage
+        },
+        {
+            path: '/account',
+            component: AccountPage,
+            children: [
+                {
+                    path: 'profile',
+                    component: ProfilePage,
+                    alias: ''
+                },
+                {
+                    path: 'change-password',
+                    component: ChangePasswordPage
+                },
+                {
+                    path: 'history',
+                    component: HistoryPage
+                }
+            ]
+        },
+        {
+            path: '/admin',
             component: AdminPage
-          },
-          {
-            path: "*",
+        },
+        {
+            path: '*',
             component: ErrorPage
-          }
-        ]
-      },
-      {
-        path: "*",
-        component: ErrorPage
-      }
-    ]
-  }
-);
+        }
+    ],
+
+
+})
 
 // Bootstrap Analytics
 // Set in .env
 // https://github.com/MatteoGabriele/vue-analytics
 if (process.env.GOOGLE_ANALYTICS) {
-  Vue.use(VueAnalytics, {
-    id: process.env.GOOGLE_ANALYTICS,
-    router,
-    autoTracking: {
-      page: process.env.NODE_ENV !== "development"
-    }
-  });
-}
+    Vue.use(VueAnalytics, {
+      id: process.env.GOOGLE_ANALYTICS,
+      router,
+      autoTracking: {
+        page: process.env.NODE_ENV !== 'development'
+      }
+    })
+  }
 
 // router.beforeEach((to, from, next) => {
 //     if (to.matched.some(record => record.meta.requiresAuth)) {
