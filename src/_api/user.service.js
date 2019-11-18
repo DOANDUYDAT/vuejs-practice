@@ -17,7 +17,7 @@ const headers = {
 async function login(email, password, remember) {
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/user/login`,
+        url: `${config.apiUrl}/users/login`,
         headers: headers,
         data: {
             email,
@@ -52,7 +52,7 @@ async function register(userInfo) {
     console.log(userInfo)
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/user/register`,
+        url: `${config.apiUrl}/users/register`,
         headers: headers,
         data: JSON.stringify(userInfo)
     };
