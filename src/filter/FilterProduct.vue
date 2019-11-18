@@ -18,74 +18,287 @@
         <!-- <v-btn :loading="loading" :disabled="loading" @click="loader = 'loading'">Accept Terms 2</v-btn> -->
       </v-btn-toggle>
       <v-container fluid>
-        <v-row align="center">
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select
-              :items="items1"
-              attach
-              chips
-              label="Giá"
-              multiple
-            ></v-select>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select
-              :items="items2"
-              chips
-              label="Thương hiệu"
-              multiple
-            ></v-select>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items3" chips label="Màu sắc" multiple></v-select>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select
-              :items="items4"
-              chips
-              label="Bộ nhớ trong điện thoại"
-              multiple
-            ></v-select>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select
-              :items="items5"
-              chips
-              label="Camera sau điện thoại"
-              multiple
-            ></v-select>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select
-              :items="items6"
-              chips
-              label="Camera trước điện thoại"
-              multiple
-            ></v-select>
-          </v-col>
-          <!-- <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items7" label="Chip điện thoại"></v-select>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select :items="items8" label="Cổng sạc điện thoại"></v-select>
-          </v-col>-->
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select
-              :items="items9"
-              chips
-              label="Hệ điều hành điện thoại"
-              multiple
-            ></v-select>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="12">
-            <v-select
-              :items="items10"
-              chips
-              label="RAM điện thoại"
-              multiple
-            ></v-select>
-          </v-col>
-        </v-row>
+        <v-list>
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Giá</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list shaped>
+              <v-list-item-group v-model="model" multiple>
+                <template v-for="(item1, i) in item1s">
+                  <v-divider v-if="!item1" :key="`divider-${i}`"></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="`item1-${i}`"
+                    :value="item1"
+                    active-class="deep-purple--text text--accent-4"
+                  >
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item1"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox
+                          :input-value="active"
+                          :true-value="item1"
+                          color="deep-purple accent-4"
+                          @click="toggle"
+                        ></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
+            </v-list>
+          </v-list-group>
+
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Thương hiệu</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list shaped>
+              <v-list-item-group v-model="model" multiple>
+                <template v-for="(item2, i) in item2s">
+                  <v-divider v-if="!item2" :key="`divider-${i}`"></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="`item2-${i}`"
+                    :value="item2"
+                    active-class="deep-purple--text text--accent-4"
+                  >
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item2"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox
+                          :input-value="active"
+                          :true-value="item2"
+                          color="deep-purple accent-4"
+                          @click="toggle"
+                        ></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
+            </v-list>
+          </v-list-group>
+
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Màu sắc</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list shaped>
+              <v-list-item-group v-model="model" multiple>
+                <template v-for="(item3, i) in item3s">
+                  <v-divider v-if="!item3" :key="`divider-${i}`"></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="`item3-${i}`"
+                    :value="item3"
+                    active-class="deep-purple--text text--accent-4"
+                  >
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item3"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox
+                          :input-value="active"
+                          :true-value="item3"
+                          color="deep-purple accent-4"
+                          @click="toggle"
+                        ></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
+            </v-list>
+          </v-list-group>
+
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Bộ nhớ trong điện thoại</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list shaped>
+              <v-list-item-group v-model="model" multiple>
+                <template v-for="(item4, i) in item4s">
+                  <v-divider v-if="!item4" :key="`divider-${i}`"></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="`item4-${i}`"
+                    :value="item4"
+                    active-class="deep-purple--text text--accent-4"
+                  >
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item4"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox
+                          :input-value="active"
+                          :true-value="item4"
+                          color="deep-purple accent-4"
+                          @click="toggle"
+                        ></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
+            </v-list>
+          </v-list-group>
+
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Camera sau điện thoại</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list shaped>
+              <v-list-item-group v-model="model" multiple>
+                <template v-for="(item5, i) in item5s">
+                  <v-divider v-if="!item5" :key="`divider-${i}`"></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="`item5-${i}`"
+                    :value="item5"
+                    active-class="deep-purple--text text--accent-4"
+                  >
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item5"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox
+                          :input-value="active"
+                          :true-value="item5"
+                          color="deep-purple accent-4"
+                          @click="toggle"
+                        ></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
+            </v-list>
+          </v-list-group>
+
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Camera trước điện thoại</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list shaped>
+              <v-list-item-group v-model="model" multiple>
+                <template v-for="(item6, i) in item6s">
+                  <v-divider v-if="!item6" :key="`divider-${i}`"></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="`item6-${i}`"
+                    :value="item6"
+                    active-class="deep-purple--text text--accent-4"
+                  >
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item6"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox
+                          :input-value="active"
+                          :true-value="item6"
+                          color="deep-purple accent-4"
+                          @click="toggle"
+                        ></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
+            </v-list>
+          </v-list-group>
+
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Hệ điều hành điện thoại</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list shaped>
+              <v-list-item-group v-model="model" multiple>
+                <template v-for="(item9, i) in item9s">
+                  <v-divider v-if="!item9" :key="`divider-${i}`"></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="`item9-${i}`"
+                    :value="item9"
+                    active-class="deep-purple--text text--accent-4"
+                  >
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item9"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox
+                          :input-value="active"
+                          :true-value="item9"
+                          color="deep-purple accent-4"
+                          @click="toggle"
+                        ></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
+            </v-list>
+          </v-list-group>
+
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>RAM điện thoại</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list shaped>
+              <v-list-item-group v-model="model" multiple>
+                <template v-for="(item10, i) in item10s">
+                  <v-divider v-if="!item10" :key="`divider-${i}`"></v-divider>
+                  <v-list-item
+                    v-else
+                    :key="`item10-${i}`"
+                    :value="item10"
+                    active-class="deep-purple--text text--accent-4"
+                  >
+                    <template v-slot:default="{ active, toggle }">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item10"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-checkbox
+                          :input-value="active"
+                          :true-value="item10"
+                          color="deep-purple accent-4"
+                          @click="toggle"
+                        ></v-checkbox>
+                      </v-list-item-action>
+                    </template>
+                  </v-list-item>
+                </template>
+              </v-list-item-group>
+            </v-list>
+          </v-list-group>
+        </v-list>
       </v-container>
     </ValidationObserver>
   </div>
@@ -101,14 +314,14 @@ export default {
     };
   },
   data: () => ({
-    items1: [
+    item1s: [
       "Dưới 5.000.000",
       "5.000.000 - 10.000.000",
       "10.000.000 - 20.000.000",
       "20.000.000 - 30.000.000",
       "Trên 30.000.000"
     ],
-    items2: [
+    item2s: [
       "Sam Sung",
       "iPhone",
       "Xiaomi",
@@ -117,7 +330,7 @@ export default {
       "Huawei",
       "NOKIA"
     ],
-    items3: [
+    item3s: [
       "Đen",
       "Xanh lam",
       "Xanh lục",
@@ -132,8 +345,8 @@ export default {
       "Đồng",
       "Xanh ngọc"
     ],
-    items4: ["16GB", "32GB", "64GB", "128GB", "256GB", "512GB"],
-    items5: [
+    item4s: ["16GB", "32GB", "64GB", "128GB", "256GB", "512GB"],
+    item5s: [
       "2MP",
       "5MP",
       "8MP",
@@ -148,7 +361,7 @@ export default {
       "48MP",
       "64MP"
     ],
-    items6: [
+    item6s: [
       "2MP",
       "5MP",
       "7MP",
@@ -162,8 +375,8 @@ export default {
       "48MP",
       "TOF 3D"
     ],
-    items9: ["Android 7.0", "Android 8.1", "Androi 9.0", "iOS 12", "iOS 13"],
-    items10: ["2GB", "3GB", "4GB", "6GB", "8GB", "12GB"]
+    item9s: ["Android 7.0", "Android 8.1", "Androi 9.0", "iOS 12", "iOS 13"],
+    item10s: ["2GB", "3GB", "4GB", "6GB", "8GB", "12GB"]
   }),
 
   //   watch: {
