@@ -21,7 +21,7 @@
               v-slot="{ errors }"
               :bails="false"
             >
-              <v-text-field label="First name" solo v-model="firstName" counter="16"></v-text-field>
+              <v-text-field label="First Name" solo v-model="firstName" counter="16"></v-text-field>
               <span class="red--text">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
@@ -37,7 +37,7 @@
               v-slot="{ errors }"
               :bails="false"
             >
-              <v-text-field label="Last name" solo v-model="lastName" counter="16"></v-text-field>
+              <v-text-field label="Last Name" solo v-model="lastName" counter="16"></v-text-field>
               <span class="red--text">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
@@ -63,7 +63,7 @@
             <v-subheader>Email</v-subheader>
           </v-col>
           <v-col cols="12" md="9">
-            <v-text-field value label="Email" solo disabled v-model="email"></v-text-field>
+            <v-text-field solo disabled v-model="email"></v-text-field>
           </v-col>
         </v-row>
         <v-row no-gutters justify="center">
@@ -71,7 +71,7 @@
             <v-subheader>Địa chỉ</v-subheader>
           </v-col>
           <v-col cols="12" md="9">
-            <v-text-field label="Địa chỉ" solo v-model="address"></v-text-field>
+            <v-text-field label="Địa chỉ" solo  v-model="address"></v-text-field>
           </v-col>
         </v-row>
         <v-row no-gutters justify="center">
@@ -79,10 +79,10 @@
             <v-subheader>Giới tính</v-subheader>
           </v-col>
           <v-col cols="12" md="9">
-            <v-radio-group v-model="row" row class="mt-2">
-              <v-radio label="Nam" value="0"></v-radio>
-              <v-radio label="Nữ" value="1"></v-radio>
-              <v-radio label="Khác" value="2"></v-radio>
+            <v-radio-group v-model="gender" row class="mt-2">
+              <v-radio label="Nam" value="Nam"></v-radio>
+              <v-radio label="Nữ" value="Nữ"></v-radio>
+              <v-radio label="Khác" value="Khác"></v-radio>
             </v-radio-group>
           </v-col>
         </v-row>
@@ -99,7 +99,7 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-text-field v-model="date" label="Ngày sinh" solo readonly v-on="on"></v-text-field>
+                <v-text-field v-model="date"  label="Ngày sinh" solo readonly v-on="on"></v-text-field>
               </template>
               <v-date-picker v-model="date" @input="menudate = false"></v-date-picker>
             </v-menu>
@@ -139,10 +139,13 @@
 </template>
 
 <script>
+import { userService } from '@/_api';
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
-      row: "",
+      gender: "",
       firstName: "",
       lastName: "",
       phone: "",
@@ -154,12 +157,31 @@ export default {
     };
   },
   methods: {
-    update() {
-      this.container = false;
+    async updateProfile() {
+      
+    },
+    initData() {
+      const user = this.user;
+      this.firstName = user.first_name;
+      this.lastName = user.last_name;
+      this.phone = user.phone;
+      this.email = user.email;
+      this.address = user.address;
+      this.date = user.date_of_birth;
+      this.gender = user.gender;
     }
   },
+  // mounted() {
+  //   this.firstName = "";
+  // }
+  computed: {
+    ...mapState({
+      user: state => state.authentication.user
+    })
+  },
+  
   mounted() {
-    this.firstName = "";
+    this.initData()
   }
 };
 </script>

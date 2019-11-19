@@ -54,7 +54,7 @@
                 <v-checkbox v-model="remember" :label="'Duy trì đăng nhập'"></v-checkbox>
               </v-col>
               <v-col cols="12" md="3" class="text-md-end">
-                <a >Quên mật khẩu?</a>
+                <a>Quên mật khẩu?</a>
               </v-col>
             </v-row>
             <v-col md="6" offset-md="3">
@@ -84,7 +84,7 @@ export default {
       email: "",
       showPassword: false,
       password: "",
-      remember: false,
+      remember: false
     };
   },
   computed: {
@@ -109,11 +109,19 @@ export default {
               message: "Login Successfully!"
             });
             this.dialog = false;
+            // const fullPath = this.$route.query.redirect
+            //   ? this.$route.query.redirect
+            //   : this.$route.fullPath;
+            // this.$router.push({ path: fullPath });
+            const fullPath = this.$route.query.redirect;
+            if(fullPath) {
+              this.$router.push({ path: fullPath });
+            }
           }
         }
       } catch (error) {
         if (error) {
-          console.log('error:  ' + error)
+          console.log("error:  " + error);
           this.$store.dispatch("alert/error", {
             message: "Login failed!"
           });

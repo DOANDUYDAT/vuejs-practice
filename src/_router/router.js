@@ -14,17 +14,17 @@ import AdminPage from '@/admin/AdminPage'
 
 Vue.use(VueRouter);
 
-export default new VueRouter({
+const router = new VueRouter({
     mode: 'history',
     scrollBehavior(to, from, savedPosition) {
         return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            if (savedPosition) {
-                resolve(savedPosition)
-              } else {
-                resolve({ x: 0, y: 0 })
-              }
-          }, 200)
+            setTimeout(() => {
+                if (savedPosition) {
+                    resolve(savedPosition)
+                } else {
+                    resolve({ x: 0, y: 0 })
+                }
+            }, 200)
         })
         // if (savedPosition) {
         //     return savedPosition
@@ -74,15 +74,18 @@ export default new VueRouter({
         {
             path: '/account',
             component: AccountPage,
+            meta: { requiresAuth: true },
             children: [
                 {
                     path: 'profile',
                     component: ProfilePage,
-                    alias: ''
+                    alias: '',
+
                 },
                 {
                     path: 'change-password',
-                    component: ChangePasswordPage
+                    component: ChangePasswordPage,
+
                 },
                 {
                     path: 'history',
@@ -108,27 +111,30 @@ export default new VueRouter({
 // https://github.com/MatteoGabriele/vue-analytics
 if (process.env.GOOGLE_ANALYTICS) {
     Vue.use(VueAnalytics, {
-      id: process.env.GOOGLE_ANALYTICS,
-      router,
-      autoTracking: {
-        page: process.env.NODE_ENV !== 'development'
-      }
+        id: process.env.GOOGLE_ANALYTICS,
+        router,
+        autoTracking: {
+            page: process.env.NODE_ENV !== 'development'
+        }
     })
-  }
+}
 
-// router.beforeEach((to, from, next) => {
-//     if (to.matched.some(record => record.meta.requiresAuth)) {
-//       // this route requires auth, check if logged in
-//       // if not, redirect to login page.
-//       if (!auth.loggedIn()) {
-//         next({
-//           path: '/login',
-//           query: { redirect: to.fullPath }
-//         })
-//       } else {
-//         next()
-//       }
-//     } else {
-//       next() // make sure to always call next()!
-//     }
-//   })
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        let user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath }
+            })
+        } else {
+            next()
+        }
+    } else {
+        next() // make sure to always call next()!
+    }
+})
+
+export default router;
