@@ -114,18 +114,19 @@ async function getProfile() {
     }
 }
 
-async function updateProfile() {
+async function updateProfile(userInfo) {
     const auth = authHeader();
     const options = {
-        method: 'post',
+        method: 'put',
         url: `${config.apiUrl}/users/profile`,
-        headers: { ...headers, ...auth }
-
+        headers: { ...headers, ...auth },
+        data: JSON.stringify(userInfo)
     }
     try {
         const response = await axios(options);
         if (response.data) {
             const user = response.data;
+            console.log("user after update: " + user);
             return user;
         }
 

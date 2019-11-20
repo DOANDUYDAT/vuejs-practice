@@ -71,7 +71,7 @@
             <v-subheader>Địa chỉ</v-subheader>
           </v-col>
           <v-col cols="12" md="9">
-            <v-text-field label="Địa chỉ" solo  v-model="address"></v-text-field>
+            <v-text-field label="Địa chỉ" solo v-model="address"></v-text-field>
           </v-col>
         </v-row>
         <v-row no-gutters justify="center">
@@ -99,7 +99,7 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-text-field v-model="date"  label="Ngày sinh" solo readonly v-on="on"></v-text-field>
+                <v-text-field v-model="date" label="Ngày sinh" solo readonly v-on="on"></v-text-field>
               </template>
               <v-date-picker v-model="date" @input="menudate = false"></v-date-picker>
             </v-menu>
@@ -116,7 +116,7 @@
         </v-row>
         <v-card-actions>
           <v-row no-gutters>
-            <v-btn color="primary" class="mx-auto" @click="update">Cập nhật</v-btn>
+            <v-btn color="primary" class="mx-auto" @click="updateProfile">Cập nhật</v-btn>
           </v-row>
         </v-card-actions>
       </v-col>
@@ -139,8 +139,8 @@
 </template>
 
 <script>
-import { userService } from '@/_api';
-import { mapState } from 'vuex';
+import { userService } from "@/_api";
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -158,7 +158,29 @@ export default {
   },
   methods: {
     async updateProfile() {
-      
+      const { gender, firstName, lastName, phone, address, date } = this;
+      const userInfo = {
+        gender,
+        first_name: firstName,
+        last_name: lastName,
+        phone,
+        address,
+        date_of_birth: date
+      };
+      console.log(userInfo);
+      try {
+        const user = await userService.updateProfile(userInfo);
+        if (user) {
+          this.$store.dispatch("alert/success", {
+            message: "Update Profile Successfully!"
+          });
+
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: "Update Profile Failed!"
+        });
+      }
     },
     initData() {
       const user = this.user;
@@ -179,9 +201,11 @@ export default {
       user: state => state.authentication.user
     })
   },
-  
+  watch: {
+    user: 'initData'
+  },
   mounted() {
-    this.initData()
+    this.initData();
   }
 };
 </script>
