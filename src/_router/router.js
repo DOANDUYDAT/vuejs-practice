@@ -12,6 +12,8 @@ import HistoryPage from '@/history/HistoryPage'
 import ErrorPage from '@/error/ErrorPage'
 import AdminPage from '@/admin/AdminPage'
 
+import OrderDetail from '@/components/OrderDetail'
+
 Vue.use(VueRouter);
 
 export default new VueRouter({
@@ -97,6 +99,13 @@ export default new VueRouter({
         {
             path: '*',
             component: ErrorPage
+        },
+
+
+        {
+            path: '/orders/:order_id',
+            component: OrderDetail,
+            name:'orders'
         }
     ],
 
