@@ -3,7 +3,7 @@
     <v-row>
   <v-col cols="12" md="8" class="mx-auto">-->
   <v-card flat>
-    <v-toolbar color="primary" dark flat dense>
+    <v-toolbar color="primary" dark flat>
       <v-card-title>
         <span class="headline">Thông tin tài khoản</span>
       </v-card-title>
