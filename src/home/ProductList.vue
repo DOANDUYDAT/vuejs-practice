@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <slider-ads :topProduct="topProduct"></slider-ads>
-    <v-row>
+    <v-row no-gutters>
       <v-col v-for="product in products" :key="product.id" cols="12" sm="6" md="4" lg="3">
         <product-list-item :product="product"></product-list-item>
       </v-col>
@@ -43,28 +43,11 @@ export default {
     ...mapActions("cart", ["addProductToCart"]),
     
   },
-  created() {
-    this.$store.dispatch("products/getAllProducts");
-  },
-  mounted() {
-    // axios
-    //   .get(
-    //     "https://gorest.co.in/public-api/photos?access-token=SLlGFifk6F6MSa8ZjPTKcQN_qOXxpOlbjw6r",
-    //     {
-    //       mode: "cors"
-    //     }
-    //   )
-    //   .then(response => {
-    //     console.log(response.data.result);
-    //     this.allProduct = response.data.result;
-    //     console.log("all product: " + this.allProduct.length);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   })
-    //   .finally(function() {
-    //     // always executed
-    //   });
-  }
 };
 </script>
+
+<style scoped>
+.container {
+  border-left: 1px solid #ddd;
+}
+</style>

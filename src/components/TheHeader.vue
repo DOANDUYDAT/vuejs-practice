@@ -13,18 +13,19 @@
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-    <template>
-      <cart-dialog></cart-dialog>
-    </template>
-   
-    <v-btn icon v-if="loginStatus" @click="logout">
-      <v-icon>mdi-account-circle</v-icon>
+    <!-- <template> -->
+    <cart-dialog></cart-dialog>
+    <!-- </template> -->
+
+    <v-btn icon v-if="loggedIn" @click="logout">
+        <v-icon>mdi-account-circle</v-icon>
     </v-btn>
 
     <!-- <template v-if="!loginStatus && $vuetify.breakpoint.smAndUp"> -->
-    <login-dialog></login-dialog>
-    <register-dialog></register-dialog>
-    <!-- </template> -->
+    <template v-else>
+      <login-dialog></login-dialog>
+      <register-dialog></register-dialog>
+    </template>
 
     <!-- <v-btn icon>
       <v-icon>mdi-dots-vertical</v-icon>
@@ -51,12 +52,12 @@ export default {
 
   computed: {
     ...mapState({
-      loginStatus: state => state.login.loginStatus
+      loggedIn: state => state.authentication.status.loggedIn
     })
   },
   methods: {
     logout() {
-      this.$store.dispatch("login/logout");
+      this.$store.dispatch("authentication/logout");
     }
   }
 };

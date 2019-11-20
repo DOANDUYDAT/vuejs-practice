@@ -13,15 +13,12 @@
 export default {
   props: {
     topProduct: {
-      type: Array
+      type: Array,
+      required: true
     }
   },
   data() {
-    return {
-      product: {
-        
-      }
-    };
+    return {};
   }
 };
 </script>

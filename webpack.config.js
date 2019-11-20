@@ -14,12 +14,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
+        publicPath: '/'
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist',
-        hot: true,
-        historyApiFallback: true
+        contentBase: './dist/',
+        historyApiFallback: true,
     },
     resolve: {
         extensions: ['.js', '.vue'],
@@ -81,7 +81,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|svg|jpg|gif|ico)$/,
                 use: [
                     'file-loader',
                 ],
@@ -101,7 +101,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://it4421.pythonanywhere.com'
+            apiUrl: 'http://127.0.0.1:8000'
         })
     }
 };

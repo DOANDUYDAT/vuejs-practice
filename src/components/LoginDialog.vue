@@ -30,7 +30,7 @@
               <v-col cols="12" md="8" class="mx-auto">
                 <ValidationProvider
                   name="password"
-                  rules="required|min:8"
+                  rules="required|min:4"
                   v-slot="{ errors }"
                   :bails="false"
                 >
@@ -51,10 +51,10 @@
             </v-row>
             <v-row align="center" justify="center">
               <v-col cols="12" md="5">
-                <v-checkbox v-model="checkbox" :label="'Duy trì đăng nhập'"></v-checkbox>
+                <v-checkbox v-model="remember" :label="'Duy trì đăng nhập'"></v-checkbox>
               </v-col>
               <v-col cols="12" md="3" class="text-md-end">
-                <a href>Quên mật khẩu?</a>
+                <a >Quên mật khẩu?</a>
               </v-col>
             </v-row>
             <v-col md="6" offset-md="3">
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -82,27 +84,42 @@ export default {
       email: "",
       showPassword: false,
       password: "",
-      checkbox: "",
-      
+      remember: false,
     };
+  },
+  computed: {
+    ...mapState({
+      loggedIn: state => state.authentication.status.loggedIn
+    })
   },
   methods: {
     async submit() {
       try {
         const isValid = await this.$refs.observer.validate();
-        this.$store.dispatch("alert/addAlert", {
-          type: "success",
-          message: "Login successfully!"
-        });
-        this.dialog = false;
+        if (isValid) {
+          const { email, password, remember } = this;
+          const user = await this.$store.dispatch("authentication/login", {
+            email,
+            password,
+            remember
+          });
+          // console.log("user: " + user);
+          if (user) {
+            this.$store.dispatch("alert/success", {
+              message: "Login Successfully!"
+            });
+            this.dialog = false;
+          }
+        }
       } catch (error) {
-        this.$store.dispatch("alert/addAlert", {
-          type: "error",
-          message: "Login error!"
-        });
+        if (error) {
+          console.log('error:  ' + error)
+          this.$store.dispatch("alert/error", {
+            message: "Login failed!"
+          });
+        }
       }
-    },
-    
+    }
   }
 };
 </script>

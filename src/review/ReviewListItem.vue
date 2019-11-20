@@ -1,9 +1,9 @@
 <template>
-  <v-card tile elevation="2" outlined>
-    <v-card-title>{{ comment.username }}</v-card-title>
-    <v-card-text>
+  <v-card tile elevation="2" outlined class="px-6">
+    <v-card-title class="pt-1 pb-0">{{ review.username }}</v-card-title>
+    <v-card-text class="pb-0">
       <v-rating
-        :value="comment.rating"
+        :value="review.rating"
         color="amber"
         background-color="grey"
         empty-icon="mdi-star-outline"
@@ -13,8 +13,8 @@
         readonly
         size="14"
       ></v-rating>
-      <div style="text-align: justify;" class="mt-2">{{ comment.content }}</div>
-      <div class="my-4 caption black--text">{{ comment.time }}</div>
+      <div style="text-align: justify;" class="mt-2">{{ review.content }}</div>
+      <div class="my-2 caption black--text">{{ review.time }}</div>
     </v-card-text>
     <!-- <v-card-actions>
       <v-btn text @click="show = !show">Trả lời</v-btn>
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       show: false
-      //   comment: {
+      //   review: {
       //     username: "john" + Math.floor(Math.random() * 25) + 1,
       //     rating: Math.floor(Math.random() * 5) + 1,
       //     time: new Date(Date.now()),
@@ -44,7 +44,7 @@ export default {
     };
   },
   props: {
-    comment: {}
+    review: {}
   }
 };
 </script>
