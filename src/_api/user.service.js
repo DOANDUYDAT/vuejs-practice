@@ -1,17 +1,20 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
 import axios from 'axios';
+import _ from 'lodash';
 
 export const userService = {
     login,
     logout,
-    register
+    register,
+    getProfile,
+    updateProfile
 };
 
 const headers = {
     'Content-Type': 'application/json',
     // "Host": 'http://127.0.0.1:8000'
-        
+
 }
 
 async function login(email, password, remember) {
@@ -25,16 +28,21 @@ async function login(email, password, remember) {
             remember
         }
     };
-    // console.log('log in service')
+    console.log('login service')
     try {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
         // console.log(response.data.token);
-        if (response.data.token) {
+        if (response.data.Token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            const user = { token: response.data.token };
-            console.log(JSON.stringify(user));
+            let user = { token: response.data.Token };
+            // console.log(JSON.stringify(user));
             localStorage.setItem('user', JSON.stringify(user));
+            const userInfo = await getProfile();
+            // console.log(JSON.stringify(userInfo));
+            user = {...user, ...userInfo}
+            localStorage.setItem('user', JSON.stringify(user));
+            console.log(user)
             return user;
         }
     } catch (error) {
@@ -43,9 +51,22 @@ async function login(email, password, remember) {
     }
 }
 
-function logout() {
+async function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    const user = JSON.parse(localStorage.getItem('user'));
+    const auth = authHeader();
+    console.log(auth)
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/users/logout`,
+        headers: { ...headers, ...auth }
+    }
+    try {
+        await axios(options)
+        localStorage.removeItem('user');
+    } catch (error) {
+        throw error;
+    }
 }
 
 async function register(userInfo) {
@@ -74,6 +95,45 @@ async function register(userInfo) {
     }
 }
 
+async function getProfile() {
+    const auth = authHeader();
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/users/profile`,
+        headers: { ...headers, ...auth }
+    }
+    try {
+        const response = await axios(options);
+        if (response.data) {
+            const user = response.data;
+            return user;
+        }
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function updateProfile(userInfo) {
+    const auth = authHeader();
+    const options = {
+        method: 'put',
+        url: `${config.apiUrl}/users/profile`,
+        headers: { ...headers, ...auth },
+        data: JSON.stringify(userInfo)
+    }
+    try {
+        const response = await axios(options);
+        if (response.data) {
+            const user = response.data;
+            console.log("user after update: " + user);
+            return user;
+        }
+
+    } catch (error) {
+        throw error;
+    }
+}
 
 function handleResponse(response) {
     return response.text().then(text => {

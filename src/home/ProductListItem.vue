@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="!checkProductEmpty" hover height="100%" :max-width="maxWidthItem" flat :to="linkToProduct" exact>
+  <v-card v-if="!checkProductEmpty" hover height="100%" :max-width="maxWidthItem" flat :to="{ name: 'product detail', params: { product_id: product.id }}" exact>
     <!-- eager giúp force các ảnh được load hết -->
     <v-img :height="heightImage" :src="product.images[0]" contain eager></v-img>
 

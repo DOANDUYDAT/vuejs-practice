@@ -17,12 +17,32 @@
     <cart-dialog></cart-dialog>
     <!-- </template> -->
 
-    <v-btn icon v-if="loggedIn" @click="logout">
-        <v-icon>mdi-account-circle</v-icon>
-    </v-btn>
+    <v-menu v-if="loggedIn" open-on-hover bottom offset-y transition="slide-y-transition">
+      <template v-slot:activator="{ on }">
+        <v-btn v-on="on" depressed color="blue">
+          <v-icon left>mdi-account-circle</v-icon>
+          {{ fullName }}
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item to="/account/profile">
+          <v-list-item-title>Profile</v-list-item-title>
+        </v-list-item>
+        <v-list-item to="/account/history">
+          <v-list-item-title>Lịch sử đặt hàng</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="logout">
+          <v-list-item-title>Log Out</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+    <!-- <v-btn icon @click="logout">
+      <v-icon>mdi-account-circle</v-icon>
+    </v-btn>-->
 
     <!-- <template v-if="!loginStatus && $vuetify.breakpoint.smAndUp"> -->
-    <template v-else>
+    <template v-if="!loggedIn">
       <login-dialog></login-dialog>
       <register-dialog></register-dialog>
     </template>
@@ -37,8 +57,9 @@
 import LoginDialog from "./LoginDialog";
 import RegisterDialog from "./RegisterDialog";
 import CartDialog from "./CartDialog";
-
-import { mapState } from "vuex";
+import { userService } from "@/_api";
+import { mapState, mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
   components: {
@@ -52,12 +73,27 @@ export default {
 
   computed: {
     ...mapState({
-      loggedIn: state => state.authentication.status.loggedIn
-    })
+      loggedIn: state => state.authentication.status.loggedIn,
+      user: state => state.authentication.user
+    }),
+    fullName() {
+      return this.user.username;
+    }
   },
   methods: {
+    ...mapActions({
+      logoutAction: "authentication/logout"
+    }),
     logout() {
-      this.$store.dispatch("authentication/logout");
+      this.logoutAction();
+      // const fullPath = this.$route.query.redirect
+      //   ? this.$route.query.redirect
+      //   : this.$route.path;
+      const currentPath = this.$route.path;
+      if ( currentPath !== '/home') {
+        this.$router.push({ path: '/home' });
+      }
+      
     }
   }
 };

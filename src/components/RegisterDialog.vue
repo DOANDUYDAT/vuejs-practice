@@ -171,12 +171,12 @@ export default {
             confirmPassword
           } = this;
           const userInfo = {
-            firstName,
-            lastName,
-            date,
+            first_name: firstName,
+            last_name: lastName,
+            date_of_birth: date,
             email,
             password,
-            confirmPassword
+            // confirm_password: confirmPassword
           };
           console.log(userInfo)
           const user = await userService.register(userInfo);
@@ -190,7 +190,7 @@ export default {
       } catch (error) {
         console.log(error);
         this.$store.dispatch("alert/error", {
-          message: "Register error!"
+          message: error
         });
       }
     }
