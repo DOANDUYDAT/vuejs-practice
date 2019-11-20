@@ -65,7 +65,7 @@ const router = new VueRouter({
                 }
             ]
         },
-        
+
         {
             path: '/account',
             component: AccountPage,
@@ -101,7 +101,7 @@ const router = new VueRouter({
         {
             path: '/orders/:order_id',
             component: OrderDetail,
-            name:'orders'
+            name: 'orders'
         }
     ],
 
