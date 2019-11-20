@@ -190,7 +190,7 @@ export default {
       } catch (error) {
         console.log(error);
         this.$store.dispatch("alert/error", {
-          message: "Register error!"
+          message: error
         });
       }
     }

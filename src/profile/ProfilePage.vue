@@ -178,7 +178,7 @@ export default {
         }
       } catch (error) {
         this.$store.dispatch("alert/error", {
-          message: "Update Profile Failed!"
+          message: error
         });
       }
     },

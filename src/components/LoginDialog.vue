@@ -123,7 +123,7 @@ export default {
         if (error) {
           console.log("error:  " + error);
           this.$store.dispatch("alert/error", {
-            message: "Login failed!"
+            message: error
           });
         }
       }

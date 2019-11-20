@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 import HelloWorld from '@/components/HelloWorld.vue'
 import HomePage from '@/home/HomePage'
-import ShoppingCartPage from '@/cart/ShoppingCartPage'
 import ProductDetailPage from '@/product-detail/ProductDetailPage'
 import AccountPage from "@/account/AccountPage"
 import ProfilePage from '@/profile/ProfilePage'
@@ -42,7 +41,8 @@ const router = new VueRouter({
         },
         {
             path: '/products/:product_id',
-            component: ProductDetailPage
+            component: ProductDetailPage,
+            name: 'product detail'
         },
         {
             path: '/todo',
@@ -63,14 +63,7 @@ const router = new VueRouter({
                 }
             ]
         },
-        {
-            path: '/shopping-cart-page',
-            component: ShoppingCartPage
-        },
-        {
-            path: '/product-detail-page',
-            component: ProductDetailPage
-        },
+        
         {
             path: '/account',
             component: AccountPage,
