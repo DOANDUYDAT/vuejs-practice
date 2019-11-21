@@ -8,7 +8,8 @@ export const userService = {
     logout,
     register,
     getProfile,
-    updateProfile
+    updateProfile,
+    resetPassword
 };
 
 const headers = {
@@ -134,6 +135,28 @@ async function updateProfile(userInfo) {
         throw error;
     }
 }
+
+async function resetPassword(email) {
+    const auth = authHeader();
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/users/password-reset`,
+        headers: { ...headers },
+        data: {
+            email
+        }
+    }
+    try {
+        const response = await axios(options);
+        if (response.status === 200) {
+            return true;
+        }
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 function handleResponse(response) {
     return response.text().then(text => {

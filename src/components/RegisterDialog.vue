@@ -178,7 +178,7 @@ export default {
             password,
             // confirm_password: confirmPassword
           };
-          console.log(userInfo)
+          // console.log(userInfo)
           const user = await userService.register(userInfo);
           if (uer) {
             this.$store.dispatch("alert/error", {
