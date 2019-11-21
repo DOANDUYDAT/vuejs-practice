@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="blue" dark dense app>
+  <v-app-bar color="blue" dark app>
     <template v-slot:img="{ props }">
       <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
     </template>
@@ -10,9 +10,7 @@
 
     <div class="flex-grow-1"></div>
 
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
+    <search-box></search-box>
     <!-- <template> -->
     <cart-dialog></cart-dialog>
     <!-- </template> -->
@@ -56,6 +54,7 @@
 <script>
 import LoginDialog from "./LoginDialog";
 import RegisterDialog from "./RegisterDialog";
+import SearchBox from './SearchBox';
 import CartDialog from "./CartDialog";
 import { userService } from "@/_api";
 import { mapState, mapActions } from "vuex";
@@ -65,7 +64,8 @@ export default {
   components: {
     LoginDialog,
     RegisterDialog,
-    CartDialog
+    CartDialog,
+    SearchBox
   },
   data() {
     return {};
