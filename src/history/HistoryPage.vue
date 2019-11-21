@@ -16,6 +16,7 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
+      @click:row="goToOrderDetailPage"
       style="font-size: 1rem;"
       :headers="headers"
       :items="orders"
@@ -112,6 +113,10 @@ export default {
     };
   },
   computed: {},
-  methods: {}
+  methods: {
+    goToOrderDetailPage(order) {
+      this.$router.push({ name: 'orders', params: { order_id: order.orderId } });
+    }
+  }
 };
 </script>
