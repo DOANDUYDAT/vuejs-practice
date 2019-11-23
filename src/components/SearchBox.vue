@@ -1,15 +1,34 @@
 <template>
-  <div class="search pa-0">
-    
-
-      <v-select
-        :items="items"
-        hide-selected
-        label="Read-only"
-        hide-details
-      ></v-select>
-     
+  <!-- <v-row justify="center" no-gutters>
+  <v-col>-->
+  <div>
+      <!-- dùng height = 10 và dense giúp giảm height của v-text-feild về min-height = 56px của v-input__slot -->
+    <v-text-field
+      class="search__input"
+      autocomplete="off"
+      filled
+      rounded
+      clearable
+      hide-details
+      v-model="search"
+      @keyup.enter="searchProduct"
+      append-icon="mdi-magnify"
+      @click:append="searchProduct"
+      @focus="querySelections"
+      @blur="result = false"
+      dense
+      height="10"
+    ></v-text-field>
+    <v-expand-transition>
+      <v-card v-if="itemsSearch && result" class="search__result" light>
+        <v-card v-for="item in itemsSearch" :key="item">
+          <v-card-text class="subtitle-1 py-1">{{ item }}</v-card-text>
+        </v-card>
+      </v-card>
+    </v-expand-transition>
   </div>
+  <!-- </v-col>
+  </v-row>-->
 </template>
 
 <script>
@@ -20,7 +39,7 @@ export default {
       loading: false,
       items: [],
       search: null,
-      select: null
+      result: false
     };
   },
   watch: {
@@ -34,6 +53,7 @@ export default {
       // Simulated ajax query
       setTimeout(() => {
         if (search) {
+          this.result = true;
           this.items = this.productListSearch.filter(e => {
             // return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
             return e.toLowerCase().indexOf(search.toLowerCase()) > -1;
@@ -42,7 +62,7 @@ export default {
           this.items = [];
         }
         this.loading = false;
-      }, 500);
+      }, 200);
     },
     searchProduct() {
       console.log(this.search);
@@ -63,4 +83,8 @@ export default {
 };
 </script>
 
-
+<style scoped>
+.search__result {
+  position: fixed;
+}
+</style>

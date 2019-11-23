@@ -17,11 +17,6 @@
             <router-link to="/todo">Todo App</router-link>
           </v-col>
           <v-col>
-            <router-link to="/shopping-cart-page"
-              >shopping cart page</router-link
-            >
-          </v-col>
-          <v-col>
             <router-link to="/account">account</router-link>
           </v-col>
         </v-row>
@@ -37,7 +32,6 @@
 </template>
 
 <script>
-import TodoList from "./components/TodoList";
 import TheHeader from "./components/TheHeader";
 import TheFooter from "./components/TheFooter";
 import AlertList from "./components/AlertList";
@@ -53,7 +47,6 @@ export default {
   },
 
   components: {
-    TodoList,
     TheHeader,
     TheFooter,
     AlertList

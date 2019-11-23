@@ -13,11 +13,11 @@ const getters = {};
 
 const actions = {
     async login({ dispatch, commit }, { email, password, remember }) {
-        // console.log('action login');
+        console.log('action login');
         
         try {
             const user = await userService.login(email, password, remember);
-            // console.log('user: ' + typeof user);
+            // console.log('user: ' +  user);
             if (user) {
                 commit('loginSuccess', user)
                 return user;
