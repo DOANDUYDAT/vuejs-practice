@@ -18,17 +18,7 @@
         </v-btn>
       </template>
 
-      <v-responsive
-        class="mx-auto"
-        max-width="450px"
-        style="background-color: white"
-      >
-        <!-- <v-toolbar color="primary" style="width=300px" class="mx-auto color:white">
-          <v-card-title class="layout justify-center; mx-auto" style="color: white">
-            <span class="mx-auto">GIỎ HÀNG CỦA BẠN</span>
-          </v-card-title>
-        </v-toolbar>-->
-
+      <v-responsive class="mx-auto" max-width="450px" style="background-color: white">
         <v-simple-table class="table table-hover table-sm">
           <thead>
             <tr>
@@ -52,43 +42,10 @@
                 <b>x{{ product.quantity }}</b>
               </td>
 
-              <!-- <td class="text-center">
-                    <v-card flat class="py-12">
-                      <v-card-text style="padding-top: 0px">
-                        <v-row align="center" justify="center">
-                          <v-col cols="10"></v-col>
-                          <v-btn-toggle dense>
-                            <v-btn
-                              :disabled="product.quantity > 1 ? false : true"
-                              @click="decrementItemQuantity({ id: product.id, quantity: 1 })"
-                              min-width="2rem"
-                            >
-                              <span>-</span>
-                            </v-btn>
-                            <v-btn disabled min-width="2rem">
-                              <span>{{ product.quantity > 1 ? product.quantity : 1 }}</span>
-                            </v-btn>
-                            <v-btn
-                              @click="incrementItemQuantity({ id: product.id, quantity: 1 })"
-                              min-width="2rem"
-                            >
-                              <span>+</span>
-                            </v-btn>
-                          </v-btn-toggle>
-                        </v-row>
-                      </v-card-text>
-                    </v-card>
-              </td>-->
               <td class="text-end">{{ formatCurrency(product.price) }}đ</td>
-              <!-- <td class="text-center">
-                    <v-btn text color="red" @click="removeProductFromCart({ id: product.id })">
-                      <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-              </td>-->
             </tr>
           </tbody>
           <tfoot>
-            <!-- <td></td> -->
             <td colspan="2" class="text-end">
               <v-card-text class="mx-auto color:white">
                 <label>
@@ -104,23 +61,18 @@
 
         <v-card-text style="color:white">
           <v-row class="mx-auto pt-0 mdi-format-float-center">
-            <v-col
-              class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center"
-            >
+            <v-col class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center">
               <v-card-actions>
                 <v-btn
                   color="red"
                   class="ma-2"
                   outlined
                   :disabled="!products.length"
-                  @click="xemchitietdonhang()"
-                  >Xem chi tiết</v-btn
-                >
+                  @click="cartdetail"
+                >Xem chi tiết</v-btn>
               </v-card-actions>
             </v-col>
-            <v-col
-              class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center"
-            >
+            <v-col class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center">
               <v-card-actions>
                 <v-btn
                   color="red"
@@ -128,9 +80,8 @@
                   dark
                   class="ma-2"
                   :disabled="!products.length"
-                  @click="checkout(products)"
-                  >Đặt hàng ngay</v-btn
-                >
+                  @click="goToOrderPage"
+                >Đặt hàng ngay</v-btn>
               </v-card-actions>
               <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
             </v-col>
@@ -167,8 +118,19 @@ export default {
     }
   },
   methods: {
-    checkout(products) {
-      this.$store.dispatch("cart/checkout", products);
+    goToOrderPage() {
+      const path = this.$route.path;
+      this.dialog = false;
+      if (path !== "/order-page") {
+        this.$router.push({ name: "order page" });
+      }
+    },
+    cartdetail() {
+      const path = this.$route.path;
+      this.dialog = false;
+      if (path !== "/shopping-cart") {
+        this.$router.push({ name: "shopping cart" });
+      }
     },
 
     ...mapMutations("cart", [

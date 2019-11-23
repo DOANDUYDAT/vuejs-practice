@@ -12,6 +12,8 @@ import ErrorPage from '@/error/ErrorPage'
 import AdminPage from '@/admin/AdminPage'
 import ForgetPassword from '@/forget-password/ForgetPassword'
 import OrderDetailPage from '@/order-detail/OrderDetailPage'
+import ShoppingCartPage from '@/cart/ShoppingCartPage'
+import OrderPage from '@/order/OrderPage'
 
 Vue.use(VueRouter);
 
@@ -23,7 +25,10 @@ const router = new VueRouter({
                 if (savedPosition) {
                     resolve(savedPosition)
                 } else {
-                    resolve({ x: 0, y: 0 })
+                    resolve({
+                        x: 0,
+                        y: 0
+                    })
                 }
             }, 200)
         })
@@ -49,8 +54,7 @@ const router = new VueRouter({
         {
             path: '/todo',
             component: HelloWorld,
-            children: [
-                {
+            children: [{
                     path: 'profile',
                     component: ProfilePage,
                     alias: ''
@@ -69,9 +73,10 @@ const router = new VueRouter({
         {
             path: '/account',
             component: AccountPage,
-            meta: { requiresAuth: true },
-            children: [
-                {
+            meta: {
+                requiresAuth: true
+            },
+            children: [{
                     path: 'profile',
                     component: ProfilePage,
                     alias: '',
@@ -111,9 +116,19 @@ const router = new VueRouter({
             path: '*',
             component: ErrorPage
         },
-        
+        {
+            path: "/shopping-cart",
+            component: ShoppingCartPage,
+            name: 'shopping cart'
+        },
+        {
+            path: "/order-page",
+            component: OrderPage,
+            name: 'order page'
+        },
 
-        
+
+
     ],
 
 
