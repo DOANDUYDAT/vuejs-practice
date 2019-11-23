@@ -176,8 +176,8 @@ export default {
       "decrementItemQuantity",
       "removeProductFromCart"
     ]),
-    formatCurrency(total) {
-      return formatCurrency(total);
+    formatCurrency(price) {
+      return formatCurrency(price);
     }
   }
 };
