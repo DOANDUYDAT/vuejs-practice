@@ -11,7 +11,7 @@ import HistoryPage from '@/history/HistoryPage'
 import ErrorPage from '@/error/ErrorPage'
 import AdminPage from '@/admin/AdminPage'
 import ForgetPassword from '@/forget-password/ForgetPassword'
-import OrderDetail from '@/components/OrderDetail'
+import OrderDetailPage from '@/order-detail/OrderDetailPage'
 
 Vue.use(VueRouter);
 
@@ -85,7 +85,12 @@ const router = new VueRouter({
                 {
                     path: 'history',
                     component: HistoryPage
-                }
+                },
+                // {
+                //     path: '/orders/:order_id',
+                //     component: OrderDetail,
+                //     name: 'orders'
+                // },
             ]
         },
         {
@@ -94,7 +99,7 @@ const router = new VueRouter({
         },
         {
             path: '/orders/:order_id',
-            component: OrderDetail,
+            component: OrderDetailPage,
             name: 'orders'
         },
         {
