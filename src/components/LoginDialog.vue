@@ -49,12 +49,12 @@
                 </ValidationProvider>
               </v-col>
             </v-row>
-            <v-row align="center" justify="center">
+            <v-row align="center" justify="center" no-gutters>
               <v-col cols="12" md="5">
                 <v-checkbox v-model="remember" :label="'Duy trì đăng nhập'"></v-checkbox>
               </v-col>
               <v-col cols="12" md="3" class="text-md-end">
-                <a >Quên mật khẩu?</a>
+                <v-chip class="px-0" label color="primary" outlined @click="goToForgetPasswordPage">Quên mật khẩu?</v-chip>
               </v-col>
             </v-row>
             <v-col md="6" offset-md="3">
@@ -84,7 +84,7 @@ export default {
       email: "",
       showPassword: false,
       password: "",
-      remember: false,
+      remember: false
     };
   },
   computed: {
@@ -93,6 +93,13 @@ export default {
     })
   },
   methods: {
+    goToForgetPasswordPage() {
+      const path = this.$route.path;
+      this.dialog = false;
+      if (path !== '/forget-password') {
+        this.$router.push({ name: 'forget password' })
+      }
+    },
     async submit() {
       try {
         const isValid = await this.$refs.observer.validate();
@@ -109,13 +116,21 @@ export default {
               message: "Login Successfully!"
             });
             this.dialog = false;
+            // const fullPath = this.$route.query.redirect
+            //   ? this.$route.query.redirect
+            //   : this.$route.fullPath;
+            // this.$router.push({ path: fullPath });
+            const fullPath = this.$route.query.redirect;
+            if(fullPath) {
+              this.$router.push({ path: fullPath });
+            }
           }
         }
       } catch (error) {
         if (error) {
-          console.log('error:  ' + error)
+          console.log("error:  " + error);
           this.$store.dispatch("alert/error", {
-            message: "Login failed!"
+            message: error
           });
         }
       }

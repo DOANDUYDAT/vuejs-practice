@@ -1,10 +1,8 @@
 <template>
   <div class="filter-product">
-    <ValidationObserver ref="observer">
+    <!-- <ValidationObserver ref="filterProduct"> -->
       <v-btn-toggle>
-        <v-btn @click="reset" class="my-2" depressed style="width:150px"
-          >Xóa bộ lọc</v-btn
-        >
+        <v-btn @click="resetFilter" class="my-2" depressed style="width:150px">Xóa bộ lọc</v-btn>
         <v-btn
           class="my-2"
           depressed
@@ -13,8 +11,7 @@
           :loading="loading"
           :disabled="loading"
           @click="loader"
-          >Áp dụng</v-btn
-        >
+        >Áp dụng</v-btn>
         <!-- <v-btn :loading="loading" :disabled="loading" @click="loader = 'loading'">Accept Terms 2</v-btn> -->
       </v-btn-toggle>
       <v-container fluid>
@@ -26,7 +23,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="selected" multiple>
+              <v-list-item-group v-model="price" multiple>
                 <template v-for="(item1, i) in item1s">
                   <v-divider v-if="!item1" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -61,7 +58,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="selected" multiple>
+              <v-list-item-group v-model="brand" multiple>
                 <template v-for="(item2, i) in item2s">
                   <v-divider v-if="!item2" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -96,7 +93,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="selected" multiple>
+              <v-list-item-group v-model="color" multiple>
                 <template v-for="(item3, i) in item3s">
                   <v-divider v-if="!item3" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -131,7 +128,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="selected" multiple>
+              <v-list-item-group v-model="ROM" multiple>
                 <template v-for="(item4, i) in item4s">
                   <v-divider v-if="!item4" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -166,7 +163,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="selected" multiple>
+              <v-list-item-group v-model="frontCamera" multiple>
                 <template v-for="(item5, i) in item5s">
                   <v-divider v-if="!item5" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -201,7 +198,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="selected" multiple>
+              <v-list-item-group v-model="backCamera" multiple>
                 <template v-for="(item6, i) in item6s">
                   <v-divider v-if="!item6" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -236,7 +233,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="selected" multiple>
+              <v-list-item-group v-model="system" multiple>
                 <template v-for="(item9, i) in item9s">
                   <v-divider v-if="!item9" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -271,7 +268,7 @@
               </v-list-item-content>
             </template>
             <v-list shaped>
-              <v-list-item-group v-model="selected" multiple>
+              <v-list-item-group v-model="RAM" multiple>
                 <template v-for="(item10, i) in item10s">
                   <v-divider v-if="!item10" :key="`divider-${i}`"></v-divider>
                   <v-list-item
@@ -300,7 +297,7 @@
           </v-list-group>
         </v-list>
       </v-container>
-    </ValidationObserver>
+    <!-- </ValidationObserver> -->
   </div>
 </template>
 
@@ -308,78 +305,82 @@
 export default {
   data() {
     return {
-      selected: [],
+      price: [],
+      brand: [],
+      color: [],
+      ROM: [],
+      frontCamera: [],
+      backCamera: [],
+      system: [],
+      RAM: [],
       //   toggle_exclusive: undefined,
       //   loader: null,
-      loading: false
+      loading: false,
+      item1s: [
+        "Dưới 5.000.000",
+        "5.000.000 - 10.000.000",
+        "10.000.000 - 20.000.000",
+        "20.000.000 - 30.000.000",
+        "Trên 30.000.000"
+      ],
+      item2s: [
+        "Sam Sung",
+        "iPhone",
+        "Xiaomi",
+        "Oppo",
+        "Realme",
+        "Huawei",
+        "NOKIA"
+      ],
+      item3s: [
+        "Đen",
+        "Xanh lam",
+        "Xanh lục",
+        "Vàng",
+        "Đỏ",
+        "Trắng",
+        "Bạc",
+        "Xám",
+        "Tím",
+        "Hồng",
+        "Cam",
+        "Đồng",
+        "Xanh ngọc"
+      ],
+      item4s: ["16GB", "32GB", "64GB", "128GB", "256GB", "512GB"],
+      item5s: [
+        "2MP",
+        "5MP",
+        "8MP",
+        "12MP",
+        "13MP",
+        "2x12MP",
+        "3x12MP",
+        "16MP",
+        "24MP",
+        "25MP",
+        "32MP",
+        "48MP",
+        "64MP"
+      ],
+      item6s: [
+        "2MP",
+        "5MP",
+        "7MP",
+        "8MP",
+        "12MP",
+        "13MP",
+        "16MP",
+        "20MP",
+        "24MP",
+        "25MP",
+        "48MP",
+        "TOF 3D"
+      ],
+      item9s: ["Android 7.0", "Android 8.1", "Androi 9.0", "iOS 12", "iOS 13"],
+      item10s: ["2GB", "3GB", "4GB", "6GB", "8GB", "12GB"]
     };
   },
-  data: () => ({
-    item1s: [
-      "Dưới 5.000.000",
-      "5.000.000 - 10.000.000",
-      "10.000.000 - 20.000.000",
-      "20.000.000 - 30.000.000",
-      "Trên 30.000.000"
-    ],
-    item2s: [
-      "Sam Sung",
-      "iPhone",
-      "Xiaomi",
-      "Oppo",
-      "Realme",
-      "Huawei",
-      "NOKIA"
-    ],
-    item3s: [
-      "Đen",
-      "Xanh lam",
-      "Xanh lục",
-      "Vàng",
-      "Đỏ",
-      "Trắng",
-      "Bạc",
-      "Xám",
-      "Tím",
-      "Hồng",
-      "Cam",
-      "Đồng",
-      "Xanh ngọc"
-    ],
-    item4s: ["16GB", "32GB", "64GB", "128GB", "256GB", "512GB"],
-    item5s: [
-      "2MP",
-      "5MP",
-      "8MP",
-      "12MP",
-      "13MP",
-      "2x12MP",
-      "3x12MP",
-      "16MP",
-      "24MP",
-      "25MP",
-      "32MP",
-      "48MP",
-      "64MP"
-    ],
-    item6s: [
-      "2MP",
-      "5MP",
-      "7MP",
-      "8MP",
-      "12MP",
-      "13MP",
-      "16MP",
-      "20MP",
-      "24MP",
-      "25MP",
-      "48MP",
-      "TOF 3D"
-    ],
-    item9s: ["Android 7.0", "Android 8.1", "Androi 9.0", "iOS 12", "iOS 13"],
-    item10s: ["2GB", "3GB", "4GB", "6GB", "8GB", "12GB"]
-  }),
-
   //   watch: {
   //     loader() {
   //       const l = this.loader;
@@ -396,10 +397,18 @@ export default {
   // },
   methods: {
     loader() {
-      (this.loading = true), setTimeout(() => (this.loading = false), 2000);
+      this.loading = true;
+      setTimeout(() => (this.loading = false), 1000);
     },
-    reset() {
-      this.$refs.form.reset();
+    resetFilter() {
+      this.price = [];
+      this.brand = [];
+      this.color = [];
+      this.ROM = [];
+      this.frontCamera = [];
+      this.backCamera = [];
+      this.system = [];
+      this.RAM = [];
     }
   }
 };

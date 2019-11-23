@@ -3,7 +3,7 @@
     <v-row>
   <v-col cols="12" md="8" class="mx-auto">-->
   <v-card flat>
-    <v-toolbar color="primary" dark flat dense>
+    <v-toolbar color="primary" dark flat>
       <v-card-title>
         <span class="headline">Thông tin tài khoản</span>
       </v-card-title>
@@ -21,7 +21,7 @@
               v-slot="{ errors }"
               :bails="false"
             >
-              <v-text-field label="First name" solo v-model="firstName" counter="16"></v-text-field>
+              <v-text-field label="First Name" solo v-model="firstName" counter="16"></v-text-field>
               <span class="red--text">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
@@ -37,7 +37,7 @@
               v-slot="{ errors }"
               :bails="false"
             >
-              <v-text-field label="Last name" solo v-model="lastName" counter="16"></v-text-field>
+              <v-text-field label="Last Name" solo v-model="lastName" counter="16"></v-text-field>
               <span class="red--text">{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
@@ -63,7 +63,7 @@
             <v-subheader>Email</v-subheader>
           </v-col>
           <v-col cols="12" md="9">
-            <v-text-field value label="Email" solo disabled v-model="email"></v-text-field>
+            <v-text-field solo disabled v-model="email"></v-text-field>
           </v-col>
         </v-row>
         <v-row no-gutters justify="center">
@@ -79,10 +79,10 @@
             <v-subheader>Giới tính</v-subheader>
           </v-col>
           <v-col cols="12" md="9">
-            <v-radio-group v-model="row" row class="mt-2">
-              <v-radio label="Nam" value="0"></v-radio>
-              <v-radio label="Nữ" value="1"></v-radio>
-              <v-radio label="Khác" value="2"></v-radio>
+            <v-radio-group v-model="gender" row class="mt-2">
+              <v-radio label="Nam" value="Nam"></v-radio>
+              <v-radio label="Nữ" value="Nữ"></v-radio>
+              <v-radio label="Khác" value="Khác"></v-radio>
             </v-radio-group>
           </v-col>
         </v-row>
@@ -116,7 +116,7 @@
         </v-row>
         <v-card-actions>
           <v-row no-gutters>
-            <v-btn color="primary" class="mx-auto" @click="update">Cập nhật</v-btn>
+            <v-btn color="primary" class="mx-auto" @click="updateProfile">Cập nhật</v-btn>
           </v-row>
         </v-card-actions>
       </v-col>
@@ -139,10 +139,13 @@
 </template>
 
 <script>
+import { userService } from "@/_api";
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
-      row: "",
+      gender: "",
       firstName: "",
       lastName: "",
       phone: "",
@@ -154,12 +157,55 @@ export default {
     };
   },
   methods: {
-    update() {
-      this.container = false;
+    async updateProfile() {
+      const { gender, firstName, lastName, phone, address, date } = this;
+      const userInfo = {
+        gender,
+        first_name: firstName,
+        last_name: lastName,
+        phone,
+        address,
+        date_of_birth: date
+      };
+      console.log(userInfo);
+      try {
+        const user = await userService.updateProfile(userInfo);
+        if (user) {
+          this.$store.dispatch("alert/success", {
+            message: "Update Profile Successfully!"
+          });
+
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error
+        });
+      }
+    },
+    initData() {
+      const user = this.user;
+      this.firstName = user.first_name;
+      this.lastName = user.last_name;
+      this.phone = user.phone;
+      this.email = user.email;
+      this.address = user.address;
+      this.date = user.date_of_birth;
+      this.gender = user.gender;
     }
   },
+  // mounted() {
+  //   this.firstName = "";
+  // }
+  computed: {
+    ...mapState({
+      user: state => state.authentication.user
+    })
+  },
+  watch: {
+    user: 'initData'
+  },
   mounted() {
-    this.firstName = "";
+    this.initData();
   }
 };
 </script>
