@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="blue" dark app>
+  <v-app-bar color="blue" app>
     <template v-slot:img="{ props }">
       <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
     </template>

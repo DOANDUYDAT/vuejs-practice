@@ -179,11 +179,12 @@ export default {
             // confirm_password: confirmPassword
           };
           // console.log(userInfo)
-          const user = await userService.register(userInfo);
-          if (uer) {
-            this.$store.dispatch("alert/error", {
+          const status = await userService.register(userInfo);
+          if (status === 201) {
+            this.$store.dispatch("alert/success", {
               message: "Register successfully!"
             });
+            this.resetInput();
             this.dialog = false;
           }
         }
@@ -193,6 +194,14 @@ export default {
           message: error
         });
       }
+    },
+    resetInput() {
+      this.email = '';
+      this.password = '';
+      this.confirmPassword = '';
+      this.date = null;
+      this.lastName = '';
+      this.firstName = '';
     }
   }
 };

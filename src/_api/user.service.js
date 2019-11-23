@@ -83,12 +83,9 @@ async function register(userInfo) {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
         // console.log(response.data.token);
-        if (response.data.token) {
+        if (response.status === 201) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            const user = { token: response.data.token };
-            console.log(JSON.stringify(user));
-            localStorage.setItem('user', JSON.stringify(user));
-            return user;
+            return response.status;
         }
     } catch (error) {
         // console.log('errr: ' + error);

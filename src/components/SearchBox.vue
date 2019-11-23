@@ -4,9 +4,11 @@
   <div>
       <!-- dùng height = 10 và dense giúp giảm height của v-text-feild về min-height = 56px của v-input__slot -->
     <v-text-field
-      class="search__input"
       autocomplete="off"
-      filled
+      solo-inverted
+      flat
+      dark
+      color="blue"
       rounded
       clearable
       hide-details
@@ -17,7 +19,6 @@
       @focus="querySelections"
       @blur="result = false"
       dense
-      height="10"
     ></v-text-field>
     <v-expand-transition>
       <v-card v-if="itemsSearch && result" class="search__result" light>
