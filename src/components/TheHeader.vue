@@ -1,12 +1,12 @@
 <template>
-  <v-app-bar color="blue" app>
+  <v-app-bar color="primary" dark app>
     <template v-slot:img="{ props }">
       <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
     </template>
 
     <v-app-bar-nav-icon class="d-block d-sm-none"></v-app-bar-nav-icon>
 
-    <v-toolbar-title>Title</v-toolbar-title>
+    <v-toolbar-title>BK Mobile</v-toolbar-title>
 
     <div class="flex-grow-1"></div>
 
