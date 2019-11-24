@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="7">
-        <v-card flat style="background-color: #F5F5F5">
+        <v-card flat>
           <v-card-title>
             <span class="display-1">Thông tin đơn hàng</span>
           </v-card-title>
@@ -82,17 +82,17 @@
               <p class="mb-0" style="color: red">Thanh toán khi nhận hàng</p>
             </v-subheader>
           </v-col>
-          <v-card-actions class="py-0">
-            <v-btn color="red" tile dark class="mx-auto" @click="order">Đặt hàng</v-btn>
+          <v-card-actions>
+            <v-btn class="mb-3 mx-auto" color="red" tile dark @click="order">Đặt hàng</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
       <v-col cols="5">
-        <v-card flat style="background-color: #F5F5F5">
+        <v-card flat>
           <v-card-title>
             <span class="display-1">Đơn hàng của bạn</span>
           </v-card-title>
-          <v-simple-table style="background-color: #F5F5F5" class="table table-hover table-sm">
+          <v-simple-table class="table table-hover table-sm">
             <thead>
               <!-- <tr>
                 <th class="text-center" style="width:30%"></th>
