@@ -1,5 +1,5 @@
 <template>
-  <v-card height="400px">
+  <v-card height="200px">
     <v-footer
       absolute
       padless
@@ -29,30 +29,7 @@
       </v-card>
     </v-footer>
 
-    <v-row
-      align="center"
-      justify="center"
-      class="ma-12"
-    >
-      <v-col
-        cols="12"
-        md="8"
-      >
-
-        <v-select
-          v-model="variant"
-          :items="items"
-          clearable
-          label="Variant"
-        ></v-select>
-
-        <v-checkbox
-          v-model="padless"
-          hide-details
-          label="Padless"
-        ></v-checkbox>
-      </v-col>
-    </v-row>
+    
   </v-card>
 </template>
 
@@ -75,17 +52,7 @@
       variant: 'default',
     }),
     computed: {
-      localAttrs () {
-        const attrs = {}
-
-        if (this.variant === 'default') {
-          attrs.absolute = false
-          attrs.fixed = false
-        } else {
-          attrs[this.variant] = true
-        }
-        return attrs
-      },
+      
     },
   }
 </script>

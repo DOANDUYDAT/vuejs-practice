@@ -1,13 +1,9 @@
 <template>
-  <div>
+  <v-container>
     <div class="headline">Bình luận</div>
-    <!-- <v-row no-gutters>
-    <v-col cols="7">-->
     <comment-box></comment-box>
     <comment-list></comment-list>
-    <!-- </v-col>
-    </v-row>-->
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -27,3 +23,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/style.scss";
+
+.container {
+  background-color: $background-child;
+}
+</style>

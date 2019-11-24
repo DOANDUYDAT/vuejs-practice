@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-container>
     <v-row>
       <v-col cols="12">
         <h2>{{ product.title }}</h2>
@@ -72,7 +72,7 @@
         </v-btn>
       </v-col>
     </v-row>
-  </v-col>
+  </v-container>
 </template>
 
 <script>
@@ -132,3 +132,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/style.scss";
+
+.container {
+  background-color: $background-child;
+}
+</style>

@@ -90,7 +90,8 @@
             dark
             class="mx-auto"
             :disabled="!products.length"
-            @click="goToOrderPage"
+            to='/order-page'
+            exact
           >Đặt hàng</v-btn>
         </v-card-actions>
         <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
@@ -132,13 +133,6 @@ export default {
     }
   },
   methods: {
-    goToOrderPage() {
-      const path = this.$route.path;
-      this.dialog = false;
-      if (path !== "/order-page") {
-        this.$router.push({ name: "order page" });
-      }
-    },
 
     ...mapMutations("cart", [
       "incrementItemQuantity",

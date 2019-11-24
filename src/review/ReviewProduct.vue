@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <v-container>
+    <div class="headline mb-2">
+      <v-icon color="amber" class="mr-2">mdi-star-outline</v-icon>Đánh giá sản phẩm
+    </div>
+
     <rating-product :product="product"></rating-product>
     <review-list></review-list>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -31,10 +35,17 @@ export default {
     }
   },
   mounted() {
-    console.log('ReviewProduct mounted');
+    console.log("ReviewProduct mounted");
   },
   updated() {
-    console.log('ReviewProduct updated');
+    console.log("ReviewProduct updated");
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/style.scss";
+.container {
+  background-color: $background-child;
+}
+</style>

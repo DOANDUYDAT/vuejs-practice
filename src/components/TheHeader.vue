@@ -11,15 +11,18 @@
     <div class="flex-grow-1"></div>
 
     <search-box></search-box>
-    <!-- <template> -->
+
+    <v-btn icon to="/home" exact>
+      <v-icon>mdi-home</v-icon>
+    </v-btn>
+
     <cart-dialog></cart-dialog>
-    <!-- </template> -->
 
     <v-menu v-if="loggedIn" open-on-hover bottom offset-y transition="slide-y-transition">
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" depressed color="blue">
-          <v-icon left>mdi-account-circle</v-icon>
+        <v-btn v-on="on" depressed color="blue" to="/account/profile" exact>
           {{ fullName }}
+          <v-icon right>mdi-account-circle</v-icon>
         </v-btn>
       </template>
 
@@ -54,7 +57,7 @@
 <script>
 import LoginDialog from "./LoginDialog";
 import RegisterDialog from "./RegisterDialog";
-import SearchBox from './SearchBox';
+import SearchBox from "./SearchBox";
 import CartDialog from "./CartDialog";
 import { userService } from "@/_api";
 import { mapState, mapActions } from "vuex";
@@ -90,10 +93,15 @@ export default {
       //   ? this.$route.query.redirect
       //   : this.$route.path;
       const currentPath = this.$route.path;
-      if ( currentPath !== '/home') {
-        this.$router.push({ path: '/home' });
+      if (currentPath !== "/home") {
+        this.$router.push({ path: "/home" });
       }
-      
+    },
+    goToHomePage() {
+      // const currentPath = this.$route.path;
+      // if (currentPath !== "/home") {
+      this.$router.push({ path: "/home" });
+      // }
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-card>
+  <div class="py-4">
+    <v-card outlined>
       <v-tabs grow v-model="tab" @change="changeTab">
         <v-tab
           v-for="(filter, i) in filterFollowStar"
@@ -9,7 +9,7 @@
       </v-tabs>
     </v-card>
     <review-list-item v-for="(review, index) in listReview" :key="index" :review="review"></review-list-item>
-    <div class="text-center my-4">
+    <div class="text-center mt-4">
       <v-pagination v-model="page" :length="lenPaginantion" total-visible="6"></v-pagination>
     </div>
   </div>

@@ -1,26 +1,30 @@
 <template>
   <v-container v-if="product">
     <v-row>
-      <v-col cols="5">
-        <slide-image-product :product="product"></slide-image-product>
-      </v-col>
-      <v-col cols="7">
-        <info-order-product :product="product"></info-order-product>
+      <v-col cols="12">
+        <product-info :product="product"></product-info>
       </v-col>
     </v-row>
-    <v-divider></v-divider>
-    <suggest-product :product="product"></suggest-product>
+
+    <v-row>
+      <v-col cols="12">
+        <suggest-product :product="product"></suggest-product>
+      </v-col>
+    </v-row>
+
     <v-row>
       <v-col cols="10">
         <review-product :product="product"></review-product>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col cols="5">
         <spec-product-table :product="product"></spec-product-table>
       </v-col>
     </v-row>
-    <v-row no-gutters>
+
+    <v-row>
       <v-col cols="10">
         <comment-product></comment-product>
       </v-col>
@@ -29,9 +33,8 @@
 </template>
 
 <script>
-import SlideImageProduct from "./SlideImageProduct";
+import ProductInfo from "./ProductInfo";
 import SpecProductTable from "./SpecProductTable";
-import InfoOrderProduct from "./InfoOrderProduct";
 import ReviewProduct from "@/review/ReviewProduct";
 import SuggestProduct from "./SuggestProduct";
 import CommentProduct from "@/comment/CommentProduct";
@@ -44,9 +47,8 @@ export default {
     };
   },
   components: {
-    SlideImageProduct,
     SpecProductTable,
-    InfoOrderProduct,
+    ProductInfo,
     ReviewProduct,
     SuggestProduct,
     CommentProduct
@@ -63,7 +65,7 @@ export default {
   created() {
     // this.getProduct()
     console.log("pdp created ");
-    this.getProduct()
+    this.getProduct();
     // this.product = this.products[productId];
 
     // console.log("pdp created products: " + this.products);
@@ -84,7 +86,7 @@ export default {
     //   console.log("$route: " + productId);
     //   this.product = this.products[productId];
     // }
-    $route: 'getProduct'
+    $route: "getProduct"
   },
 
   methods: {
@@ -93,7 +95,7 @@ export default {
       this.$store
         .dispatch("products/getProduct", { id: productId })
         .then(resolve => {
-          console.log(resolve.images)
+          console.log(resolve.images);
           this.product = Object.assign({}, this.product, resolve);
           console.log("pdp dispatch resolve" + resolve);
         })
@@ -105,9 +107,9 @@ export default {
 };
 </script>
 
-<style scoped>
-.row {
-  background-color: white;
-  margin: 1rem 0;
+<style lang="scss" scoped>
+@import "@/style.scss";
+.product-info {
+  background-color: $background-child;
 }
 </style>

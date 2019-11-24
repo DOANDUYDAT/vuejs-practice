@@ -54,7 +54,7 @@
                 <v-checkbox v-model="remember" :label="'Duy trì đăng nhập'"></v-checkbox>
               </v-col>
               <v-col cols="12" md="3" class="text-md-end">
-                <v-chip class="px-0" label color="primary" outlined @click="goToForgetPasswordPage">Quên mật khẩu?</v-chip>
+                <a @click="goToForgetPasswordPage">Quên mật khẩu?</a>
               </v-col>
             </v-row>
             <v-col md="6" offset-md="3">

@@ -102,11 +102,7 @@ const router = new VueRouter({
             path: '/admin',
             component: AdminPage
         },
-        {
-            path: '/orders/:order_id',
-            component: OrderDetailPage,
-            name: 'orders'
-        },
+        
         {
             path: '/forget-password',
             component: ForgetPassword,
@@ -121,6 +117,13 @@ const router = new VueRouter({
             component: ShoppingCartPage,
             name: 'shopping cart'
         },
+        // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
+        {
+            path: '/orders/:order_id',
+            component: OrderDetailPage,
+            name: 'orders'
+        },
+        // OrderPage là trang khi đang tạo đơn hàng, chưa được đặt hàng, thanh toán
         {
             path: "/order-page",
             component: OrderPage,

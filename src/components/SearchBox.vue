@@ -1,7 +1,7 @@
 <template>
   <!-- <v-row justify="center" no-gutters>
   <v-col>-->
-  <div>
+  <div class="px-3">
       <!-- dùng height = 10 và dense giúp giảm height của v-text-feild về min-height = 56px của v-input__slot -->
     <v-text-field
       autocomplete="off"
