@@ -1,109 +1,114 @@
 
 <template>
-  <div class="text-center">
-    <v-responsive class="text-center mx-auto" max-width="1200px" style="background-color:white">
-      <!-- <v-toolbar color="primary" class="mx-auto color:white">
+  <v-container>
+    <v-row>
+      <div class="text-center">
+        <v-responsive class="text-center mx-auto" max-width="1200px" style="background-color:white">
+          <!-- <v-toolbar color="primary" class="mx-auto color:white">
         <v-card-title class="layout justify-center; mx-auto" style="color: white">
           <span class="mx-auto">GIỎ HÀNG CỦA BẠN</span>
         </v-card-title>
-      </v-toolbar>-->
+          </v-toolbar>-->
 
-      <v-simple-table class="table table-hover table-sm">
-        <thead>
-          <tr>
-            <th class="text-center" style="width:25%">
-              <b>HÌNH ẢNH</b>
-            </th>
-            <th class="text-center" style="width:35%">
-              <b>TÊN SẢN PHẨM</b>
-            </th>
-            <th class="text-center" style="width:20%">
-              <b>SỐ LƯỢNG</b>
-            </th>
-            <th class="text-center" style="width:15%">
-              <b>ĐƠN GIÁ</b>
-            </th>
-            <th class="text-center" style="width:10%"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="product in products" :key="product.id">
-            <td class="text-center mx-auto">
-              <v-img class="mx-auto" max-width="150px" max-height="200px" :src="product.image"></v-img>
-            </td>
-            <td class="text-center">{{ product.title }}</td>
+          <v-simple-table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th class="text-center" style="width:25%">
+                  <b>HÌNH ẢNH</b>
+                </th>
+                <th class="text-center" style="width:35%">
+                  <b>TÊN SẢN PHẨM</b>
+                </th>
+                <th class="text-center" style="width:20%">
+                  <b>SỐ LƯỢNG</b>
+                </th>
+                <th class="text-center" style="width:15%">
+                  <b>ĐƠN GIÁ</b>
+                </th>
+                <th class="text-center" style="width:10%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="product in products" :key="product.id">
+                <td class="text-center mx-auto">
+                  <v-img class="mx-auto" max-width="150px" max-height="200px" :src="product.image"></v-img>
+                </td>
+                <td class="text-center">{{ product.title }}</td>
 
-            <td class="text-center">
-              <v-card flat class="py-12">
-                <v-card-text style="padding-top: 0px">
-                  <v-row align="center" justify="center">
-                    <v-col cols="10"></v-col>
-                    <v-btn-toggle dense>
-                      <v-btn
-                        :disabled="product.quantity > 1 ? false : true"
-                        @click="decrementItemQuantity({ id: product.id, quantity: 1 })"
-                        min-width="2rem"
-                      >
-                        <span>-</span>
-                      </v-btn>
-                      <v-btn disabled min-width="2rem">
-                        <span>{{ product.quantity > 1 ? product.quantity : 1 }}</span>
-                      </v-btn>
-                      <v-btn
-                        @click="incrementItemQuantity({ id: product.id, quantity: 1 })"
-                        min-width="2rem"
-                      >
-                        <span>+</span>
-                      </v-btn>
-                    </v-btn-toggle>
-                  </v-row>
+                <td class="text-center">
+                  <v-card flat class="py-12">
+                    <v-card-text style="padding-top: 0px">
+                      <v-row align="center" justify="center">
+                        <v-col cols="10"></v-col>
+                        <v-btn-toggle dense>
+                          <v-btn
+                            :disabled="product.quantity > 1 ? false : true"
+                            @click="decrementItemQuantity({ id: product.id, quantity: 1 })"
+                            min-width="2rem"
+                          >
+                            <span>-</span>
+                          </v-btn>
+                          <v-btn disabled min-width="2rem">
+                            <span>{{ product.quantity > 1 ? product.quantity : 1 }}</span>
+                          </v-btn>
+                          <v-btn
+                            @click="incrementItemQuantity({ id: product.id, quantity: 1 })"
+                            min-width="2rem"
+                          >
+                            <span>+</span>
+                          </v-btn>
+                        </v-btn-toggle>
+                      </v-row>
+                    </v-card-text>
+                  </v-card>
+                </td>
+                <td class="text-center">{{ formatCurrency(product.price) }}đ</td>
+                <td class="text-center">
+                  <v-btn text color="red" @click="removeProductFromCart({ id: product.id })">
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <td></td>
+              <td></td>
+
+              <td class="text-center">
+                <v-card-text class="mx-auto color:white">
+                  <b>Tổng tiền:</b>
                 </v-card-text>
-              </v-card>
-            </td>
-            <td class="text-center">{{ formatCurrency(product.price) }}đ</td>
-            <td class="text-center">
-              <v-btn text color="red" @click="removeProductFromCart({ id: product.id })">
-                <v-icon>mdi-delete</v-icon>
-              </v-btn>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <td></td>
-          <td></td>
+              </td>
+              <td class="text-center">
+                <span style="color: red" data-tongtien>{{ total }}đ</span>
+              </td>
+            </tfoot>
+          </v-simple-table>
+          <v-col class="mx-auto pt-0 px-0 mx-auto pt-0">
+            <v-card-actions>
+              <v-btn
+                color="red"
+                tile
+                dark
+                class="mx-auto"
+                :disabled="!products.length"
+                to="/order-page"
+                exact
+              >Đặt hàng</v-btn>
+            </v-card-actions>
+            <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
+          </v-col>
 
-          <td class="text-center">
-            <v-card-text class="mx-auto color:white">
-              <b>Tổng tiền:</b>
-            </v-card-text>
-          </td>
-          <td class="text-center">
-            <span style="color: red" data-tongtien>{{ total }}đ</span>
-          </td>
-        </tfoot>
-      </v-simple-table>
-      <v-col class="mx-auto pt-0 px-0 mx-auto pt-0">
-        <v-card-actions>
-          <v-btn
-            color="red"
-            tile
-            dark
-            class="mx-auto"
-            :disabled="!products.length"
-            @click="goToOrderPage"
-          >Đặt hàng</v-btn>
-        </v-card-actions>
-        <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
-      </v-col>
-
-      <!-- <v-card-text style="color:white">
+          <!-- <v-card-text style="color:white">
         <v-row class="mx-auto pt-0 mdi-format-float-center">
           <v-col class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center"></v-col>
           <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
         </v-row>
-      </v-card-text>-->
-    </v-responsive>
-  </div>
+          </v-card-text>-->
+        </v-responsive>
+      </div>
+    </v-row>
+  </v-container>
 </template>
 <script>
 import { mapGetters, mapState, mapMutations } from "vuex";
@@ -132,14 +137,6 @@ export default {
     }
   },
   methods: {
-    goToOrderPage() {
-      const path = this.$route.path;
-      this.dialog = false;
-      if (path !== "/order-page") {
-        this.$router.push({ name: "order page" });
-      }
-    },
-
     ...mapMutations("cart", [
       "incrementItemQuantity",
       "decrementItemQuantity",

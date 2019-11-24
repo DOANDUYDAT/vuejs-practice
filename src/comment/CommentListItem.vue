@@ -1,5 +1,5 @@
 <template>
-  <v-card tile elevation="2" outlined class="px-6">
+  <v-card tile  outlined class="px-5">
     <v-card-title class="pt-1 pb-0">{{ comment.username }}</v-card-title>
     <v-card-text class="pb-0">
       <div style="text-align: justify;" class="mt-2">{{ comment.content }}</div>

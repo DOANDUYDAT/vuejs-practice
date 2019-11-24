@@ -11,7 +11,7 @@ import HistoryPage from '@/history/HistoryPage'
 import ErrorPage from '@/error/ErrorPage'
 import AdminPage from '@/admin/AdminPage'
 import ForgetPassword from '@/forget-password/ForgetPassword'
-import OrderDetail from '@/components/OrderDetail'
+import OrderDetailPage from '@/order-detail/OrderDetailPage'
 import ShoppingCartPage from '@/cart/ShoppingCartPage'
 import OrderPage from '@/order/OrderPage'
 
@@ -90,18 +90,19 @@ const router = new VueRouter({
                 {
                     path: 'history',
                     component: HistoryPage
-                }
+                },
+                // {
+                //     path: '/orders/:order_id',
+                //     component: OrderDetail,
+                //     name: 'orders'
+                // },
             ]
         },
         {
             path: '/admin',
             component: AdminPage
         },
-        {
-            path: '/orders/:order_id',
-            component: OrderDetail,
-            name: 'orders'
-        },
+        
         {
             path: '/forget-password',
             component: ForgetPassword,
@@ -116,6 +117,13 @@ const router = new VueRouter({
             component: ShoppingCartPage,
             name: 'shopping cart'
         },
+        // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
+        {
+            path: '/orders/:order_id',
+            component: OrderDetailPage,
+            name: 'orders'
+        },
+        // OrderPage là trang khi đang tạo đơn hàng, chưa được đặt hàng, thanh toán
         {
             path: "/order-page",
             component: OrderPage,
@@ -143,23 +151,21 @@ if (process.env.GOOGLE_ANALYTICS) {
 }
 
 // router.beforeEach((to, from, next) => {
-//     if (to.matched.some(record => record.meta.requiresAuth)) {
-//         // this route requires auth, check if logged in
-//         // if not, redirect to login page.
-//         let user = JSON.parse(localStorage.getItem('user'));
-//         if (!user) {
-//             next({
-//                 path: '/login',
-//                 query: {
-//                     redirect: to.fullPath
-//                 }
-//             })
-//         } else {
-//             next()
-//         }
-//     } else {
-//         next() // make sure to always call next()!
-//     }
+    // if (to.matched.some(record => record.meta.requiresAuth)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        // let user = JSON.parse(localStorage.getItem('user'));
+        // if (!user) {
+            // next({
+                // path: '/login',
+                // query: { redirect: to.fullPath }
+            // })
+        // } else {
+            // next()
+        // }
+    // } else {
+        // next() // make sure to always call next()!
+    // }
 // })
 
 export default router;

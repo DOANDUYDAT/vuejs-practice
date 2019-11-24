@@ -8,7 +8,7 @@
       style="background-color: white"
     >
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" icon>
+        <v-btn v-on="on" icon to='/shopping-cart' exact>
           <v-badge overlap color="red">
             <template v-slot:badge>
               <span v-if="numberProduct > 0">{{ numberProduct }}</span>
@@ -20,15 +20,6 @@
 
       <v-responsive class="mx-auto" max-width="450px" style="background-color: white">
         <v-simple-table class="table table-hover table-sm">
-          <thead>
-            <tr>
-              <th class="text-center" style="width:30%"></th>
-              <th class="text-center" style="width:50%"></th>
-              <th class="text-center" style="width:20%"></th>
-              <!-- <th class="text-center" style="width:15%"></th>
-              <th class="text-center" style="width:5%"></th>-->
-            </tr>
-          </thead>
           <tbody>
             <tr v-for="product in products" :key="product.id">
               <td class="center">
@@ -138,8 +129,8 @@ export default {
       "decrementItemQuantity",
       "removeProductFromCart"
     ]),
-    formatCurrency(total) {
-      return formatCurrency(total);
+    formatCurrency(price) {
+      return formatCurrency(price);
     }
   }
 };

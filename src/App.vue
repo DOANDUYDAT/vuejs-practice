@@ -8,26 +8,15 @@
     <v-content>
       <!-- Provides the application the proper gutter -->
       <alert-list></alert-list>
-      <v-container>
-        <v-row no-gutters>
-          <v-col>
-            <router-link to="/">Home</router-link>
-          </v-col>
-          <v-col>
-            <router-link to="/todo">Todo App</router-link>
-          </v-col>
-          <v-col>
-            <router-link to="/account">account</router-link>
-          </v-col>
-        </v-row>
-        <!-- <v-btn @click="clickBar">click</v-btn> -->
-      </v-container>
+
       <!-- <transition name="fade" mode="out-in"> -->
       <router-view></router-view>
       <!-- </transition> -->
     </v-content>
 
+    <scroll-button></scroll-button>
     <the-footer></the-footer>
+    
   </v-app>
 </template>
 
@@ -35,6 +24,7 @@
 import TheHeader from "./components/TheHeader";
 import TheFooter from "./components/TheFooter";
 import AlertList from "./components/AlertList";
+import ScrollButton from "@/components/ScrollButton";
 
 import { mapState, mapMutations } from "vuex";
 
@@ -49,7 +39,8 @@ export default {
   components: {
     TheHeader,
     TheFooter,
-    AlertList
+    AlertList,
+    ScrollButton
   },
   computed: {
     ...mapState({
@@ -97,4 +88,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import '@/style.scss';
+.v-application {
+  background-color: $background-parent;
+}
+</style>

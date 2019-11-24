@@ -1,6 +1,6 @@
 <template>
   <v-card>
-      <v-toolbar color="primary" dark flat>
+    <v-toolbar color="primary" dark flat>
       <v-card-title>
         <span class="headline">Đơn hàng của tôi</span>
       </v-card-title>
