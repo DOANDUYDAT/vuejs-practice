@@ -33,6 +33,6 @@ export default {
 @import "@/style.scss";
 
 .container {
-  background-color: $background-child;
+  background-color: $it-bg-in;
 }
 </style>

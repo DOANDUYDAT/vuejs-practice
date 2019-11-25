@@ -13,13 +13,11 @@ export default new Vuetify({
   theme: {
     themes: {
       light: {
-        background: '#EEEEEE',
-        primary: '#3f51b5',
-        button1: '#3f51b5',
-        button2: '#f44336',
-        error: '#f44336',
-        warning: '#ffc107',
-        success: '#4caf50',
+        "gg-blue": "#2793F2",
+        "gg-green": "#03A63C",
+        "gg-orange": "#F29F05",
+        "gg-red": "#F22727",
+        "gg-grey": "#F2F2F2"
       },
     },
   },

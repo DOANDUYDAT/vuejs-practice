@@ -2,12 +2,7 @@
   <div class="search pa-0">
     
 
-      <v-select
-        :items="items"
-        hide-selected
-        label="Read-only"
-        hide-details
-      ></v-select>
+      <v-btn @click="handleClick">click</v-btn>
      
   </div>
 </template>
@@ -15,49 +10,9 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      loading: false,
-      items: [],
-      search: null,
-      select: null
-    };
-  },
-  watch: {
-    search: "querySelections"
-  },
   methods: {
-    querySelections() {
-      let search = this.search;
-
-      this.loading = true;
-      // Simulated ajax query
-      setTimeout(() => {
-        if (search) {
-          this.items = this.productListSearch.filter(e => {
-            // return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
-            return e.toLowerCase().indexOf(search.toLowerCase()) > -1;
-          });
-        } else {
-          this.items = [];
-        }
-        this.loading = false;
-      }, 500);
-    },
-    searchProduct() {
-      console.log(this.search);
-    }
-  },
-  computed: {
-    ...mapState({
-      products: state => state.products.all
-    }),
-    productListSearch() {
-      let productListSearch = this.products.map(e => e.title);
-      return productListSearch;
-    },
-    itemsSearch() {
-      return this.items.slice(0, 6);
+    handleClick() {
+      console.log(this.$vuetify.theme.dark)
     }
   }
 };

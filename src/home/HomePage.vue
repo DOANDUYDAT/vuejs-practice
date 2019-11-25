@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-row no-gutters>
-      <v-col cols="3">
+    <v-row >
+      <v-col cols="4">
         <filter-product></filter-product>
       </v-col>
-      <v-col cols="9">
+      <v-col cols="8">
         <product-list></product-list>
       </v-col>
     </v-row>
@@ -23,9 +23,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  background-color: white;
-  padding: 0;
-}
-</style>

@@ -1,14 +1,15 @@
 <template>
-  <v-card height="200px">
+  
     <v-footer
       absolute
       padless
+      app
     >
       <v-card
         flat
         tile
         width="100%"
-        class="red lighten-1 text-center"
+        class="gg-green text-center"
       >
         <v-card-text>
           <v-btn
@@ -30,7 +31,7 @@
     </v-footer>
 
     
-  </v-card>
+  
 </template>
 
 <script>
