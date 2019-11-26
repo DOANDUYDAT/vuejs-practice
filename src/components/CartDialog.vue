@@ -9,7 +9,7 @@
     >
       <template v-slot:activator="{ on }">
         <v-btn v-on="on" icon to='/shopping-cart' exact>
-          <v-badge overlap color="red">
+          <v-badge overlap color="gg-red">
             <template v-slot:badge>
               <span v-if="numberProduct > 0">{{ numberProduct }}</span>
             </template>
@@ -55,7 +55,7 @@
             <v-col class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center">
               <v-card-actions>
                 <v-btn
-                  color="red"
+                  color="gg-red"
                   class="ma-2"
                   outlined
                   :disabled="!products.length"
@@ -66,7 +66,7 @@
             <v-col class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center">
               <v-card-actions>
                 <v-btn
-                  color="red"
+                  color="gg-red"
                   tile
                   dark
                   class="ma-2"

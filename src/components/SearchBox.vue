@@ -8,7 +8,7 @@
       solo-inverted
       flat
       dark
-      color="gg-green"
+      color="it-blue-lighten"
       rounded
       clearable
       hide-details

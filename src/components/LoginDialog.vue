@@ -4,7 +4,7 @@
       <v-btn text v-on="on">Đăng nhập</v-btn>
     </template>
     <v-card flat>
-      <v-toolbar color="primary" dark flat>
+      <v-toolbar color="it-green-lighten" dark flat>
         <v-card-title class="layout justify-center">
           <span class="headline">ĐĂNG NHẬP</span>
         </v-card-title>
@@ -60,8 +60,8 @@
             <v-col md="6" offset-md="3">
               <v-card-actions>
                 <v-btn
-                  color="primary"
-                  class="layout justify-center"
+                  color="it-blue-lighten"
+                  class="layout justify-center white--text"
                   @click="submit"
                   :disabled="invalid"
                 >Login</v-btn>
@@ -96,8 +96,8 @@ export default {
     goToForgetPasswordPage() {
       const path = this.$route.path;
       this.dialog = false;
-      if (path !== '/forget-password') {
-        this.$router.push({ name: 'forget password' })
+      if (path !== "/forget-password") {
+        this.$router.push({ name: "forget password" });
       }
     },
     async submit() {
@@ -121,7 +121,7 @@ export default {
             //   : this.$route.fullPath;
             // this.$router.push({ path: fullPath });
             const fullPath = this.$route.query.redirect;
-            if(fullPath) {
+            if (fullPath) {
               this.$router.push({ path: fullPath });
             }
           }
@@ -139,5 +139,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.v-toolbar {
+  background-image: linear-gradient(0.25turn, #00bda0 30%, #007ddd);
+}
 </style>

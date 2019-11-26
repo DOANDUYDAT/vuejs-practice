@@ -17,7 +17,9 @@ export default new Vuetify({
         "gg-green": "#03A63C",
         "gg-orange": "#F29F05",
         "gg-red": "#F22727",
-        "gg-grey": "#F2F2F2"
+        "gg-grey": "#F2F2F2",
+        "it-green-lighten": "#00bda0",
+        "it-blue-lighten": "#007ddd"
       },
     },
   },

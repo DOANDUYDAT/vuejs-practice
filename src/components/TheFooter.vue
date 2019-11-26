@@ -4,12 +4,13 @@
       absolute
       padless
       app
+      dark
     >
       <v-card
         flat
         tile
         width="100%"
-        class="gg-green text-center"
+        class="text-center"
       >
         <v-card-text>
           <v-btn
@@ -57,3 +58,9 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+.v-card {
+  background-image: linear-gradient(0.25turn, #00bda0 30%, #007ddd);
+}
+</style>
