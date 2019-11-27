@@ -9,13 +9,20 @@ import ProfilePage from '@/profile/ProfilePage'
 import ChangePasswordPage from '@/change-password/ChangePasswordPage'
 import HistoryPage from '@/history/HistoryPage'
 import ErrorPage from '@/error/ErrorPage'
-import AdminPage from '@/admin/AdminPage'
 import ForgetPassword from '@/forget-password/ForgetPassword'
 import OrderDetailPage from '@/order-detail/OrderDetailPage'
 import ShoppingCartPage from '@/shopping-cart/ShoppingCartPage'
 import OrderPage from '@/order/OrderPage'
 import UserPage from '@/user/UserPage'
+
+import AdminPage from '@/admin/AdminPage'
 import AdminHome from '@/admin/AdminHome'
+import ManageUsersPage from '@/admin/users/ManageUsersPage'
+import ManageProductsPage from '@/admin/products/ManageProductsPage'
+import AddProductPage from '@/admin/products/AddProductPage'
+import EditProductPage from '@/admin/products/EditProductPage'
+import ManageOrdersPage from '@/admin/orders/ManageOrdersPage'
+
 
 Vue.use(VueRouter);
 
@@ -117,7 +124,28 @@ const router = new VueRouter({
                 {
                     path: '',
                     component: AdminHome
-                }
+                },
+                {
+                    path: 'users',
+                    component: ManageUsersPage
+                },
+                {
+                    path: 'products',
+                    component: ManageProductsPage
+                },
+                {
+                    path: 'products/:productId',
+                    component: EditProductPage
+                },
+                {
+                    path: 'add-product',
+                    component: AddProductPage
+                },
+                {
+                    path: 'orders',
+                    component: ManageOrdersPage
+                },
+                
             ]
         },
 
