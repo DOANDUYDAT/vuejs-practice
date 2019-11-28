@@ -1,5 +1,5 @@
 <template>
-  <v-btn v-show="showButton" fab bottom right fixed dark color="red" @click="scrollToTop" v-scroll="onScroll">
+  <v-btn v-show="showButton" fab bottom right fixed dark color="gg-red" @click="scrollToTop" v-scroll="onScroll">
     <v-icon x-large>mdi-chevron-up</v-icon>
   </v-btn>
 </template>

@@ -79,7 +79,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/style.scss';
 .container {
-  background-color: $background-child;
+  background-color: $it-bg-in;
   .v-card {
   transition: opacity 0.4s ease-in-out;
   &:not(.on-hover) {

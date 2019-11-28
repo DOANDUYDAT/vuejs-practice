@@ -8,7 +8,7 @@ const getters = {}
 const actions = {
     addAlert({ commit, dispatch }, alert) {
         commit("pushAlert", alert)
-        setTimeout(() => dispatch("deleteAlert"), 2000)
+        setTimeout(() => dispatch("deleteAlert"), 3000)
     },
     deleteAlert({ commit }) {
         commit("removeAlert")

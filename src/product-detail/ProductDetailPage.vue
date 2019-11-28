@@ -110,6 +110,6 @@ export default {
 <style lang="scss" scoped>
 @import "@/style.scss";
 .product-info {
-  background-color: $background-child;
+  background-color: $it-bg-in;
 }
 </style>

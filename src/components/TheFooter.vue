@@ -1,14 +1,16 @@
 <template>
-  <v-card height="200px">
+  
     <v-footer
       absolute
       padless
+      app
+      dark
     >
       <v-card
         flat
         tile
         width="100%"
-        class="red lighten-1 text-center"
+        class="text-center"
       >
         <v-card-text>
           <v-btn
@@ -30,7 +32,7 @@
     </v-footer>
 
     
-  </v-card>
+  
 </template>
 
 <script>
@@ -56,3 +58,9 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+.v-card {
+  background-image: linear-gradient(0.25turn, #00bda0 30%, #007ddd);
+}
+</style>
