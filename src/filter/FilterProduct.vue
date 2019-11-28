@@ -221,14 +221,14 @@ export default {
       setTimeout(() => (this.loading = false), 1000);
     },
     resetFilter() {
-      this.price = [];
-      this.brand = [];
-      this.color = [];
-      this.ROM = [];
-      this.frontCamera = [];
-      this.backCamera = [];
-      this.system = [];
-      this.RAM = [];
+      this.filter.price = [];
+      this.filter.brand = [];
+      this.filter.color = [];
+      this.filter.ROM = [];
+      this.filter.frontCamera = [];
+      this.filter.backCamera = [];
+      this.filter.system = [];
+      this.filter.RAM = [];
     }
   }
 };

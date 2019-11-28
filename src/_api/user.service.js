@@ -22,7 +22,7 @@ async function login(email, password, remember) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/login`,
-        headers: headers,
+        headers: {...headers},
         data: {
             email,
             password,
@@ -75,7 +75,7 @@ async function register(userInfo) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/register`,
-        headers: headers,
+        headers: {...headers},
         data: JSON.stringify(userInfo)
     };
     // console.log('log in service')
