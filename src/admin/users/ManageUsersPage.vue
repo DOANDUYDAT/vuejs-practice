@@ -47,6 +47,9 @@
                     <v-text-field label="Email" disabled></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
+                    <v-text-field label="Phone" disabled></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
                     <v-text-field label="Birthday" disabled></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -84,8 +87,9 @@ export default {
         filterable: false
       },
       { text: "Email", value: "email", filterable: false },
+      { text: "Phone", value: "phone", sortable: true, filterable: false },
       { text: "Address", value: "address", filterable: false },
-      //   { text: "Phone", value: "phone", sortable: true, filterable: false },
+
       {
         text: "Birthday",
         value: "birthday",
@@ -100,6 +104,7 @@ export default {
         userId: 1,
         name: "Le Thanh",
         email: "lethanh98@gmail.com",
+        phone: "0123456789",
         address: "Truong Dinh, Hai Ba Trung",
         birthday: "26/06/1998"
       },
@@ -107,6 +112,7 @@ export default {
         userId: 2,
         name: "Duong Thoa",
         email: "duongthoa98@gmail.com",
+        phone: "0123445566",
         address: "Dai La, Hai Ba Trung",
         birthday: "04/11/1998"
       },
@@ -114,6 +120,7 @@ export default {
         userId: 3,
         name: "Doan Dat",
         email: "doandat98@gmail.com",
+        phone: "0987654321",
         address: "Phap Van",
         birthday: "12/12/1998"
       }
