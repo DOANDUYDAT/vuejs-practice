@@ -1,27 +1,21 @@
 <template>
-  <editor-content :editor="editor" />
+  <div id="app">
+    <vue-editor v-model="content"></vue-editor>
+  </div>
 </template>
 
 <script>
-// Import the editor
-import { Editor, EditorContent } from 'tiptap'
+import { VueEditor } from "vue2-editor";
 
 export default {
   components: {
-    EditorContent,
+    VueEditor
   },
+
   data() {
     return {
-      editor: null,
-    }
-  },
-  mounted() {
-    this.editor = new Editor({
-      content: '<p>This is just a boring paragraph</p>',
-    })
-  },
-  beforeDestroy() {
-    this.editor.destroy()
-  },
-}
+      content: "<h1>Some initial content</h1>"
+    };
+  }
+};
 </script>
