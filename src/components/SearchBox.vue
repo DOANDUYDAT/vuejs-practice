@@ -8,7 +8,7 @@
       solo-inverted
       flat
       dark
-      color="blue"
+      color="it-blue-lighten"
       rounded
       clearable
       hide-details
@@ -18,7 +18,7 @@
       @click:append="searchProduct"
       @focus="querySelections"
       @blur="result = false"
-      dense
+      label="Search"
     ></v-text-field>
     <v-expand-transition>
       <v-card v-if="itemsSearch && result" class="search__result" light>

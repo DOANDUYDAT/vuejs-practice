@@ -1,8 +1,8 @@
 <template>
-  <v-app-bar color="primary" dark app>
-    <template v-slot:img="{ props }">
+  <v-app-bar app  dark >
+    <!-- <template v-slot:img="{ props }">
       <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
-    </template>
+    </template> -->
 
     <v-app-bar-nav-icon class="d-block d-sm-none"></v-app-bar-nav-icon>
 
@@ -20,7 +20,7 @@
 
     <v-menu v-if="loggedIn" open-on-hover bottom offset-y transition="slide-y-transition">
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" depressed color="blue" to="/account/profile" exact>
+        <v-btn v-on="on" depressed color="it-blue-lighten" to="/account/profile" exact>
           {{ fullName }}
           <v-icon right>mdi-account-circle</v-icon>
         </v-btn>
@@ -107,3 +107,8 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+.v-app-bar {
+  background-image: linear-gradient(0.25turn, #00bda0 30%, #007ddd);
+}
+</style>

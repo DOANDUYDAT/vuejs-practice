@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-row no-gutters>
+  <v-container class="px-0">
+    <v-row >
       <v-col cols="3">
         <filter-product></filter-product>
       </v-col>
@@ -23,9 +23,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  background-color: white;
-  padding: 0;
-}
-</style>

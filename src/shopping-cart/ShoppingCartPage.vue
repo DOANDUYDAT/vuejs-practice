@@ -3,7 +3,7 @@
   <v-container>
     <v-row>
       <div class="text-center">
-        <v-responsive class="text-center mx-auto" max-width="1200px" style="background-color:white">
+        <v-responsive class="text-center mx-auto"  style="background-color:white">
           <!-- <v-toolbar color="primary" class="mx-auto color:white">
         <v-card-title class="layout justify-center; mx-auto" style="color: white">
           <span class="mx-auto">GIỎ HÀNG CỦA BẠN</span>
