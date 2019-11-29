@@ -1,5 +1,6 @@
 <template>
   <v-data-table
+    @click:row="goToOrderDetailPage"
     :headers="headers"
     :items="orders"
     :sort-by="['date']"
@@ -178,6 +179,10 @@ export default {
         this.desserts.push(this.editedItem);
       }
       this.close();
+    },
+
+    goToOrderDetailPage(order) {
+      this.$router.push({ name: 'admin order', params: { orderId: orders.id } });
     }
   }
 };
