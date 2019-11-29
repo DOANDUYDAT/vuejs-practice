@@ -22,6 +22,7 @@ import ManageProductsPage from '@/admin/products/ManageProductsPage'
 import AddProductPage from '@/admin/products/AddProductPage'
 import EditProductPage from '@/admin/products/EditProductPage'
 import ManageOrdersPage from '@/admin/orders/ManageOrdersPage'
+import ManageOrderDetailPage from '@/admin/orders/ManageOrderDetailPage'
 
 
 Vue.use(VueRouter);
@@ -144,6 +145,11 @@ const router = new VueRouter({
                 {
                     path: 'orders',
                     component: ManageOrdersPage
+                },
+                {
+                    path: 'orders/:orderId',
+                    component: ManageOrderDetailPage,
+                    name: 'admin order'
                 },
                 
             ]
