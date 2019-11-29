@@ -144,7 +144,13 @@ const router = new VueRouter({
                 },
                 {
                     path: 'orders',
-                    component: ManageOrdersPage
+                    component: ManageOrdersPage,
+                    name: "admin manage orders"
+                },
+                {
+                    path: 'orders/:orderId',
+                    component: ManageOrderDetailPage,
+                    name: 'admin order'
                 },
                 {
                     path: 'orders/:orderId',

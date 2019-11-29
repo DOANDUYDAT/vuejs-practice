@@ -1,27 +1,29 @@
 <template>
-  <editor-content :editor="editor" />
+  <div>
+    <vue-editor v-model="content"></vue-editor>
+    <v-btn @click="handleClick">click</v-btn>
+    <v-btn :to="'/products/' + undefined" exact>product</v-btn>
+  </div>
 </template>
-
+ 
 <script>
-// Import the editor
-import { Editor, EditorContent } from 'tiptap'
-
+import { VueEditor } from "vue2-editor";
+ 
 export default {
   components: {
-    EditorContent,
+    VueEditor
   },
+ 
   data() {
     return {
-      editor: null,
+      content: "<p>Write here</p>"
+    };
+  },
+  methods: {
+    handleClick() {
+      console.log('asd')
+      this.$router.push('/products/1asd')
     }
-  },
-  mounted() {
-    this.editor = new Editor({
-      content: '<p>This is just a boring paragraph</p>',
-    })
-  },
-  beforeDestroy() {
-    this.editor.destroy()
-  },
-}
+  }
+};
 </script>

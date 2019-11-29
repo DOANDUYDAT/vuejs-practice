@@ -4,7 +4,7 @@
     :headers="headers"
     :items="orders"
     :sort-by="['date']"
-    item-key="id"
+    item-key="orderId"
     :sort-desc="[true]"
     class="elevation-1"
     :search="search"
@@ -39,7 +39,7 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.id" label="Id" disabled></v-text-field>
+                    <v-text-field v-model="editedItem.id" label="Order Id" disabled></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.userId" label="User Id" disabled></v-text-field>
@@ -89,8 +89,8 @@ export default {
     status: ["Đang giao hàng", "Đã xác nhận", "Hoàn thành"],
     headers: [
       {
-        text: "Id",
-        value: "id",
+        text: "Order Id",
+        value: "orderId",
         sortable: false,
         filterable: true
       },
@@ -114,7 +114,7 @@ export default {
     orders: [],
     editedIndex: -1,
     editedItem: {
-      id: 0,
+      orderId: 0,
       userId: 0,
       username: "",
       staffId: 0,
@@ -122,7 +122,7 @@ export default {
       status: ""
     },
     defaultItem: {
-      id: 0,
+      orderId: 0,
       userId: 0,
       username: "",
       staffId: 0,
@@ -180,10 +180,18 @@ export default {
       }
       this.close();
     },
+<<<<<<< HEAD
 
     goToOrderDetailPage(order) {
       this.$router.push({ name: 'admin order', params: { orderId: orders.id } });
+=======
+    goToOrderDetailPage(order) {
+      this.$router.push({ name: 'admin order', params: { orderId: order.orderId } });
+>>>>>>> fix variable name
     }
   }
 };
 </script>
+<style lang="scss" scoped>
+
+</style>
