@@ -16,12 +16,15 @@ export default {
   components: {
     TheNavigator,
     TheHeader
-  }
-  // props: {
-  //   source: String
-  // },
-  // data: () => ({
-  //   dialog: false
-  // })
+  },
+  created() {
+    this.$store
+      .dispatch("products/getAllProducts")
+      .then(resolve => {
+        console.log("app dispatch resolve: " + resolve);
+      })
+      .catch(error => console.log("app dispatch reject: " + error));
+    
+  },
 };
 </script>
