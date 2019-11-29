@@ -180,14 +180,8 @@ export default {
       }
       this.close();
     },
-<<<<<<< HEAD
-
-    goToOrderDetailPage(order) {
-      this.$router.push({ name: 'admin order', params: { orderId: orders.id } });
-=======
     goToOrderDetailPage(order) {
       this.$router.push({ name: 'admin order', params: { orderId: order.orderId } });
->>>>>>> fix variable name
     }
   }
 };
