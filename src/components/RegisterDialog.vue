@@ -4,7 +4,7 @@
       <v-btn text v-on="on">Đăng ký</v-btn>
     </template>
     <v-card flat>
-      <v-toolbar color="primary" dark flat>
+      <v-toolbar dark flat>
         <v-card-title class="layout justify-center">
           <span class="headline">ĐĂNG KÝ</span>
         </v-card-title>
@@ -123,8 +123,8 @@
             <v-col cols="12" md="6" class="mx-auto pt-0">
               <v-card-actions>
                 <v-btn
-                  color="primary"
-                  class="layout justify-center"
+                  color="it-blue-lighten"
+                  class="layout justify-center white--text"
                   @click="submit"
                   :disabled="invalid"
                 >Register</v-btn>
@@ -179,11 +179,12 @@ export default {
             // confirm_password: confirmPassword
           };
           // console.log(userInfo)
-          const user = await userService.register(userInfo);
-          if (uer) {
-            this.$store.dispatch("alert/error", {
+          const status = await userService.register(userInfo);
+          if (status === 201) {
+            this.$store.dispatch("alert/success", {
               message: "Register successfully!"
             });
+            this.resetInput();
             this.dialog = false;
           }
         }
@@ -193,10 +194,21 @@ export default {
           message: error
         });
       }
+    },
+    resetInput() {
+      this.email = '';
+      this.password = '';
+      this.confirmPassword = '';
+      this.date = null;
+      this.lastName = '';
+      this.firstName = '';
     }
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.v-toolbar {
+  background-image: linear-gradient(0.25turn, #00bda0 30%, #007ddd);
+}
 </style>

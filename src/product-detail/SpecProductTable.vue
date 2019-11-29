@@ -1,5 +1,5 @@
 <template>
-  <v-col class="mx-auto">
+  <v-container class="mx-auto">
     <div class="headline">Thông số kỹ thuật</div>
     <v-simple-table v-if="specProduct !== undefined">
       <template v-slot:default>
@@ -176,7 +176,7 @@
         </v-card>
       </v-dialog>
     </v-row>
-  </v-col>
+  </v-container>
 </template>
 
 <script>
@@ -209,6 +209,9 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+@import '@/style.scss';
+.container {
+  background-color: $it-bg-in;
+}
 </style>

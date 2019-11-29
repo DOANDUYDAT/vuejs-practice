@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card flat>
-      <v-toolbar color="primary" dark flat>
+      <v-toolbar dark flat>
         <v-card-title>
           <span class="headline">Reset mật khẩu</span>
         </v-card-title>
@@ -36,7 +36,7 @@
               <v-row no-gutters>
                 <!-- <v-col cols="3"></v-col> -->
                 <!-- <v-col cols="12"> -->
-                <v-btn color="primary" class="mx-auto" @click="submit" :disabled="invalid">Xác nhận</v-btn>
+                <v-btn color="it-blue-lighten" class="mx-auto white--text" @click="submit" :disabled="invalid">Xác nhận</v-btn>
                 <!-- </v-col> -->
               </v-row>
             </v-card-actions>
@@ -79,3 +79,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.v-toolbar {
+  background-image: linear-gradient(0.25turn, #00bda0 30%, #007ddd);
+}
+</style>

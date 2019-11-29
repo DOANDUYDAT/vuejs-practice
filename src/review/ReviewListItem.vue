@@ -1,5 +1,5 @@
 <template>
-  <v-card tile elevation="2" outlined class="px-6">
+  <v-card outlined tile class="px-6">
     <v-card-title class="pt-1 pb-0">{{ review.username }}</v-card-title>
     <v-card-text class="pb-0">
       <v-rating

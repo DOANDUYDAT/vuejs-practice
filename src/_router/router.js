@@ -9,9 +9,21 @@ import ProfilePage from '@/profile/ProfilePage'
 import ChangePasswordPage from '@/change-password/ChangePasswordPage'
 import HistoryPage from '@/history/HistoryPage'
 import ErrorPage from '@/error/ErrorPage'
-import AdminPage from '@/admin/AdminPage'
 import ForgetPassword from '@/forget-password/ForgetPassword'
-import OrderDetail from '@/components/OrderDetail'
+import OrderDetailPage from '@/order-detail/OrderDetailPage'
+import ShoppingCartPage from '@/shopping-cart/ShoppingCartPage'
+import OrderPage from '@/order/OrderPage'
+import UserPage from '@/user/UserPage'
+
+import AdminPage from '@/admin/AdminPage'
+import AdminHome from '@/admin/AdminHome'
+import ManageUsersPage from '@/admin/users/ManageUsersPage'
+import ManageProductsPage from '@/admin/products/ManageProductsPage'
+import AddProductPage from '@/admin/products/AddProductPage'
+import EditProductPage from '@/admin/products/EditProductPage'
+import ManageOrdersPage from '@/admin/orders/ManageOrdersPage'
+import ManageOrderDetailPage from '@/admin/orders/ManageOrderDetailPage'
+
 
 Vue.use(VueRouter);
 
@@ -23,7 +35,10 @@ const router = new VueRouter({
                 if (savedPosition) {
                     resolve(savedPosition)
                 } else {
-                    resolve({ x: 0, y: 0 })
+                    resolve({
+                        x: 0,
+                        y: 0
+                    })
                 }
             }, 200)
         })
@@ -36,79 +51,115 @@ const router = new VueRouter({
     routes: [
 
         {
-            path: '/home',
-            name: 'home',
-            component: HomePage,
-            alias: ['/', '/products']
-        },
-        {
-            path: '/products/:product_id',
-            component: ProductDetailPage,
-            name: 'product detail'
-        },
-        {
-            path: '/todo',
-            component: HelloWorld,
+            path: '/',
+            component: UserPage,
             children: [
                 {
-                    path: 'profile',
-                    component: ProfilePage,
-                    alias: ''
+                    path: 'home',
+                    name: 'home',
+                    component: HomePage,
+                    alias: ['', '/products']
                 },
                 {
-                    path: 'change',
-                    component: ChangePasswordPage
+                    path: 'products/:product_id',
+                    component: ProductDetailPage,
+                    name: 'product detail'
                 },
                 {
-                    path: 'history',
-                    component: HistoryPage
-                }
+                    path: 'todo',
+                    component: HelloWorld,
+                },
+        
+                {
+                    path: 'account',
+                    component: AccountPage,
+                    meta: {
+                        requiresAuth: true
+                    },
+                    children: [{
+                        path: 'profile',
+                        component: ProfilePage,
+                        alias: '',
+        
+                    },
+                    {
+                        path: 'change-password',
+                        component: ChangePasswordPage,
+        
+                    },
+                    {
+                        path: 'history',
+                        component: HistoryPage
+                    },
+                    ]
+                },
+                {
+                    path: 'forget-password',
+                    component: ForgetPassword,
+                    name: 'forget password'
+                },
+                {
+                    path: "shopping-cart",
+                    component: ShoppingCartPage,
+                    name: 'shopping cart'
+                },
+                // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
+                {
+                    path: 'orders/:order_id',
+                    component: OrderDetailPage,
+                    name: 'orders'
+                },
+                // OrderPage là trang khi đang tạo đơn hàng, chưa được đặt hàng, thanh toán
+                {
+                    path: "order-page",
+                    component: OrderPage,
+                    name: 'order page'
+                },
             ]
         },
 
-        {
-            path: '/account',
-            component: AccountPage,
-            meta: { requiresAuth: true },
-            children: [
-                {
-                    path: 'profile',
-                    component: ProfilePage,
-                    alias: '',
-
-                },
-                {
-                    path: 'change-password',
-                    component: ChangePasswordPage,
-
-                },
-                {
-                    path: 'history',
-                    component: HistoryPage
-                }
-            ]
-        },
         {
             path: '/admin',
-            component: AdminPage
+            component: AdminPage,
+            children: [
+                {
+                    path: '',
+                    component: AdminHome
+                },
+                {
+                    path: 'users',
+                    component: ManageUsersPage
+                },
+                {
+                    path: 'products',
+                    component: ManageProductsPage
+                },
+                {
+                    path: 'products/:productId',
+                    component: EditProductPage
+                },
+                {
+                    path: 'add-product',
+                    component: AddProductPage
+                },
+                {
+                    path: 'orders',
+                    component: ManageOrdersPage
+                },
+                {
+                    path: 'orders/:orderId',
+                    component: ManageOrderDetailPage,
+                    name: 'admin order'
+                },
+                
+            ]
         },
-        {
-            path: '/orders/:order_id',
-            component: OrderDetail,
-            name: 'orders'
-        },
-        {
-            path: '/forget-password',
-            component: ForgetPassword,
-            name: 'forget password'
-        },
+
         {
             path: '*',
             component: ErrorPage
         },
-        
 
-        
     ],
 
 
@@ -128,21 +179,21 @@ if (process.env.GOOGLE_ANALYTICS) {
 }
 
 // router.beforeEach((to, from, next) => {
-    // if (to.matched.some(record => record.meta.requiresAuth)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
-        // let user = JSON.parse(localStorage.getItem('user'));
-        // if (!user) {
-            // next({
-                // path: '/login',
-                // query: { redirect: to.fullPath }
-            // })
-        // } else {
-            // next()
-        // }
-    // } else {
-        // next() // make sure to always call next()!
-    // }
+// if (to.matched.some(record => record.meta.requiresAuth)) {
+// this route requires auth, check if logged in
+// if not, redirect to login page.
+// let user = JSON.parse(localStorage.getItem('user'));
+// if (!user) {
+// next({
+// path: '/login',
+// query: { redirect: to.fullPath }
+// })
+// } else {
+// next()
+// }
+// } else {
+// next() // make sure to always call next()!
+// }
 // })
 
 export default router;

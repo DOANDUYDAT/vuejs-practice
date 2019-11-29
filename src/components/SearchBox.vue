@@ -1,12 +1,14 @@
 <template>
   <!-- <v-row justify="center" no-gutters>
   <v-col>-->
-  <div>
+  <div class="px-3">
       <!-- dùng height = 10 và dense giúp giảm height của v-text-feild về min-height = 56px của v-input__slot -->
     <v-text-field
-      class="search__input"
       autocomplete="off"
-      filled
+      solo-inverted
+      flat
+      dark
+      color="it-blue-lighten"
       rounded
       clearable
       hide-details
@@ -16,8 +18,7 @@
       @click:append="searchProduct"
       @focus="querySelections"
       @blur="result = false"
-      dense
-      height="10"
+      label="Search"
     ></v-text-field>
     <v-expand-transition>
       <v-card v-if="itemsSearch && result" class="search__result" light>

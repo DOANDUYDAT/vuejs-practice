@@ -1,13 +1,12 @@
 <template>
-  <div>
+  <v-container>
     <div class="headline">Bình luận</div>
-    <!-- <v-row no-gutters>
-    <v-col cols="7">-->
+    <div class="headline mb-2">
+      <v-icon color="amber" class="mr-2">mdi-message-text-outline</v-icon>Bình luận
+    </div>
     <comment-box></comment-box>
     <comment-list></comment-list>
-    <!-- </v-col>
-    </v-row>-->
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -27,3 +26,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/style.scss";
+
+.container {
+  background-color: $it-bg-in;
+}
+</style>

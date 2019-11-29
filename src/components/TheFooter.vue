@@ -1,14 +1,16 @@
 <template>
-  <v-card height="400px">
+  
     <v-footer
       absolute
       padless
+      app
+      dark
     >
       <v-card
         flat
         tile
         width="100%"
-        class="red lighten-1 text-center"
+        class="text-center"
       >
         <v-card-text>
           <v-btn
@@ -29,31 +31,8 @@
       </v-card>
     </v-footer>
 
-    <v-row
-      align="center"
-      justify="center"
-      class="ma-12"
-    >
-      <v-col
-        cols="12"
-        md="8"
-      >
-
-        <v-select
-          v-model="variant"
-          :items="items"
-          clearable
-          label="Variant"
-        ></v-select>
-
-        <v-checkbox
-          v-model="padless"
-          hide-details
-          label="Padless"
-        ></v-checkbox>
-      </v-col>
-    </v-row>
-  </v-card>
+    
+  
 </template>
 
 <script>
@@ -75,17 +54,13 @@
       variant: 'default',
     }),
     computed: {
-      localAttrs () {
-        const attrs = {}
-
-        if (this.variant === 'default') {
-          attrs.absolute = false
-          attrs.fixed = false
-        } else {
-          attrs[this.variant] = true
-        }
-        return attrs
-      },
+      
     },
   }
 </script>
+
+<style lang="scss" scoped>
+.v-card {
+  background-image: linear-gradient(0.25turn, #00bda0 30%, #007ddd);
+}
+</style>

@@ -1,8 +1,8 @@
 <template>
   <v-container v-if="!checkProductEmpty">
-    <div class="headline pa-3">Sản phẩm tương tự</div>
+    <div class="headline py-3">Sản phẩm tương tự</div>
     <!-- mandatory yêu cầu 1 value luôn được chọn, giúp slide tự cuộn lại khi thay đổi list slide-item -->
-    <v-slide-group mandatory class show-arrows>
+    <v-slide-group mandatory show-arrows>
       <v-slide-item v-for="productItem in suggestProduct" :key="productItem.id">
         <product-list-item :product="productItem" :maxWidthItem="175" :heightImage="80"></product-list-item>
       </v-slide-item>
@@ -61,5 +61,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/style.scss";
+
+.container {
+  background-color: $it-bg-in;
+}
 </style>

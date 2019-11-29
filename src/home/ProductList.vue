@@ -1,11 +1,19 @@
 <template>
   <v-container>
-    <slider-ads :topProduct="topProduct"></slider-ads>
+    <v-carousel cycle height="350" show-arrows-on-hover hide-delimiter-background>
+      <v-carousel-item
+        v-for="product in topProduct"
+        :key="product.id"
+        :src="product.images[0]"
+        contain
+      ></v-carousel-item>
+    </v-carousel>
     <v-row no-gutters>
       <v-col v-for="product in products" :key="product.id" cols="12" sm="6" md="4" lg="3">
         <product-list-item :product="product"></product-list-item>
       </v-col>
     </v-row>
+    
   </v-container>
 </template>
 
@@ -40,14 +48,14 @@ export default {
     })
   },
   methods: {
-    ...mapActions("cart", ["addProductToCart"]),
-    
-  },
+    ...mapActions("cart", ["addProductToCart"])
+  }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '@/style.scss';
 .container {
-  border-left: 1px solid #ddd;
+  background-color: $it-bg-in;
 }
 </style>

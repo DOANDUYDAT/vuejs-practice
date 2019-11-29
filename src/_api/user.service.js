@@ -22,7 +22,7 @@ async function login(email, password, remember) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/login`,
-        headers: headers,
+        headers: {...headers},
         data: {
             email,
             password,
@@ -75,7 +75,7 @@ async function register(userInfo) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/register`,
-        headers: headers,
+        headers: {...headers},
         data: JSON.stringify(userInfo)
     };
     // console.log('log in service')
@@ -83,12 +83,9 @@ async function register(userInfo) {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
         // console.log(response.data.token);
-        if (response.data.token) {
+        if (response.status === 201) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            const user = { token: response.data.token };
-            console.log(JSON.stringify(user));
-            localStorage.setItem('user', JSON.stringify(user));
-            return user;
+            return response.status;
         }
     } catch (error) {
         // console.log('errr: ' + error);

@@ -1,5 +1,5 @@
 <template>
-  <v-col v-if="!checkProductEmpty">
+  <v-container v-if="!checkProductEmpty">
     <v-row>
       <v-col cols="12">
         <v-img height="auto" width="auto" contain :src="imageBig"></v-img>
@@ -22,7 +22,7 @@
         </v-hover>
       </v-slide-item>
     </v-slide-group>
-  </v-col>
+  </v-container>
 </template>
 
 <script>
@@ -32,7 +32,6 @@ export default {
   data() {
     return {
       imageBig: "",
-      keyA: 0
     };
   },
   props: {
@@ -77,12 +76,16 @@ export default {
 };
 </script>
 
-<style scoped>
-.v-card {
+<style lang="scss" scoped>
+@import '@/style.scss';
+.container {
+  background-color: $it-bg-in;
+  .v-card {
   transition: opacity 0.4s ease-in-out;
+  &:not(.on-hover) {
+    opacity: 0.4;
+  }
+}
 }
 
-.v-card:not(.on-hover) {
-  opacity: 0.4;
-}
 </style>
