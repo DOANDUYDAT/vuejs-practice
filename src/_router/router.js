@@ -136,7 +136,8 @@ const router = new VueRouter({
                 },
                 {
                     path: 'products/:productId',
-                    component: EditProductPage
+                    component: EditProductPage,
+                    name: 'admin product'
                 },
                 {
                     path: 'add-product',
