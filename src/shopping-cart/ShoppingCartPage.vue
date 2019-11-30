@@ -1,6 +1,6 @@
 
 <template>
-  <v-container>
+  <v-container v-if="numberProduct > 0">
     <v-row justify="center">
       <v-col cols="10">
         <v-card color="white">
@@ -103,6 +103,17 @@
       </v-col>
     </v-row>
   </v-container>
+  <v-card v-else flat height="100%" class="pt-10">
+    <v-img
+      class="white--text mx-auto"
+      max-width="300"
+      max-height="300"
+      :src="require('@/_assets/image/empty-cart-big.png')"
+    ></v-img>
+    <v-card-text class="text-center">
+      <v-btn color="gg-red" tile dark to="/home">Quay lại trang chủ</v-btn>
+    </v-card-text>
+  </v-card>
 </template>
 <script>
 import { mapGetters, mapState, mapMutations } from "vuex";
