@@ -1,15 +1,9 @@
 
 <template>
   <v-container>
-    <v-row>
-      <div class="text-center">
-        <v-responsive class="text-center mx-auto"  style="background-color:white">
-          <!-- <v-toolbar color="primary" class="mx-auto color:white">
-        <v-card-title class="layout justify-center; mx-auto" style="color: white">
-          <span class="mx-auto">GIỎ HÀNG CỦA BẠN</span>
-        </v-card-title>
-          </v-toolbar>-->
-
+    <v-row justify="center">
+      <v-col cols="10">
+        <v-card color="white">
           <v-simple-table class="table table-hover table-sm">
             <thead>
               <tr>
@@ -105,8 +99,8 @@
           <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
         </v-row>
           </v-card-text>-->
-        </v-responsive>
-      </div>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
