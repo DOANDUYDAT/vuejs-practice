@@ -8,7 +8,7 @@
       style="background-color: white"
     >
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" icon to='/shopping-cart' exact>
+        <v-btn v-on="on" icon to="/shopping-cart" exact>
           <v-badge overlap color="gg-red">
             <template v-slot:badge>
               <span v-if="numberProduct > 0">{{ numberProduct }}</span>
@@ -18,7 +18,12 @@
         </v-btn>
       </template>
 
-      <v-responsive class="mx-auto" max-width="450px" style="background-color: white">
+      <v-responsive
+        v-if="numberProduct > 0"
+        class="mx-auto"
+        max-width="450px"
+        style="background-color: white"
+      >
         <v-simple-table class="table table-hover table-sm">
           <tbody>
             <tr v-for="product in products" :key="product.id">
@@ -32,7 +37,6 @@
                 <br />
                 <b>x{{ product.quantity }}</b>
               </td>
-
               <td class="text-end">{{ formatCurrency(product.price) }}đ</td>
             </tr>
           </tbody>
@@ -49,7 +53,6 @@
             </td>
           </tfoot>
         </v-simple-table>
-
         <v-card-text style="color:white">
           <v-row class="mx-auto pt-0 mdi-format-float-center">
             <v-col class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center">
@@ -79,6 +82,16 @@
           </v-row>
         </v-card-text>
       </v-responsive>
+      <v-card v-else>
+        <template>
+          <v-img
+            class="white--text mx-auto"
+            max-width="250"
+            max-height="200"
+            :src="require('@/_assets/image/empty-cart.png')"
+          ></v-img>
+        </template>
+      </v-card>
     </v-menu>
   </div>
 </template>

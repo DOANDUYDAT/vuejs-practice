@@ -1,15 +1,9 @@
 
 <template>
-  <v-container>
-    <v-row>
-      <div class="text-center">
-        <v-responsive class="text-center mx-auto"  style="background-color:white">
-          <!-- <v-toolbar color="primary" class="mx-auto color:white">
-        <v-card-title class="layout justify-center; mx-auto" style="color: white">
-          <span class="mx-auto">GIỎ HÀNG CỦA BẠN</span>
-        </v-card-title>
-          </v-toolbar>-->
-
+  <v-container v-if="numberProduct > 0">
+    <v-row justify="center">
+      <v-col cols="10">
+        <v-card color="white">
           <v-simple-table class="table table-hover table-sm">
             <thead>
               <tr>
@@ -105,10 +99,21 @@
           <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
         </v-row>
           </v-card-text>-->
-        </v-responsive>
-      </div>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
+  <v-card v-else flat height="100%" class="pt-10">
+    <v-img
+      class="white--text mx-auto"
+      max-width="300"
+      max-height="300"
+      :src="require('@/_assets/image/empty-cart-big.png')"
+    ></v-img>
+    <v-card-text class="text-center">
+      <v-btn color="gg-red" tile dark to="/home">Quay lại trang chủ</v-btn>
+    </v-card-text>
+  </v-card>
 </template>
 <script>
 import { mapGetters, mapState, mapMutations } from "vuex";
