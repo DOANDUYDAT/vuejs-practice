@@ -1,5 +1,6 @@
 <template>
   <v-container v-if="product">
+    <breadcrumb-base></breadcrumb-base>
     <v-row>
       <v-col cols="12">
         <product-info :product="product"></product-info>
@@ -38,6 +39,7 @@ import SpecProductTable from "./SpecProductTable";
 import ReviewProduct from "@/review/ReviewProduct";
 import SuggestProduct from "./SuggestProduct";
 import CommentProduct from "@/comment/CommentProduct";
+import BreadcrumbBase from '@/components/BreadcrumbBase';
 import { mapState } from "vuex";
 
 export default {
@@ -51,7 +53,8 @@ export default {
     ProductInfo,
     ReviewProduct,
     SuggestProduct,
-    CommentProduct
+    CommentProduct,
+    BreadcrumbBase
   },
   computed: {
     // ...mapState({

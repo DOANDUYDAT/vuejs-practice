@@ -3,7 +3,7 @@
     :headers="headers"
     :items="users"
     :sort-by="['userId']"
-    user-key="id"
+    user-key="userId"
     :sort-asc="[true]"
     :search="search"
   >
@@ -23,43 +23,6 @@
           single-line
           hide-details
         ></v-text-field>
-        <v-dialog v-model="dialog" max-width="650px">
-          <!-- <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">New user</v-btn>
-          </template>-->
-          <v-card>
-            <v-toolbar color="gg-red" dark flat>
-              <v-card-title class="flex-grow-1 justify-center">
-                <span class="headline">{{ formTitle }}</span>
-              </v-card-title>
-            </v-toolbar>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="User Id" disabled></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Name" disabled></v-text-field>
-                  </v-col>
-
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Email" disabled></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Phone" disabled></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Birthday" disabled></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Address" disabled></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
@@ -78,7 +41,7 @@ export default {
         text: "User Id",
         value: "userId",
         sortable: false,
-        filterable: false
+        filterable: true
       },
       {
         text: "Name",
@@ -86,9 +49,9 @@ export default {
         sortable: true,
         filterable: false
       },
-      { text: "Email", value: "email", filterable: false },
-      { text: "Phone", value: "phone", sortable: true, filterable: false },
-      { text: "Address", value: "address", filterable: false },
+      { text: "Email", value: "email", sortable: false, filterable: false },
+      { text: "Phone", value: "phone", sortable: false, filterable: false },
+      { text: "Address", value: "address", sortable: false, filterable: false },
 
       {
         text: "Birthday",

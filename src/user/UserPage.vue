@@ -40,7 +40,7 @@ export default {
     TheHeader,
     TheFooter,
     AlertList,
-    ScrollButton
+    ScrollButton,
   },
   computed: {
     ...mapState({
