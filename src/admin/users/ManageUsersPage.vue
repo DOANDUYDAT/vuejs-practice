@@ -3,7 +3,7 @@
     :headers="headers"
     :items="users"
     :sort-by="['userId']"
-    user-key="id"
+    user-key="userId"
     :sort-asc="[true]"
     :search="search"
   >
@@ -78,7 +78,7 @@ export default {
         text: "User Id",
         value: "userId",
         sortable: false,
-        filterable: false
+        filterable: true
       },
       {
         text: "Name",
@@ -86,9 +86,9 @@ export default {
         sortable: true,
         filterable: false
       },
-      { text: "Email", value: "email", filterable: false },
-      { text: "Phone", value: "phone", sortable: true, filterable: false },
-      { text: "Address", value: "address", filterable: false },
+      { text: "Email", value: "email", sortable: false, filterable: false },
+      { text: "Phone", value: "phone", sortable: false, filterable: false },
+      { text: "Address", value: "address", sortable: false, filterable: false },
 
       {
         text: "Birthday",
