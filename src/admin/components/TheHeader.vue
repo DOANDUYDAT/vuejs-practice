@@ -5,7 +5,7 @@
       color='gg-red'
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="$emit('changeDrawer')" />
       <v-toolbar-title
         style="width: 300px"
         class="ml-0 pl-4"
@@ -53,5 +53,8 @@ export default {
 
         }
     },
+    methods: {
+      
+    }
 }
 </script>

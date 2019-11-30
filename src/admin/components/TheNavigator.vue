@@ -19,7 +19,6 @@
 export default {
   data() {
     return {
-      drawer: null,
       items: [
         {
           text: "Quản lý người dùng",
@@ -93,6 +92,13 @@ export default {
         }
       ]
     };
+  },
+  props: {
+    drawer: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
   }
 };
 </script>

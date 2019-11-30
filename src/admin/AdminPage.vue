@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <the-navigator></the-navigator>
-    <the-header></the-header>
+    <the-navigator :drawer="drawer"></the-navigator>
+    <the-header @changeDrawer="drawer = !drawer"></the-header>
     <v-content>
       <breadcrumb-base></breadcrumb-base>
       <router-view></router-view>
@@ -15,6 +15,11 @@ import TheHeader from "./components/TheHeader";
 import BreadcrumbBase from "@/components/BreadcrumbBase";
 
 export default {
+  data() {
+    return {
+      drawer: true
+    }
+  },
   components: {
     TheNavigator,
     TheHeader,
