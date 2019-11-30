@@ -31,12 +31,14 @@ export default {
         exact: true,
         to: "/home"
       });
+      let to = '';
       for (let i = 1; i < fullPath.length; i++) {
+        to = to + '/' + fullPath[i]
         this.itemsBreadcrumb.push({
           text: _.capitalize(fullPath[i]),
           disabled: i < fullPath.length - 1 ? false : true,
           exact: true,
-          to: "/" + fullPath[i]
+          to: to
         });
       }
       console.log(2 > fullPath.length - 1);

@@ -88,8 +88,14 @@ const router = new VueRouter({
         
                     },
                     {
-                        path: 'history',
+                        path: 'orders',
                         component: HistoryPage
+                    },
+                    // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
+                    {
+                        path: 'orders/:orderId',
+                        component: OrderDetailPage,
+                        name: 'orders'
                     },
                     ]
                 },
@@ -102,12 +108,6 @@ const router = new VueRouter({
                     path: "shopping-cart",
                     component: ShoppingCartPage,
                     name: 'shopping cart'
-                },
-                // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
-                {
-                    path: 'orders/:orderId',
-                    component: OrderDetailPage,
-                    name: 'orders'
                 },
                 // OrderPage là trang khi đang tạo đơn hàng, chưa được đặt hàng, thanh toán
                 {

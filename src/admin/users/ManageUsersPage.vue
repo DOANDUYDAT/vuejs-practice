@@ -120,9 +120,9 @@ export default {
         userId: 3,
         name: "Doan Dat",
         email: "doandat98@gmail.com",
-        phone: "0987654321",
+        phone: "0336221717",
         address: "Phap Van",
-        birthday: "12/12/1998"
+        birthday: "28/04/1998"
       }
     ]
   }),
