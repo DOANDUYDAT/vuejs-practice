@@ -19,12 +19,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Thương hiệu"
-                  outlined
-                  v-model="supplier"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Thương hiệu" outlined v-model="supplier" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -40,12 +35,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Bảo hành"
-                  outlined
-                  v-model="guarantee"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Bảo hành" outlined v-model="guarantee" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -82,12 +72,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Tên"
-                  outlined
-                  v-model="name"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Tên" outlined v-model="name" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -103,12 +88,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Màu sắc"
-                  outlined
-                  v-model="color"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Màu sắc" outlined v-model="color" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -124,12 +104,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Màn hình"
-                  outlined
-                  v-model="screen"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Màn hình" outlined v-model="screen" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -145,12 +120,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Độ phân giải"
-                  outlined
-                  v-model="resolution"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Độ phân giải" outlined v-model="resolution" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -166,12 +136,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Camera sau"
-                  outlined
-                  v-model="rearCamera"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Camera sau" outlined v-model="rearCamera" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -208,12 +173,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Thương hiệu"
-                  outlined
-                  v-model="chip"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Thương hiệu" outlined v-model="chip" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -229,12 +189,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="RAM"
-                  outlined
-                  v-model="ram"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="RAM" outlined v-model="ram" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -250,12 +205,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Bộ nhớ trong"
-                  outlined
-                  v-model="rom"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Bộ nhớ trong" outlined v-model="rom" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -271,12 +221,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Pin"
-                  outlined
-                  v-model="pin"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Pin" outlined v-model="pin" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -313,12 +258,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Cổng sạc"
-                  outlined
-                  v-model="chargingPort"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Cổng sạc" outlined v-model="chargingPort" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -334,12 +274,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Loại sim"
-                  outlined
-                  v-model="sim"
-                  hide-details
-                ></v-text-field>
+                <v-text-field placeholder="Loại sim" outlined v-model="sim" hide-details></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -349,16 +284,37 @@
           <div class="my-avatar">
             <!-- <v-row justify="center">
             <v-col>-->
-            <v-avatar class="profile" color="grey" size="164" tile>
-              <v-img :src="avatar"></v-img>
-            </v-avatar>
+            <div v-if="images" class="px-5">
+              <v-avatar
+                v-for="(image, i) in images"
+                class="profile ma-1"
+                color="grey"
+                size="164"
+                tile
+                :key="i"
+              >
+                <v-img :src="image"></v-img>
+              </v-avatar>
+            </div>
             <!-- </v-col>
             </v-row>-->
           </div>
+          <!-- <input type="file" ref="file" accept="image/*" v-on:change="handleFileUpload()"/> -->
+          <v-file-input
+            multiple
+            show-size
+            prepend-icon="mdi-camera"
+            @change="handleFileUpload"
+            accept="image/*"
+            full-width
+            label="Thêm ảnh"
+          ></v-file-input>
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="10"><vue-editor v-model="content"></vue-editor></v-col>
+        <v-col cols="10">
+          <vue-editor v-model="content"></vue-editor>
+        </v-col>
       </v-row>
       <v-card-actions>
         <v-row>
@@ -379,7 +335,7 @@ export default {
 
   data() {
     return {
-      avatar: "",
+      images: [],
       content: "<h1>Some initial content</h1>",
       supplier: "",
       guarantee: "",
@@ -403,6 +359,16 @@ export default {
   methods: {
     submit() {
       console.log(this.content);
+    },
+    handleFileUpload(files) {
+      this.images = [];
+      for (let i = 0; i < files.length; i++) {
+        let reader = new FileReader();
+        reader.onload = function() {
+          this.images.push(reader.result);
+        }.bind(this);
+        reader.readAsDataURL(files[i]);
+      }
     }
   }
 };
