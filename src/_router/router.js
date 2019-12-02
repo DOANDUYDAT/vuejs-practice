@@ -105,7 +105,7 @@ const router = new VueRouter({
                 },
                 // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
                 {
-                    path: 'orders/:order_id',
+                    path: 'orders/:orderId',
                     component: OrderDetailPage,
                     name: 'orders'
                 },

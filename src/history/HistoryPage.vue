@@ -115,7 +115,7 @@ export default {
   computed: {},
   methods: {
     goToOrderDetailPage(order) {
-      this.$router.push({ name: 'orders', params: { order_id: order.orderId } });
+      this.$router.push({ name: 'orders', params: { orderId: order.orderId } });
     }
   }
 };

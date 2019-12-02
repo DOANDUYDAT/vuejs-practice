@@ -8,7 +8,7 @@ export function fakeOrders() {
         let year = d.getFullYear() - Math.floor(Math.random() * 5);
         let time = `${year}/${month}/${day}`;
         all.push({
-            id:  i + 1,
+            orderId:  i + 1,
             userId:  Math.floor(Math.random() * 1000) + 1,
             username: "john" + Math.floor(Math.random() * 25) + 1,
             staffId: Math.floor(Math.random() * 100) + 1,

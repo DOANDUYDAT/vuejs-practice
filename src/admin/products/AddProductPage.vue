@@ -3,116 +3,347 @@
     <v-card flat>
       <v-toolbar color="primary" dark flat>
         <v-card-title>
-          <span class="headline">Thông tin tài khoản</span>
+          <span class="headline">Thêm sản phẩm</span>
         </v-card-title>
       </v-toolbar>
       <v-row>
         <v-col cols="8">
-          <v-row no-gutters justify="center">
+          <v-row justify="center">
             <v-col cols="12" md="3">
-              <v-subheader>First Name</v-subheader>
+              <v-subheader style="font-size: 1rem;">Thương hiệu</v-subheader>
             </v-col>
             <v-col cols="12" md="9">
               <ValidationProvider
-                name="first name"
+                name="supplier"
                 rules="required|alpha"
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field label="First Name" outlined v-model="firstName" counter="16"></v-text-field>
+                <v-text-field
+                  placeholder="Thương hiệu"
+                  outlined
+                  v-model="supplier"
+                  hide-details
+                ></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
           </v-row>
-          <v-row no-gutters justify="center">
+          <v-row justify="center">
             <v-col cols="12" md="3">
-              <v-subheader>Last Name</v-subheader>
+              <v-subheader style="font-size: 1rem;">Bảo hành</v-subheader>
             </v-col>
             <v-col cols="12" md="9">
               <ValidationProvider
-                name="last name"
+                name="guarantee"
                 rules="required|alpha"
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field label="Last Name" outlined v-model="lastName" counter="16"></v-text-field>
+                <v-text-field
+                  placeholder="Bảo hành"
+                  outlined
+                  v-model="guarantee"
+                  hide-details
+                ></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
           </v-row>
-          <v-row no-gutters justify="center">
+          <v-row justify="center">
             <v-col cols="12" md="3">
-              <v-subheader>Số điện thoại</v-subheader>
+              <v-subheader style="font-size: 1rem;">Mô tả bảo hành</v-subheader>
             </v-col>
             <v-col cols="12" md="9">
               <ValidationProvider
-                name="phone number"
-                :rules="{required: true, regex:/^(0|\+84)[0-9]{9}$/}"
+                name="guaranteeDes"
+                rules="required|alpha"
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field label="Số điện thoại" outlined v-model="phone"></v-text-field>
+                <v-text-field
+                  placeholder="Mô tả bảo hành"
+                  outlined
+                  v-model="guaranteeDes"
+                  hide-details
+                ></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
           </v-row>
-          <v-row no-gutters justify="center">
+          <v-row justify="center">
             <v-col cols="12" md="3">
-              <v-subheader>Email</v-subheader>
+              <v-subheader style="font-size: 1rem;">Tên</v-subheader>
             </v-col>
             <v-col cols="12" md="9">
-              <v-text-field outlined disabled v-model="email"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row no-gutters justify="center">
-            <v-col cols="12" md="3">
-              <v-subheader>Địa chỉ</v-subheader>
-            </v-col>
-            <v-col cols="12" md="9">
-              <v-text-field label="Địa chỉ" outlined v-model="address"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row no-gutters justify="center">
-            <v-col cols="12" md="3">
-              <v-subheader>Giới tính</v-subheader>
-            </v-col>
-            <v-col cols="12" md="9">
-              <v-radio-group v-model="gender" row class="mt-2">
-                <v-radio label="Nam" value="Nam"></v-radio>
-                <v-radio label="Nữ" value="Nữ"></v-radio>
-                <v-radio label="Khác" value="Khác"></v-radio>
-              </v-radio-group>
-            </v-col>
-          </v-row>
-          <v-row no-gutters justify="center">
-            <v-col cols="12" md="3">
-              <v-subheader>Ngày sinh</v-subheader>
-            </v-col>
-            <v-col cols="12" md="9">
-              <v-menu
-                v-model="menudate"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
+              <ValidationProvider
+                name="name"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
               >
-                <template v-slot:activator="{ on }">
-                  <v-text-field v-model="date" label="Ngày sinh" outlined readonly v-on="on"></v-text-field>
-                </template>
-                <v-date-picker v-model="date" @input="menudate = false"></v-date-picker>
-              </v-menu>
+                <v-text-field
+                  placeholder="Tên"
+                  outlined
+                  v-model="name"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
             </v-col>
-            <!-- <v-col cols="3">
-                  <v-select :items="items" label="Ngày" outlined dense></v-select>
-                </v-col>
-                <v-col cols="3">
-                  <v-select :items="items" label="Tháng" outlined dense></v-select>
-                </v-col>
-                <v-col cols="3">
-                  <v-select :items="items" label="Năm" outlined dense></v-select>
-            </v-col>-->
           </v-row>
-          
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Màu sắc</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="color"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Màu sắc"
+                  outlined
+                  v-model="color"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Màn hình</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="screen"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Màn hình"
+                  outlined
+                  v-model="screen"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Độ phân giải</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="resolution"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Độ phân giải"
+                  outlined
+                  v-model="resolution"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Camera sau</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="rearCamera"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Camera sau"
+                  outlined
+                  v-model="rearCamera"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Camera trước</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="frontCamera"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Camera trước"
+                  outlined
+                  v-model="frontCamera"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Chip</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="chip"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Thương hiệu"
+                  outlined
+                  v-model="chip"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">RAM</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="ram"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="RAM"
+                  outlined
+                  v-model="ram"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Bộ nhớ trong</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="rom"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Bộ nhớ trong"
+                  outlined
+                  v-model="rom"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Pin</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="pin"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Pin"
+                  outlined
+                  v-model="pin"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Hệ điều hành</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="operatingSystem"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Hệ điều hành"
+                  outlined
+                  v-model="operatingSystem"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Cổng sạc</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="chargingPort"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Cổng sạc"
+                  outlined
+                  v-model="chargingPort"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader style="font-size: 1rem;">Loại sim</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="sim"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  placeholder="Loại sim"
+                  outlined
+                  v-model="sim"
+                  hide-details
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
         </v-col>
         <v-col cols="4">
           <div class="my-avatar">
@@ -126,11 +357,15 @@
           </div>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="10"><vue-editor v-model="content"></vue-editor></v-col>
+      </v-row>
+      <v-card-actions>
+        <v-row>
+          <v-btn color="gg-red" class="mx-auto white--text" @click="submit">Submit</v-btn>
+        </v-row>
+      </v-card-actions>
     </v-card>
-    <vue-editor v-model="content"></vue-editor>
-    <v-row>
-      <v-btn color="gg-red" class="mx-auto white--text" @click="submit">Submit</v-btn>
-    </v-row>
   </div>
 </template>
 
@@ -144,7 +379,24 @@ export default {
 
   data() {
     return {
-      content: "<h1>Some initial content</h1>"
+      avatar: "",
+      content: "<h1>Some initial content</h1>",
+      supplier: "",
+      guarantee: "",
+      guaranteeDes: "",
+      name: "",
+      color: "",
+      screen: "",
+      resolution: "",
+      rearCamera: "",
+      frontCamera: "",
+      chip: "",
+      ram: "",
+      rom: "",
+      pin: "",
+      operatingSystem: "",
+      chargingPort: "",
+      sim: ""
     };
   },
 

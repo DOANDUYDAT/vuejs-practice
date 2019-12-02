@@ -182,7 +182,7 @@ export default {
     },
 
     goToOrderDetailPage(order) {
-      this.$router.push({ name: 'admin order', params: { orderId: orders.id } });
+      this.$router.push({ name: 'admin order', params: { orderId: order.orderId } });
     }
   }
 };
