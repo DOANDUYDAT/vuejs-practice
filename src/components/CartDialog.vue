@@ -1,99 +1,58 @@
 <template>
-  <div class="text-center">
-    <v-menu
-      open-on-hover
-      bottom
-      offset-y
-      class="color:white mx-auto center"
-      style="background-color: white"
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn v-on="on" icon to="/shopping-cart" exact>
-          <v-badge overlap color="gg-red">
-            <template v-slot:badge>
-              <span v-if="numberProduct > 0">{{ numberProduct }}</span>
-            </template>
-            <v-icon>mdi-cart-plus</v-icon>
-          </v-badge>
-        </v-btn>
-      </template>
+  <v-menu open-on-hover bottom offset-y>
+    <template v-slot:activator="{ on }">
+      <v-btn icon to="/shopping-cart" exact v-on="on">
+        <v-badge overlap color="gg-red">
+          <template v-slot:badge>
+            <span v-if="numberProduct > 0">{{ numberProduct }}</span>
+          </template>
+          <v-icon>mdi-cart-plus</v-icon>
+        </v-badge>
+      </v-btn>
+    </template>
+    <v-card v-if="numberProduct > 0" :width="450">
+      <v-container>
+        <v-row v-for="product in products" :key="product.id">
+          <v-col cols="3">
+            <v-img :height="60" contain :src="product.image"></v-img>
+          </v-col>
+          <v-col cols="5">{{ product.title }}x{{ product.quantity }}</v-col>
+          <v-col cols="4">{{ formatCurrency(product.price) }}đ</v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="6"></v-col>
+          <v-col cols="6">Tổng tiền: {{ total }}đ</v-col>
+        </v-row>
+        <v-card-actions>
+          <v-btn
+            color="gg-red"
+            class="ma-2"
+            outlined
+            :disabled="!products.length"
+            @click="cartdetail"
+          >Xem chi tiết</v-btn>
+          <v-btn
+            color="gg-red"
+            tile
+            dark
+            class="ma-2"
+            :disabled="!products.length"
+            @click="goToOrderPage"
+          >Đặt hàng ngay</v-btn>
+        </v-card-actions>
+        <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
+      </v-container>
+    </v-card>
 
-      <v-responsive
-        v-if="numberProduct > 0"
-        class="mx-auto"
-        max-width="450px"
-        style="background-color: white"
-      >
-        <v-simple-table class="table table-hover table-sm">
-          <tbody>
-            <tr v-for="product in products" :key="product.id">
-              <td class="center">
-                <v-card max-width="100px" max-height="100px">
-                  <v-img :src="product.image"></v-img>
-                </v-card>
-              </td>
-              <td class="text-center">
-                {{ product.title }}
-                <br />
-                <b>x{{ product.quantity }}</b>
-              </td>
-              <td class="text-end">{{ formatCurrency(product.price) }}đ</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <td colspan="2" class="text-end">
-              <v-card-text class="mx-auto color:white">
-                <label>
-                  <b>Tổng tiền:</b>
-                </label>
-              </v-card-text>
-            </td>
-            <td class="text-end">
-              <span style="color: red" data-tongtien>{{ total }}đ</span>
-            </td>
-          </tfoot>
-        </v-simple-table>
-        <v-card-text style="color:white">
-          <v-row class="mx-auto pt-0 mdi-format-float-center">
-            <v-col class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center">
-              <v-card-actions>
-                <v-btn
-                  color="gg-red"
-                  class="ma-2"
-                  outlined
-                  :disabled="!products.length"
-                  @click="cartdetail"
-                >Xem chi tiết</v-btn>
-              </v-card-actions>
-            </v-col>
-            <v-col class="mx-auto pt-0 px-0 mx-auto pt-0 mdi-format-float-center">
-              <v-card-actions>
-                <v-btn
-                  color="gg-red"
-                  tile
-                  dark
-                  class="ma-2"
-                  :disabled="!products.length"
-                  @click="goToOrderPage"
-                >Đặt hàng ngay</v-btn>
-              </v-card-actions>
-              <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-responsive>
-      <v-card v-else>
-        <template>
-          <v-img
-            class="white--text mx-auto"
-            max-width="250"
-            max-height="200"
-            :src="require('@/_assets/image/empty-cart.png')"
-          ></v-img>
-        </template>
-      </v-card>
-    </v-menu>
-  </div>
+    <v-card v-else :width="450">
+      <v-img
+        class="white--text mx-auto"
+        max-width="250"
+        max-height="200"
+        :src="require('@/_assets/image/empty-cart.png')"
+      ></v-img>
+    </v-card>
+  </v-menu>
 </template>
 <script>
 import { mapGetters, mapState, mapMutations } from "vuex";
@@ -115,9 +74,11 @@ export default {
     }),
     numberProduct: function() {
       let numberProduct = 0;
-      this.products.forEach(product => {
-        numberProduct += product.quantity;
-      });
+      if (this.products.length > 0) {
+        this.products.forEach(product => {
+          numberProduct += product.quantity;
+        });
+      }
       return numberProduct;
     }
   },
@@ -144,6 +105,12 @@ export default {
     ]),
     formatCurrency(price) {
       return formatCurrency(price);
+    },
+    onMouseOver() {
+      this.dialog = true;
+    },
+    onMouseOut() {
+      this.dialog = false;
     }
   }
 };
