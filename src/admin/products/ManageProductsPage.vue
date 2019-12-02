@@ -28,7 +28,7 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      <v-icon small @click="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
+      <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize">Reset</v-btn>
@@ -114,9 +114,9 @@ export default {
 
   methods: {
     deleteItem(item) {
-      const index = this.orders.indexOf(item);
+      const index = this.products.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
-        this.orders.splice(index, 1);
+        this.products.splice(index, 1);
     },
 
     goToEditProductPage(product) {

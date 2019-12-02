@@ -14,7 +14,7 @@
             <v-list-item to="/account/change-password" exact>
               <v-list-item-content>Đổi mật khẩu</v-list-item-content>
             </v-list-item>
-            <v-list-item to="/account/history" exact>
+            <v-list-item to="/account/orders" exact>
               <v-list-item-content>Lịch sử mua hàng</v-list-item-content>
             </v-list-item>
           </v-list-group>

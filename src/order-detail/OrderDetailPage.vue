@@ -1,5 +1,6 @@
 <template>
-  <v-container>
+  <!-- <v-container>
+
     <v-row justify="center" no-gutters>
       <v-col cols="3">
         <v-list flat class="py-0">
@@ -19,7 +20,7 @@
           </v-list-group>
         </v-list>
       </v-col>
-      <v-col cols="9">
+      <v-col cols="9"> -->
         <v-card>
           <v-toolbar color="primary" dark flat>
             <v-card-title>
@@ -68,9 +69,9 @@
             </tfoot>
           </v-simple-table>
         </v-card>
-      </v-col>
+      <!-- </v-col>
     </v-row>
-  </v-container>
+  </v-container> -->
 </template>
 <script>
 import { mapState } from "vuex";

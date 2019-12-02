@@ -70,11 +70,14 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
-      <v-icon small @click="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
+      <v-icon small class="mr-2" @click.stop="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
+      <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize">Reset</v-btn>
+    </template>
+    <template v-slot:item.status="{ item }">
+      <v-chip :color="getColor(item.status)" dark>{{ item.status }}</v-chip>
     </template>
   </v-data-table>
 </template>
@@ -180,6 +183,12 @@ export default {
       }
       this.close();
     },
+
+    getColor (status) {
+        if (status == "Đang giao hàng") return 'red'
+        else if (status == "Đã xác nhận") return 'orange'
+        else return 'green'
+      },
 
     goToOrderDetailPage(order) {
       this.$router.push({ name: 'admin order', params: { orderId: order.orderId } });

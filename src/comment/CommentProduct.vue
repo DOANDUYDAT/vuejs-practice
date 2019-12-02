@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <div class="headline">Bình luận</div>
     <div class="headline mb-2">
       <v-icon color="amber" class="mr-2">mdi-message-text-outline</v-icon>Bình luận
     </div>
