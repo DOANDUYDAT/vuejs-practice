@@ -3,8 +3,10 @@
     <the-navigator :drawer="drawer"></the-navigator>
     <the-header @changeDrawer="drawer = !drawer"></the-header>
     <v-content>
-      <breadcrumb-base></breadcrumb-base>
-      <router-view></router-view>
+      <v-container>
+        <breadcrumb-base></breadcrumb-base>
+        <router-view></router-view>
+      </v-container>
     </v-content>
   </v-app>
 </template>
@@ -18,7 +20,7 @@ export default {
   data() {
     return {
       drawer: true
-    }
+    };
   },
   components: {
     TheNavigator,

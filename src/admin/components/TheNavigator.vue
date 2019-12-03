@@ -30,6 +30,19 @@ export default {
           ]
         },
         {
+          text: "Quản lý nhân viên",
+          children: [
+            {
+              text: "Danh sách nhân viên",
+              link: '/admin/staffs'
+            },
+            {
+              text: "Thêm nhân viên",
+              link: '/admin/add-staff'
+            }
+          ]
+        },
+        {
           text: "Quản lý sản phẩm",
           children: [
             {
