@@ -1,5 +1,5 @@
 <template>
-  <div>
+  
     <v-card flat>
       <v-toolbar color="primary" dark flat>
         <v-card-title>
@@ -19,7 +19,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field :placeholder="item.text" outlined v-model="product[item.model]" hide-details></v-text-field>
+                <v-text-field :placeholder="item.text" outlined v-model="product[item.model]" hide-details :disabled="disabled"></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -57,17 +57,21 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="8">
-          <vue-editor v-model="content"></vue-editor>
+        <v-col cols="8" class="text-editor">
+          <vue-editor v-model="content" ></vue-editor>
         </v-col>
       </v-row>
       <v-card-actions>
-        <v-row>
-          <v-btn color="gg-red" class="mx-auto white--text" @click="submit">Chỉnh sửa</v-btn>
+        <v-row v-if="disabled">
+          <v-btn color="gg-red" class="mx-auto white--text" @click="disabled = !disabled">Chỉnh sửa</v-btn>
+        </v-row>
+        <v-row v-else justify="center">
+          <v-btn color="gg-red" outlined class="mx-3 px-2 epp-btn" @click="disabled = !disabled">Quay lại</v-btn>
+          <v-btn color="gg-red" class="mx-3 px-2 epp-btn white--text" @click="submit">Lưu</v-btn>
         </v-row>
       </v-card-actions>
     </v-card>
-  </div>
+
 </template>
 
 <script>
@@ -80,6 +84,7 @@ export default {
 
   data() {
     return {
+      disabled: true,
       images: [],
       content: "<h1>Some initial content</h1>",
       product: {
@@ -195,8 +200,15 @@ export default {
 </script>
 
 <style scoped>
-.text-size{
+.text-size {
   font-size: 1rem;
+}
+.epp-btn {
+  width: 6rem;
+}
+.text-editor {
+    padding-left: 32px;
+    
 }
 </style>
 

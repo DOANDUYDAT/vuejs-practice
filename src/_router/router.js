@@ -18,6 +18,8 @@ import UserPage from '@/user/UserPage'
 import AdminPage from '@/admin/AdminPage'
 import AdminHome from '@/admin/AdminHome'
 import ManageUsersPage from '@/admin/users/ManageUsersPage'
+import ManageStaffsPage from '@/admin/staffs/ManageStaffsPage'
+import AddStaffPage from '@/admin/staffs/AddStaffPage'
 import ManageProductsPage from '@/admin/products/ManageProductsPage'
 import AddProductPage from '@/admin/products/AddProductPage'
 import EditProductPage from '@/admin/products/EditProductPage'
@@ -129,6 +131,14 @@ const router = new VueRouter({
                 {
                     path: 'users',
                     component: ManageUsersPage
+                },
+                {
+                    path: 'staffs',
+                    component: ManageStaffsPage
+                },
+                {
+                    path: 'add-staff',
+                    component: AddStaffPage
                 },
                 {
                     path: 'products',
