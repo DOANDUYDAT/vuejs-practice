@@ -25,7 +25,7 @@ export default {
           children: [
             {
               text: "Danh sách người dùng",
-              link: '/admin/users'
+              link: "/admin/users"
             }
           ]
         },
@@ -34,11 +34,11 @@ export default {
           children: [
             {
               text: "Danh sách sản phẩm",
-              link: '/admin/products'
+              link: "/admin/products"
             },
             {
               text: "Thêm sản phẩm",
-              link: '/admin/add-product'
+              link: "/admin/add-product"
             }
           ]
         },
@@ -47,7 +47,7 @@ export default {
           children: [
             {
               text: "Danh sách đơn hàng",
-              link: '/admin/orders'
+              link: "/admin/orders"
             }
           ]
         },
@@ -56,11 +56,7 @@ export default {
           children: [
             {
               text: "Danh sách nhà cung cấp",
-              link: '/admin/suppliers'
-            },
-            {
-              text: "Thêm nhà cung cấp",
-              link: '/admin/suppliers'
+              link: "/admin/suppliers"
             }
           ]
         },
@@ -68,12 +64,12 @@ export default {
           text: "Quản lý nhập xuất",
           children: [
             {
-              text: "Danh sách nhà cung cấp",
-              link: '/admin/suppliers'
+              text: "Quản lý nhập ",
+              link: ""
             },
             {
-              text: "Thêm nhà cung cấp",
-              link: '/admin/suppliers'
+              text: "Quản lý xuất ",
+              link: ""
             }
           ]
         },
@@ -81,12 +77,12 @@ export default {
           text: "Thống kê thu chi",
           children: [
             {
-              text: "Thoa thống kê",
-              link: '/admin/suppliers'
+              text: "Thống kê thu ",
+              link: ""
             },
             {
-              text: "Thành thống kê",
-              link: '/admin/suppliers'
+              text: "Thống kê chi ",
+              link: ""
             }
           ]
         }
