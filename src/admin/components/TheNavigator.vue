@@ -78,15 +78,11 @@ export default {
           ]
         },
         {
-          text: "Quản lý nhập xuất",
+          text: "Quản lý nhập kho",
           children: [
             {
-              text: "Danh sách nhà cung cấp",
-              link: '/admin/suppliers'
-            },
-            {
-              text: "Thêm nhà cung cấp",
-              link: '/admin/suppliers'
+              text: "Danh sách phiếu nhập",
+              link: '/admin/importProducts'
             }
           ]
         },
