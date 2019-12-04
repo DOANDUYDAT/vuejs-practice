@@ -16,7 +16,20 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
+  computed: {
+    ...mapState("navigator", ["drawerStatus"]),
+    drawer: {
+      get() {
+        return this.drawerStatus;
+      },
+      set(value) {
+        this.$store.dispatch("navigator/changeDrawer", { value: value });
+      }
+    }
+  },
   data() {
     return {
       items: [
@@ -25,7 +38,7 @@ export default {
           children: [
             {
               text: "Danh sách người dùng",
-              link: '/admin/users'
+              link: "/admin/users"
             }
           ]
         },
@@ -34,11 +47,11 @@ export default {
           children: [
             {
               text: "Danh sách nhân viên",
-              link: '/admin/staffs'
+              link: "/admin/staffs"
             },
             {
               text: "Thêm nhân viên",
-              link: '/admin/add-staff'
+              link: "/admin/add-staff"
             }
           ]
         },
@@ -47,11 +60,11 @@ export default {
           children: [
             {
               text: "Danh sách sản phẩm",
-              link: '/admin/products'
+              link: "/admin/products"
             },
             {
               text: "Thêm sản phẩm",
-              link: '/admin/add-product'
+              link: "/admin/add-product"
             }
           ]
         },
@@ -60,7 +73,7 @@ export default {
           children: [
             {
               text: "Danh sách đơn hàng",
-              link: '/admin/orders'
+              link: "/admin/orders"
             }
           ]
         },
@@ -69,11 +82,11 @@ export default {
           children: [
             {
               text: "Danh sách nhà cung cấp",
-              link: '/admin/suppliers'
+              link: "/admin/suppliers"
             },
             {
               text: "Thêm nhà cung cấp",
-              link: '/admin/suppliers'
+              link: "/admin/suppliers"
             }
           ]
         },
@@ -82,11 +95,11 @@ export default {
           children: [
             {
               text: "Danh sách nhà cung cấp",
-              link: '/admin/suppliers'
+              link: "/admin/suppliers"
             },
             {
               text: "Thêm nhà cung cấp",
-              link: '/admin/suppliers'
+              link: "/admin/suppliers"
             }
           ]
         },
@@ -95,23 +108,16 @@ export default {
           children: [
             {
               text: "Thoa thống kê",
-              link: '/admin/suppliers'
+              link: "/admin/suppliers"
             },
             {
               text: "Thành thống kê",
-              link: '/admin/suppliers'
+              link: "/admin/suppliers"
             }
           ]
         }
       ]
     };
-  },
-  props: {
-    drawer: {
-      type: Boolean,
-      required: true,
-      default: false
-    }
   }
 };
 </script>

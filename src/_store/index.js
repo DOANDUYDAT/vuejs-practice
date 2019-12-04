@@ -6,6 +6,7 @@ import cart from './modules/cart'
 import products from './modules/products'
 import alert from './modules/alert'
 import authentication from './modules/authentication'
+import navigator from './modules/navigator'
 
 
 Vue.use(Vuex)
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     products,
     alert,
     authentication,
+    navigator
   },
   strict: debug,
 

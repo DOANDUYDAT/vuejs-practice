@@ -1,29 +1,30 @@
 <template>
-  <div>
-    <v-btn @click="handleClick">click</v-btn>
-    
-    <breadcrumb-base :fullPath="$route.fullPath"></breadcrumb-base>
+  <div class="my-chart">
+    <monthly-income></monthly-income>
   </div>
 </template>
 
 <script>
-import _ from 'lodash';
-// import BreadcrumbBase from "./BreadcrumbBase";
+import MonthlyIncome from "@/admin/components/MonthlyIncome"
 
 export default {
   data() {
     return {
-      orderId: 1,
-      itemsBreadcrumb: [],
+     data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
     };
   },
   methods: {
-    handleClick() {
-      this.$router.push({ name: "orders", params: { order_id: this.orderId} });
-    },
+    
   },
   components: {
-    // BreadcrumbBase
+    MonthlyIncome
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.my-chart {
+  width: 600px;
+  height: 600px;
+}
+</style>

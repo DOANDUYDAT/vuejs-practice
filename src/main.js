@@ -9,9 +9,6 @@ import store from './_store'
 import App from './App'
 import { currency } from './currency'
 
-import 'chartist/dist/chartist.min.css'
-
-Vue.use(require('vue-chartist'))
 
 Vue.use(VueSweetalert2);
 
