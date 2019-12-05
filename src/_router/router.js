@@ -25,7 +25,8 @@ import AddProductPage from '@/admin/products/AddProductPage'
 import EditProductPage from '@/admin/products/EditProductPage'
 import ManageOrdersPage from '@/admin/orders/ManageOrdersPage'
 import ManageOrderDetailPage from '@/admin/orders/ManageOrderDetailPage'
-
+import ImportProductsPage from '@/admin/importProducts/ImportProductsPage'
+import ImportProductDetailPage from '@/admin/importProducts/ImportProductDetailPage'
 
 Vue.use(VueRouter);
 
@@ -162,7 +163,15 @@ const router = new VueRouter({
                     component: ManageOrderDetailPage,
                     name: 'admin order'
                 },
-                
+                {
+                    path: 'importProducts',
+                    component: ImportProductsPage
+                },
+                {
+                    path: 'importProducts/:importProductId',
+                    component: ImportProductDetailPage,
+                    name: 'admin importProduct'
+                },
             ]
         },
 
