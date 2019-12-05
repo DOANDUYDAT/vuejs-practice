@@ -27,6 +27,7 @@ import ManageOrdersPage from '@/admin/orders/ManageOrdersPage';
 import ManageOrderDetailPage from '@/admin/orders/ManageOrderDetailPage';
 import ImportProductsPage from '@/admin/importProducts/ImportProductsPage';
 import ImportProductDetailPage from '@/admin/importProducts/ImportProductDetailPage';
+import ManageSuppliersPage from "@/admin/suppliers/ManageSuppliersPage";
 
 Vue.use(VueRouter);
 
@@ -36,15 +37,15 @@ const router = new VueRouter({
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (savedPosition) {
-                    resolve(savedPosition)
+                    resolve(savedPosition);
                 } else {
                     resolve({
                         x: 0,
                         y: 0
-                    })
+                    });
                 }
             }, 200);
-        })
+        });
         // if (savedPosition) {
         //     return savedPosition
         // } else {
@@ -56,8 +57,7 @@ const router = new VueRouter({
         {
             path: '/',
             component: UserPage,
-            children: [
-                {
+            children: [{
                     path: 'home',
                     name: 'home',
                     component: HomePage,
@@ -72,7 +72,7 @@ const router = new VueRouter({
                     path: 'todo',
                     component: HelloWorld,
                 },
-        
+
                 {
                     path: 'account',
                     component: AccountPage,
@@ -80,26 +80,26 @@ const router = new VueRouter({
                         requiresAuth: true
                     },
                     children: [{
-                        path: 'profile',
-                        component: ProfilePage,
-                        alias: '',
-        
-                    },
-                    {
-                        path: 'change-password',
-                        component: ChangePasswordPage,
-        
-                    },
-                    {
-                        path: 'orders',
-                        component: HistoryPage
-                    },
-                    // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
-                    {
-                        path: 'orders/:orderId',
-                        component: OrderDetailPage,
-                        name: 'orders'
-                    },
+                            path: 'profile',
+                            component: ProfilePage,
+                            alias: '',
+
+                        },
+                        {
+                            path: 'change-password',
+                            component: ChangePasswordPage,
+
+                        },
+                        {
+                            path: 'orders',
+                            component: HistoryPage
+                        },
+                        // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
+                        {
+                            path: 'orders/:orderId',
+                            component: OrderDetailPage,
+                            name: 'orders'
+                        },
                     ]
                 },
                 {
@@ -124,8 +124,7 @@ const router = new VueRouter({
         {
             path: '/admin',
             component: AdminPage,
-            children: [
-                {
+            children: [{
                     path: '',
                     component: AdminHome
                 },
@@ -172,6 +171,11 @@ const router = new VueRouter({
                     component: ImportProductDetailPage,
                     name: 'admin importProduct'
                 },
+                {
+                    path: "suppliers",
+                    component: ManageSuppliersPage
+                }
+
             ]
         },
 
@@ -183,7 +187,7 @@ const router = new VueRouter({
     ],
 
 
-})
+});
 
 // Bootstrap Analytics
 // Set in .env
@@ -195,7 +199,7 @@ if (process.env.GOOGLE_ANALYTICS) {
         autoTracking: {
             page: process.env.NODE_ENV !== 'development'
         }
-    })
+    });
 }
 
 // router.beforeEach((to, from, next) => {

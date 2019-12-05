@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   computed: {
@@ -83,10 +83,6 @@ export default {
             {
               text: "Danh sách nhà cung cấp",
               link: "/admin/suppliers"
-            },
-            {
-              text: "Thêm nhà cung cấp",
-              link: "/admin/suppliers"
             }
           ]
         },
@@ -95,7 +91,7 @@ export default {
           children: [
             {
               text: "Danh sách phiếu nhập",
-              link: '/admin/importProducts'
+              link: "/admin/importProducts"
             }
           ]
         },
