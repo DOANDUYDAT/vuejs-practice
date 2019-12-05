@@ -39,35 +39,6 @@
                 </ValidationProvider>
               </v-col>
             </v-row>
-            <v-row align="center" justify="center">
-              <v-col cols="12" md="10" class="py-0">
-                <v-menu
-                  v-model="menudate"
-                  :close-on-content-click="false"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="290px"
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-text-field
-                      v-model="date"
-                      label="Birthday date"
-                      append-icon="mdi-calendar"
-                      readonly
-                      v-on="on"
-                    ></v-text-field>
-                  </template>
-                  <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
-                </v-menu>
-              </v-col>
-              <!-- <v-col cols="12" md="5" class="py-0">
-              <v-autocomplete
-                :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                label="Address"
-                
-              ></v-autocomplete>
-              </v-col>-->
-            </v-row>
             <v-row>
               <v-col cols="12" md="10" class="mx-auto py-0">
                 <ValidationProvider
@@ -151,8 +122,6 @@ export default {
       lastName: "",
       firstName: "",
       value: "",
-      date: null,
-      menudate: false,
       showPassword: false,
       showConfirmPassword: false
     };
@@ -165,7 +134,6 @@ export default {
           const {
             lastName,
             firstName,
-            date,
             email,
             password,
             confirmPassword
@@ -173,7 +141,6 @@ export default {
           const userInfo = {
             first_name: firstName,
             last_name: lastName,
-            date_of_birth: date,
             email,
             password,
             // confirm_password: confirmPassword
@@ -199,7 +166,6 @@ export default {
       this.email = '';
       this.password = '';
       this.confirmPassword = '';
-      this.date = null;
       this.lastName = '';
       this.firstName = '';
     }
