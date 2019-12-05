@@ -201,20 +201,6 @@ export default {
       ]
     };
   },
-  //   watch: {
-  //     loader() {
-  //       const l = this.loader;
-  //       this[l] = !this[l];
-  //       setTimeout(() => (this[l] = false), 3000);
-
-  //       this.loader = null;
-  //     }
-  //   },
-  // watch: {
-  //   menu() {
-  //     this.$refs.form.reset();
-  //   }
-  // },
   methods: {
     loader() {
       this.loading = true;
@@ -235,7 +221,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/style.scss";
+@import "@/variables.scss";
 .container {
   background-color: $it-bg-in;
 }

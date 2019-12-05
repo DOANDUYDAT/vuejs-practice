@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/style.scss';
+@import '@/variables.scss';
 .container {
   background-color: $it-bg-in;
 }

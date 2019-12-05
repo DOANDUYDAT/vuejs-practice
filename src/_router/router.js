@@ -1,32 +1,32 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-import HelloWorld from '@/components/HelloWorld.vue'
-import HomePage from '@/home/HomePage'
-import ProductDetailPage from '@/product-detail/ProductDetailPage'
-import AccountPage from "@/account/AccountPage"
-import ProfilePage from '@/profile/ProfilePage'
-import ChangePasswordPage from '@/change-password/ChangePasswordPage'
-import HistoryPage from '@/history/HistoryPage'
-import ErrorPage from '@/error/ErrorPage'
-import ForgetPassword from '@/forget-password/ForgetPassword'
-import OrderDetailPage from '@/order-detail/OrderDetailPage'
-import ShoppingCartPage from '@/shopping-cart/ShoppingCartPage'
-import OrderPage from '@/order/OrderPage'
-import UserPage from '@/user/UserPage'
+import HelloWorld from '@/components/HelloWorld.vue';
+import HomePage from '@/home/HomePage';
+import ProductDetailPage from '@/product-detail/ProductDetailPage';
+import AccountPage from "@/account/AccountPage";
+import ProfilePage from '@/profile/ProfilePage';
+import ChangePasswordPage from '@/change-password/ChangePasswordPage';
+import HistoryPage from '@/history/HistoryPage';
+import ErrorPage from '@/error/ErrorPage';
+import ForgetPassword from '@/forget-password/ForgetPassword';
+import OrderDetailPage from '@/order-detail/OrderDetailPage';
+import ShoppingCartPage from '@/shopping-cart/ShoppingCartPage';
+import OrderPage from '@/order/OrderPage';
+import UserPage from '@/user/UserPage';
 
-import AdminPage from '@/admin/AdminPage'
-import AdminHome from '@/admin/AdminHome'
-import ManageUsersPage from '@/admin/users/ManageUsersPage'
-import ManageStaffsPage from '@/admin/staffs/ManageStaffsPage'
-import AddStaffPage from '@/admin/staffs/AddStaffPage'
-import ManageProductsPage from '@/admin/products/ManageProductsPage'
-import AddProductPage from '@/admin/products/AddProductPage'
-import EditProductPage from '@/admin/products/EditProductPage'
-import ManageOrdersPage from '@/admin/orders/ManageOrdersPage'
-import ManageOrderDetailPage from '@/admin/orders/ManageOrderDetailPage'
-import ImportProductsPage from '@/admin/importProducts/ImportProductsPage'
-import ImportProductDetailPage from '@/admin/importProducts/ImportProductDetailPage'
+import AdminPage from '@/admin/AdminPage';
+import AdminHome from '@/admin/AdminHome';
+import ManageUsersPage from '@/admin/users/ManageUsersPage';
+import ManageStaffsPage from '@/admin/staffs/ManageStaffsPage';
+import AddStaffPage from '@/admin/staffs/AddStaffPage';
+import ManageProductsPage from '@/admin/products/ManageProductsPage';
+import AddProductPage from '@/admin/products/AddProductPage';
+import EditProductPage from '@/admin/products/EditProductPage';
+import ManageOrdersPage from '@/admin/orders/ManageOrdersPage';
+import ManageOrderDetailPage from '@/admin/orders/ManageOrderDetailPage';
+import ImportProductsPage from '@/admin/importProducts/ImportProductsPage';
+import ImportProductDetailPage from '@/admin/importProducts/ImportProductDetailPage';
 
 Vue.use(VueRouter);
 
@@ -43,7 +43,7 @@ const router = new VueRouter({
                         y: 0
                     })
                 }
-            }, 200)
+            }, 200);
         })
         // if (savedPosition) {
         //     return savedPosition

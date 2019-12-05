@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/style.scss';
+@import '@/variables.scss';
 .v-application {
   background-color: $it-bg-out;
 }
