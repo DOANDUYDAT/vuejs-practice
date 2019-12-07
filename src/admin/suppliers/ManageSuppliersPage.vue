@@ -2,9 +2,9 @@
   <v-data-table
     :headers="headers"
     :items="suppliers"
-    sort-by="supplierId"
+    sort-by="id"
     class="elevation-1"
-    user-key="supplierId"
+    item-key="id"
     :sort-asc="[true]"
     :search="search"
   >
@@ -39,10 +39,7 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="12">
-                    <v-text-field v-model="editedItem.supplierId" label="supplierId"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="12">
-                    <v-text-field v-model="editedItem.supplierName" label="supplierName"></v-text-field>
+                    <v-text-field v-model="editedItem.name" outlined placeholder="Name"></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -63,11 +60,14 @@
       <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
     </template>
     <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize">Reset</v-btn>
+      <v-btn color="primary" @click="getData">Reset</v-btn>
     </template>
   </v-data-table>
 </template>
 <script>
+import { supplierService } from "@/_api";
+import _ from "lodash";
+
 export default {
   data: () => ({
     dialog: false,
@@ -75,14 +75,14 @@ export default {
     headers: [
       {
         text: "Supplier ID",
-        value: "supplierId",
+        value: "id",
         align: "left",
         sortable: false,
         filterable: true
       },
       {
         text: "Supplier Name",
-        value: "supplierName",
+        value: "name",
         align: "left",
         sortable: false,
         filterable: true
@@ -92,12 +92,12 @@ export default {
     suppliers: [],
     editedIndex: -1,
     editedItem: {
-      supplierId: "",
-      supplierName: ""
+      id: "",
+      name: ""
     },
     defaultItem: {
-      supplierId: "",
-      supplierName: ""
+      id: "",
+      name: ""
     }
   }),
 
@@ -114,20 +114,11 @@ export default {
   },
 
   created() {
-    this.initialize();
+    this.getData();
   },
-
   methods: {
-    initialize() {
-      this.suppliers = [
-        { supplierId: "01", supplierName: "Sam Sung" },
-        { supplierId: "02", supplierName: "Iphone" },
-        { supplierId: "03", supplierName: "Xiaomi" },
-        { supplierId: "04", supplierName: "Oppo" },
-        { supplierId: "05", supplierName: "Realme" },
-        { supplierId: "06", supplierName: "Huawei" },
-        { supplierId: "07", supplierName: "NOKIA" }
-      ];
+    async getData() {
+      this.suppliers = await supplierService.getAllSuppliers();
     },
 
     editItem(item) {
@@ -136,10 +127,22 @@ export default {
       this.dialog = true;
     },
 
-    deleteItem(item) {
-      const index = this.suppliers.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
-        this.suppliers.splice(index, 1);
+    async deleteItem(item) {
+      const supplierId = item.id;
+      confirm("Are you sure you want to delete this item?");
+      try {
+        const isSuccess = await supplierService.deleteSupplier(supplierId);
+        if (isSuccess) {
+          await this.getData();
+          this.$store.dispatch("alert/success", {
+            message: "Delete Successfully!"
+          });
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error
+        });
+      }
     },
 
     close() {
@@ -150,13 +153,39 @@ export default {
       }, 300);
     },
 
-    save() {
+    async save() {
+      const supplier = this.editedItem;
       if (this.editedIndex > -1) {
-        Object.assign(this.suppliers[this.editedIndex], this.editedItem);
+        try {
+          const isSuccess = await supplierService.updateSupplier(supplier);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Update Successfully!"
+            });
+            this.close();
+          }
+        } catch (error) {
+          this.$store.dispatch("alert/error", {
+            message: error
+          });
+        }
       } else {
-        this.suppliers.push(this.editedItem);
+        try {
+          const isSuccess = await supplierService.createSupplier(supplier);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Add Successfully!"
+            });
+            this.close();
+          }
+        } catch (error) {
+          this.$store.dispatch("alert/error", {
+            message: error
+          });
+        }
       }
-      this.close();
     }
   }
 };

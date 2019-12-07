@@ -61,8 +61,8 @@ export default {
       try {
         const isValid = await this.$refs.observer.validate();
         if (isValid) {
-          const response = await userService.resetPassword(email);
-          if (response) {
+          const isSuccess = await userService.resetPassword(email);
+          if (isSuccess) {
             this.email = "";
             this.$refs.observer.reset();
             this.$store.dispatch("alert/success", {

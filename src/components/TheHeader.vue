@@ -95,9 +95,6 @@ export default {
     }),
     logout() {
       this.logoutAction();
-      // const fullPath = this.$route.query.redirect
-      //   ? this.$route.query.redirect
-      //   : this.$route.path;
       const currentPath = this.$route.path;
       if (currentPath !== "/home") {
         this.$router.push({ path: "/home" });

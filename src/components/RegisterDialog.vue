@@ -131,23 +131,17 @@ export default {
       try {
         const isValid = await this.$refs.observer.validate();
         if (isValid) {
-          const {
+          const { lastName, firstName, email, password } = this;
+          const userInfo = {
             lastName,
             firstName,
             email,
-            password,
-            confirmPassword
-          } = this;
-          const userInfo = {
-            first_name: firstName,
-            last_name: lastName,
-            email,
-            password,
-            // confirm_password: confirmPassword
+            password
           };
-          // console.log(userInfo)
-          const status = await userService.register(userInfo);
-          if (status === 201) {
+
+          // console.log(userInfo);
+          const isSuccess = await userService.register(userInfo);
+          if (isSuccess) {
             this.$store.dispatch("alert/success", {
               message: "Register successfully!"
             });
@@ -156,18 +150,17 @@ export default {
           }
         }
       } catch (error) {
-        console.log(error);
         this.$store.dispatch("alert/error", {
           message: error
         });
       }
     },
     resetInput() {
-      this.email = '';
-      this.password = '';
-      this.confirmPassword = '';
-      this.lastName = '';
-      this.firstName = '';
+      this.email = "";
+      this.password = "";
+      this.confirmPassword = "";
+      this.lastName = "";
+      this.firstName = "";
     }
   }
 };

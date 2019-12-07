@@ -48,19 +48,9 @@ export default {
       loggedIn: state => state.authentication.status.loggedIn,
       products: state => state.products.all
     })
-    // alertReverse() {
-    //   return this.alerts.reverse()
-    // }
   },
 
   methods: {
-    // clickBar: function() {
-    //   this.product = this.products[0];
-    //   console.log(this.product)
-    // },
-    // ...mapMutations({
-    //   setDataForVuex: 'products/setProducts'
-    // })
   },
   created() {
     console.log("app created");
@@ -71,20 +61,7 @@ export default {
         console.log("app dispatch resolve: " + resolve);
       })
       .catch(error => console.log("app dispatch reject: " + error));
-
-    // this.product = this.products[0];
-    // console.log('app created products: ' + this.products);
-    // console.log('app created product: ' + JSON.stringify(this.product));
   },
-  mounted() {
-    console.log("app mounted ");
-    // console.log('app mounted products: ' + this.products);
-    // console.log('app mounted product: ' + JSON.stringify(this.product));
-  },
-  updated() {
-    //   console.log('app updated products: ' + this.products);
-    //   console.log('app updated product: ' + JSON.stringify(this.product));
-  }
 };
 </script>
 

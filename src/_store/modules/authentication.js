@@ -13,14 +13,12 @@ const getters = {};
 
 const actions = {
     async login({ dispatch, commit }, { email, password, remember }) {
-        console.log('action login');
-        
         try {
-            const user = await userService.login(email, password, remember);
-            // console.log('user: ' +  user);
-            if (user) {
+            const isSuccess = await userService.login(email, password, remember);
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (isSuccess) {
                 commit('loginSuccess', user)
-                return user;
+                return true;
             }
         } catch (error) {
             // console.log('action error')

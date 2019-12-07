@@ -169,9 +169,9 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.staffs[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.staffs.push(this.editedItem);
       }
       this.close();
     },

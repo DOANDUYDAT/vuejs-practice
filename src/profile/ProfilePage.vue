@@ -1,7 +1,4 @@
 <template>
-  <!-- <v-container>
-    <v-row>
-  <v-col cols="12" md="8" class="mx-auto">-->
   <v-card flat>
     <v-toolbar color="primary" dark flat>
       <v-card-title>
@@ -99,20 +96,11 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-text-field v-model="date" label="Ngày sinh" solo readonly v-on="on"></v-text-field>
+                <v-text-field v-model="dateOfBirth" label="Ngày sinh" solo readonly v-on="on"></v-text-field>
               </template>
-              <v-date-picker v-model="date" @input="menudate = false"></v-date-picker>
+              <v-date-picker v-model="dateOfBirth" @input="menudate = false"></v-date-picker>
             </v-menu>
           </v-col>
-          <!-- <v-col cols="3">
-                  <v-select :items="items" label="Ngày" solo dense></v-select>
-                </v-col>
-                <v-col cols="3">
-                  <v-select :items="items" label="Tháng" solo dense></v-select>
-                </v-col>
-                <v-col cols="3">
-                  <v-select :items="items" label="Năm" solo dense></v-select>
-          </v-col>-->
         </v-row>
         <v-card-actions>
           <v-row no-gutters>
@@ -122,20 +110,13 @@
       </v-col>
       <v-col cols="4">
         <div class="my-avatar">
-          <!-- <v-row justify="center">
-          <v-col>-->
           <v-avatar class="profile" color="grey" size="164" tile>
             <v-img :src="avatar"></v-img>
           </v-avatar>
-          <!-- </v-col>
-          </v-row>-->
         </div>
       </v-col>
     </v-row>
   </v-card>
-  <!-- </v-col>
-    </v-row>
-  </v-container>-->
 </template>
 
 <script>
@@ -145,34 +126,35 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
+      user: {},
       gender: "",
       firstName: "",
       lastName: "",
       phone: "",
       email: "",
       address: "",
-      date: null,
+      dateOfBirth: null,
       menudate: false,
       avatar: "https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
     };
   },
   methods: {
     async updateProfile() {
-      const { gender, firstName, lastName, phone, address, date } = this;
+      const { gender, firstName, lastName, phone, address, dateOfBirth } = this;
       const userInfo = {
         gender,
-        first_name: firstName,
-        last_name: lastName,
+        firstName,
+        lastName,
         phone,
         address,
-        date_of_birth: date
+        dateOfBirth
       };
-      console.log(userInfo);
       try {
-        const user = await userService.updateProfile(userInfo);
-        if (user) {
+        const isSuccess = await userService.updateProfile(userInfo);
+        if (isSuccess) {
+          // await this.getData();
           this.$store.dispatch("alert/success", {
-            message: "Update Profile Successfully!"
+            message: "Update Successfully!"
           });
 
         }
@@ -182,8 +164,8 @@ export default {
         });
       }
     },
-    initData() {
-      const user = this.user;
+    async getData() {
+      this.user = await userService.getProfile();
       this.firstName = user.first_name;
       this.lastName = user.last_name;
       this.phone = user.phone;
@@ -193,19 +175,9 @@ export default {
       this.gender = user.gender;
     }
   },
-  // mounted() {
-  //   this.firstName = "";
-  // }
-  computed: {
-    ...mapState({
-      user: state => state.authentication.user
-    })
-  },
-  watch: {
-    user: 'initData'
-  },
-  mounted() {
-    this.initData();
+  computed: {},
+  created() {
+    this.getData();
   }
 };
 </script>

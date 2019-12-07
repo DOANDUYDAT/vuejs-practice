@@ -116,10 +116,6 @@ export default {
               message: "Login Successfully!"
             });
             this.dialog = false;
-            // const fullPath = this.$route.query.redirect
-            //   ? this.$route.query.redirect
-            //   : this.$route.fullPath;
-            // this.$router.push({ path: fullPath });
             const fullPath = this.$route.query.redirect;
             if (fullPath) {
               this.$router.push({ path: fullPath });
@@ -128,7 +124,6 @@ export default {
         }
       } catch (error) {
         if (error) {
-          console.log("error:  " + error);
           this.$store.dispatch("alert/error", {
             message: error
           });

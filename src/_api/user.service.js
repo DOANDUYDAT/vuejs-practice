@@ -1,5 +1,5 @@
 import config from 'config';
-import { authHeader } from '../_helpers';
+import { authHeader } from '@/_helpers';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -18,33 +18,31 @@ const headers = {
 
 }
 
+const auth = authHeader();
+
 async function login(email, password, remember) {
+    const data = {
+        email,
+        password
+    }
+    console.log(JSON.stringify(data));
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/login`,
         headers: {...headers},
-        data: {
-            email,
-            password,
-            remember
-        }
+        data: JSON.stringify(data)
     };
-    console.log('login service')
     try {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
-        // console.log(response.data.token);
-        if (response.data.Token) {
+        // console.log(response.data);
+        if (response.status === 200) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            let user = { token: response.data.Token };
-            // console.log(JSON.stringify(user));
+            console.log(response.status);
+            console.log(response.data);
+            let user = response.data;
             localStorage.setItem('user', JSON.stringify(user));
-            const userInfo = await getProfile();
-            // console.log(JSON.stringify(userInfo));
-            user = {...user, ...userInfo}
-            localStorage.setItem('user', JSON.stringify(user));
-            console.log(user)
-            return user;
+            return true;
         }
     } catch (error) {
         // console.log('errr: ' + error);
@@ -54,9 +52,6 @@ async function login(email, password, remember) {
 
 async function logout() {
     // remove user from local storage to log user out
-    const user = JSON.parse(localStorage.getItem('user'));
-    const auth = authHeader();
-    console.log(auth)
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/logout`,
@@ -71,30 +66,32 @@ async function logout() {
 }
 
 async function register(userInfo) {
-    console.log(userInfo)
+    const data = {
+        last_name: userInfo.lastName,
+        first_name: userInfo.firstName,
+        email: userInfo.email,
+        password: userInfo.password
+    };
+    console.log(JSON.stringify(data));
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/register`,
         headers: {...headers},
-        data: JSON.stringify(userInfo)
+        data: JSON.stringify(data)
     };
-    // console.log('log in service')
     try {
         const response = await axios(options);
-        // login successful if there's a jwt token in the response
-        // console.log(response.data.token);
         if (response.status === 201) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            return response.status;
+            console.log(response.status);
+            console.log(response.data);
+            return true;
         }
     } catch (error) {
-        // console.log('errr: ' + error);
         if (error) throw error;
     }
 }
 
 async function getProfile() {
-    const auth = authHeader();
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/profile`,
@@ -102,8 +99,10 @@ async function getProfile() {
     }
     try {
         const response = await axios(options);
-        if (response.data) {
+        if (response.status === 200) {
             const user = response.data;
+            console.log(response.status);
+            console.log(response.data);
             return user;
         }
 
@@ -113,19 +112,27 @@ async function getProfile() {
 }
 
 async function updateProfile(userInfo) {
-    const auth = authHeader();
+    const data = {
+        last_name: userInfo.lastName,
+        first_name: userInfo.firstName,
+        phone: userInfo.phone,
+        gender: userInfo.gender,
+        address: userInfo.address,
+        date_of_birth: userInfo.dateOfBirth
+    }
+    console.log(JSON.stringify(data));
     const options = {
         method: 'put',
         url: `${config.apiUrl}/users/profile`,
         headers: { ...headers, ...auth },
-        data: JSON.stringify(userInfo)
+        data: JSON.stringify(data)
     }
     try {
         const response = await axios(options);
-        if (response.data) {
-            const user = response.data;
-            console.log("user after update: " + user);
-            return user;
+        if (response.status === 200) {
+            console.log(response.status);
+            console.log(response.data);
+            return true;
         }
 
     } catch (error) {
@@ -134,18 +141,20 @@ async function updateProfile(userInfo) {
 }
 
 async function resetPassword(email) {
-    const auth = authHeader();
+    const data = {
+        email: email
+    };
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/password-reset`,
         headers: { ...headers },
-        data: {
-            email
-        }
+        data: JSON.stringify(data)
     }
     try {
         const response = await axios(options);
         if (response.status === 200) {
+            console.log(response.status);
+            console.log(response.data);
             return true;
         }
 
