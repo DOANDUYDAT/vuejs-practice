@@ -21,6 +21,7 @@ const headers = {
 const auth = authHeader();
 
 async function login(email, password, remember) {
+    console.log('login');
     const data = {
         email,
         password
@@ -29,7 +30,7 @@ async function login(email, password, remember) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/login`,
-        headers: {...headers},
+        headers: { ...headers },
         data: JSON.stringify(data)
     };
     try {
@@ -51,6 +52,7 @@ async function login(email, password, remember) {
 }
 
 async function logout() {
+    console.log('logout');
     // remove user from local storage to log user out
     const options = {
         method: 'get',
@@ -58,7 +60,9 @@ async function logout() {
         headers: { ...headers, ...auth }
     }
     try {
-        await axios(options)
+        const response = await axios(options);
+        console.log(response.status);
+        console.log(response.data);
         localStorage.removeItem('user');
     } catch (error) {
         throw error;
@@ -66,6 +70,7 @@ async function logout() {
 }
 
 async function register(userInfo) {
+    console.log('register');
     const data = {
         last_name: userInfo.lastName,
         first_name: userInfo.firstName,
@@ -76,7 +81,7 @@ async function register(userInfo) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/register`,
-        headers: {...headers},
+        headers: { ...headers },
         data: JSON.stringify(data)
     };
     try {
@@ -92,6 +97,7 @@ async function register(userInfo) {
 }
 
 async function getProfile() {
+    console.log('getProfile');
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/profile`,
@@ -112,6 +118,7 @@ async function getProfile() {
 }
 
 async function updateProfile(userInfo) {
+    console.log('updateProfile: ' + userInfo.id);
     const data = {
         last_name: userInfo.lastName,
         first_name: userInfo.firstName,
@@ -141,6 +148,7 @@ async function updateProfile(userInfo) {
 }
 
 async function resetPassword(email) {
+    console.log('resetPassword');
     const data = {
         email: email
     };
