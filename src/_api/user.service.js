@@ -98,6 +98,8 @@ async function register(userInfo) {
 
 async function getProfile() {
     console.log('getProfile');
+    let temp = { ...headers, ...auth };
+    console.log(temp);
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/profile`,
@@ -118,7 +120,7 @@ async function getProfile() {
 }
 
 async function updateProfile(userInfo) {
-    console.log('updateProfile: ' + userInfo.id);
+    console.log('updateProfile');
     const data = {
         last_name: userInfo.lastName,
         first_name: userInfo.firstName,

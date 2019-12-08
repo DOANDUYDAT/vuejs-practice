@@ -58,7 +58,7 @@ export default {
     this.$store
       .dispatch("products/getAllProducts")
       .then(resolve => {
-        console.log("app dispatch resolve: " + resolve);
+        // console.log("app dispatch resolve: " + resolve);
       })
       .catch(error => console.log("app dispatch reject: " + error));
   },

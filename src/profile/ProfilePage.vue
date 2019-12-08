@@ -152,7 +152,7 @@ export default {
       try {
         const isSuccess = await userService.updateProfile(userInfo);
         if (isSuccess) {
-          // await this.getData();
+          await this.getData();
           this.$store.dispatch("alert/success", {
             message: "Update Successfully!"
           });
@@ -166,6 +166,7 @@ export default {
     },
     async getData() {
       this.user = await userService.getProfile();
+      const user = this.user;
       this.firstName = user.first_name;
       this.lastName = user.last_name;
       this.phone = user.phone;
