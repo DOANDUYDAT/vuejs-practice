@@ -45,7 +45,7 @@ async function createProduct(product) {
     const data = {
         supplier_id: product.supplierId,
         guarantee: product.guarantee,
-        guarantee_des: product.guarantee_des,
+        guarantee_des: product.guaranteeDes,
         name: product.name,
         color: product.color,
         screen: product.screen,
@@ -95,8 +95,30 @@ async function getProduct(productId) {
         if (response.status === 200) {
             console.log(response.status);
             console.log(response.data);
-            let product = response.data;
-            return product;
+            const data = response.data;
+            const product = {
+                id: data.id,
+                supplierId: data.supplier_id,
+                guarantee: data.guarantee,
+                guaranteeDes: data.guarantee_des,
+                name: data.name,
+                color: data.color,
+                screen: data.screen,
+                resolution: data.resolution,
+                frontCamera: data.front_camera,
+                backCamera: data.rear_camera,
+                chip: data.chip,
+                ram: data.ram,
+                rom: data.rom,
+                pin: data.pin,
+                operatingSystem: data.operating_system,
+                chargingPort: data.charging_port,
+                retailPrice: data.retail_price,
+                listedPrice: data.listed_price,
+                promotionalPrice: data.promotional_price,
+                count: data.count,
+                description: data.description,
+            }
         }
     } catch (error) {
         if (error) throw error;
@@ -108,7 +130,7 @@ async function updateProduct(product) {
     const data = {
         supplier_id: product.supplierId,
         guarantee: product.guarantee,
-        guarantee_des: product.guarantee_des,
+        guarantee_des: product.guaranteeDes,
         name: product.name,
         color: product.color,
         screen: product.screen,

@@ -3,7 +3,7 @@
     <v-card flat>
       <v-toolbar color="primary" dark flat>
         <v-card-title>
-          <span class="headline">Chi tiết sản phẩm {{ getProductId }}</span>
+          <span class="headline">Chi tiết sản phẩm {{ product.id }}</span>
         </v-card-title>
       </v-toolbar>
       <v-row>
@@ -58,7 +58,7 @@
       </v-row>
       <v-row>
         <v-col cols="8" class="text-editor">
-          <vue-editor v-model="content" ></vue-editor>
+          <vue-editor v-model="product.description" ></vue-editor>
         </v-col>
       </v-row>
       <v-card-actions>
@@ -76,6 +76,8 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
+import { productService } from "@/_api";
+import { supplierService } from "@/_api";
 
 export default {
   components: {
@@ -84,10 +86,11 @@ export default {
 
   data() {
     return {
+      suppliers: [],
       disabled: true,
-      images: [],
-      content: "<h1>Some initial content</h1>",
+      productId: null,
       product: {
+        id: null,
         supplier: "",
         guarantee: "",
         guaranteeDes: "",
@@ -103,7 +106,9 @@ export default {
         pin: "",
         operatingSystem: "",
         chargingPort: "",
-        sim: ""
+        sim: "",
+        images: [],
+        description: "<h1>Some initial content</h1>",
       },
       items: [
         {
@@ -175,26 +180,67 @@ export default {
   },
 
   computed: {
-    getProductId() {
+    productId() {
       const productId = this.$route.params.productId;
       return productId;
     }
   },
 
   methods: {
-    submit() {
-      console.log(this.content);
+    async submit() {
+      const product = this.product;
+      try {
+        const isSuccess = await productService.updateProduct(product);
+        if (isSuccess) {
+          this.$store.dispatch("alert/success", {
+            message: "Add Successfully!"
+          });
+          this.getData();
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error
+        });
+      }
     },
     handleFileUpload(files) {
-      this.images = [];
+      this.product.images = [];
       for (let i = 0; i < files.length; i++) {
         let reader = new FileReader();
         reader.onload = function() {
-          this.images.push(reader.result);
+          this.product.images.push(reader.result);
         }.bind(this);
         reader.readAsDataURL(files[i]);
       }
-    }
+    },
+    resetInput() {
+      this.product.supplier = "";
+      this.product.guarantee = "";
+      this.product.guaranteeDes = "";
+      this.product.name = "";
+      this.product.color = "";
+      this.product.screen = "";
+      this.product.resolution = "";
+      this.product.rearCamera = "";
+      this.product.frontCamera = "";
+      this.product.chip = "";
+      this.product.ram = "";
+      this.product.rom = "";
+      this.product.pin = "";
+      this.product.operatingSystem = "";
+      this.product.chargingPort = "";
+      this.product.sim = "";
+      this.product.description = "<h1>Some initial content</h1>";
+      this.product.images = [];
+    },
+    async getData() {
+      this.productId = this.$route.params.productId;
+      this.suppliers = await supplierService.getAllSuppliers();
+      this.product = await productService.getProduct(this.productId);
+    },
+  },
+  created() {
+    this.getData();
   }
 };
 </script>

@@ -19,7 +19,12 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field :placeholder="item.text" outlined v-model="product[item.model]" hide-details></v-text-field>
+                <v-text-field
+                  :placeholder="item.text"
+                  outlined
+                  v-model="product[item.model]"
+                  hide-details
+                ></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -29,9 +34,9 @@
           <div class="my-avatar">
             <!-- <v-row justify="center">
             <v-col>-->
-            <div v-if="images" class="px-5">
+            <div v-if="product.images.length > 0">
               <v-avatar
-                v-for="(image, i) in images"
+                v-for="(image, i) in product.images"
                 class="profile ma-1"
                 color="grey"
                 size="164"
@@ -58,7 +63,7 @@
       </v-row>
       <v-row>
         <v-col cols="8">
-          <vue-editor v-model="content"></vue-editor>
+          <vue-editor v-model="product.description"></vue-editor>
         </v-col>
       </v-row>
       <v-card-actions>
@@ -72,6 +77,8 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
+import { productService } from "@/_api";
+import { supplierService } from "@/_api";
 
 export default {
   components: {
@@ -80,8 +87,7 @@ export default {
 
   data() {
     return {
-      images: [],
-      content: "<h1>Some initial content</h1>",
+      suppliers: [],
       product: {
         supplier: "",
         guarantee: "",
@@ -98,97 +104,138 @@ export default {
         pin: "",
         operatingSystem: "",
         chargingPort: "",
-        sim: ""
+        sim: "",
+        description: "<h1>Some initial content</h1>",
+        images: []
       },
       items: [
         {
           text: "Thương hiệu",
-          model: "supplier",
+          model: "supplier"
         },
         {
           text: "Bảo hành",
-          model: "guarantee",
+          model: "guarantee"
         },
         {
           text: "Mô tả bảo hành",
-          model: "guaranteeDes",
+          model: "guaranteeDes"
         },
         {
           text: "Tên",
-          model: "name",
+          model: "name"
         },
         {
           text: "Màu sắc",
-          model: "color",
+          model: "color"
         },
         {
           text: "Màn hình",
-          model: "screen",
+          model: "screen"
         },
         {
           text: "Độ phân giải",
-          model: "resolution",
+          model: "resolution"
         },
         {
           text: "Camera sau",
-          model: "rearCamera",
+          model: "rearCamera"
         },
         {
           text: "Camera trước",
-          model: "frontCamera",
+          model: "frontCamera"
         },
         {
           text: "Chip",
-          model: "chip",
+          model: "chip"
         },
         {
           text: "RAM",
-          model: "ram",
+          model: "ram"
         },
         {
           text: "Bộ nhớ trong",
-          model: "rom",
+          model: "rom"
         },
         {
           text: "Pin",
-          model: "pin",
+          model: "pin"
         },
         {
           text: "Hệ điều hành",
-          model: "operatingSystem",
+          model: "operatingSystem"
         },
         {
           text: "Cổng sạc",
-          model: "chargingPort",
+          model: "chargingPort"
         },
         {
           text: "Loại sim",
-          model: "sim",
+          model: "sim"
         }
       ]
     };
   },
 
   methods: {
-    submit() {
-      console.log(this.content);
+    async submit() {
+      const product = this.product;
+      try {
+        const isSuccess = await productService.createProduct(product);
+        if (isSuccess) {
+          this.$store.dispatch("alert/success", {
+            message: "Add Successfully!"
+          });
+          this.resetInput();
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error
+        });
+      }
     },
     handleFileUpload(files) {
-      this.images = [];
+      this.product.images = [];
       for (let i = 0; i < files.length; i++) {
         let reader = new FileReader();
         reader.onload = function() {
-          this.images.push(reader.result);
+          this.product.images.push(reader.result);
         }.bind(this);
         reader.readAsDataURL(files[i]);
       }
-    }
+    },
+    resetInput() {
+      this.product.supplier = "";
+      this.product.guarantee = "";
+      this.product.guaranteeDes = "";
+      this.product.name = "";
+      this.product.color = "";
+      this.product.screen = "";
+      this.product.resolution = "";
+      this.product.rearCamera = "";
+      this.product.frontCamera = "";
+      this.product.chip = "";
+      this.product.ram = "";
+      this.product.rom = "";
+      this.product.pin = "";
+      this.product.operatingSystem = "";
+      this.product.chargingPort = "";
+      this.product.sim = "";
+      this.product.description = "<h1>Some initial content</h1>";
+      this.product.images = [];
+    },
+    async getData() {
+      this.suppliers = await supplierService.getAllSuppliers();
+    },
+  },
+  created() {
+    this.getData();
   }
 };
 </script>
 
 <style scoped>
-.text-size{
+.text-size {
   font-size: 1rem;
 }
 </style>
