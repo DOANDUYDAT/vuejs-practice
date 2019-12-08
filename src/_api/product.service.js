@@ -32,7 +32,33 @@ async function getAllProducts() {
         if (response.data.length > 0) {
             console.log(response.status);
             console.log(response.data);
-            let allProducts = response.data;
+            const data = response.data;
+            const allProducts = data.map(e => {
+                const product = {
+                    id: e.id,
+                    supplierId: e.supplier_id,
+                    guarantee: e.guarantee,
+                    guaranteeDes: e.guarantee_des,
+                    name: e.name,
+                    color: e.color,
+                    screen: e.screen,
+                    resolution: e.resolution,
+                    frontCamera: e.front_camera,
+                    backCamera: e.rear_camera,
+                    chip: e.chip,
+                    ram: e.ram,
+                    rom: e.rom,
+                    pin: e.pin,
+                    operatingSystem: e.operating_system,
+                    chargingPort: e.charging_port,
+                    retailPrice: e.retail_price,
+                    listedPrice: e.listed_price,
+                    promotionalPrice: e.promotional_price,
+                    count: e.count,
+                    description: e.description,
+                };
+                return product;
+            });
             return allProducts;
         }
     } catch (error) {
@@ -118,7 +144,8 @@ async function getProduct(productId) {
                 promotionalPrice: data.promotional_price,
                 count: data.count,
                 description: data.description,
-            }
+            };
+            return product;
         }
     } catch (error) {
         if (error) throw error;
