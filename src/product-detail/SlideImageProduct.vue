@@ -31,7 +31,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      imageBig: "",
+      imageBig: ""
     };
   },
   props: {
@@ -63,13 +63,6 @@ export default {
       this.imageBig = this.product.images[0];
     }
   },
-  mounted() {
-    console.log("SlideImageProduct mounted");
-  },
-  updated() {
-    console.log("SlideImageProduct updated");
-  },
-
   watch: {
     product: "initImageBig"
   }
@@ -77,15 +70,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/variables.scss';
+@import "@/variables.scss";
 .container {
   background-color: $it-bg-in;
   .v-card {
-  transition: opacity 0.4s ease-in-out;
-  &:not(.on-hover) {
-    opacity: 0.4;
+    transition: opacity 0.4s ease-in-out;
+    &:not(.on-hover) {
+      opacity: 0.4;
+    }
   }
 }
-}
-
 </style>

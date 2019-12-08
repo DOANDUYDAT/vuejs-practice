@@ -36,7 +36,7 @@ async function getAllProducts() {
             const allProducts = data.map(e => {
                 const product = {
                     id: e.id,
-                    supplierId: e.supplier_id,
+                    supplier: e.supplier,
                     guarantee: e.guarantee,
                     guaranteeDes: e.guarantee_des,
                     name: e.name,
@@ -56,6 +56,7 @@ async function getAllProducts() {
                     promotionalPrice: e.promotional_price,
                     count: e.count,
                     description: e.description,
+                    images: e.images
                 };
                 return product;
             });
@@ -69,7 +70,7 @@ async function getAllProducts() {
 async function createProduct(product) {
     console.log('createProduct');
     const data = {
-        supplier_id: product.supplierId,
+        supplier: product.supplier,
         guarantee: product.guarantee,
         guarantee_des: product.guaranteeDes,
         name: product.name,
@@ -89,6 +90,7 @@ async function createProduct(product) {
         promotional_price: product.promotionalPrice,
         count: product.count,
         description: product.description,
+        images: product.images
     };
     console.log(JSON.stringify(data));
     const options = {
@@ -124,7 +126,7 @@ async function getProduct(productId) {
             const data = response.data;
             const product = {
                 id: data.id,
-                supplierId: data.supplier_id,
+                supplier: data.supplier,
                 guarantee: data.guarantee,
                 guaranteeDes: data.guarantee_des,
                 name: data.name,
@@ -144,6 +146,7 @@ async function getProduct(productId) {
                 promotionalPrice: data.promotional_price,
                 count: data.count,
                 description: data.description,
+                images: data.images
             };
             return product;
         }
@@ -155,7 +158,7 @@ async function getProduct(productId) {
 async function updateProduct(product) {
     console.log('updateProduct: ' + product.id);
     const data = {
-        supplier_id: product.supplierId,
+        supplier: product.supplier,
         guarantee: product.guarantee,
         guarantee_des: product.guaranteeDes,
         name: product.name,
@@ -175,6 +178,7 @@ async function updateProduct(product) {
         promotional_price: product.promotionalPrice,
         count: product.count,
         description: product.description,
+        images: product.images
     };
     console.log(JSON.stringify(data));
     const options = {

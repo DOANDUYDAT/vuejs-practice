@@ -57,7 +57,7 @@
     <v-row justify="center">
       <v-dialog v-model="dialog" max-width="600">
         <template v-slot:activator="{ on }">
-          <v-btn small  v-on="on">Xem đầy đủ</v-btn>
+          <v-btn small v-on="on">Xem đầy đủ</v-btn>
         </template>
         <v-card tile class="spec-product">
           <v-toolbar flat>
@@ -199,18 +199,12 @@ export default {
     specProduct() {
       return this.product.thong_so_ky_thuat;
     }
-  },
-  mounted() {
-    console.log('SpecProductTable mounted');
-  },
-  updated() {
-    console.log('SpecProductTable updated');
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '@/variables.scss';
+@import "@/variables.scss";
 .container {
   background-color: $it-bg-in;
 }

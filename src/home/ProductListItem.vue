@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="!checkProductEmpty" hover height="100%" :max-width="maxWidthItem" flat :to="{ name: 'product detail', params: { product_id: product.id }}" exact>
+  <v-card v-if="!checkProductEmpty" hover height="100%" :max-width="maxWidthItem" flat :to="{ name: 'product detail', params: { productId: product.id }}" exact>
     <!-- eager giúp force các ảnh được load hết -->
     <v-img :height="heightImage" :src="product.images[0]" contain eager></v-img>
 
@@ -60,20 +60,17 @@ export default {
   computed: {
     descriptionProduct() {
       let description =
-        this.product.title.length < 30
-          ? this.product.title
-          : this.product.title.slice(0, 30) + "...";
+        this.product.name.length < 30
+          ? this.product.name
+          : this.product.name.slice(0, 30) + "...";
       return description;
     },
     priceProduct() {
       let price =
-        this.product.gia_khuyen_mai.length > 0
-          ? this.product.gia_khuyen_mai
-          : this.product.gia_ban_le;
+        this.product.promotionalPrice.length > 0
+          ? this.product.promotionalPrice
+          : this.product.retailPrice;
       return formatCurrency(price);
-    },
-    linkToProduct() {
-      return '/products/' + this.product.id
     },
     checkProductEmpty() {
       return _.isEmpty(this.product);

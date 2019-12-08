@@ -64,7 +64,7 @@ const router = new VueRouter({
                 alias: ['', '/products']
             },
             {
-                path: 'products/:product_id',
+                path: 'products/:productId',
                 component: ProductDetailPage,
                 name: 'product detail'
             },

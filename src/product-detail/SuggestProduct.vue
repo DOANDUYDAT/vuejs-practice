@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     ...mapState({
-      products: state => state.products.all
+      products: state => state.products.allProducts
     }),
     checkProductEmpty() {
       return _.isEmpty(this.product);
@@ -42,22 +42,16 @@ export default {
     },
     suggestProductFollowBrand() {
       if (!_.isEmpty(this.product)) {
-        let brand = this.product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu;
+        let supplier = this.product.supplier;
         let suggestProductFollowBrand = this.products.filter(
           product =>
-            product.thong_so_ky_thuat.thong_tin_chung.thuong_hieu === brand
+            product.supplier === supplier
         );
         return suggestProductFollowBrand;
       }
     }
   },
-  methods: {},
-  mounted() {
-    console.log("SuggestProduct mounted");
-  },
-  updated() {
-    console.log("SuggestProduct updated");
-  }
+  methods: {}
 };
 </script>
 

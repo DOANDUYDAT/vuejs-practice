@@ -1,9 +1,9 @@
-import shop from '../../_api/shop'
+import shop from '@/_api/shop';
+import { productService } from "@/_api";
 
 // initial state
 const state = {
-  all: [],
-  product: {}
+  allProducts: [],
 }
 
 // getters
@@ -12,20 +12,19 @@ const getters = {}
 // actions
 const actions = {
   async getAllProducts({ commit }) {
-    // console.log('getAllProduct actions');
     try {
-      const allProducts = await shop.getAllProducts();
-      if (allProducts) {
+      const allProducts = await productService.getAllProducts();
+      if (allProducts.length > 0) {
         commit('setAllProducts', allProducts);
-        return allProducts;
+        return true;
       }
     } catch (error) {
       throw error;
     }
-    // }
+
   },
   async getProduct({ commit }, { id }) {
-    // console.log('getProduct action');
+
     try {
       const product = await shop.getProduct(id);
       if (product) {
@@ -41,11 +40,9 @@ const actions = {
 // mutations
 const mutations = {
   setAllProducts(state, products) {
-    // console.log('setAllProducts mutation');
-    state.all = products;
+    state.allProducts = products;
   },
   setProduct(state, product) {
-    // console.log('setProduct mutation');
     state.product = product;
   },
   decrementProductInventory(state, { id, quantity }) {

@@ -16,7 +16,6 @@
 
     <scroll-button></scroll-button>
     <the-footer></the-footer>
-    
   </v-app>
 </template>
 
@@ -30,28 +29,18 @@ import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
-    return {
-      // transitionName: "slide-left"
-      product: {}
-    };
+    return {};
   },
 
   components: {
     TheHeader,
     TheFooter,
     AlertList,
-    ScrollButton,
+    ScrollButton
   },
-  computed: {
-    ...mapState({
-      alerts: state => state.alert.all,
-      loggedIn: state => state.authentication.status.loggedIn,
-      products: state => state.products.all
-    })
-  },
+  computed: {},
 
-  methods: {
-  },
+  methods: {},
   created() {
     console.log("app created");
     // this.product = null
@@ -60,13 +49,17 @@ export default {
       .then(resolve => {
         // console.log("app dispatch resolve: " + resolve);
       })
-      .catch(error => console.log("app dispatch reject: " + error));
-  },
+      .catch(error =>
+        this.$store.dispatch("alert/error", {
+          message: error
+        })
+      );
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '@/variables.scss';
+@import "@/variables.scss";
 .v-application {
   background-color: $it-bg-out;
 }
