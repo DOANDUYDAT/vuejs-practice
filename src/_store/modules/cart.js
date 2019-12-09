@@ -14,11 +14,11 @@ const getters = {
       return [];
     }
     return state.items.map(({ id, quantity }) => {
-      const product = rootState.products.all.find(product => product.id === id)
+      const product = rootState.products.allProducts.find(product => product.id === id)
       return {
         id: product.id,
         title: product.title,
-        price: product.gia_khuyen_mai.length > 0 ? product.gia_khuyen_mai : product.gia_ban_le,
+        price: product.promotionalPrice ? product.promotionalPrice : product.retailPrice,
         image: product.images[0],
         quantity
       }
@@ -49,7 +49,7 @@ const actions = {
         products.forEach((product) => {
           commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
         })
-        
+
       },
       () => {
         commit('setCheckoutStatus', 'failed')
@@ -62,15 +62,17 @@ const actions = {
   addProductToCart({ state, commit }, { product, quantity }) {
 
     commit('setCheckoutStatus', null)
-    if (product.inventory > 0) {
+    if (state.items.length) {
       const cartItem = state.items.find(item => item.id === product.id)
 
       if (!cartItem) {
-        commit('pushProductToCart', { id: product.id, quantity: quantity })
+        commit('pushProductToCart', { id: product.id, quantity: quantity });
       } else {
-        commit('incrementItemQuantity', { id: cartItem.id, quantity: quantity })
+        commit('incrementItemQuantity', { id: cartItem.id, quantity: quantity });
       }
 
+    } else {
+      commit('pushProductToCart', { id: product.id, quantity: quantity });
     }
   }
 }

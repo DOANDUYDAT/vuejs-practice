@@ -117,7 +117,9 @@ export default {
   },
   methods: {
     incrementItemQuantity() {
-      this.quantity++;
+      if (this.quantity < this.product.count) {
+        this.quantity++;
+      }
     },
     decrementItemQuantity() {
       this.quantity--;
