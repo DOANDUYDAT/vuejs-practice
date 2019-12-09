@@ -1,38 +1,64 @@
 <template>
-  
-    <ValidationObserver ref="observer" v-slot="{ invalid }" class="pa-5" tag="div">
-      <ValidationProvider name="name" rules="required|max:50" v-slot="{ errors }" :bails="false">
-        <v-text-field label="Name" v-model="name"></v-text-field>
-        <span class="red--text">{{ errors[0] }}</span>
-      </ValidationProvider>
-      <ValidationProvider
-        name="comment"
-        rules="required|max:300"
-        v-slot="{ errors }"
-        :bails="false"
-      >
-        <v-textarea outlined v-model="comment" counter="300" label="Viết bình luận ở đây" :rows="2"></v-textarea>
-        <span class="red--text">{{ errors[0] }}</span>
-      </ValidationProvider>
+  <ValidationObserver ref="observer" v-slot="{ invalid }" class="pa-5" tag="div">
+    <ValidationProvider name="name" rules="required|max:50" v-slot="{ errors }" :bails="false">
+      <v-text-field label="Name" v-model="comment.user"></v-text-field>
+      <span class="red--text">{{ errors[0] }}</span>
+    </ValidationProvider>
+    <ValidationProvider name="comment" rules="required|max:300" v-slot="{ errors }" :bails="false">
+      <v-textarea
+        outlined
+        v-model="comment.content"
+        counter="300"
+        label="Viết bình luận ở đây"
+        :rows="2"
+      ></v-textarea>
+      <span class="red--text">{{ errors[0] }}</span>
+    </ValidationProvider>
 
-      <div class="mb-1">
-        <v-btn color="primary" @click="submit" :disabled="invalid">Bình luận</v-btn>
-      </div>
-    </ValidationObserver>
-  
+    <div class="mb-1">
+      <v-btn color="primary" @click="submit" :disabled="invalid">Bình luận</v-btn>
+    </div>
+  </ValidationObserver>
 </template>
 
 <script>
+import { productService } from "@/_api";
+
 export default {
   data() {
     return {
-      name: "",
-      comment: ""
+      comment: {
+        user: "",
+        content: ""
+      }
     };
   },
+  computed: {
+    productId() {
+      return this.$route.params.productId;
+    }
+  },
   methods: {
-    submit() {
-      console.log("submit");
+    async submit() {
+      const comment = this.comment;
+      const productId = this.productId;
+      try {
+        const isSuccess = await productService.createComment(comment, productId);
+        if (isSuccess) {
+          this.$store.dispatch("alert/success", {
+            message: "Add Successfully!"
+          });
+          this.resetInput();
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error
+        });
+      }
+    },
+    resetInput() {
+      this.comment.user = "";
+      this.comment.content = "";
     }
   }
 };

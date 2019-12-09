@@ -48,7 +48,7 @@ async function createOrder(order) {
         name: order.name,
         list_cart_item: order.listCartItem
     }
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/orders`,
@@ -92,7 +92,7 @@ async function updateOrder(order) {
     const data = {
         list_cart_item: order.listCartItem
     }
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/orders/${order.id}`,

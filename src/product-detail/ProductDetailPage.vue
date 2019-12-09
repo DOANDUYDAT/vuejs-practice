@@ -39,8 +39,8 @@ import SpecProductTable from "./SpecProductTable";
 import ReviewProduct from "@/review/ReviewProduct";
 import SuggestProduct from "./SuggestProduct";
 import CommentProduct from "@/comment/CommentProduct";
-import BreadcrumbBase from '@/components/BreadcrumbBase';
-import { mapState } from "vuex";
+import BreadcrumbBase from "@/components/BreadcrumbBase";
+import { productService } from "@/_api";
 
 export default {
   data() {
@@ -56,32 +56,11 @@ export default {
     CommentProduct,
     BreadcrumbBase
   },
-  computed: {
-    // ...mapState({
-    //   products: state => state.products.all
-    //   // product: state => state.products.product
-    // })
-    // product() {
-    //   return this.products[0];
-    // }
-  },
+  computed: {},
   created() {
-    // this.getProduct()
-    console.log("pdp created ");
-    this.getProduct();
-    // this.product = this.products[productId];
+    this.getData();
+  },
 
-    // console.log("pdp created products: " + this.products);
-    // console.log("pdp created product: " + JSON.stringify(this.product));
-  },
-  mounted() {
-    console.log("ProductDetailPage mounted: ");
-    // console.log("pdp mounted products: " + this.products);
-    // console.log("pdp mounted product: " + JSON.stringify(this.product));
-  },
-  updated() {
-    console.log("ProductDetailPage updated: ");
-  },
   watch: {
     // call again the method if the route changes
     // $route(to, from) {
@@ -89,22 +68,13 @@ export default {
     //   console.log("$route: " + productId);
     //   this.product = this.products[productId];
     // }
-    $route: "getProduct"
+    $route: "getData"
   },
 
   methods: {
-    getProduct() {
-      const productId = this.$route.params.product_id;
-      this.$store
-        .dispatch("products/getProduct", { id: productId })
-        .then(resolve => {
-          console.log(resolve.images);
-          this.product = Object.assign({}, this.product, resolve);
-          console.log("pdp dispatch resolve" + resolve);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    async getData() {
+      const productId = this.$route.params.productId;
+      this.product = await productService.getProduct(productId);
     }
   }
 };

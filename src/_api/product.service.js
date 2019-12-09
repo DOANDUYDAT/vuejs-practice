@@ -10,7 +10,11 @@ export const productService = {
     createProduct,
     deleteProduct,
     updateProduct,
-    getProduct
+    getProduct,
+    getAllComments,
+    createComment,
+    getAllReviews,
+    createReview
 };
 
 
@@ -32,7 +36,37 @@ async function getAllProducts() {
         if (response.data.length > 0) {
             console.log(response.status);
             console.log(response.data);
-            let allProducts = response.data;
+            const data = response.data;
+            let allProducts = [];
+            if (data.length > 0) {
+                allProducts = data.map(e => {
+                    const product = {
+                        id: e.id,
+                        supplier: e.supplier,
+                        guarantee: e.guarantee,
+                        guaranteeDes: e.guarantee_des,
+                        name: e.name,
+                        color: e.color,
+                        screen: e.screen,
+                        resolution: e.resolution,
+                        frontCamera: e.front_camera,
+                        backCamera: e.rear_camera,
+                        chip: e.chip,
+                        ram: e.ram,
+                        rom: e.rom,
+                        pin: e.pin,
+                        operatingSystem: e.operating_system,
+                        chargingPort: e.charging_port,
+                        retailPrice: e.retail_price,
+                        listedPrice: e.listed_price,
+                        promotionalPrice: e.promotional_price,
+                        count: e.count,
+                        description: e.description,
+                        images: e.images
+                    };
+                    return product;
+                });
+            }
             return allProducts;
         }
     } catch (error) {
@@ -43,7 +77,7 @@ async function getAllProducts() {
 async function createProduct(product) {
     console.log('createProduct');
     const data = {
-        supplier_id: product.supplierId,
+        supplier: product.supplier,
         guarantee: product.guarantee,
         guarantee_des: product.guaranteeDes,
         name: product.name,
@@ -63,8 +97,9 @@ async function createProduct(product) {
         promotional_price: product.promotionalPrice,
         count: product.count,
         description: product.description,
+        images: product.images
     };
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/products`,
@@ -98,7 +133,7 @@ async function getProduct(productId) {
             const data = response.data;
             const product = {
                 id: data.id,
-                supplierId: data.supplier_id,
+                supplier: data.supplier,
                 guarantee: data.guarantee,
                 guaranteeDes: data.guarantee_des,
                 name: data.name,
@@ -118,7 +153,9 @@ async function getProduct(productId) {
                 promotionalPrice: data.promotional_price,
                 count: data.count,
                 description: data.description,
-            }
+                images: data.images
+            };
+            return product;
         }
     } catch (error) {
         if (error) throw error;
@@ -128,7 +165,7 @@ async function getProduct(productId) {
 async function updateProduct(product) {
     console.log('updateProduct: ' + product.id);
     const data = {
-        supplier_id: product.supplierId,
+        supplier: product.supplier,
         guarantee: product.guarantee,
         guarantee_des: product.guaranteeDes,
         name: product.name,
@@ -148,8 +185,9 @@ async function updateProduct(product) {
         promotional_price: product.promotionalPrice,
         count: product.count,
         description: product.description,
+        images: product.images
     };
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/products/${product.id}`,
@@ -188,3 +226,119 @@ async function deleteProduct(productId) {
     }
 }
 
+async function getAllComments(productId) {
+    console.log('getAllComments: ' + productId);
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/products/${productId}/comments`,
+        headers: { ...headers },
+    };
+    try {
+        const response = await axios(options);
+        if (response.status === 200) {
+            console.log(response.status);
+            console.log(response.data);
+            const data = response.data;
+            let allComments = [];
+            if (data.length > 0) {
+                allComments = data.map(e => {
+                    const comment = {
+                        id: e.id,
+                        user: e.user,
+                        content: e.content,
+                        createdAt: e.created_at
+                    };
+                    return comment;
+                })
+            }
+            return allComments;
+        }
+    } catch (error) {
+        if (error) throw error;
+    }
+}
+
+async function createComment(comment, productId) {
+    console.log('createComment');
+    const data = {
+        user: comment.user,
+        content: comment.content,
+        created_at: comment.createdAt
+    };
+    console.log(data);
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/products/${productId}/comments`,
+        headers: { ...headers, ...auth },
+        data: JSON.stringify(data)
+    };
+    try {
+        const response = await axios(options);
+        if (response.status === 201) {
+            console.log(response.status);
+            console.log(response.data);
+            return true;
+        }
+    } catch (error) {
+        if (error) throw error;
+    }
+}
+
+async function getAllReviews(productId) {
+    console.log('getAllReviews: ' + productId);
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/products/${productId}/reviews`,
+        headers: { ...headers },
+    };
+    try {
+        const response = await axios(options);
+        if (response.status === 200) {
+            console.log(response.status);
+            console.log(response.data);
+            const data = response.data;
+            let allComments = [];
+            if (data.length > 0) {
+                allComments = data.map(e => {
+                    const comment = {
+                        id: e.id,
+                        user: e.user,
+                        content: e.content,
+                        createdAt: e.created_at
+                    };
+                    return comment;
+                })
+            }
+            return allComments;
+        }
+    } catch (error) {
+        if (error) throw error;
+    }
+}
+
+async function createReview(review, productId) {
+    console.log('createReview');
+    const data = {
+        user: review.user,
+        content: review.content,
+        vote: review.vote,
+        created_at: review.createdAt
+    };
+    console.log(data);
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/products/${productId}/reviews`,
+        headers: { ...headers, ...auth },
+        data: JSON.stringify(data)
+    };
+    try {
+        const response = await axios(options);
+        if (response.status === 201) {
+            console.log(response.status);
+            console.log(response.data);
+            return true;
+        }
+    } catch (error) {
+        if (error) throw error;
+    }
+}

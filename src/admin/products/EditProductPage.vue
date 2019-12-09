@@ -29,9 +29,9 @@
           <div class="my-avatar">
             <!-- <v-row justify="center">
             <v-col>-->
-            <div v-if="images" class="px-5">
+            <div v-if="product.images.length > 0" class="px-5">
               <v-avatar
-                v-for="(image, i) in images"
+                v-for="(image, i) in product.images"
                 class="profile ma-1"
                 color="grey"
                 size="164"
@@ -180,10 +180,6 @@ export default {
   },
 
   computed: {
-    productId() {
-      const productId = this.$route.params.productId;
-      return productId;
-    }
   },
 
   methods: {

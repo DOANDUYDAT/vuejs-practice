@@ -26,7 +26,7 @@ async function login(email, password, remember) {
         email,
         password
     }
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/login`,
@@ -77,7 +77,7 @@ async function register(userInfo) {
         email: userInfo.email,
         password: userInfo.password
     };
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/register`,
@@ -129,7 +129,7 @@ async function updateProfile(userInfo) {
         address: userInfo.address,
         date_of_birth: userInfo.dateOfBirth
     }
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/users/profile`,
@@ -174,20 +174,3 @@ async function resetPassword(email) {
 }
 
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout();
-                location.reload(true);
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
-}

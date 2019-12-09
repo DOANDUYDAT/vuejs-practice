@@ -1,7 +1,7 @@
 <template>
   <v-container class="mx-auto">
     <div class="headline">Thông số kỹ thuật</div>
-    <v-simple-table v-if="specProduct !== undefined">
+    <v-simple-table>
       <template v-slot:default>
         <thead>
           <tr>
@@ -12,27 +12,27 @@
         <tbody>
           <tr>
             <td>Thương hiệu</td>
-            <td>{{ specProduct.thong_tin_chung.thuong_hieu }}</td>
+            <td>{{ product.supplier }}</td>
           </tr>
           <tr>
             <td>Bảo hành</td>
-            <td>{{ specProduct.thong_tin_chung.bao_hanh }}</td>
+            <td>{{ product.guarantee }}</td>
           </tr>
           <tr>
             <td>Mô tả bảo hành</td>
-            <td>{{ specProduct.thong_tin_chung.mo_ta_bao_hanh }}</td>
+            <td>{{ product.guaranteeDes }}</td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>Nhóm sản phẩm</td>
-            <td>{{ specProduct.thong_tin_chung.nhom_san_pham }}</td>
-          </tr>
+            <td>{{ product }}</td>
+          </tr> -->
           <tr>
             <td>Tên</td>
-            <td>{{ specProduct.thong_tin_chung.ten }}</td>
+            <td>{{ product.name }}</td>
           </tr>
           <tr>
             <td>Màu sắc</td>
-            <td>{{ specProduct.thong_tin_chung.mau_sac }}</td>
+            <td>{{ product.color }}</td>
           </tr>
         </tbody>
         <thead>
@@ -44,11 +44,11 @@
         <tbody>
           <tr>
             <td>Loại màn hình</td>
-            <td>{{ specProduct.man_hinh.loai_man_hinh }}</td>
+            <td>{{ product.screen }}</td>
           </tr>
           <tr>
             <td>Độ phân giải</td>
-            <td>{{ specProduct.man_hinh.do_phan_giai }}</td>
+            <td>{{ product.resolution }}</td>
           </tr>
         </tbody>
       </template>
@@ -57,7 +57,7 @@
     <v-row justify="center">
       <v-dialog v-model="dialog" max-width="600">
         <template v-slot:activator="{ on }">
-          <v-btn small  v-on="on">Xem đầy đủ</v-btn>
+          <v-btn small v-on="on">Xem đầy đủ</v-btn>
         </template>
         <v-card tile class="spec-product">
           <v-toolbar flat>
@@ -68,7 +68,7 @@
           </v-toolbar>
           <v-divider></v-divider>
           <v-card-text>
-            <v-simple-table v-if="specProduct !== undefined">
+            <v-simple-table>
               <template v-slot:default>
                 <thead>
                   <tr>
@@ -79,27 +79,27 @@
                 <tbody>
                   <tr>
                     <td>Thương hiệu</td>
-                    <td>{{ specProduct.thong_tin_chung.thuong_hieu }}</td>
+                    <td>{{ product.supplier }}</td>
                   </tr>
                   <tr>
                     <td>Bảo hành</td>
-                    <td>{{ specProduct.thong_tin_chung.bao_hanh }}</td>
+                    <td>{{ product.guarantee }}</td>
                   </tr>
                   <tr>
                     <td>Mô tả bảo hành</td>
-                    <td>{{ specProduct.thong_tin_chung.mo_ta_bao_hanh }}</td>
+                    <td>{{ product.guaranteeDes }}</td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>Nhóm sản phẩm</td>
                     <td>{{ specProduct.thong_tin_chung.nhom_san_pham }}</td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <td>Tên</td>
-                    <td>{{ specProduct.thong_tin_chung.ten }}</td>
+                    <td>{{ product.name }}</td>
                   </tr>
                   <tr>
                     <td>Màu sắc</td>
-                    <td>{{ specProduct.thong_tin_chung.mau_sac }}</td>
+                    <td>{{ product.color }}</td>
                   </tr>
                 </tbody>
                 <thead>
@@ -111,11 +111,11 @@
                 <tbody>
                   <tr>
                     <td>Loại màn hình</td>
-                    <td>{{ specProduct.man_hinh.loai_man_hinh }}</td>
+                    <td>{{ product.screen }}</td>
                   </tr>
                   <tr>
                     <td>Độ phân giải</td>
-                    <td>{{ specProduct.man_hinh.do_phan_giai }}</td>
+                    <td>{{ product.resolution }}</td>
                   </tr>
                 </tbody>
                 <thead>
@@ -127,11 +127,11 @@
                 <tbody>
                   <tr>
                     <td>Camera sau</td>
-                    <td>{{ specProduct.camera.camera_sau }}</td>
+                    <td>{{ product.backCamera }}</td>
                   </tr>
                   <tr>
                     <td>Camera trước</td>
-                    <td>{{ specProduct.camera.camera_truoc }}</td>
+                    <td>{{ product.frontCamera }}</td>
                   </tr>
                 </tbody>
                 <thead>
@@ -143,32 +143,32 @@
                 <tbody>
                   <tr>
                     <td>Chip</td>
-                    <td>{{ specProduct.cau_hinh.chip }}</td>
+                    <td>{{ product.chip }}</td>
                   </tr>
                   <tr>
                     <td>RAM</td>
-                    <td>{{ specProduct.cau_hinh.ram }}</td>
+                    <td>{{ product.ram }}</td>
                   </tr>
                   <tr>
                     <td>Bộ nhớ trong</td>
-                    <td>{{ specProduct.cau_hinh.bo_nho_trong }}</td>
+                    <td>{{ product.rom }}</td>
                   </tr>
                   <tr>
                     <td>Pin</td>
-                    <td>{{ specProduct.cau_hinh.pin }}</td>
+                    <td>{{ product.pin }}</td>
                   </tr>
                   <tr>
                     <td>Hệ điều hành</td>
-                    <td>{{ specProduct.cau_hinh.he_dieu_hanh }}</td>
+                    <td>{{ product.operatingSystem }}</td>
                   </tr>
                   <tr>
                     <td>Cổng sạc</td>
-                    <td>{{ specProduct.cau_hinh.cong_sac }}</td>
+                    <td>{{ product.chargingPort }}</td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>Loại sim</td>
                     <td>{{ specProduct.cau_hinh.loai_sim }}</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </template>
             </v-simple-table>
@@ -199,18 +199,12 @@ export default {
     specProduct() {
       return this.product.thong_so_ky_thuat;
     }
-  },
-  mounted() {
-    console.log('SpecProductTable mounted');
-  },
-  updated() {
-    console.log('SpecProductTable updated');
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '@/variables.scss';
+@import "@/variables.scss";
 .container {
   background-color: $it-bg-in;
 }

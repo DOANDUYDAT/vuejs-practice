@@ -13,7 +13,6 @@
         <product-list-item :product="product"></product-list-item>
       </v-col>
     </v-row>
-    
   </v-container>
 </template>
 
@@ -21,7 +20,7 @@
 import axios from "axios";
 import ProductListItem from "./ProductListItem";
 import SliderAds from "./SliderAds";
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -37,24 +36,21 @@ export default {
       // Lấy 5 sản phẩm mới nhất
       if (this.products.length > 0) {
         for (let i = 0; i < 5; i++) {
+          if (i >= this.products.length) break;
           topProduct.push(this.products[i]);
         }
+        return topProduct;
       }
-      // console.log(topProduct);
-      return topProduct;
     },
     ...mapState({
-      products: state => state.products.all
+      products: state => state.products.allProducts
     })
-  },
-  methods: {
-    ...mapActions("cart", ["addProductToCart"])
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '@/variables.scss';
+@import "@/variables.scss";
 .container {
   background-color: $it-bg-in;
 }

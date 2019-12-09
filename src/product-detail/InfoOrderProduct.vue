@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h2>{{ product.title }}</h2>
+        <h2>{{ product.name }}</h2>
         <v-rating
           :value="rating"
           color="amber"
@@ -16,7 +16,7 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <template v-if="product.gia_khuyen_mai">
+    <template v-if="product.promotionalPrice">
       <v-row>
         <v-col cols="3">Giá niêm yết</v-col>
         <v-col cols="9">{{ price }}đ</v-col>
@@ -58,14 +58,14 @@
           </v-btn>
         </v-btn-toggle>
       </v-col>
-      <v-col cols="6">Có sẵn {{ product.inventory }} sản phẩm</v-col>
+      <v-col cols="6">Có sẵn {{ product.count }} sản phẩm</v-col>
     </v-row>
     <v-row>
       <v-col cols="8">
         <v-btn
           outlined
           color="red"
-          :disabled="!product.inventory"
+          :disabled="!product.count"
           @click="addProductToCart({ product: product, quantity: quantity })"
         >
           <v-icon>mdi-cart-plus</v-icon>Thêm vào giỏ hàng
@@ -95,22 +95,22 @@ export default {
   computed: {
     oldPrice() {
       let oldPrice = "";
-      if (this.product.gia_ban_le !== undefined) {
-        oldPrice = formatCurrency(this.product.gia_ban_le);
+      if (this.product.retailPrice !== undefined) {
+        oldPrice = formatCurrency(this.product.retailPrice);
       }
       return oldPrice;
     },
     price() {
       let price = "";
-      if (this.product.gia_niem_yet !== undefined) {
-        price = formatCurrency(this.product.gia_niem_yet);
+      if (this.product.listedPrice !== undefined) {
+        price = formatCurrency(this.product.listedPrice);
       }
       return price;
     },
     salePrice() {
       let salePrice = "";
-      if (this.product.gia_khuyen_mai !== undefined) {
-        salePrice = formatCurrency(this.product.gia_khuyen_mai);
+      if (this.product.promotionalPrice !== undefined) {
+        salePrice = formatCurrency(this.product.promotionalPrice);
       }
       return salePrice;
     }
@@ -124,12 +124,6 @@ export default {
     },
     ...mapActions("cart", ["addProductToCart"])
   },
-  mounted() {
-    console.log('InfoOrderProduct mounted');
-  },
-  updated() {
-    console.log('InfoOrderProduct updated');
-  }
 };
 </script>
 

@@ -41,7 +41,7 @@ export default {
           to: to
         });
       }
-      console.log(2 > fullPath.length - 1);
+      // console.log(2 > fullPath.length - 1);
     }
   },
   created() {
