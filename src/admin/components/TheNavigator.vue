@@ -91,7 +91,7 @@ export default {
           children: [
             {
               text: "Danh sách phiếu nhập",
-              link: "/admin/importProducts"
+              link: "/admin/import-products"
             }
           ]
         },

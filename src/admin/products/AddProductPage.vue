@@ -8,6 +8,34 @@
       </v-toolbar>
       <v-row>
         <v-col cols="8">
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader class="text-size">Thương hiệu</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="supplier"
+                rules="required"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-select
+                  :items="listSelected"
+                  placeholder="Thương hiệu"
+                  v-model="supplier"
+                  outlined
+                  hide-details
+                ></v-select>
+                <!-- <v-text-field
+                  :placeholder="item.text"
+                  outlined
+                  v-model="product[item.model]"
+                  hide-details
+                ></v-text-field> -->
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
           <v-row justify="center" v-for="item in items" :key="item.text">
             <v-col cols="12" md="3">
               <v-subheader class="text-size">{{ item.text }}</v-subheader>
@@ -15,7 +43,7 @@
             <v-col cols="12" md="9">
               <ValidationProvider
                 :name="item.model"
-                rules="required|alpha"
+                rules="required"
                 v-slot="{ errors }"
                 :bails="false"
               >
@@ -68,7 +96,9 @@
       </v-row>
       <v-card-actions>
         <v-row>
-          <v-btn color="gg-red" class="mx-auto white--text" @click="submit">Submit</v-btn>
+          <v-btn color="gg-red" class="mx-auto white--text" @click="submit"
+            >Submit</v-btn
+          >
         </v-row>
       </v-card-actions>
     </v-card>
@@ -88,8 +118,8 @@ export default {
   data() {
     return {
       suppliers: [],
+      supplier: "",
       product: {
-        supplier: "",
         guarantee: "",
         guaranteeDes: "",
         name: "",
@@ -109,10 +139,6 @@ export default {
         images: []
       },
       items: [
-        {
-          text: "Thương hiệu",
-          model: "supplier"
-        },
         {
           text: "Bảo hành",
           model: "guarantee"
@@ -176,7 +202,21 @@ export default {
       ]
     };
   },
-
+  computed: {
+    listSelected() {
+      const suppliers = this.suppliers;
+      let listSelected = [];
+      if (suppliers.length > 0) {
+        listSelected = suppliers.map(e => {
+          return {
+            text: e.name,
+            value: e.id
+          }
+        })
+      }
+      return listSelected;
+    }
+  },
   methods: {
     async submit() {
       const product = this.product;
@@ -226,7 +266,7 @@ export default {
     },
     async getData() {
       this.suppliers = await supplierService.getAllSuppliers();
-    },
+    }
   },
   created() {
     this.getData();

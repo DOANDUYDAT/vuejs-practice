@@ -15,7 +15,7 @@
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
-        <v-btn color="gg-red" dark class="mx-4 white--text">+ Nhập hàng</v-btn>
+        <v-btn color="gg-red" dark class="mx-4 white--text" :to="{ name: 'admin addImportProduct'}">+ Nhập hàng</v-btn>
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"

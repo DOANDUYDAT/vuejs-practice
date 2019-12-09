@@ -27,6 +27,7 @@ import ManageOrdersPage from '@/admin/orders/ManageOrdersPage';
 import ManageOrderDetailPage from '@/admin/orders/ManageOrderDetailPage';
 import ImportProductsPage from '@/admin/importProducts/ImportProductsPage';
 import ImportProductDetailPage from '@/admin/importProducts/ImportProductDetailPage';
+import AddImportProductPage from '@/admin/importProducts/AddImportProductPage';
 import ManageSuppliersPage from "@/admin/suppliers/ManageSuppliersPage";
 
 Vue.use(VueRouter);
@@ -166,13 +167,18 @@ const router = new VueRouter({
                 name: 'admin order'
             },
             {
-                path: 'importProducts',
+                path: 'import-products',
                 component: ImportProductsPage
             },
             {
-                path: 'importProducts/:importProductId',
+                path: 'import-products/:importProductId',
                 component: ImportProductDetailPage,
                 name: 'admin importProduct'
+            },
+            {
+                path: 'add-import-poducts',
+                component: AddImportProductPage,
+                name: 'admin addImportProduct'
             },
             {
                 path: "suppliers",
