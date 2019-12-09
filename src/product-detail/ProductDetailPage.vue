@@ -14,19 +14,20 @@
     </v-row>
 
     <v-row>
-      <v-col cols="10">
-        <review-product :product="product"></review-product>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="5">
+      <v-col cols="8"></v-col>
+      <v-col cols="4">
         <spec-product-table :product="product"></spec-product-table>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col cols="10">
+      <v-col cols="12">
+        <review-product :product="product"></review-product>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12">
         <comment-product></comment-product>
       </v-col>
     </v-row>

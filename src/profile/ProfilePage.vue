@@ -172,7 +172,7 @@ export default {
       this.phone = user.phone;
       this.email = user.email;
       this.address = user.address;
-      this.date = user.date_of_birth;
+      this.dateOfBirth = user.date_of_birth;
       this.gender = user.gender;
     }
   },

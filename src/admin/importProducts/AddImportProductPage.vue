@@ -21,10 +21,13 @@
       label="Search"
     ></v-text-field>
     <v-expand-transition>
-      <v-card v-if="itemsSearch && result" class="search__result" light>
-        <v-card v-for="item in itemsSearch" :key="item">
-          <v-card-text class="subtitle-1 py-1">{{ item }}</v-card-text>
-        </v-card>
+      <v-card v-if="itemsSearch && result" class="search__result mx-auto" :width="600" light>
+        <v-card-text class="subtitle-1 py-1 px-4" v-for="item in itemsSearch" :key="item.id">
+          <v-row no-gutters>
+            <v-col cols="4">{{ item.id }}</v-col>
+            <v-col cols="8">{{ item.name }}</v-col>
+          </v-row>
+        </v-card-text>
       </v-card>
     </v-expand-transition>
   </div>
@@ -34,17 +37,33 @@
 
 <script>
 import { mapState } from "vuex";
+import { productService } from "@/_api";
 export default {
   data() {
     return {
       loading: false,
       items: [],
       search: null,
-      result: false
+      result: false,
+      products: []
     };
   },
   watch: {
     search: "querySelections"
+  },
+  computed: {
+    productListSearch() {
+      let productListSearch = this.products.map(e => {
+        return {
+          id: e.id,
+          name: e.name
+        };
+      });
+      return productListSearch;
+    },
+    itemsSearch() {
+      return this.items.slice(0, 6);
+    }
   },
   methods: {
     querySelections() {
@@ -56,8 +75,7 @@ export default {
       if (search) {
         this.result = true;
         this.items = this.productListSearch.filter(e => {
-          // return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
-          return e.toString().startsWith(search);
+          return e.id.toString().startsWith(search);
         });
       } else {
         this.items = [];
@@ -66,24 +84,19 @@ export default {
     },
     searchProduct() {
       console.log(this.search);
+    },
+    async getData() {
+      this.products = await productService.getAllProducts();
     }
   },
-  computed: {
-    ...mapState({
-      products: state => state.products.all
-    }),
-    productListSearch() {
-      let productListSearch = this.products.map(e => e.id);
-      return productListSearch;
-    },
-    itemsSearch() {
-      return this.items.slice(0, 6);
-    }
+  created() {
+    this.getData();
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/variables.scss";
 .search__result {
   position: fixed;
 }

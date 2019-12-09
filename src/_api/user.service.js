@@ -99,7 +99,6 @@ async function register(userInfo) {
 async function getProfile() {
     console.log('getProfile');
     let temp = { ...headers, ...auth };
-    console.log(temp);
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/profile`,

@@ -42,8 +42,6 @@ export default {
 
   methods: {},
   created() {
-    console.log("app created");
-    // this.product = null
     this.$store
       .dispatch("products/getAllProducts")
       .then(resolve => {
