@@ -1,6 +1,6 @@
 <template>
-  <v-row v-if="!checkProductEmpty">
-    <v-col cols="5">
+  <v-row>
+    <v-col cols="5" v-if="product.id">
       <v-card class="mx-auto" height="100%" flat>
         <v-img height="200px" :src="product.images[0]" contain></v-img>
         <v-card-text>
@@ -27,7 +27,7 @@
     <v-col cols="6">
       <div class="body-1">Đánh giá của bạn</div>
       <v-rating
-        v-model="ratingNumber"
+        v-model="review.vote"
         color="amber"
         background-color="grey"
         empty-icon="mdi-star-outline"
@@ -43,14 +43,14 @@
           v-slot="{ errors }"
           :bails="false"
         >
-          <v-textarea outlined v-model="ratingComment" counter="300" label="Viết đánh giá ở đây"></v-textarea>
+          <v-textarea outlined v-model="review.content" counter="300" label="Viết đánh giá ở đây"></v-textarea>
           <span class="red--text">{{ errors[0] }}</span>
         </ValidationProvider>
         <div class="my-4">
           <v-btn
             color="primary"
             @click="submit"
-            :disabled="(ratingNumber > 0 ? false : true) || invalid"
+            :disabled="(review.vote > 0 ? false : true) || invalid"
           >Gửi đánh giá</v-btn>
         </div>
       </ValidationObserver>
@@ -66,8 +66,11 @@ export default {
     return {
       rating: 3.5,
       number: 25,
-      ratingComment: "",
-      ratingNumber: 0
+      review: {
+        user: "",
+        content: "",
+        vote: 0
+      }
     };
   },
   components: {},
@@ -78,18 +81,20 @@ export default {
     }
   },
   computed: {
-    checkProductEmpty() {
-      return _.isEmpty(this.product);
-    }
   },
   methods: {
     async submit() {
+      const review = this.review;
+      const productId = this.$route.params.productId;
       try {
-        console.log("submit rating");
-        this.$store.dispatch("alert/addAlert", {
-          type: "success",
-          message: "Successfully!"
-        });
+        const isSuccess = await productService.createReview(review, productId);
+        if (isSuccess) {
+          this.$store.dispatch("alert/addAlert", {
+            type: "success",
+            message: "Create Successfully!"
+          });
+          this.resetInput();
+        }
         // this.dialog = false;
       } catch (error) {
         this.$store.dispatch("alert/addAlert", {
@@ -97,6 +102,11 @@ export default {
           message: "Login error!"
         });
       }
+    },
+    resetInput() {
+      this.review.vote = 0;
+      this.review.content = "";
+      this.review.user = "";
     }
   }
 };

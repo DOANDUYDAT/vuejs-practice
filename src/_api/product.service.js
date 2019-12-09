@@ -262,8 +262,7 @@ async function createComment(comment, productId) {
     console.log('createComment');
     const data = {
         user: comment.user,
-        content: comment.content,
-        created_at: comment.createdAt
+        content: comment.content
     };
     console.log(data);
     const options = {
@@ -321,8 +320,7 @@ async function createReview(review, productId) {
     const data = {
         user: review.user,
         content: review.content,
-        vote: review.vote,
-        created_at: review.createdAt
+        vote: review.vote
     };
     console.log(data);
     const options = {

@@ -1,5 +1,5 @@
 <template>
-  <div class="py-4">
+  <div class="py-4" v-if="allReviews.length">
     <v-card outlined>
       <v-tabs grow v-model="tab" @change="changeTab">
         <v-tab
@@ -13,22 +13,21 @@
       <v-pagination v-model="page" :length="lenPaginantion" total-visible="6"></v-pagination>
     </div>
   </div>
+  <div v-else>
+    <div class="headline">Chưa có đánh giá</div>
+  </div>
 </template>
 
 <script>
-import { fakeReviews } from "../_helpers/fake-review";
-
-let allReviews = fakeReviews();
-
+import { productService } from "@/_api";
 import ReviewListItem  from "./ReviewListItem";
 
 export default {
   data() {
     return {
-      allReviews: [...allReviews],
+      allReviews: [],
       page: 1,
       tab: 0,
-
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     };
@@ -128,11 +127,17 @@ export default {
       }
     }
   },
-
   methods: {
     changeTab(number) {
       this.page = 1;
+    },
+    async getData() {
+      const productId = this.$route.params.productId;
+      this.allReviews = await productService.getAllReviews(productId);
     }
+  },
+  created() {
+    this.getData();
   }
 };
 </script>

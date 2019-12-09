@@ -1,9 +1,9 @@
 <template>
   <v-card outlined tile class="px-6">
-    <v-card-title class="pt-1 pb-0">{{ review.username }}</v-card-title>
+    <v-card-title class="pt-1 pb-0">{{ review.user }}</v-card-title>
     <v-card-text class="pb-0">
       <v-rating
-        :value="review.rating"
+        :value="review.vote"
         color="amber"
         background-color="grey"
         empty-icon="mdi-star-outline"
@@ -14,7 +14,7 @@
         size="14"
       ></v-rating>
       <div style="text-align: justify;" class="mt-2">{{ review.content }}</div>
-      <div class="my-2 caption black--text">{{ review.time }}</div>
+      <div class="my-2 caption black--text">{{ review.createdAt }}</div>
     </v-card-text>
     <!-- <v-card-actions>
       <v-btn text @click="show = !show">Trả lời</v-btn>
@@ -34,17 +34,13 @@ export default {
   data() {
     return {
       show: false
-      //   review: {
-      //     username: "john" + Math.floor(Math.random() * 25) + 1,
-      //     rating: Math.floor(Math.random() * 5) + 1,
-      //     time: new Date(Date.now()),
-      //     content:
-      //       "Sản phẩm dùng đã được sử dụng 2 ngày, nhìn chung khá tốt, chưa có hiện tượng gì xảy ra. Dịch vụ tư vấn khá tốt. Cho 5 sao!!! <3 Sản phẩm dùng đã được sử dụng 2 ngày, nhìn chung khá tốt, chưa có hiện tượng gì xảy ra. Dịch vụ tư vấn khá tốt. Cho 5 sao!!! <3"
-      //   }
     };
   },
   props: {
-    review: {}
+    review: {
+      type: Object,
+      required: true
+    }
   }
 };
 </script>
