@@ -46,7 +46,7 @@ async function createSupplier(supplier) {
     const data = {
         name: supplier.name
     }
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/suppliers`,
@@ -90,7 +90,7 @@ async function updateSupplier(supplier) {
     const data = {
         name: supplier.name
     };
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/suppliers/${supplier.id}`,

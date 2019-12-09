@@ -10,7 +10,11 @@ export const productService = {
     createProduct,
     deleteProduct,
     updateProduct,
-    getProduct
+    getProduct,
+    getAllComments,
+    createComment,
+    getAllReviews,
+    createReview
 };
 
 
@@ -33,33 +37,36 @@ async function getAllProducts() {
             console.log(response.status);
             console.log(response.data);
             const data = response.data;
-            const allProducts = data.map(e => {
-                const product = {
-                    id: e.id,
-                    supplier: e.supplier,
-                    guarantee: e.guarantee,
-                    guaranteeDes: e.guarantee_des,
-                    name: e.name,
-                    color: e.color,
-                    screen: e.screen,
-                    resolution: e.resolution,
-                    frontCamera: e.front_camera,
-                    backCamera: e.rear_camera,
-                    chip: e.chip,
-                    ram: e.ram,
-                    rom: e.rom,
-                    pin: e.pin,
-                    operatingSystem: e.operating_system,
-                    chargingPort: e.charging_port,
-                    retailPrice: e.retail_price,
-                    listedPrice: e.listed_price,
-                    promotionalPrice: e.promotional_price,
-                    count: e.count,
-                    description: e.description,
-                    images: e.images
-                };
-                return product;
-            });
+            let allProducts = [];
+            if (data.length > 0) {
+                allProducts = data.map(e => {
+                    const product = {
+                        id: e.id,
+                        supplier: e.supplier,
+                        guarantee: e.guarantee,
+                        guaranteeDes: e.guarantee_des,
+                        name: e.name,
+                        color: e.color,
+                        screen: e.screen,
+                        resolution: e.resolution,
+                        frontCamera: e.front_camera,
+                        backCamera: e.rear_camera,
+                        chip: e.chip,
+                        ram: e.ram,
+                        rom: e.rom,
+                        pin: e.pin,
+                        operatingSystem: e.operating_system,
+                        chargingPort: e.charging_port,
+                        retailPrice: e.retail_price,
+                        listedPrice: e.listed_price,
+                        promotionalPrice: e.promotional_price,
+                        count: e.count,
+                        description: e.description,
+                        images: e.images
+                    };
+                    return product;
+                });
+            }
             return allProducts;
         }
     } catch (error) {
@@ -92,7 +99,7 @@ async function createProduct(product) {
         description: product.description,
         images: product.images
     };
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/products`,
@@ -180,7 +187,7 @@ async function updateProduct(product) {
         description: product.description,
         images: product.images
     };
-    console.log(JSON.stringify(data));
+    console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/products/${product.id}`,
@@ -219,3 +226,119 @@ async function deleteProduct(productId) {
     }
 }
 
+async function getAllComments(productId) {
+    console.log('getAllComments: ' + productId);
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/products/${productId}/comments`,
+        headers: { ...headers },
+    };
+    try {
+        const response = await axios(options);
+        if (response.status === 200) {
+            console.log(response.status);
+            console.log(response.data);
+            const data = response.data;
+            let allComments = [];
+            if (data.length > 0) {
+                allComments = data.map(e => {
+                    const comment = {
+                        id: e.id,
+                        user: e.user,
+                        content: e.content,
+                        createdAt: e.created_at
+                    };
+                    return comment;
+                })
+            }
+            return allComments;
+        }
+    } catch (error) {
+        if (error) throw error;
+    }
+}
+
+async function createComment(comment, productId) {
+    console.log('createComment');
+    const data = {
+        user: comment.user,
+        content: comment.content,
+        created_at: comment.createdAt
+    };
+    console.log(data);
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/products/${productId}/comments`,
+        headers: { ...headers, ...auth },
+        data: JSON.stringify(data)
+    };
+    try {
+        const response = await axios(options);
+        if (response.status === 201) {
+            console.log(response.status);
+            console.log(response.data);
+            return true;
+        }
+    } catch (error) {
+        if (error) throw error;
+    }
+}
+
+async function getAllReviews(productId) {
+    console.log('getAllReviews: ' + productId);
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/products/${productId}/reviews`,
+        headers: { ...headers },
+    };
+    try {
+        const response = await axios(options);
+        if (response.status === 200) {
+            console.log(response.status);
+            console.log(response.data);
+            const data = response.data;
+            let allComments = [];
+            if (data.length > 0) {
+                allComments = data.map(e => {
+                    const comment = {
+                        id: e.id,
+                        user: e.user,
+                        content: e.content,
+                        createdAt: e.created_at
+                    };
+                    return comment;
+                })
+            }
+            return allComments;
+        }
+    } catch (error) {
+        if (error) throw error;
+    }
+}
+
+async function createReview(review, productId) {
+    console.log('createReview');
+    const data = {
+        user: review.user,
+        content: review.content,
+        vote: review.vote,
+        created_at: review.createdAt
+    };
+    console.log(data);
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/products/${productId}/reviews`,
+        headers: { ...headers, ...auth },
+        data: JSON.stringify(data)
+    };
+    try {
+        const response = await axios(options);
+        if (response.status === 201) {
+            console.log(response.status);
+            console.log(response.data);
+            return true;
+        }
+    } catch (error) {
+        if (error) throw error;
+    }
+}
