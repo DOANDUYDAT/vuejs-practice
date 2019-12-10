@@ -1,6 +1,8 @@
 import config from 'config';
 import axios from 'axios';
-import { authHeader } from '@/_helpers';
+import {
+    authHeader
+} from '@/_helpers';
 import _ from 'lodash';
 
 const auth = authHeader();
@@ -25,12 +27,15 @@ async function getAllSuppliers() {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/suppliers`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             let suppliers = response.data;
             return suppliers;
@@ -50,13 +55,17 @@ async function createSupplier(supplier) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/suppliers/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 201) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -70,12 +79,15 @@ async function getSupplier(supplierId) {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/suppliers/${supplierId}/`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             let product = response.data;
             return product;
@@ -94,13 +106,17 @@ async function updateSupplier(supplier) {
     const options = {
         method: 'put',
         url: `${config.apiUrl}/suppliers/${supplier.id}/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -114,12 +130,16 @@ async function deleteSupplier(supplierId) {
     const options = {
         method: 'delete',
         url: `${config.apiUrl}/suppliers/${supplierId}/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
     }
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 204) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -127,4 +147,3 @@ async function deleteSupplier(supplierId) {
         if (error) throw error;
     }
 }
-

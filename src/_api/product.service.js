@@ -1,6 +1,8 @@
 import config from 'config';
 import axios from 'axios';
-import { authHeader } from '@/_helpers';
+import {
+    authHeader
+} from '@/_helpers';
 import _ from 'lodash';
 
 const auth = authHeader();
@@ -29,12 +31,15 @@ async function getAllProducts() {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/products`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             const data = response.data;
             let allProducts = [];
@@ -103,13 +108,17 @@ async function createProduct(product) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/products/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 201) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -123,12 +132,15 @@ async function getProduct(productId) {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/products/${productId}`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             const data = response.data;
             const product = {
@@ -191,13 +203,17 @@ async function updateProduct(product) {
     const options = {
         method: 'put',
         url: `${config.apiUrl}/products/${product.id}/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     };
     try {
         const response = await axios(options);
-        if (response.status === 204) {
-            console.log(response.status);
+        console.log(response.status);
+        if (response.status === 200) {
+
             console.log(response.data);
             return true;
         }
@@ -212,12 +228,16 @@ async function deleteProduct(productId) {
     const options = {
         method: 'delete',
         url: `${config.apiUrl}/products/${productId}/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 204) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -231,12 +251,15 @@ async function getAllComments(productId) {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/products/${productId}/comments`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             const data = response.data;
             let allComments = [];
@@ -268,13 +291,17 @@ async function createComment(comment, productId) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/products/${productId}/comments/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 201) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -288,12 +315,15 @@ async function getAllReviews(productId) {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/products/${productId}/votes`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             const data = response.data;
             let allComments = [];
@@ -326,13 +356,17 @@ async function createReview(review, productId) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/products/${productId}/votes/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 201) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }

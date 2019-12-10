@@ -40,10 +40,10 @@ async function login(email, password, remember) {
     try {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
-        // console.log(response.data);
+        console.log(response.status);
         if (response.status === 200) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log(response.status);
+
             console.log(response.data);
             let user = response.data;
             localStorage.setItem('user', JSON.stringify(user));
@@ -68,8 +68,9 @@ async function logout() {
     }
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             localStorage.removeItem('user');
         }
@@ -97,8 +98,9 @@ async function register(userInfo) {
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 201) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -119,9 +121,10 @@ async function getProfile() {
     }
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
             const user = response.data;
-            console.log(response.status);
+
             console.log(response.data);
             return user;
         }
@@ -153,8 +156,9 @@ async function updateProfile(userInfo) {
     }
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -179,8 +183,9 @@ async function resetPassword(email) {
     }
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }

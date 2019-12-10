@@ -1,6 +1,8 @@
 import config from 'config';
 import axios from 'axios';
-import { authHeader } from '@/_helpers';
+import {
+    authHeader
+} from '@/_helpers';
 import _ from 'lodash';
 
 const auth = authHeader();
@@ -25,13 +27,17 @@ async function getAllOrders() {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/orders`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
 
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             let orders = response.data;
             return orders;
@@ -52,13 +58,17 @@ async function createOrder(order) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/orders/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 201) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -72,12 +82,15 @@ async function getOrder(orderId) {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/orders/${orderId}`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 200) {
-            console.log(response.status);
+
             console.log(response.data);
             let order = response.data;
             return order;
@@ -96,13 +109,17 @@ async function updateOrder(order) {
     const options = {
         method: 'put',
         url: `${config.apiUrl}/orders/${order.id}/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 204) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -116,12 +133,16 @@ async function deleteOrder(orderId) {
     const options = {
         method: 'delete',
         url: `${config.apiUrl}/orders/${orderId}/`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
     };
     try {
         const response = await axios(options);
+        console.log(response.status);
         if (response.status === 204) {
-            console.log(response.status);
+
             console.log(response.data);
             return true;
         }
@@ -129,4 +150,3 @@ async function deleteOrder(orderId) {
         if (error) throw error;
     }
 }
-
