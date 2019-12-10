@@ -24,7 +24,7 @@ async function getAllSuppliers() {
     console.log('getAllSuppliers');
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/suppliers`,
+        url: `${config.apiUrl}/suppliers/`,
         headers: { ...headers },
     };
     try {
@@ -49,7 +49,7 @@ async function createSupplier(supplier) {
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/suppliers`,
+        url: `${config.apiUrl}/suppliers/`,
         headers: { ...headers, ...auth },
         data: JSON.stringify(data)
     };
@@ -69,7 +69,7 @@ async function getSupplier(supplierId) {
     console.log('getSupplier: ' + supplierId);
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/suppliers/${supplierId}`,
+        url: `${config.apiUrl}/suppliers/${supplierId}/`,
         headers: { ...headers },
     };
     try {
@@ -93,14 +93,13 @@ async function updateSupplier(supplier) {
     console.log(data);
     const options = {
         method: 'put',
-        url: `${config.apiUrl}/suppliers/${supplier.id}`,
+        url: `${config.apiUrl}/suppliers/${supplier.id}/`,
         headers: { ...headers, ...auth },
         data: JSON.stringify(data)
     };
     try {
-        console.log('updateSupplier');
         const response = await axios(options);
-        if (response.status === 204) {
+        if (response.status === 200) {
             console.log(response.status);
             console.log(response.data);
             return true;
@@ -114,7 +113,7 @@ async function deleteSupplier(supplierId) {
     console.log('deleteSupplier: ' + supplierId);
     const options = {
         method: 'delete',
-        url: `${config.apiUrl}/suppliers/${supplierId}`,
+        url: `${config.apiUrl}/suppliers/${supplierId}/`,
         headers: { ...headers, ...auth },
     }
     try {

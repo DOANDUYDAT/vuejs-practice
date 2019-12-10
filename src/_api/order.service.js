@@ -24,7 +24,7 @@ async function getAllOrders() {
     console.log('getAllOrders');
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/orders`,
+        url: `${config.apiUrl}/orders/`,
         headers: { ...headers, ...auth },
 
     };
@@ -51,7 +51,7 @@ async function createOrder(order) {
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/orders`,
+        url: `${config.apiUrl}/orders/`,
         headers: { ...headers, ...auth },
         data: JSON.stringify(data)
     };
@@ -71,7 +71,7 @@ async function getOrder(orderId) {
     console.log('getOrder: ' + orderId);
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/orders/${orderId}`,
+        url: `${config.apiUrl}/orders/${orderId}/`,
         headers: { ...headers },
     };
     try {
@@ -95,7 +95,7 @@ async function updateOrder(order) {
     console.log(data);
     const options = {
         method: 'put',
-        url: `${config.apiUrl}/orders/${order.id}`,
+        url: `${config.apiUrl}/orders/${order.id}/`,
         headers: { ...headers, ...auth },
         data: JSON.stringify(data)
     };
@@ -115,7 +115,7 @@ async function deleteOrder(orderId) {
     console.log('deleteOrder: ' + orderId);
     const options = {
         method: 'delete',
-        url: `${config.apiUrl}/orders/${orderId}`,
+        url: `${config.apiUrl}/orders/${orderId}/`,
         headers: { ...headers, ...auth },
     };
     try {

@@ -158,6 +158,7 @@ export default {
       if (this.editedIndex > -1) {
         try {
           const isSuccess = await supplierService.updateSupplier(supplier);
+          console.log(isSuccess);
           if (isSuccess) {
             await this.getData();
             this.$store.dispatch("alert/success", {

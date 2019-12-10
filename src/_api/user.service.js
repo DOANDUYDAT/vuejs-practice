@@ -29,7 +29,7 @@ async function login(email, password, remember) {
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/users/login`,
+        url: `${config.apiUrl}/users/login/`,
         headers: { ...headers },
         data: JSON.stringify(data)
     };
@@ -56,7 +56,7 @@ async function logout() {
     // remove user from local storage to log user out
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/users/logout`,
+        url: `${config.apiUrl}/users/logout/`,
         headers: { ...headers, ...auth }
     }
     try {
@@ -80,7 +80,7 @@ async function register(userInfo) {
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/users/register`,
+        url: `${config.apiUrl}/users/register/`,
         headers: { ...headers },
         data: JSON.stringify(data)
     };
@@ -101,7 +101,7 @@ async function getProfile() {
     let temp = { ...headers, ...auth };
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/users/profile`,
+        url: `${config.apiUrl}/users/profile/`,
         headers: { ...headers, ...auth }
     }
     try {
@@ -131,7 +131,7 @@ async function updateProfile(userInfo) {
     console.log(data);
     const options = {
         method: 'put',
-        url: `${config.apiUrl}/users/profile`,
+        url: `${config.apiUrl}/users/profile/`,
         headers: { ...headers, ...auth },
         data: JSON.stringify(data)
     }
@@ -155,7 +155,7 @@ async function resetPassword(email) {
     };
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/users/password-reset`,
+        url: `${config.apiUrl}/users/password-reset/`,
         headers: { ...headers },
         data: JSON.stringify(data)
     }
