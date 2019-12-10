@@ -1,5 +1,7 @@
 import config from 'config';
-import { authHeader } from '@/_helpers';
+import {
+    authHeader
+} from '@/_helpers';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -30,7 +32,9 @@ async function login(email, password, remember) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/login`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
         data: JSON.stringify(data)
     };
     try {
@@ -57,7 +61,10 @@ async function logout() {
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/logout`,
-        headers: { ...headers, ...auth }
+        headers: {
+            ...headers,
+            ...auth
+        }
     }
     try {
         const response = await axios(options);
@@ -83,7 +90,9 @@ async function register(userInfo) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/register`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
         data: JSON.stringify(data)
     };
     try {
@@ -100,11 +109,13 @@ async function register(userInfo) {
 
 async function getProfile() {
     console.log('getProfile');
-    let temp = { ...headers, ...auth };
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/profile`,
-        headers: { ...headers, ...auth }
+        headers: {
+            ...headers,
+            ...auth
+        }
     }
     try {
         const response = await axios(options);
@@ -134,7 +145,10 @@ async function updateProfile(userInfo) {
     const options = {
         method: 'put',
         url: `${config.apiUrl}/users/profile`,
-        headers: { ...headers, ...auth },
+        headers: {
+            ...headers,
+            ...auth
+        },
         data: JSON.stringify(data)
     }
     try {
@@ -158,7 +172,9 @@ async function resetPassword(email) {
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/password-reset`,
-        headers: { ...headers },
+        headers: {
+            ...headers
+        },
         data: JSON.stringify(data)
     }
     try {
@@ -173,5 +189,3 @@ async function resetPassword(email) {
         throw error;
     }
 }
-
-

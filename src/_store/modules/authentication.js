@@ -1,10 +1,20 @@
-import { userService } from '@/_api';
+import {
+    userService
+} from '@/_api';
 
 
 const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user
-    ? { status: { loggedIn: true }, user }
-    : { status: {}, user: null };
+const initialState = user ?
+    {
+        status: {
+            loggedIn: true
+        },
+        user
+    } :
+    {
+        status: {},
+        user: null
+    };
 
 
 const state = initialState;
@@ -12,10 +22,18 @@ const state = initialState;
 const getters = {};
 
 const actions = {
-    async login({ dispatch, commit }, { email, password, remember }) {
+    async login({
+        dispatch,
+        commit
+    }, {
+        email,
+        password,
+        remember
+    }) {
         try {
             const isSuccess = await userService.login(email, password, remember);
             const user = JSON.parse(localStorage.getItem('user'));
+
             if (isSuccess) {
                 commit('loginSuccess', user)
                 return true;
@@ -23,16 +41,21 @@ const actions = {
         } catch (error) {
             // console.log('action error')
             commit('loginFailure', error)
-            
+
             throw error;
         }
     },
-    async logout({ commit, dispatch }) {
+    async logout({
+        commit,
+        dispatch
+    }) {
         await userService.logout();
         commit('logout');
         dispatch('alert/success', {
             message: "You are logged out!"
-        }, { root: true });
+        }, {
+            root: true
+        });
     },
 };
 
@@ -42,7 +65,9 @@ const mutations = {
     //     state.user = user;
     // },
     loginSuccess(state, user) {
-        state.status = { loggedIn: true };
+        state.status = {
+            loggedIn: true
+        };
         state.user = user;
     },
     loginFailure(state) {

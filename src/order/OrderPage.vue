@@ -14,13 +14,8 @@
               </v-subheader>
             </v-col>
             <v-col cols="12" md="8">
-              <ValidationProvider
-                name="name"
-                rules="required|alpha"
-                v-slot="{ errors }"
-                :bails="false"
-              >
-                <v-text-field label="Name" outlined v-model="name" counter="16"></v-text-field>
+              <ValidationProvider name="name" rules="required" v-slot="{ errors }" :bails="false">
+                <v-text-field placeholder="Name" outlined v-model="name" counter="16"></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -35,11 +30,11 @@
             <v-col cols="12" md="8">
               <ValidationProvider
                 name="address"
-                rules="required|alpha"
+                rules="required"
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field label="Address" outlined v-model="address" counter="100"></v-text-field>
+                <v-text-field placeholder="Address" outlined v-model="address" counter="100"></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -53,12 +48,12 @@
             </v-col>
             <v-col cols="12" md="8">
               <ValidationProvider
-                name="phone number"
+                name="phone"
                 :rules="{required: true, regex:/^(0|\+84)[0-9]{9}$/}"
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field label="Phone number" outlined v-model="phone"></v-text-field>
+                <v-text-field placeholder="Phone number" outlined v-model="phone"></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -72,7 +67,7 @@
             </v-col>
             <v-col cols="12" md="8">
               <ValidationProvider name="note" v-slot="{ errors }" :bails="false">
-                <v-textarea label="Note" outlined v-model="note" counter="200"></v-textarea>
+                <v-textarea placeholder="Note" outlined v-model="note" counter="200"></v-textarea>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -136,6 +131,7 @@
 </template>
 
 <script>
+import { userService } from "@/_api";
 import { mapGetters, mapState, mapMutations } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
 export default {
@@ -147,7 +143,8 @@ export default {
 
     phone: "",
 
-    note: ""
+    note: "",
+    user: {}
   }),
   computed: {
     ...mapState({
@@ -173,10 +170,16 @@ export default {
     },
     formatCurrency(total) {
       return formatCurrency(total);
+    },
+    async getData() {
+      this.user = await userService.getProfile();
+      this.name = this.user.first_name + this.user.last_name;
+      this.address = this.user.address;
+      this.phone = this.user.phone;
     }
-    // reset() {
-    //   this.$refs.form.reset();
-    // }
+  },
+  created() {
+    this.getData();
   }
 };
 </script>
