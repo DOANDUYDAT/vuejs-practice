@@ -59,7 +59,9 @@ export default {
         filterable: false
       },
       { text: "Name", value: "name", sortable: false, filterable: false },
-      { text: "Price", value: "price", sortable: true, filterable: false },
+      { text: "ListedPrice", value: "listedPrice", sortable: true, filterable: false },
+      { text: "RetailPrice", value: "retailPrice", sortable: true, filterable: false },
+      { text: "PromotionPrice", value: "promotionalPrice", sortable: true, filterable: false },
       {
         text: "Quantity",
         value: "count",
