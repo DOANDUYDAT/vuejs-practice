@@ -4,7 +4,7 @@
       <v-col cols="12">
         <h2>{{ product.name }}</h2>
         <v-rating
-          :value="rating"
+          :value="product.voting"
           color="amber"
           background-color="grey"
           empty-icon="mdi-star-outline"

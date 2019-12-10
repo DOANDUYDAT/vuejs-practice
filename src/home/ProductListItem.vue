@@ -5,7 +5,7 @@
 
     <v-card-text class="py-0">
       <v-rating
-        :value="rating"
+        :value="product.voting"
         color="amber"
         background-color="grey"
         empty-icon="mdi-star-outline"

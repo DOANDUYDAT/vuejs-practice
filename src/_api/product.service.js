@@ -62,7 +62,8 @@ async function getAllProducts() {
                         promotionalPrice: e.promotional_price,
                         count: e.count,
                         description: e.description,
-                        images: e.images
+                        images: e.images,
+                        voting: e.voting
                     };
                     return product;
                 });
@@ -153,7 +154,8 @@ async function getProduct(productId) {
                 promotionalPrice: data.promotional_price,
                 count: data.count,
                 description: data.description,
-                images: data.images
+                images: data.images,
+                voting: data.voting
             };
             return product;
         }

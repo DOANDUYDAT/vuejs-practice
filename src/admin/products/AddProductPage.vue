@@ -51,6 +51,7 @@
                 <v-text-field
                   :placeholder="item.text"
                   outlined
+                  :type="item.type"
                   v-model="product[item.model]"
                   hide-details
                 ></v-text-field>
@@ -147,79 +148,98 @@ export default {
       items: [
         {
           text: "Bảo hành",
-          model: "guarantee"
+          model: "guarantee",
+          type: ""
         },
         {
           text: "Mô tả bảo hành",
-          model: "guaranteeDes"
+          model: "guaranteeDes",
+          type: ""
         },
         {
           text: "Tên",
-          model: "name"
+          model: "name",
+          type: ""
         },
         {
           text: "Màu sắc",
-          model: "color"
+          model: "color",
+          type: ""
         },
         {
           text: "Màn hình",
-          model: "screen"
+          model: "screen",
+          type: ""
         },
         {
           text: "Độ phân giải",
-          model: "resolution"
+          model: "resolution",
+          type: ""
         },
         {
           text: "Camera sau",
-          model: "rearCamera"
+          model: "rearCamera",
+          type: ""
         },
         {
           text: "Camera trước",
-          model: "frontCamera"
+          model: "frontCamera",
+          type: ""
         },
         {
           text: "Chip",
-          model: "chip"
+          model: "chip",
+          type: ""
         },
         {
           text: "RAM",
-          model: "ram"
+          model: "ram",
+          type: ""
         },
         {
           text: "Bộ nhớ trong",
-          model: "rom"
+          model: "rom",
+          type: ""
         },
         {
           text: "Pin",
-          model: "pin"
+          model: "pin",
+          type: ""
         },
         {
           text: "Hệ điều hành",
-          model: "operatingSystem"
+          model: "operatingSystem",
+          type: ""
         },
         {
           text: "Cổng sạc",
-          model: "chargingPort"
+          model: "chargingPort",
+          type: ""
         },
         {
           text: "Loại sim",
-          model: "sim"
+          model: "sim",
+          type: ""
         },
         {
           text: "Giá bán lẻ",
-          model: "retailPrice"
+          model: "retailPrice",
+          type: ""
         },
         {
           text: "Giá niêm yết",
-          model: "listedPrice"
+          model: "listedPrice",
+          type: ""
         },
         {
           text: "Giá khuyến mại",
-          model: "promotionalPrice"
+          model: "promotionalPrice",
+          type: ""
         },
         {
           text: "Số lượng",
-          model: "count"
+          model: "count",
+          type: ""
         }
       ]
     };
@@ -284,10 +304,10 @@ export default {
       this.product.operatingSystem = "";
       this.product.chargingPort = "";
       this.product.sim = "";
-      this.product.retailPrice = "";
-      this.product.listedPrice = "";
-      this.product.promotionalPrice = "";
-      this.product.count = "";
+      this.product.retailPrice = 0;
+      this.product.listedPrice = 0;
+      this.product.promotionalPrice = 0;
+      this.product.count = 0;
       this.product.description = "<h1>Some initial content</h1>";
       this.product.images = [];
     },
