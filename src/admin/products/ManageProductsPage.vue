@@ -62,7 +62,7 @@ export default {
       { text: "Price", value: "price", sortable: true, filterable: false },
       {
         text: "Quantity",
-        value: "quantity",
+        value: "count",
         sortable: true,
         filterable: false
       },

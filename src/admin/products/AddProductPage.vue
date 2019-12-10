@@ -8,6 +8,7 @@
       </v-toolbar>
       <v-row>
         <v-col cols="8">
+          <ValidationObserver ref="observer" v-slot="{ invalid }" tag="div">
           <v-row justify="center">
             <v-col cols="12" md="3">
               <v-subheader class="text-size">Thương hiệu</v-subheader>
@@ -22,7 +23,7 @@
                 <v-select
                   :items="listSelected"
                   placeholder="Thương hiệu"
-                  v-model="supplier"
+                  v-model="supplierId"
                   outlined
                   hide-details
                 ></v-select>
@@ -57,6 +58,7 @@
               </ValidationProvider>
             </v-col>
           </v-row>
+          </ValidationObserver>
         </v-col>
         <v-col cols="4">
           <div class="my-avatar">
@@ -118,7 +120,7 @@ export default {
   data() {
     return {
       suppliers: [],
-      supplier: "",
+      supplierId: "",
       product: {
         guarantee: "",
         guaranteeDes: "",
@@ -135,6 +137,10 @@ export default {
         operatingSystem: "",
         chargingPort: "",
         sim: "",
+        retailPrice: 0,
+        listedPrice: 0,
+        promotionalPrice: 0,
+        count: 0,
         description: "<h1>Some initial content</h1>",
         images: []
       },
@@ -198,6 +204,22 @@ export default {
         {
           text: "Loại sim",
           model: "sim"
+        },
+        {
+          text: "Giá bán lẻ",
+          model: "retailPrice"
+        },
+        {
+          text: "Giá niêm yết",
+          model: "listedPrice"
+        },
+        {
+          text: "Giá khuyến mại",
+          model: "promotionalPrice"
+        },
+        {
+          text: "Số lượng",
+          model: "count"
         }
       ]
     };
@@ -219,10 +241,11 @@ export default {
   },
   methods: {
     async submit() {
-      const product = this.product;
+      const product = {...this.product, supplierId: this.supplierId};
       try {
         const isSuccess = await productService.createProduct(product);
         if (isSuccess) {
+          this.$refs.observer.reset();
           this.$store.dispatch("alert/success", {
             message: "Add Successfully!"
           });
@@ -261,6 +284,10 @@ export default {
       this.product.operatingSystem = "";
       this.product.chargingPort = "";
       this.product.sim = "";
+      this.product.retailPrice = "";
+      this.product.listedPrice = "";
+      this.product.promotionalPrice = "";
+      this.product.count = "";
       this.product.description = "<h1>Some initial content</h1>";
       this.product.images = [];
     },

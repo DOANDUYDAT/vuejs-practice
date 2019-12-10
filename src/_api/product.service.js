@@ -33,7 +33,7 @@ async function getAllProducts() {
     };
     try {
         const response = await axios(options);
-        if (response.data.length > 0) {
+        if (response.status === 200) {
             console.log(response.status);
             console.log(response.data);
             const data = response.data;
@@ -77,7 +77,7 @@ async function getAllProducts() {
 async function createProduct(product) {
     console.log('createProduct');
     const data = {
-        supplier: product.supplier,
+        supplier_id: product.supplierId,
         guarantee: product.guarantee,
         guarantee_des: product.guaranteeDes,
         name: product.name,
@@ -85,7 +85,7 @@ async function createProduct(product) {
         screen: product.screen,
         resolution: product.resolution,
         front_camera: product.frontCamera,
-        rear_camera: product.backCamera,
+        rear_camera: product.rearCamera,
         chip: product.chip,
         ram: product.ram,
         rom: product.rom,
@@ -141,7 +141,7 @@ async function getProduct(productId) {
                 screen: data.screen,
                 resolution: data.resolution,
                 frontCamera: data.front_camera,
-                backCamera: data.rear_camera,
+                rearCamera: data.rear_camera,
                 chip: data.chip,
                 ram: data.ram,
                 rom: data.rom,
@@ -173,7 +173,7 @@ async function updateProduct(product) {
         screen: product.screen,
         resolution: product.resolution,
         front_camera: product.frontCamera,
-        rear_camera: product.backCamera,
+        rear_camera: product.rearCamera,
         chip: product.chip,
         ram: product.ram,
         rom: product.rom,
