@@ -28,7 +28,7 @@ async function getAllProducts() {
     console.log('getAllProducts');
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/products/`,
+        url: `${config.apiUrl}/products`,
         headers: { ...headers },
     };
     try {
@@ -122,7 +122,7 @@ async function getProduct(productId) {
     console.log('getProduct: ' + productId);
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/products/${productId}/`,
+        url: `${config.apiUrl}/products/${productId}`,
         headers: { ...headers },
     };
     try {
@@ -230,7 +230,7 @@ async function getAllComments(productId) {
     console.log('getAllComments: ' + productId);
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/products/${productId}/comments/`,
+        url: `${config.apiUrl}/products/${productId}/comments`,
         headers: { ...headers },
     };
     try {
@@ -287,7 +287,7 @@ async function getAllReviews(productId) {
     console.log('getAllReviews: ' + productId);
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/products/${productId}/reviews/`,
+        url: `${config.apiUrl}/products/${productId}/votes`,
         headers: { ...headers },
     };
     try {
@@ -325,7 +325,7 @@ async function createReview(review, productId) {
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/products/${productId}/reviews/`,
+        url: `${config.apiUrl}/products/${productId}/votes/`,
         headers: { ...headers, ...auth },
         data: JSON.stringify(data)
     };

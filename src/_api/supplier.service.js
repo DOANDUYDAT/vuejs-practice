@@ -24,7 +24,7 @@ async function getAllSuppliers() {
     console.log('getAllSuppliers');
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/suppliers/`,
+        url: `${config.apiUrl}/suppliers`,
         headers: { ...headers },
     };
     try {

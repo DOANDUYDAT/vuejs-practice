@@ -24,7 +24,7 @@ async function getAllOrders() {
     console.log('getAllOrders');
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/orders/`,
+        url: `${config.apiUrl}/orders`,
         headers: { ...headers, ...auth },
 
     };
@@ -71,7 +71,7 @@ async function getOrder(orderId) {
     console.log('getOrder: ' + orderId);
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/orders/${orderId}/`,
+        url: `${config.apiUrl}/orders/${orderId}`,
         headers: { ...headers },
     };
     try {
