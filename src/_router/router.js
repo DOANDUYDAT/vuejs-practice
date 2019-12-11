@@ -30,6 +30,9 @@ import ImportProductDetailPage from '@/admin/importProducts/ImportProductDetailP
 import AddImportProductPage from '@/admin/importProducts/AddImportProductPage';
 import ManageSuppliersPage from "@/admin/suppliers/ManageSuppliersPage";
 
+import NotPermission from '@/not-permission/NotPermission';
+import LoginPage from "@/login/LoginPage";
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -58,66 +61,105 @@ const router = new VueRouter({
         {
             path: '/',
             component: UserPage,
+            meta: {
+                requiresRole: null
+            },
             children: [{
                 path: 'home',
                 name: 'home',
                 component: HomePage,
-                alias: ['', '/products']
+                alias: ['', '/products'],
+                meta: {
+                    requiresRole: null
+                }
             },
             {
                 path: 'products/:productId',
                 component: ProductDetailPage,
-                name: 'product detail'
+                name: 'product detail',
+                meta: {
+                    requiresRole: null
+                }
             },
             {
                 path: 'todo',
                 component: HelloWorld,
+                meta: {
+                    requiresRole: null
+                }
             },
 
             {
                 path: 'account',
                 component: AccountPage,
                 meta: {
-                    requiresAuth: true
+                    requiresRole: ['user', 'staff', 'admin']
                 },
                 children: [{
                     path: 'profile',
                     component: ProfilePage,
                     alias: '',
-
+                    meta: {
+                        requiresRole: ['user', 'staff', 'admin']
+                    }
                 },
                 {
                     path: 'change-password',
                     component: ChangePasswordPage,
-
+                    meta: {
+                        requiresRole: ['user', 'staff', 'admin']
+                    }
                 },
                 {
                     path: 'orders',
-                    component: HistoryPage
+                    component: HistoryPage,
+                    meta: {
+                        requiresRole: ['user', 'staff', 'admin']
+                    }
                 },
                 // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
                 {
                     path: 'orders/:orderId',
                     component: OrderDetailPage,
-                    name: 'orders'
+                    name: 'orders',
+                    meta: {
+                        requiresRole: ['user', 'staff', 'admin']
+                    }
                 },
                 ]
             },
             {
                 path: 'forget-password',
                 component: ForgetPassword,
-                name: 'forget password'
+                name: 'forget password',
+                meta: {
+                    requiresRole: null
+                }
             },
             {
                 path: "shopping-cart",
                 component: ShoppingCartPage,
-                name: 'shopping cart'
+                name: 'shopping cart',
+                meta: {
+                    requiresRole: null
+                }
             },
             // OrderPage là trang khi đang tạo đơn hàng, chưa được đặt hàng, thanh toán
             {
                 path: "order-page",
                 component: OrderPage,
-                name: 'order page'
+                name: 'order page',
+                meta: {
+                    requiresRole: null
+                }
+            },
+            {
+                path: "login",
+                component: LoginPage,
+                name: 'login page',
+                meta: {
+                    requiresRole: null
+                }
             },
             ]
         },
@@ -126,54 +168,87 @@ const router = new VueRouter({
             path: '/admin',
             component: AdminPage,
             meta: {
-                requiresAuth: true
+                requiresRole: ['staff', 'admin']
             },
             children: [{
                 path: '',
-                component: AdminHome
+                component: AdminHome,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'users',
-                component: ManageUsersPage
+                component: ManageUsersPage,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'staffs',
-                component: ManageStaffsPage
+                component: ManageStaffsPage,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'add-staff',
-                component: AddStaffPage
+                component: AddStaffPage,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'products',
-                component: ManageProductsPage
+                component: ManageProductsPage,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'products/:productId',
                 component: EditProductPage,
-                name: 'admin product'
+                name: 'admin product',
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'add-product',
-                component: AddProductPage
+                component: AddProductPage,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'orders',
-                component: ManageOrdersPage
+                component: ManageOrdersPage,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'orders/:orderId',
                 component: ManageOrderDetailPage,
-                name: 'admin order'
+                name: 'admin order',
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'import-products',
-                component: ImportProductsPage
+                component: ImportProductsPage,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'import-products/:importProductId',
                 component: ImportProductDetailPage,
-                name: 'admin importProduct'
+                name: 'admin importProduct',
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             },
             {
                 path: 'add-import-poducts',
@@ -182,51 +257,53 @@ const router = new VueRouter({
             },
             {
                 path: "suppliers",
-                component: ManageSuppliersPage
+                component: ManageSuppliersPage,
+                meta: {
+                    requiresRole: ['staff', 'admin']
+                }
             }
 
             ]
         },
 
         {
-            path: '*',
-            component: ErrorPage
+            path: '/not-permission',
+            component: NotPermission,
+            meta: {
+                requiresRole: null
+            }
         },
+        {
+            path: '*',
+            component: ErrorPage,
+            meta: {
+                requiresRole: null
+            }
+        }
 
     ],
 
 
 });
 
-// Bootstrap Analytics
-// Set in .env
-// https://github.com/MatteoGabriele/vue-analytics
-if (process.env.GOOGLE_ANALYTICS) {
-    Vue.use(VueAnalytics, {
-        id: process.env.GOOGLE_ANALYTICS,
-        router,
-        autoTracking: {
-            page: process.env.NODE_ENV !== 'development'
-        }
-    });
-}
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
-        let user = JSON.parse(localStorage.getItem('user'));
-        if (!user) {
-            next({
-                path: '/login',
-                query: { redirect: to.fullPath }
-            })
-        } else {
-            next()
-        }
-    } else {
-        next() // make sure to always call next()!
-    }
-})
+
+// router.beforeEach((to, from, next) => {
+//     const requiresRole = to.meta.requiresRole;
+//     // nếu ko yêu cầu quyền (requiresRole = null) thì next()
+//     if (!requiresRole) {
+//         next();
+//     } else {
+//         const user = JSON.parse(localStorage.getItem('user'));
+//         // nếu user = null thì quay lại trang home
+//         if (!user) {
+//             next({
+//                 path: '/home'
+//             })
+//         } 
+//         if (user)
+//     }
+// })
+
 
 export default router;

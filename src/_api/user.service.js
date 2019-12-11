@@ -96,9 +96,12 @@ async function register(userInfo) {
         },
         data: JSON.stringify(data)
     };
+    // const response = await axios(options);
+    // console.log(response);
     try {
         const response = await axios(options);
         console.log(response.status);
+        console.log(response);
         if (response.status === 201) {
 
             console.log(response.data);

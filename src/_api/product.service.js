@@ -98,10 +98,10 @@ async function createProduct(product) {
         pin: product.pin,
         operating_system: product.operatingSystem,
         charging_port: product.chargingPort,
-        retail_price: product.retailPrice,
-        listed_price: product.listedPrice,
-        promotional_price: product.promotionalPrice,
-        count: product.count,
+        retail_price: Number(product.retailPrice),
+        listed_price: Number(product.listedPrice),
+        promotional_price: Number(product.promotionalPrice),
+        count: Number(product.count),
         description: product.description,
         images: product.images
     };
@@ -194,10 +194,10 @@ async function updateProduct(product) {
         pin: product.pin,
         operating_system: product.operatingSystem,
         charging_port: product.chargingPort,
-        retail_price: product.retailPrice,
-        listed_price: product.listedPrice,
-        promotional_price: product.promotionalPrice,
-        count: product.count,
+        retail_price: Number(product.retailPrice),
+        listed_price: Number(product.listedPrice),
+        promotional_price: Number(product.promotionalPrice),
+        count: Number(product.count),
         description: product.description,
         images: product.images
     };
