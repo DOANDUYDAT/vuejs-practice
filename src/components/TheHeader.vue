@@ -6,7 +6,7 @@
     <v-container class="px-0">
       <v-row align="center" no-gutters>
         <v-col cols="3">
-          <v-avatar size="150">
+          <v-avatar size="120">
             <v-img :src="require('@/_assets/image/logo.png')"></v-img>
           </v-avatar>
         </v-col>

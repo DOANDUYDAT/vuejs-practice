@@ -5,7 +5,7 @@ import {
 } from '@/_helpers';
 import _ from 'lodash';
 
-const auth = authHeader();
+
 
 export const orderService = {
     getAllOrders,
@@ -24,6 +24,7 @@ const headers = {
 
 async function getAllOrders() {
     console.log('getAllOrders');
+    const auth = authHeader();
     const options = {
         method: 'get',
         url: `${config.apiUrl}/orders`,
@@ -50,6 +51,7 @@ async function getAllOrders() {
 
 async function createOrder(order) {
     console.log('createOrder');
+    const auth = authHeader();
     const data = {
         name: order.name,
         list_cart_item: order.listCartItem
@@ -79,11 +81,13 @@ async function createOrder(order) {
 
 async function getOrder(orderId) {
     console.log('getOrder: ' + orderId);
+    const auth = authHeader();
     const options = {
         method: 'get',
         url: `${config.apiUrl}/orders/${orderId}`,
         headers: {
-            ...headers
+            ...headers,
+            ...auth
         },
     };
     try {
@@ -102,6 +106,7 @@ async function getOrder(orderId) {
 
 async function updateOrder(order) {
     console.log('updateOrder: ' + order.id);
+    const auth = authHeader();
     const data = {
         list_cart_item: order.listCartItem
     }
@@ -130,6 +135,7 @@ async function updateOrder(order) {
 
 async function deleteOrder(orderId) {
     console.log('deleteOrder: ' + orderId);
+    const auth = authHeader();
     const options = {
         method: 'delete',
         url: `${config.apiUrl}/orders/${orderId}/`,

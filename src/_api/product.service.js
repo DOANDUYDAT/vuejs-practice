@@ -5,7 +5,7 @@ import {
 } from '@/_helpers';
 import _ from 'lodash';
 
-const auth = authHeader();
+
 
 export const productService = {
     getAllProducts,
@@ -82,6 +82,7 @@ async function getAllProducts() {
 
 async function createProduct(product) {
     console.log('createProduct');
+    const auth = authHeader();
     const data = {
         supplier_id: product.supplierId,
         guarantee: product.guarantee,
@@ -178,6 +179,7 @@ async function getProduct(productId) {
 
 async function updateProduct(product) {
     console.log('updateProduct: ' + product.id);
+    const auth = authHeader();
     const data = {
         supplier: product.supplier,
         guarantee: product.guarantee,
@@ -227,6 +229,7 @@ async function updateProduct(product) {
 
 async function deleteProduct(productId) {
     console.log('deleteProduct: ' + productId);
+    const auth = authHeader();
     const options = {
         method: 'delete',
         url: `${config.apiUrl}/products/${productId}/`,
@@ -285,6 +288,7 @@ async function getAllComments(productId) {
 
 async function createComment(comment, productId) {
     console.log('createComment');
+    const auth = authHeader();
     const data = {
         user: comment.user,
         content: comment.content
@@ -349,6 +353,7 @@ async function getAllReviews(productId) {
 
 async function createReview(review, productId) {
     console.log('createReview');
+    const auth = authHeader();
     const data = {
         user: review.user,
         content: review.content,

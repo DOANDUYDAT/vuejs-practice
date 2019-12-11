@@ -20,7 +20,7 @@ const headers = {
 
 }
 
-const auth = authHeader();
+
 
 async function login(email, password, remember) {
     console.log('login');
@@ -56,7 +56,9 @@ async function login(email, password, remember) {
 }
 
 async function logout() {
+    
     console.log('logout');
+    const auth = authHeader();
     // remove user from local storage to log user out
     const options = {
         method: 'get',
@@ -114,7 +116,9 @@ async function register(userInfo) {
 }
 
 async function getProfile() {
+    
     console.log('getProfile');
+    const auth = authHeader();
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/profile`,
@@ -140,6 +144,7 @@ async function getProfile() {
 
 async function updateProfile(userInfo) {
     console.log('updateProfile');
+    const auth = authHeader();
     const data = {
         last_name: userInfo.lastName,
         first_name: userInfo.firstName,

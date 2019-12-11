@@ -5,7 +5,7 @@ import {
 } from '@/_helpers';
 import _ from 'lodash';
 
-const auth = authHeader();
+
 
 export const supplierService = {
     getAllSuppliers,
@@ -48,6 +48,7 @@ async function getAllSuppliers() {
 
 async function createSupplier(supplier) {
     console.log('createSupplier');
+    const auth = authHeader();
     const data = {
         name: supplier.name
     }
@@ -99,6 +100,7 @@ async function getSupplier(supplierId) {
 
 async function updateSupplier(supplier) {
     console.log('updateSupplier: ' + supplier.id);
+    const auth = authHeader();
     const data = {
         name: supplier.name
     };
@@ -127,6 +129,7 @@ async function updateSupplier(supplier) {
 
 async function deleteSupplier(supplierId) {
     console.log('deleteSupplier: ' + supplierId);
+    const auth = authHeader();
     const options = {
         method: 'delete',
         url: `${config.apiUrl}/suppliers/${supplierId}/`,
