@@ -28,7 +28,7 @@
                 <v-col cols="12" md="8" class="mx-auto">
                   <ValidationProvider
                     name="password"
-                    rules="required|min:4"
+                    rules="required|min:8"
                     v-slot="{ errors }"
                     :bails="false"
                   >
@@ -104,20 +104,24 @@ export default {
         const isValid = await this.$refs.observer.validate();
         if (isValid) {
           const { email, password, remember } = this;
-          const user = await this.$store.dispatch("authentication/login", {
+          const isSuccess = await this.$store.dispatch("authentication/login", {
             email,
             password,
             remember
           });
           // console.log("user: " + user);
-          if (user) {
+          if (isSuccess) {
             this.$store.dispatch("alert/success", {
               message: "Login Successfully!"
             });
-            this.dialog = false;
+            
             const fullPath = this.$route.query.redirect;
+            const currentPath = this.$route.fullPath;
             if (fullPath) {
               this.$router.push({ path: fullPath });
+            } 
+            if (currentPath === '/login') {
+                this.$router.push({ path: '/home'});
             }
           }
         }

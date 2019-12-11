@@ -288,22 +288,29 @@ const router = new VueRouter({
 
 
 
-// router.beforeEach((to, from, next) => {
-//     const requiresRole = to.meta.requiresRole;
-//     // nếu ko yêu cầu quyền (requiresRole = null) thì next()
-//     if (!requiresRole) {
-//         next();
-//     } else {
-//         const user = JSON.parse(localStorage.getItem('user'));
-//         // nếu user = null thì quay lại trang home
-//         if (!user) {
-//             next({
-//                 path: '/home'
-//             })
-//         } 
-//         if (user)
-//     }
-// })
+router.beforeEach((to, from, next) => {
+    const requiresRole = to.meta.requiresRole;
+    // nếu ko yêu cầu quyền (requiresRole = null) thì next()
+    if (!requiresRole) {
+        next();
+    } else {
+        const user = JSON.parse(localStorage.getItem('user'));
+        // nếu user = null thì quay lại trang home
+        if (!user) {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath }
+            });
+        } 
+        else if (user.groups.length && user.groups.some(e => requiresRole.includes(e.name))) {
+            next();
+        } else {
+            next({
+                path: '/not-permission'
+            });
+        }
+    }
+})
 
 
 export default router;

@@ -73,6 +73,7 @@ async function logout() {
 
             console.log(response.data);
             localStorage.removeItem('user');
+            return true;
         }
     } catch (error) {
         throw error;

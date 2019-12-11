@@ -49,13 +49,16 @@ const actions = {
         commit,
         dispatch
     }) {
-        await userService.logout();
-        commit('logout');
-        dispatch('alert/success', {
-            message: "You are logged out!"
-        }, {
-            root: true
-        });
+        try {
+            const isSuccess = await userService.logout();
+            if (isSuccess) {
+                commit('logout');
+                return true;
+            }
+        } catch (error) {
+            throw error;
+        }
+
     },
 };
 
