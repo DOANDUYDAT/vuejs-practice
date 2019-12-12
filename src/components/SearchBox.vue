@@ -17,7 +17,7 @@
       @blur="onBlur"
       label="Search"
     ></v-text-field>
-    <v-expand-transition>
+    <!-- <v-expand-transition> -->
       <v-card v-if="itemsSearch.length && result" class="search__result mx-auto" :width="600" light>
         <v-list>
           <v-list-item-group v-model="search">
@@ -30,7 +30,7 @@
           </v-list-item-group>
         </v-list>
       </v-card>
-    </v-expand-transition>
+    <!-- </v-expand-transition> -->
   </div>
 </template>
 
@@ -105,5 +105,6 @@ export default {
 @import "@/variables.scss";
 .search__result {
   position: fixed;
+  z-index: 999;
 }
 </style>

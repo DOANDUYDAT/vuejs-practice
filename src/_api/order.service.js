@@ -40,7 +40,20 @@ async function getAllOrders() {
         if (response.status === 200) {
 
             console.log(response.data);
-            let orders = response.data;
+            const data = response.data;
+            const orders = data.map(e => {
+                return {
+                    id: data.id,
+                    user: {
+                        phone: data.user.phone,
+                        name: data.user.name,
+                        address: data.user.address
+                    },
+                    items: data.items,
+                    note: data.note,
+                    status: data.status
+                }
+            })
             return orders;
         }
     } catch (error) {
@@ -56,7 +69,7 @@ async function createOrder(order) {
         user: {
             name: order.name,
             phone: order.phone,
-            address: order.address, 
+            address: order.address,
         },
         items: order.items,
         note: order.note
@@ -101,7 +114,18 @@ async function getOrder(orderId) {
         if (response.status === 200) {
 
             console.log(response.data);
-            let order = response.data;
+            const data = response.data;
+            const order = {
+                id: data.id,
+                user: {
+                    phone: data.user.phone,
+                    name: data.user.name,
+                    address: data.user.address
+                },
+                note: data.note,
+                items: data.items,
+                status: data.status
+            };
             return order;
         }
     } catch (error) {
@@ -113,7 +137,7 @@ async function updateOrder(order) {
     console.log('updateOrder: ' + order.id);
     const auth = authHeader();
     const data = {
-        list_cart_item: order.listCartItem
+        status: order.status
     }
     console.log(data);
     const options = {

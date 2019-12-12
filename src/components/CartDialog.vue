@@ -117,7 +117,5 @@ export default {
 </script>
 
 <style scoped>
-v-btn-tpggle v-btn {
-  min-width: 2rem;
-}
+
 </style>
