@@ -2,10 +2,11 @@ import shop from '../../_api/shop'
 import { formatCurrency } from '../../_api/format-currency'
 // initial state
 // shape: [{ id, quantity }]
-const state = {
-  items: [],
-  checkoutStatus: null
-}
+const cart = JSON.parse(localStorage.getItem('cart'));
+// console.log(cart.items);
+const initialState = cart ? { items: cart.items.slice(0), checkoutStatus: null } : { items: [], checkoutStatus: null };
+// const initialState = { items: [], checkoutStatus: null };
+const state = initialState;
 
 // getters
 const getters = {
@@ -14,14 +15,20 @@ const getters = {
       return [];
     }
     return state.items.map(({ id, quantity }) => {
-      const product = rootState.products.allProducts.find(product => product.id === id)
-      return {
-        id: product.id,
-        title: product.title,
-        price: product.promotionalPrice ? product.promotionalPrice : product.retailPrice,
-        image: product.images[0],
-        quantity
+      const products = rootState.products.allProducts;
+      if (products.length) {
+        const product = products.find(product => product.id == id);
+        return {
+          id: product.id,
+          name: product.name,
+          price: product.promotionalPrice ? product.promotionalPrice : product.retailPrice,
+          image: product.images[0],
+          quantity
+        }
+      } else {
+        return [];
       }
+
     })
   },
 
@@ -49,7 +56,7 @@ const actions = {
         products.forEach((product) => {
           commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
         })
-
+        localStorage.removeItem('cart');
       },
       () => {
         commit('setCheckoutStatus', 'failed')
@@ -83,21 +90,33 @@ const mutations = {
     state.items.push({
       id,
       quantity: quantity
-    })
+    });
+    const cart = { items: state.items };
+    localStorage.setItem('cart', JSON.stringify(cart));
   },
 
   removeProductFromCart(state, { id }) {
-    state.items = state.items.filter(item => item.id !== id)
+    state.items = state.items.filter(item => item.id !== id);
+    const cart = state.items.length ? { items: state.items } : null;
+    if (!cart) {
+      localStorage.removeItem('cart');
+    } else {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
   },
 
   incrementItemQuantity(state, { id, quantity }) {
     const cartItem = state.items.find(item => item.id === id)
-    cartItem.quantity += quantity
+    cartItem.quantity += quantity;
+    const cart = { items: state.items };
+    localStorage.setItem('cart', JSON.stringify(cart));
   },
 
   decrementItemQuantity(state, { id, quantity }) {
     const cartItem = state.items.find(item => item.id === id)
-    cartItem.quantity -= quantity
+    cartItem.quantity -= quantity;
+    const cart = { items: state.items };
+    localStorage.setItem('cart', JSON.stringify(cart));
   },
 
   setCartItems(state, { items }) {

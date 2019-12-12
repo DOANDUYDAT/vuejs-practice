@@ -10,13 +10,13 @@
         </v-badge>
       </v-btn>
     </template>
-    <v-card v-if="numberProduct > 0" :width="450">
+    <v-card v-if="products.length" :width="450">
       <v-container>
         <v-row v-for="product in products" :key="product.id">
           <v-col cols="3">
             <v-img :height="60" contain :src="product.image"></v-img>
           </v-col>
-          <v-col cols="5">{{ product.title }}x{{ product.quantity }}</v-col>
+          <v-col cols="5">{{ product.name }}x{{ product.quantity }}</v-col>
           <v-col cols="4">{{ formatCurrency(product.price) }}đ</v-col>
         </v-row>
         <v-row>
@@ -74,7 +74,7 @@ export default {
     }),
     numberProduct: function() {
       let numberProduct = 0;
-      if (this.products.length > 0) {
+      if (this.products.length) {
         this.products.forEach(product => {
           numberProduct += product.quantity;
         });
