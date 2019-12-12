@@ -57,7 +57,7 @@ async function login(email, password, remember) {
 }
 
 async function logout() {
-    
+
     console.log('logout');
     const auth = authHeader();
     // remove user from local storage to log user out
@@ -116,7 +116,7 @@ async function register(userInfo) {
 }
 
 async function getProfile() {
-    
+
     console.log('getProfile');
     const auth = authHeader();
     const options = {
