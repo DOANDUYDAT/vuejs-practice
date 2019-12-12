@@ -11,7 +11,8 @@ export const userService = {
     register,
     getProfile,
     updateProfile,
-    resetPassword
+    resetPassword,
+    changePassword
 };
 
 const headers = {
@@ -186,6 +187,36 @@ async function resetPassword(email) {
         url: `${config.apiUrl}/users/password-reset`,
         headers: {
             ...headers
+        },
+        data: JSON.stringify(data)
+    }
+    try {
+        const response = await axios(options);
+        console.log(response.status);
+        if (response.status === 200) {
+
+            console.log(response.data);
+            return true;
+        }
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function changePassword({ oldPasword, password }) {
+    console.log('changePassword');
+    const data = {
+        old_pasword: oldPasword,
+        password: password
+    };
+    const auth = authHeader();
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/users/change-password`,
+        headers: {
+            ...headers,
+            ...auth
         },
         data: JSON.stringify(data)
     }
