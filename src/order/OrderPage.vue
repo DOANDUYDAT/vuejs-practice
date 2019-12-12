@@ -131,18 +131,15 @@
 </template>
 
 <script>
-import { userService } from "@/_api";
+import { userService, orderService } from "@/_api";
 import { mapGetters, mapState, mapMutations } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
 export default {
   data: () => ({
     valid: true,
     name: "",
-
     address: "",
-
     phone: "",
-
     note: "",
     user: {}
   }),
@@ -176,6 +173,28 @@ export default {
       this.name = this.user.first_name + this.user.last_name;
       this.address = this.user.address;
       this.phone = this.user.phone;
+    },
+    async order() {
+      const { name, address, phone, note, products } = this;
+      const order = {
+        name,
+        phone,
+        address,
+        note,
+        products
+      };
+      try {
+        const isSuccess = await this.$store.dispatch("cart/checkout", order);
+        if (isSuccess) {
+          this.$store.dispatch("alert/success", {
+            message: "Checkout Successfully!"
+          });
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error.message
+        });
+      }
     }
   },
   created() {

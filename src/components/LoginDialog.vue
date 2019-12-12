@@ -125,7 +125,7 @@ export default {
       } catch (error) {
         if (error) {
           this.$store.dispatch("alert/error", {
-            message: error
+            message: error.message
           });
         }
       }

@@ -53,8 +53,13 @@ async function createOrder(order) {
     console.log('createOrder');
     const auth = authHeader();
     const data = {
-        name: order.name,
-        list_cart_item: order.listCartItem
+        user: {
+            name: order.name,
+            phone: order.phone,
+            address: order.address, 
+        },
+        items: order.items,
+        note: order.note
     }
     console.log(data);
     const options = {

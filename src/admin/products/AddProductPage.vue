@@ -65,16 +65,16 @@
           <div class="my-avatar">
             <!-- <v-row justify="center">
             <v-col>-->
-            <div v-if="product.images.length > 0">
+            <div v-if="imagesShow.length">
               <v-avatar
-                v-for="(image, i) in product.images"
+                v-for="(image, i) in imagesShow"
                 class="profile ma-1"
                 color="grey"
                 size="164"
                 tile
                 :key="i"
               >
-                <v-img :src="image"></v-img>
+                <v-img :src="image.image"></v-img>
               </v-avatar>
             </div>
             <!-- </v-col>
@@ -122,6 +122,7 @@ export default {
     return {
       suppliers: [],
       supplierId: "",
+      imagesShow: [],
       product: {
         guarantee: "",
         guaranteeDes: "",
@@ -280,9 +281,10 @@ export default {
     handleFileUpload(files) {
       this.product.images = [];
       for (let i = 0; i < files.length; i++) {
+        this.product.images.push({ image: files[i]});
         let reader = new FileReader();
         reader.onload = function() {
-          this.product.images.push(reader.result);
+          this.imagesShow.push({ image: reader.result});
         }.bind(this);
         reader.readAsDataURL(files[i]);
       }
