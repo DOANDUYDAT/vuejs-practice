@@ -80,8 +80,7 @@ export default {
       required: true
     }
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     async submit() {
       const review = this.review;
@@ -89,18 +88,18 @@ export default {
       try {
         const isSuccess = await productService.createReview(review, productId);
         if (isSuccess) {
-          this.$store.dispatch("alert/addAlert", {
-            type: "success",
+          this.$store.dispatch("alert/success", {
             message: "Create Successfully!"
           });
           this.resetInput();
         }
         // this.dialog = false;
       } catch (error) {
-        this.$store.dispatch("alert/addAlert", {
-          type: "error",
-          message: "Login error!"
-        });
+        if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data.message
+          });
+        }
       }
     },
     resetInput() {
