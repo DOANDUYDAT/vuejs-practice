@@ -104,7 +104,7 @@ export default {
       firstName: "",
       lastName: "",
       email: "",
-      roles: ["Nhân viên", "Quản trị viên"],
+      roles: ["Staff", "Admin"],
       role: ""
     };
   },

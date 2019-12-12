@@ -7,106 +7,108 @@
     </v-toolbar>
     <v-row>
       <v-col cols="8">
-        <v-row no-gutters justify="center">
-          <v-col cols="12" md="3">
-            <v-subheader>First Name</v-subheader>
-          </v-col>
-          <v-col cols="12" md="9">
-            <ValidationProvider
-              name="first name"
-              rules="required|alpha"
-              v-slot="{ errors }"
-              :bails="false"
-            >
-              <v-text-field label="First Name" solo v-model="firstName" counter="16"></v-text-field>
-              <span class="red--text">{{ errors[0] }}</span>
-            </ValidationProvider>
-          </v-col>
-        </v-row>
-        <v-row no-gutters justify="center">
-          <v-col cols="12" md="3">
-            <v-subheader>Last Name</v-subheader>
-          </v-col>
-          <v-col cols="12" md="9">
-            <ValidationProvider
-              name="last name"
-              rules="required|alpha"
-              v-slot="{ errors }"
-              :bails="false"
-            >
-              <v-text-field label="Last Name" solo v-model="lastName" counter="16"></v-text-field>
-              <span class="red--text">{{ errors[0] }}</span>
-            </ValidationProvider>
-          </v-col>
-        </v-row>
-        <v-row no-gutters justify="center">
-          <v-col cols="12" md="3">
-            <v-subheader>Số điện thoại</v-subheader>
-          </v-col>
-          <v-col cols="12" md="9">
-            <ValidationProvider
-              name="phone number"
-              :rules="{required: true, regex:/^(0|\+84)[0-9]{9}$/}"
-              v-slot="{ errors }"
-              :bails="false"
-            >
-              <v-text-field label="Số điện thoại" solo v-model="phone"></v-text-field>
-              <span class="red--text">{{ errors[0] }}</span>
-            </ValidationProvider>
-          </v-col>
-        </v-row>
-        <v-row no-gutters justify="center">
-          <v-col cols="12" md="3">
-            <v-subheader>Email</v-subheader>
-          </v-col>
-          <v-col cols="12" md="9">
-            <v-text-field solo disabled v-model="email"></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row no-gutters justify="center">
-          <v-col cols="12" md="3">
-            <v-subheader>Địa chỉ</v-subheader>
-          </v-col>
-          <v-col cols="12" md="9">
-            <v-text-field label="Địa chỉ" solo v-model="address"></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row no-gutters justify="center">
-          <v-col cols="12" md="3">
-            <v-subheader>Giới tính</v-subheader>
-          </v-col>
-          <v-col cols="12" md="9">
-            <v-radio-group v-model="gender" row class="mt-2">
-              <v-radio label="Nam" value="Nam"></v-radio>
-              <v-radio label="Nữ" value="Nữ"></v-radio>
-              <v-radio label="Khác" value="Khác"></v-radio>
-            </v-radio-group>
-          </v-col>
-        </v-row>
-        <v-row no-gutters justify="center">
-          <v-col cols="12" md="3">
-            <v-subheader>Ngày sinh</v-subheader>
-          </v-col>
-          <v-col cols="12" md="9">
-            <v-menu
-              v-model="menudate"
-              :close-on-content-click="false"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field v-model="dateOfBirth" label="Ngày sinh" solo readonly v-on="on"></v-text-field>
-              </template>
-              <v-date-picker v-model="dateOfBirth" @input="menudate = false"></v-date-picker>
-            </v-menu>
-          </v-col>
-        </v-row>
-        <v-card-actions>
-          <v-row no-gutters>
-            <v-btn color="primary" class="mx-auto" @click="updateProfile">Cập nhật</v-btn>
+        <ValidationObserver ref="observer" v-slot="{ invalid }" tag="form">
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader>First Name</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="first name"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field label="First Name" solo v-model="firstName" counter="16"></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
           </v-row>
-        </v-card-actions>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader>Last Name</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="last name"
+                rules="required|alpha"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field label="Last Name" solo v-model="lastName" counter="16"></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader>Số điện thoại</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="phone number"
+                :rules="{required: true, regex:/^(0|\+84)[0-9]{9}$/}"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field label="Số điện thoại" solo v-model="phone"></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader>Email</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <v-text-field solo disabled v-model="email"></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader>Địa chỉ</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <v-text-field label="Địa chỉ" solo v-model="address"></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader>Giới tính</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <v-radio-group v-model="gender" row class="mt-2">
+                <v-radio label="Nam" value="Nam"></v-radio>
+                <v-radio label="Nữ" value="Nữ"></v-radio>
+                <v-radio label="Khác" value="Khác"></v-radio>
+              </v-radio-group>
+            </v-col>
+          </v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader>Ngày sinh</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <v-menu
+                v-model="menudate"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field v-model="dateOfBirth" label="Ngày sinh" solo readonly v-on="on"></v-text-field>
+                </template>
+                <v-date-picker v-model="dateOfBirth" @input="menudate = false"></v-date-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
+          <v-card-actions>
+            <v-row no-gutters>
+              <v-btn color="primary" class="mx-auto" @click="updateProfile">Cập nhật</v-btn>
+            </v-row>
+          </v-card-actions>
+        </ValidationObserver>
       </v-col>
       <v-col cols="4">
         <div class="my-avatar">
@@ -130,7 +132,7 @@ export default {
       gender: "",
       firstName: "",
       lastName: "",
-      phone: "",
+      phone: 0,
       email: "",
       address: "",
       dateOfBirth: null,
@@ -140,23 +142,32 @@ export default {
   },
   methods: {
     async updateProfile() {
-      const { gender, firstName, lastName, phone, address, dateOfBirth } = this;
-      const userInfo = {
-        gender,
-        firstName,
-        lastName,
-        phone,
-        address,
-        dateOfBirth
-      };
       try {
-        const isSuccess = await userService.updateProfile(userInfo);
-        if (isSuccess) {
-          await this.getData();
-          this.$store.dispatch("alert/success", {
-            message: "Update Successfully!"
-          });
-
+        const isValid = await this.$refs.observer.validate();
+        if (isValid) {
+          const {
+            gender,
+            firstName,
+            lastName,
+            phone,
+            address,
+            dateOfBirth
+          } = this;
+          const userInfo = {
+            gender,
+            firstName,
+            lastName,
+            phone,
+            address,
+            dateOfBirth
+          };
+          const isSuccess = await userService.updateProfile(userInfo);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Update Successfully!"
+            });
+          }
         }
       } catch (error) {
         this.$store.dispatch("alert/error", {

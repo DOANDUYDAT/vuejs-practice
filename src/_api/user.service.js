@@ -100,7 +100,6 @@ async function register(userInfo) {
         const response = await axios(options);
         console.log(response.status);
         if (response.status === 201) {
-
             console.log(response.data);
             return true;
         }
