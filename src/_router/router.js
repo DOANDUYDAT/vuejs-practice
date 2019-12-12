@@ -65,102 +65,102 @@ const router = new VueRouter({
                 requiresRole: null
             },
             children: [{
-                path: 'home',
-                name: 'home',
-                component: HomePage,
-                alias: ['', '/products'],
-                meta: {
-                    requiresRole: null
-                }
-            },
-            {
-                path: 'products/:productId',
-                component: ProductDetailPage,
-                name: 'product detail',
-                meta: {
-                    requiresRole: null
-                }
-            },
-            {
-                path: 'todo',
-                component: HelloWorld,
-                meta: {
-                    requiresRole: null
-                }
-            },
+                    path: 'home',
+                    name: 'home',
+                    component: HomePage,
+                    alias: ['', '/products'],
+                    meta: {
+                        requiresRole: null
+                    }
+                },
+                {
+                    path: 'products/:productId',
+                    component: ProductDetailPage,
+                    name: 'product detail',
+                    meta: {
+                        requiresRole: null
+                    }
+                },
+                {
+                    path: 'todo',
+                    component: HelloWorld,
+                    meta: {
+                        requiresRole: null
+                    }
+                },
 
-            {
-                path: 'account',
-                component: AccountPage,
-                meta: {
-                    requiresRole: ['user', 'staff', 'admin']
-                },
-                children: [{
-                    path: 'profile',
-                    component: ProfilePage,
-                    alias: '',
+                {
+                    path: 'account',
+                    component: AccountPage,
                     meta: {
                         requiresRole: ['user', 'staff', 'admin']
+                    },
+                    children: [{
+                            path: 'profile',
+                            component: ProfilePage,
+                            alias: '',
+                            meta: {
+                                requiresRole: ['user', 'staff', 'admin']
+                            }
+                        },
+                        {
+                            path: 'change-password',
+                            component: ChangePasswordPage,
+                            meta: {
+                                requiresRole: ['user', 'staff', 'admin']
+                            }
+                        },
+                        {
+                            path: 'orders',
+                            component: HistoryPage,
+                            meta: {
+                                requiresRole: ['user', 'staff', 'admin']
+                            }
+                        },
+                        // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
+                        {
+                            path: 'orders/:orderId',
+                            component: OrderDetailPage,
+                            name: 'orders',
+                            meta: {
+                                requiresRole: ['user', 'staff', 'admin']
+                            }
+                        },
+                    ]
+                },
+                {
+                    path: 'forget-password',
+                    component: ForgetPassword,
+                    name: 'forget password',
+                    meta: {
+                        requiresRole: null
                     }
                 },
                 {
-                    path: 'change-password',
-                    component: ChangePasswordPage,
+                    path: "shopping-cart",
+                    component: ShoppingCartPage,
+                    name: 'shopping cart',
                     meta: {
-                        requiresRole: ['user', 'staff', 'admin']
+                        requiresRole: null
+                    }
+                },
+                // OrderPage là trang khi đang tạo đơn hàng, chưa được đặt hàng, thanh toán
+                {
+                    path: "order-page",
+                    component: OrderPage,
+                    name: 'order page',
+                    meta: {
+                        requiresRole: null
                     }
                 },
                 {
-                    path: 'orders',
-                    component: HistoryPage,
+                    path: "login",
+                    component: LoginPage,
+                    name: 'login page',
                     meta: {
-                        requiresRole: ['user', 'staff', 'admin']
+                        requiresRole: null
                     }
                 },
-                // OrderDetailPage là trang sau khi đã tạo đơn hàng, đơn hàng có trong lịch sử đặt hàng
-                {
-                    path: 'orders/:orderId',
-                    component: OrderDetailPage,
-                    name: 'orders',
-                    meta: {
-                        requiresRole: ['user', 'staff', 'admin']
-                    }
-                },
-                ]
-            },
-            {
-                path: 'forget-password',
-                component: ForgetPassword,
-                name: 'forget password',
-                meta: {
-                    requiresRole: null
-                }
-            },
-            {
-                path: "shopping-cart",
-                component: ShoppingCartPage,
-                name: 'shopping cart',
-                meta: {
-                    requiresRole: null
-                }
-            },
-            // OrderPage là trang khi đang tạo đơn hàng, chưa được đặt hàng, thanh toán
-            {
-                path: "order-page",
-                component: OrderPage,
-                name: 'order page',
-                meta: {
-                    requiresRole: null
-                }
-            },
-            {
-                path: "login",
-                component: LoginPage,
-                name: 'login page',
-                meta: {
-                    requiresRole: null
-                }
-            },
             ]
         },
 
@@ -171,97 +171,97 @@ const router = new VueRouter({
                 requiresRole: ['staff', 'admin']
             },
             children: [{
-                path: '',
-                component: AdminHome,
-                meta: {
-                    requiresRole: ['staff', 'admin']
+                    path: '',
+                    component: AdminHome,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'users',
+                    component: ManageUsersPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'staffs',
+                    component: ManageStaffsPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'add-staff',
+                    component: AddStaffPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'products',
+                    component: ManageProductsPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'products/:productId',
+                    component: EditProductPage,
+                    name: 'admin product',
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'add-product',
+                    component: AddProductPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'orders',
+                    component: ManageOrdersPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'orders/:orderId',
+                    component: ManageOrderDetailPage,
+                    name: 'admin order',
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'import-products',
+                    component: ImportProductsPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'import-products/:importProductId',
+                    component: ImportProductDetailPage,
+                    name: 'admin importProduct',
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: 'add-import-poducts',
+                    component: AddImportProductPage,
+                    name: 'admin addImportProduct'
+                },
+                {
+                    path: "suppliers",
+                    component: ManageSuppliersPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
                 }
-            },
-            {
-                path: 'users',
-                component: ManageUsersPage,
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'staffs',
-                component: ManageStaffsPage,
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'add-staff',
-                component: AddStaffPage,
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'products',
-                component: ManageProductsPage,
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'products/:productId',
-                component: EditProductPage,
-                name: 'admin product',
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'add-product',
-                component: AddProductPage,
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'orders',
-                component: ManageOrdersPage,
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'orders/:orderId',
-                component: ManageOrderDetailPage,
-                name: 'admin order',
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'import-products',
-                component: ImportProductsPage,
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'import-products/:importProductId',
-                component: ImportProductDetailPage,
-                name: 'admin importProduct',
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            },
-            {
-                path: 'add-import-poducts',
-                component: AddImportProductPage,
-                name: 'admin addImportProduct'
-            },
-            {
-                path: "suppliers",
-                component: ManageSuppliersPage,
-                meta: {
-                    requiresRole: ['staff', 'admin']
-                }
-            }
 
             ]
         },
@@ -299,10 +299,11 @@ router.beforeEach((to, from, next) => {
         if (!user) {
             next({
                 path: '/login',
-                query: { redirect: to.fullPath }
+                query: {
+                    redirect: to.fullPath
+                }
             });
-        } 
-        else if (user.groups.length && user.groups.some(e => requiresRole.includes(e.name))) {
+        } else if (user.groups.length && user.groups.some(e => requiresRole.includes(e.name))) {
             next();
         } else {
             next({
