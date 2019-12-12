@@ -40,18 +40,13 @@ export default {
   },
   computed: {},
 
-  methods: {},
+  methods: {
+    async getData() {
+      await this.$store.dispatch('products/getAllProducts');
+    }
+  },
   created() {
-    this.$store
-      .dispatch("products/getAllProducts")
-      .then(resolve => {
-        // console.log("app dispatch resolve: " + resolve);
-      })
-      .catch(error =>
-        this.$store.dispatch("alert/error", {
-          message: error
-        })
-      );
+    this.getData();
   }
 };
 </script>

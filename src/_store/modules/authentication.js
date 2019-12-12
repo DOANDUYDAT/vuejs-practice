@@ -4,18 +4,7 @@ import {
 
 
 const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ?
-    {
-        status: {
-            loggedIn: true
-        },
-        user
-    } :
-    {
-        status: {},
-        user: null
-    };
-
+const initialState = user ? { status: { loggedIn: true }, user } : { status: {}, user: null };
 
 const state = initialState;
 
@@ -49,13 +38,16 @@ const actions = {
         commit,
         dispatch
     }) {
-        await userService.logout();
-        commit('logout');
-        dispatch('alert/success', {
-            message: "You are logged out!"
-        }, {
-            root: true
-        });
+        try {
+            const isSuccess = await userService.logout();
+            if (isSuccess) {
+                commit('logout');
+                return true;
+            }
+        } catch (error) {
+            throw error;
+        }
+
     },
 };
 

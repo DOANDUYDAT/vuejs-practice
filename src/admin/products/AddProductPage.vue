@@ -149,97 +149,97 @@ export default {
         {
           text: "Bảo hành",
           model: "guarantee",
-          type: ""
+          type: "text"
         },
         {
           text: "Mô tả bảo hành",
           model: "guaranteeDes",
-          type: ""
+          type: "text"
         },
         {
           text: "Tên",
           model: "name",
-          type: ""
+          type: "text"
         },
         {
           text: "Màu sắc",
           model: "color",
-          type: ""
+          type: "text"
         },
         {
           text: "Màn hình",
           model: "screen",
-          type: ""
+          type: "text"
         },
         {
           text: "Độ phân giải",
           model: "resolution",
-          type: ""
+          type: "text"
         },
         {
           text: "Camera sau",
           model: "rearCamera",
-          type: ""
+          type: "text"
         },
         {
           text: "Camera trước",
           model: "frontCamera",
-          type: ""
+          type: "text"
         },
         {
           text: "Chip",
           model: "chip",
-          type: ""
+          type: "text"
         },
         {
           text: "RAM",
           model: "ram",
-          type: ""
+          type: "text"
         },
         {
           text: "Bộ nhớ trong",
           model: "rom",
-          type: ""
+          type: "text"
         },
         {
           text: "Pin",
           model: "pin",
-          type: ""
+          type: "text"
         },
         {
           text: "Hệ điều hành",
           model: "operatingSystem",
-          type: ""
+          type: "text"
         },
         {
           text: "Cổng sạc",
           model: "chargingPort",
-          type: ""
+          type: "text"
         },
         {
           text: "Loại sim",
           model: "sim",
-          type: ""
+          type: "text"
         },
         {
           text: "Giá bán lẻ",
           model: "retailPrice",
-          type: ""
+          type: "number"
         },
         {
           text: "Giá niêm yết",
           model: "listedPrice",
-          type: ""
+          type: "number"
         },
         {
           text: "Giá khuyến mại",
           model: "promotionalPrice",
-          type: ""
+          type: "number"
         },
         {
           text: "Số lượng",
           model: "count",
-          type: ""
+          type: "number"
         }
       ]
     };

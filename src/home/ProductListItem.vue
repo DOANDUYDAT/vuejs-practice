@@ -1,5 +1,13 @@
 <template>
-  <v-card v-if="!checkProductEmpty" hover height="100%" :max-width="maxWidthItem" flat :to="{ name: 'product detail', params: { productId: product.id }}" exact>
+  <v-card
+    v-if="!checkProductEmpty"
+    hover
+    height="100%"
+    :max-width="maxWidthItem"
+    flat
+    :to="{ name: 'product detail', params: { productId: product.id }}"
+    exact
+  >
     <!-- eager giúp force các ảnh được load hết -->
     <v-img :height="heightImage" :src="product.images[0]" contain eager></v-img>
 
@@ -26,14 +34,14 @@
         :disabled="!product.inventory"
         @click="addProductToCart({ product: product, quantity: 1 })"
       >MUA</v-btn>
-    </v-card-actions> -->
+    </v-card-actions>-->
   </v-card>
 </template>
 
 <script>
 import { mapActions } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
-import _ from 'lodash';
+import _ from "lodash";
 
 export default {
   data() {
@@ -55,7 +63,7 @@ export default {
       type: Number,
       required: false,
       default: 180
-    },
+    }
   },
   computed: {
     descriptionProduct() {
@@ -66,10 +74,9 @@ export default {
       return description;
     },
     priceProduct() {
-      let price =
-        this.product.promotionalPrice.length > 0
-          ? this.product.promotionalPrice
-          : this.product.retailPrice;
+      let price = this.product.promotionalPrice.length
+        ? this.product.promotionalPrice
+        : this.product.retailPrice;
       return formatCurrency(price);
     },
     checkProductEmpty() {
@@ -83,6 +90,5 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
 

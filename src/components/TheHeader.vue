@@ -6,7 +6,7 @@
     <v-container class="px-0">
       <v-row align="center" no-gutters>
         <v-col cols="3">
-          <v-avatar size="150">
+          <v-avatar size="120">
             <v-img :src="require('@/_assets/image/logo.png')"></v-img>
           </v-avatar>
         </v-col>
@@ -33,7 +33,7 @@
             <v-list-item to="/account/profile">
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item>
-            <v-list-item to="/account/history">
+            <v-list-item to="/account/orders">
               <v-list-item-title>Lịch sử đặt hàng</v-list-item-title>
             </v-list-item>
             <v-list-item @click="logout">
@@ -93,11 +93,22 @@ export default {
     ...mapActions({
       logoutAction: "authentication/logout"
     }),
-    logout() {
-      this.logoutAction();
-      const currentPath = this.$route.path;
-      if (currentPath !== "/home") {
-        this.$router.push({ path: "/home" });
+    async logout() {
+      try {
+        const isSuccess = await this.logoutAction();
+        if (isSuccess) {
+          this.$store.dispatch("alert/success", {
+            message: "You are log out!"
+          });
+          const currentPath = this.$route.path;
+          if (currentPath !== "/home") {
+            this.$router.push({ path: "/home" });
+          }
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error
+        });
       }
     },
     goToHomePage() {

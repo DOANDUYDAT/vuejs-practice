@@ -20,7 +20,7 @@ const headers = {
 
 }
 
-const auth = authHeader();
+
 
 async function login(email, password, remember) {
     console.log('login');
@@ -56,7 +56,9 @@ async function login(email, password, remember) {
 }
 
 async function logout() {
+    
     console.log('logout');
+    const auth = authHeader();
     // remove user from local storage to log user out
     const options = {
         method: 'get',
@@ -73,6 +75,7 @@ async function logout() {
 
             console.log(response.data);
             localStorage.removeItem('user');
+            return true;
         }
     } catch (error) {
         throw error;
@@ -96,9 +99,12 @@ async function register(userInfo) {
         },
         data: JSON.stringify(data)
     };
+    // const response = await axios(options);
+    // console.log(response);
     try {
         const response = await axios(options);
         console.log(response.status);
+        console.log(response);
         if (response.status === 201) {
             console.log(response.data);
             return true;
@@ -109,7 +115,9 @@ async function register(userInfo) {
 }
 
 async function getProfile() {
+    
     console.log('getProfile');
+    const auth = authHeader();
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/profile`,
@@ -135,6 +143,7 @@ async function getProfile() {
 
 async function updateProfile(userInfo) {
     console.log('updateProfile');
+    const auth = authHeader();
     const data = {
         last_name: userInfo.lastName,
         first_name: userInfo.firstName,
