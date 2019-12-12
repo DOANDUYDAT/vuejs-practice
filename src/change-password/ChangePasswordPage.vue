@@ -119,15 +119,21 @@ export default {
     async submit() {
       try {
         const isValid = await this.$refs.observer.validate();
-        this.$store.dispatch("alert/addAlert", {
-          type: "success",
-          message: "Reset Password successfully!"
-        });
-        this.dialog = false;
+        if (isValid) {
+          const { oldPassword, password } = this;
+          const isSuccess = await userService.changePassword({
+            oldPassword,
+            password
+          });
+          if (isSuccess) {
+            this.$store.dispatch("alert/success", {
+              message: "Reset Password successfully!"
+            });
+          }
+        }
       } catch (error) {
-        this.$store.dispatch("alert/addAlert", {
-          type: "error",
-          message: "Reset Password error!"
+        this.$store.dispatch("alert/error", {
+          message: error.name
         });
       }
     }

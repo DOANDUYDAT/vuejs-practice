@@ -99,7 +99,7 @@ export default {
   },
   computed: {
     ...mapState({
-      products: state => state.products.all
+      products: state => state.products.allProducts
     }),
     listProducts() {
       // listProducts = this.order.listProducts

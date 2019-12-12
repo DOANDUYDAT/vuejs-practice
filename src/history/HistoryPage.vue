@@ -27,6 +27,7 @@
 
 <script>
 import { formatCurrency } from "../_api/format-currency";
+import { orderService } from "@/_api";
 
 export default {
   data() {
@@ -37,7 +38,7 @@ export default {
           text: "Mã đơn hàng",
           align: "center",
           sortable: false,
-          value: "orderId"
+          value: "id"
         },
         { text: "Ngày đặt hàng", align: "center", value: "created" },
         { text: "Tổng đơn", align: "center", value: "total" },
@@ -50,61 +51,61 @@ export default {
       ],
       orders: [
         {
-          orderId: 1,
+          id: 1,
           created: "10/11/2019",
           total: "22990000",
           status: "Đang giao hàng"
         },
         {
-          orderId: 2,
+          id: 2,
           created: "10/09/2018",
           total: "9299000",
           status: "Hoàn thành"
         },
         {
-          orderId: 3,
+          id: 3,
           created: "10/11/2018",
           total: "82990000",
           status: "Hoàn thành"
         },
         {
-          orderId: 4,
+          id: 4,
           created: "06/11/2017",
           total: "72990000",
           status: "Hoàn thành"
         },
         {
-          orderId: 5,
+          id: 5,
           created: "10/07/2018",
           total: "52990000",
           status: "Hoàn thành"
         },
         {
-          orderId: 6,
+          id: 6,
           created: "19/04/2018",
           total: "22990000",
           status: "Hoàn thành"
         },
         {
-          orderId: 7,
+          id: 7,
           created: "03/12/2019",
           total: "12990000",
           status: "Hoàn thành"
         },
         {
-          orderId: 8,
+          id: 8,
           created: "10/05/2018",
           total: "42990000",
           status: "Hoàn thành"
         },
         {
-          orderId: 9,
+          id: 9,
           created: "20/07/2019",
           total: "32990000",
           status: "Hoàn thành"
         },
         {
-          orderId: 10,
+          id: 10,
           created: "31/12/2018",
           total: "2299000",
           status: "Hoàn thành"
@@ -115,7 +116,7 @@ export default {
   computed: {},
   methods: {
     goToOrderDetailPage(order) {
-      this.$router.push({ name: 'orders', params: { orderId: order.orderId } });
+      this.$router.push({ name: 'orders', params: { id: order.id } });
     }
   }
 };
