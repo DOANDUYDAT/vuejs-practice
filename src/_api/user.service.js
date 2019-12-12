@@ -107,7 +107,6 @@ async function register(userInfo) {
         console.log(response.status);
         console.log(response);
         if (response.status === 201) {
-
             console.log(response.data);
             return true;
         }

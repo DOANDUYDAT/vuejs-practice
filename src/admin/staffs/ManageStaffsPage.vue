@@ -26,7 +26,7 @@
         <v-dialog v-model="dialog" max-width="650px">
           <!-- <template v-slot:activator="{ on }">
             <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
-          </template> -->
+          </template>-->
           <v-card>
             <v-toolbar color="gg-red" dark flat>
               <v-card-title class="flex-grow-1 justify-center">
@@ -46,7 +46,7 @@
                     <v-text-field v-model="editedItem.email" label="Email" outlined></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
-                    <v-select :items="role" v-model="editedItem.role" label="Role" outlined></v-select>
+                    <v-select :items="roles" v-model="editedItem.role" label="Role" outlined></v-select>
                   </v-col>
                 </v-row>
               </v-container>
@@ -72,7 +72,7 @@ export default {
   data: () => ({
     dialog: false,
     search: "",
-    role: ["Nhân viên", "Quản trị viên"],
+    roles: ["Staff", "Admin"],
     headers: [
       {
         text: "Staff Id",
@@ -112,7 +112,6 @@ export default {
     }
   },
 
-
   watch: {
     dialog(val) {
       val || this.close();
@@ -130,19 +129,19 @@ export default {
           staffId: 1,
           name: "Le Thanh",
           email: "lethanh98@gmail.com",
-          role: "Nhân viên"
+          role: "Staff"
         },
         {
           staffId: 2,
           name: "Duong Thoa",
           email: "duongthoa98@gmail.com",
-          role: "Nhân viên"
+          role: "Staff"
         },
         {
           staffId: 3,
           name: "Doan Dat",
           email: "doandat98@gmail.com",
-          role: "Nhân viên"
+          role: "Staff"
         }
       ];
     },
@@ -174,7 +173,7 @@ export default {
         this.staffs.push(this.editedItem);
       }
       this.close();
-    },
+    }
   }
 };
 </script>

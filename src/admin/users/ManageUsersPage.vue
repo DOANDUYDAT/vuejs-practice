@@ -42,7 +42,7 @@
                         </v-subheader>
                       </v-col>
                       <v-col cols="9">
-                        <v-select v-model="editedItem.role" :items="roles" label="Select"></v-select>
+                        <v-select outlined v-model="editedItem.role" :items="roles" label="Role"></v-select>
                       </v-col>
                     </v-row>
                   </v-col>
