@@ -36,27 +36,28 @@ async function getAllOrders() {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             const data = response.data;
             const orders = data.map(e => {
                 return {
                     id: data.id,
-                    user: {
-                        phone: data.user.phone,
-                        name: data.user.name,
-                        address: data.user.address
-                    },
+                    userId: data.user,
+                    phone: data.phone,
+                    name: data.name,
+                    address: data.address,
                     items: data.items,
                     note: data.note,
-                    status: data.status
+                    status: data.status,
+                    createdAt: data.create_at,
+                    total: data.total
                 }
             })
             return orders;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -66,13 +67,12 @@ async function createOrder(order) {
     console.log('createOrder');
     const auth = authHeader();
     const data = {
-        user: {
-            name: order.name,
-            phone: order.phone,
-            address: order.address,
-        },
+        name: order.name,
+        phone: order.phone,
+        address: order.address,
         items: order.items,
-        note: order.note
+        note: order.note,
+        total: order.total
     }
     console.log(data);
     const options = {
@@ -86,13 +86,13 @@ async function createOrder(order) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 201) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -110,9 +110,8 @@ async function getOrder(orderId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             const data = response.data;
             const order = {
@@ -129,6 +128,7 @@ async function getOrder(orderId) {
             return order;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -151,13 +151,13 @@ async function updateOrder(order) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 204) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -175,13 +175,13 @@ async function deleteOrder(orderId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 204) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }

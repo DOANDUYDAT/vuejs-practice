@@ -60,6 +60,7 @@
 
 <script>
 import _ from "lodash";
+import { productService } from "@/_api";
 
 export default {
   data() {
@@ -67,7 +68,6 @@ export default {
       rating: 3.5,
       number: 25,
       review: {
-        user: "",
         content: "",
         vote: 0
       }
@@ -85,6 +85,7 @@ export default {
     async submit() {
       const review = this.review;
       const productId = this.$route.params.productId;
+      console.log(review);
       try {
         const isSuccess = await productService.createReview(review, productId);
         if (isSuccess) {

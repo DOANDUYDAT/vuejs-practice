@@ -37,9 +37,8 @@ async function getAllProducts() {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             const data = response.data;
             let allProducts = [];
@@ -76,6 +75,7 @@ async function getAllProducts() {
             return allProducts;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -118,13 +118,13 @@ async function createProduct(product) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 201) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -140,9 +140,8 @@ async function getProduct(productId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             const data = response.data;
             const product = {
@@ -173,6 +172,7 @@ async function getProduct(productId) {
             return product;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -215,13 +215,14 @@ async function updateProduct(product) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
 
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -240,13 +241,14 @@ async function deleteProduct(productId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 204) {
 
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -262,9 +264,8 @@ async function getAllComments(productId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             const data = response.data;
             let allComments = [];
@@ -282,6 +283,7 @@ async function getAllComments(productId) {
             return allComments;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -305,13 +307,13 @@ async function createComment(comment, productId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 201) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -327,7 +329,7 @@ async function getAllReviews(productId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
 
             console.log(response.data);
@@ -347,6 +349,7 @@ async function getAllReviews(productId) {
             return allComments;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -355,7 +358,6 @@ async function createReview(review, productId) {
     console.log('createReview');
     const auth = authHeader();
     const data = {
-        user: review.user,
         content: review.content,
         vote: review.vote
     };
@@ -371,13 +373,13 @@ async function createReview(review, productId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 201) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }

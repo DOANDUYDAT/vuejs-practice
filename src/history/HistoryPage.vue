@@ -5,23 +5,28 @@
         <span class="headline">Đơn hàng của tôi</span>
       </v-card-title>
     </v-toolbar>
-    <v-card-title>
-      <v-spacer></v-spacer><v-spacer></v-spacer><v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      @click:row="goToOrderDetailPage"
-      style="font-size: 1rem;"
-      :headers="headers"
-      :items="orders"
-      :search="search"
-    ></v-data-table>
+    <div v-if="orders.length">
+      <v-card-title>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        @click:row="goToOrderDetailPage"
+        style="font-size: 1rem;"
+        :headers="headers"
+        :items="orders"
+        :search="search"
+      ></v-data-table>
+    </div>
+    <div v-else class="headline text-center py-5">Bạn chưa có đơn hàng nào</div>
   </v-card>
 </template>
 
@@ -40,7 +45,7 @@ export default {
           sortable: false,
           value: "id"
         },
-        { text: "Ngày đặt hàng", align: "center", value: "created" },
+        { text: "Ngày đặt hàng", align: "center", value: "createdAt" },
         { text: "Tổng đơn", align: "center", value: "total" },
         {
           text: "Trạng thái đơn hàng",
@@ -49,75 +54,20 @@ export default {
           value: "status"
         }
       ],
-      orders: [
-        {
-          id: 1,
-          created: "10/11/2019",
-          total: "22990000",
-          status: "Đang giao hàng"
-        },
-        {
-          id: 2,
-          created: "10/09/2018",
-          total: "9299000",
-          status: "Hoàn thành"
-        },
-        {
-          id: 3,
-          created: "10/11/2018",
-          total: "82990000",
-          status: "Hoàn thành"
-        },
-        {
-          id: 4,
-          created: "06/11/2017",
-          total: "72990000",
-          status: "Hoàn thành"
-        },
-        {
-          id: 5,
-          created: "10/07/2018",
-          total: "52990000",
-          status: "Hoàn thành"
-        },
-        {
-          id: 6,
-          created: "19/04/2018",
-          total: "22990000",
-          status: "Hoàn thành"
-        },
-        {
-          id: 7,
-          created: "03/12/2019",
-          total: "12990000",
-          status: "Hoàn thành"
-        },
-        {
-          id: 8,
-          created: "10/05/2018",
-          total: "42990000",
-          status: "Hoàn thành"
-        },
-        {
-          id: 9,
-          created: "20/07/2019",
-          total: "32990000",
-          status: "Hoàn thành"
-        },
-        {
-          id: 10,
-          created: "31/12/2018",
-          total: "2299000",
-          status: "Hoàn thành"
-        }
-      ]
+      orders: []
     };
   },
   computed: {},
   methods: {
     goToOrderDetailPage(order) {
-      this.$router.push({ name: 'orders', params: { id: order.id } });
+      this.$router.push({ name: "orders", params: { id: order.id } });
+    },
+    async getData() {
+      this.orders = await orderService.getAllOrders();
     }
+  },
+  created() {
+    this.getData();
   }
 };
 </script>

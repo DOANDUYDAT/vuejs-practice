@@ -141,7 +141,7 @@ export default {
     address: "",
     phone: "",
     note: "",
-    user: {}
+    userInfoInfo: {}
   }),
   computed: {
     ...mapState({
@@ -169,10 +169,10 @@ export default {
       return formatCurrency(total);
     },
     async getData() {
-      this.user = await userService.getProfile();
-      this.name = this.user.first_name + this.user.last_name;
-      this.address = this.user.address;
-      this.phone = this.user.phone;
+      this.userInfo = await userInfoService.getProfile();
+      this.name = this.userInfo.first_name + this.userInfo.last_name;
+      this.address = this.userInfo.address;
+      this.phone = this.userInfo.phone;
     },
     async order() {
       const { name, address, phone, note, products } = this;
@@ -181,7 +181,8 @@ export default {
         phone,
         address,
         note,
-        products
+        products,
+        total
       };
       try {
         const isSuccess = await this.$store.dispatch("cart/checkout", order);

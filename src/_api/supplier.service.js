@@ -33,14 +33,14 @@ async function getAllSuppliers() {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             let suppliers = response.data;
             return suppliers;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -64,13 +64,13 @@ async function createSupplier(supplier) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 201) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -86,14 +86,14 @@ async function getSupplier(supplierId) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             let product = response.data;
             return product;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -116,13 +116,13 @@ async function updateSupplier(supplier) {
     };
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -140,13 +140,13 @@ async function deleteSupplier(supplierId) {
     }
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 204) {
-
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
