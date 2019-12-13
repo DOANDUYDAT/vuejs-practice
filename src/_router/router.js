@@ -273,6 +273,7 @@ const router = new VueRouter({
                 requiresRole: null
             }
         },
+
         {
             path: '*',
             component: ErrorPage,

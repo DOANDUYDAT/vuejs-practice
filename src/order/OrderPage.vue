@@ -173,7 +173,7 @@ export default {
     },
     async getData() {
       this.user = await userService.getProfile();
-      this.name = this.user.first_name + this.user.last_name;
+      this.name = this.user.first_name + ' ' +this.user.last_name;
       this.address = this.user.address;
       this.phone = this.user.phone;
     }
