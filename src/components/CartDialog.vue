@@ -44,7 +44,7 @@
       </v-container>
     </v-card>
 
-    <v-card v-else :width="450">
+    <v-card v-else :width="300">
       <v-img
         class="white--text mx-auto"
         max-width="250"
@@ -117,7 +117,5 @@ export default {
 </script>
 
 <style scoped>
-v-btn-tpggle v-btn {
-  min-width: 2rem;
-}
+
 </style>

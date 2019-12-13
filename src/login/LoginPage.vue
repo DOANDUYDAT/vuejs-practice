@@ -126,9 +126,9 @@ export default {
           }
         }
       } catch (error) {
-        if (error) {
+        if (error.response) {
           this.$store.dispatch("alert/error", {
-            message: error
+            message: error.response.data.message
           });
         }
       }

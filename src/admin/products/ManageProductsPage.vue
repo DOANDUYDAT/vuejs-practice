@@ -87,9 +87,11 @@ export default {
           });
         }
       } catch (error) {
-        this.$store.dispatch("alert/error", {
-          message: error
-        });
+        if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data.message
+          });
+        }
       }
     },
 

@@ -11,7 +11,8 @@ export const userService = {
     register,
     getProfile,
     updateProfile,
-    resetPassword
+    resetPassword,
+    changePassword
 };
 
 const headers = {
@@ -40,23 +41,22 @@ async function login(email, password, remember) {
     try {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-
             console.log(response.data);
             let user = response.data;
             localStorage.setItem('user', JSON.stringify(user));
             return true;
         }
     } catch (error) {
-        // console.log('errr: ' + error);
+        console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function logout() {
-    
+
     console.log('logout');
     const auth = authHeader();
     // remove user from local storage to log user out
@@ -70,14 +70,14 @@ async function logout() {
     }
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             localStorage.removeItem('user');
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         throw error;
     }
 }
@@ -103,19 +103,19 @@ async function register(userInfo) {
     // console.log(response);
     try {
         const response = await axios(options);
-        console.log(response.status);
         console.log(response);
         if (response.status === 201) {
             console.log(response.data);
             return true;
         }
     } catch (error) {
+        console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getProfile() {
-    
+
     console.log('getProfile');
     const auth = authHeader();
     const options = {
@@ -128,15 +128,14 @@ async function getProfile() {
     }
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
             const user = response.data;
-
             console.log(response.data);
             return user;
         }
-
     } catch (error) {
+        console.log(error.response);
         throw error;
     }
 }
@@ -164,14 +163,14 @@ async function updateProfile(userInfo) {
     }
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             return true;
         }
 
     } catch (error) {
+        console.log(error.response);
         throw error;
     }
 }
@@ -191,14 +190,42 @@ async function resetPassword(email) {
     }
     try {
         const response = await axios(options);
-        console.log(response.status);
+        console.log(response);
         if (response.status === 200) {
-
             console.log(response.data);
             return true;
         }
-
     } catch (error) {
+        console.log(error.response);
+        throw error;
+    }
+}
+
+async function changePassword({ oldPasword, password }) {
+    console.log('changePassword');
+    const data = {
+        old_pasword: oldPasword,
+        password: password
+    };
+    const auth = authHeader();
+    const options = {
+        method: 'post',
+        url: `${config.apiUrl}/users/change-password`,
+        headers: {
+            ...headers,
+            ...auth
+        },
+        data: JSON.stringify(data)
+    }
+    try {
+        const response = await axios(options);
+        console.log(response);
+        if (response.status === 200) {
+            console.log(response.data);
+            return true;
+        }
+    } catch (error) {
+        console.log(error.response);
         throw error;
     }
 }

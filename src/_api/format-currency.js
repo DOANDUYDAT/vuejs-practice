@@ -1,5 +1,4 @@
 export function formatCurrency(total = 0) {
-  console.log(total);
   let total_str = total.toString();
   // number là số lượng phần tử trong 1 block
   let number = 3;

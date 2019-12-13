@@ -17,12 +17,6 @@ export default {
     CommentList,
     CommentBox
   },
-  mounted() {
-    console.log('CommentProduct mounted');
-  },
-  updated(){
-    console.log('CommentProduct updated')
-  }
 };
 </script>
 

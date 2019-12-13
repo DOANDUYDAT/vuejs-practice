@@ -65,9 +65,9 @@
           <div class="my-avatar">
             <!-- <v-row justify="center">
             <v-col>-->
-            <div v-if="product.images.length > 0">
+            <div v-if="imagesShow.length">
               <v-avatar
-                v-for="(image, i) in product.images"
+                v-for="(image, i) in imagesShow"
                 class="profile ma-1"
                 color="grey"
                 size="164"
@@ -122,6 +122,7 @@ export default {
     return {
       suppliers: [],
       supplierId: "",
+      imagesShow: [],
       product: {
         guarantee: "",
         guaranteeDes: "",
@@ -272,17 +273,22 @@ export default {
           this.resetInput();
         }
       } catch (error) {
-        this.$store.dispatch("alert/error", {
-          message: error
-        });
+        if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data.message
+          });
+        }
       }
     },
     handleFileUpload(files) {
       this.product.images = [];
       for (let i = 0; i < files.length; i++) {
+        // this.product.images.push({ image: files[i]});
+        this.product.images.push(files[i]);
         let reader = new FileReader();
         reader.onload = function() {
-          this.product.images.push(reader.result);
+          // this.imagesShow.push({ image: reader.result});
+          this.imagesShow.push(reader.result);
         }.bind(this);
         reader.readAsDataURL(files[i]);
       }
