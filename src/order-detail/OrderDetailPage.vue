@@ -22,11 +22,11 @@
           <td class="text-center">{{ index + 1 }}</td>
           <td class="text-center">{{ product.id }}</td>
           <td>
-            <v-img contain :height="80" :width="80" class="mx-auto" :src="product.images[0]"></v-img>
+            <v-img contain :height="80" :width="80" class="mx-auto" :src="product.image"></v-img>
           </td>
-          <td class="text-left">{{ product.title }}</td>
+          <td class="text-left">{{ product.name }}</td>
           <td class="text-center">{{ product.quantity }}</td>
-          <td class="text-center">{{ formatCurrency(price(product)) }}đ</td>
+          <td class="text-center">{{ formatCurrency(product.price) }}đ</td>
         </tr>
       </tbody>
       <!-- <v-divider></v-divider> -->
@@ -51,59 +51,43 @@
 <script>
 import { mapState } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
-import { orderService } from "@/_api";
+import { orderService, productService } from "@/_api";
 
 export default {
   data() {
     return {
-      order: { id, listProducts: []}
+      order: {},
+      listProducts: []
     };
   },
   computed: {
-    ...mapState({
-      products: state => state.products.all
-    }),
-    listProducts() {
-      // listProducts = this.order.listProducts
-      let listProducts = this.products.slice(0, 4);
-      listProducts = listProducts.map(product => {
-        const productFake = {
-          ...product,
-          quantity: Math.floor(Math.random() * 3) + 1
-        };
-        return productFake;
-      });
-      return listProducts;
-    },
-    total() {
-      let total = 0;
-      for (let i = 0; i < this.listProducts.length; i++) {
-        const product = this.listProducts[i];
-        total += product.quantity * this.price(product);
-      }
-      return total;
-    },
     orderId() {
       return this.$route.params.orderId;
+    },
+    total() {
+      return this.order.total;
     }
   },
   methods: {
-    price(product) {
-      return product.gia_khuyen_mai.length > 0
-        ? product.gia_khuyen_mai
-        : product.gia_ban_le;
-    },
-    formatCurrency(price) {
-      return formatCurrency(price);
+    formatCurrency(total) {
+      return formatCurrency(total);
     },
     async getData() {
       const orderId = this.orderId;
       this.order = await orderService.getOrder(orderId);
+      this.listProducts = this.order.items.map(e => {
+        return {
+          id: e.product.id,
+          quantity: e.quantity,
+          name: e.product.name,
+          price: e.product.price,
+          image: e.product.images[0]
+        }
+      })
     }
   },
   created() {
-    //gọi api để nhạn thông tin về đơn hàng
-    // this.order = data
+    this.getData();
   }
 };
 </script>

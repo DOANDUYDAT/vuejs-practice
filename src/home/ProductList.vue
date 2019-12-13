@@ -49,7 +49,7 @@ export default {
     //   products: state => state.products.allProducts
     // })
   },
-  method: {
+  methods: {
     async getData() {
       const query = this.$route.query.search;
       if (query) {

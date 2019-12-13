@@ -68,7 +68,7 @@ async function createOrder(order) {
     const auth = authHeader();
     const items = order.products.map(e => {
         return {
-            productId: e.id,
+            product_id: e.id,
             quantity: e.quantity
         }
     })
@@ -122,14 +122,15 @@ async function getOrder(orderId) {
             const data = response.data;
             const order = {
                 id: data.id,
-                user: {
-                    phone: data.user.phone,
-                    name: data.user.name,
-                    address: data.user.address
-                },
-                note: data.note,
+                user: data.user,
+                phone: data.phone,
+                name: data.name,
+                address: data.address,
                 items: data.items,
-                status: data.status
+                note: data.note,
+                status: data.status,
+                createdAt: data.create_at,
+                total: data.total
             };
             return order;
         }

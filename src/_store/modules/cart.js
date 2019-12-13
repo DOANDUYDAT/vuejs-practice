@@ -37,8 +37,7 @@ const getters = {
     let total = getters.cartProducts.reduce((total, product) => {
       return total + product.price * product.quantity
     }, 0);
-    let result = formatCurrency(total);
-    return result;
+    return total;
   }
 }
 
