@@ -5,11 +5,11 @@
       <v-col cols="6">
         <v-img
           class="center"
-          max-width="600"
-          max-height="400"
+          max-width="100%"
+          max-height="100%"
           :src="require('@/_assets/image/403.gif')"
         ></v-img>
-        <v-row justify="center">
+        <v-row justify="center" class="mt-2">
           <div class="mx-auto">
             <v-btn
               class="white--text"

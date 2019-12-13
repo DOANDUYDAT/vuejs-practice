@@ -23,22 +23,25 @@
           <v-col cols="6"></v-col>
           <v-col cols="6">Tổng tiền: {{ total }}đ</v-col>
         </v-row>
+
         <v-card-actions>
-          <v-btn
-            color="gg-red"
-            class="ma-2"
-            outlined
-            :disabled="!products.length"
-            @click="cartdetail"
-          >Xem chi tiết</v-btn>
-          <v-btn
-            color="gg-red"
-            tile
-            dark
-            class="ma-2"
-            :disabled="!products.length"
-            @click="goToOrderPage"
-          >Đặt hàng ngay</v-btn>
+          <v-row class="px-8" justify="space-between">
+            <v-btn
+              color="gg-red"
+              class="ma-2"
+              outlined
+              :disabled="!products.length"
+              @click="cartdetail"
+            >Xem chi tiết</v-btn>
+            <v-btn
+              color="gg-red"
+              tile
+              dark
+              class="ma-2"
+              :disabled="!products.length"
+              @click="goToOrderPage"
+            >Đặt hàng ngay</v-btn>
+          </v-row>
         </v-card-actions>
         <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
       </v-container>
