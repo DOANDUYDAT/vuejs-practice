@@ -6,14 +6,25 @@ export function formatCurrency(total = 0) {
   let start = total_str.length - total_block * number;
   // tiến hành phân cụm 
   let temp = [];
-  for (let i = start; i < total_str.length; i += number) {
-    temp.push(total_str.substr(i, number));
-  }
   let result = '';
-  if (start > 0) {
-    result = total_str.substr(0, start) + '.' + temp.join('.');
+  if( total_str.length <= number) {
+    result = total_str;
   } else {
-    result = temp.join('.');
+    for (let i = start; i < total_str.length; i += number) {
+      temp.push(total_str.substr(i, number));
+    }
+    if (start > 0) {
+      result = total_str.substr(0, start) + '.' + temp.join('.');
+    } else {
+      result = temp.join('.');
+    }
   }
+  // if (start > 0) {
+  //   result = total_str.substr(0, start) + temp.join('.');
+  // } else if (temp.length > 1 && start <= 0) {
+  //   result = temp.join('.');
+  // } else {
+  //   result = temp.join('');
+  // }
   return result;
 }
