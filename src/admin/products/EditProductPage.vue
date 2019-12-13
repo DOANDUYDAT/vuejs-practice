@@ -58,6 +58,7 @@
           accept="image/*"
           full-width
           label="Thêm ảnh"
+          :disabled="disabled"
         ></v-file-input>
       </v-col>
     </v-row>
