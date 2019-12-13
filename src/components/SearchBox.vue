@@ -14,22 +14,22 @@
       @keyup.enter="searchProduct"
       append-icon="mdi-magnify"
       @click:append="searchProduct"
-      @blur="onBlur"
+      @focus="querySelections"
       label="Search"
     ></v-text-field>
     <!-- <v-expand-transition> -->
-      <v-card v-if="itemsSearch.length && result" class="search__result mx-auto" :width="600" light>
-        <v-list>
-          <v-list-item-group v-model="search">
-            <v-list-item
-              class="subtitle-1 py-1"
-              v-for="item in itemsSearch"
-              :key="item.id"
-              :value="item.name"
-            >{{ item.name }}</v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-card>
+    <v-card v-if="itemsSearch.length && result" class="search__result mx-auto" :width="600" light>
+      <v-list>
+        <v-list-item-group>
+          <v-list-item
+            class="subtitle-1 py-1"
+            v-for="item in itemsSearch"
+            :key="item.id"
+            @click="goToProductDetailPage(item.id)"
+          >{{ item.name }}</v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-card>
     <!-- </v-expand-transition> -->
   </div>
 </template>
@@ -85,15 +85,24 @@ export default {
     },
     async searchProduct() {
       const query = this.search;
-      this.$router.push({ path: '/home', query: { search: query }});
+      this.$router.push({ path: "/home", query: { search: query } });
     },
     async getData() {
       this.products = await productService.getAllProducts();
     },
     onBlur() {
-      setTimeout(() => {
-        this.result = false;
-      }, 100);
+      this.result = false;
+      console.log('hello')
+    },
+    goToProductDetailPage(productId) {
+      this.result = false;
+      this.search = "";
+      const currentPath = this.$route.fullPath;
+      const url = `/products/${productId}`;
+      if (currentPath !== url) {
+        this.$router.push(url);
+      }
+      
     }
   },
   created() {
