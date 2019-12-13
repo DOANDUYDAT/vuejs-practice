@@ -111,7 +111,7 @@ async function createProduct(product) {
         method: 'post',
         url: `${config.apiUrl}/products/`,
         headers: {
-            ...headers,
+            'Content-Type': 'multipart/form-data, application/json',
             ...auth
         },
         data: JSON.stringify(data)
@@ -208,7 +208,7 @@ async function updateProduct(product) {
         method: 'put',
         url: `${config.apiUrl}/products/${product.id}/`,
         headers: {
-            ...headers,
+            'Content-Type': 'multipart/form-data, application/json',
             ...auth
         },
         data: JSON.stringify(data)

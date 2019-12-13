@@ -74,7 +74,7 @@
                 tile
                 :key="i"
               >
-                <v-img :src="image.image"></v-img>
+                <v-img :src="image"></v-img>
               </v-avatar>
             </div>
             <!-- </v-col>
