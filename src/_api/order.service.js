@@ -66,11 +66,17 @@ async function getAllOrders() {
 async function createOrder(order) {
     console.log('createOrder');
     const auth = authHeader();
+    const items = order.products.map(e => {
+        return {
+            productId: e.id,
+            quantity: e.quantity
+        }
+    })
     const data = {
         name: order.name,
         phone: order.phone,
         address: order.address,
-        items: order.products,
+        items: items,
         note: order.note,
         total: order.total
     }

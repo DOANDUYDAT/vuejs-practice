@@ -36,7 +36,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { productService } from "@/_api";
+import { productService, searchService } from "@/_api";
 
 export default {
   data() {
@@ -83,8 +83,9 @@ export default {
       }
       this.loading = false;
     },
-    searchProduct() {
-      console.log(this.search);
+    async searchProduct() {
+      const query = this.search;
+      this.$router.push({ path: '/home', query: { search: query }});
     },
     async getData() {
       this.products = await productService.getAllProducts();

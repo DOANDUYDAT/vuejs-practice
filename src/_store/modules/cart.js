@@ -22,7 +22,7 @@ const getters = {
         return {
           id: product.id,
           name: product.name,
-          price: product.promotionalPrice ? product.promotionalPrice : product.retailPrice,
+          price: product.promotionalPrice ? product.promotionalPrice : product.listedPrice,
           image: product.images[0],
           quantity
         }

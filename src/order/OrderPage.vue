@@ -184,8 +184,7 @@ export default {
         products,
         total
       };
-      console.log(order);
-      
+
       try {
         const isSuccess = await this.$store.dispatch("cart/checkout", order);
         if (isSuccess) {
