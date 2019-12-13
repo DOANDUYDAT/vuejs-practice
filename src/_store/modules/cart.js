@@ -44,7 +44,7 @@ const getters = {
 
 // actions
 const actions = {
-  async checkout({ commit, state }, products) {
+  async checkout({ commit, state }, order) {
     const savedCartItems = [...state.items]
     commit('setCheckoutStatus', null)
     // empty cart
@@ -59,31 +59,30 @@ const actions = {
           commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
         })
         localStorage.removeItem('cart');
+        return true;
       }
     } catch (error) {
-      () => {
         commit('setCheckoutStatus', 'failed')
         // rollback to the cart saved before sending the request
         commit('setCartItems', { items: savedCartItems })
-      }
     }
 
-    shop.buyProducts(
-      products,
-      () => {
-        commit('setCheckoutStatus', 'successful')
-        // remove  item from stock
-        products.forEach((product) => {
-          commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
-        })
-        localStorage.removeItem('cart');
-      },
-      () => {
-        commit('setCheckoutStatus', 'failed')
-        // rollback to the cart saved before sending the request
-        commit('setCartItems', { items: savedCartItems })
-      }
-    )
+    // shop.buyProducts(
+    //   products,
+    //   () => {
+    //     commit('setCheckoutStatus', 'successful')
+    //     // remove  item from stock
+    //     products.forEach((product) => {
+    //       commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
+    //     })
+    //     localStorage.removeItem('cart');
+    //   },
+    //   () => {
+    //     commit('setCheckoutStatus', 'failed')
+    //     // rollback to the cart saved before sending the request
+    //     commit('setCartItems', { items: savedCartItems })
+    //   }
+    // )
   },
 
   addProductToCart({ state, commit }, { product, quantity }) {

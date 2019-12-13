@@ -71,10 +71,10 @@
     </template>
     <template v-slot:item.action="{ item }">
       <v-icon small class="mr-2" @click.stop="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
-      <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
+      <!-- <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon> -->
     </template>
     <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize">Reset</v-btn>
+      <v-btn color="primary" @click="getData">Reset</v-btn>
     </template>
     <template v-slot:item.status="{ item }">
       <v-chip :color="getColor(item.status)" dark>{{ item.status }}</v-chip>
@@ -84,6 +84,7 @@
 
 <script>
 import { fakeOrders } from "@/_helpers/fake-orders";
+import { orderService } from "@/_api";
 
 export default {
   data: () => ({
@@ -97,20 +98,20 @@ export default {
         sortable: false,
         filterable: true
       },
-      { text: "User Id", value: "userId", sortable: false, filterable: false },
+      { text: "User Id", value: "user.id", sortable: false, filterable: false },
       {
-        text: "User name",
-        value: "username",
+        text: "User email",
+        value: "user.email",
         sortable: true,
         filterable: false
       },
-      {
-        text: "Staff Id",
-        value: "staffId",
-        sortable: false,
-        filterable: false
-      },
-      { text: "Date", value: "date", sortable: true, filterable: false },
+      // {
+      //   text: "Staff Id",
+      //   value: "staffId",
+      //   sortable: false,
+      //   filterable: false
+      // },
+      { text: "Date", value: "createdAt", sortable: true, filterable: false },
       { text: "Status", value: "status", sortable: true, filterable: false },
       { text: "Actions", value: "action", sortable: false, filterable: false }
     ],
@@ -120,16 +121,16 @@ export default {
       id: 0,
       userId: 0,
       username: "",
-      staffId: 0,
-      date: null,
+      // staffId: 0,
+      createdAt: null,
       status: ""
     },
     defaultItem: {
       id: 0,
       userId: 0,
       username: "",
-      staffId: 0,
-      date: null,
+      // staffId: 0,
+      createdAt: null,
       status: ""
     }
   }),
@@ -145,14 +146,11 @@ export default {
       val || this.close();
     }
   },
-
-  created() {
-    this.initialize();
-  },
-
   methods: {
-    initialize() {
-      this.orders = fakeOrders();
+    async getData() {
+      // const allOrders = await orderService.getAllOrders();
+      this.orders = await orderService.getAllOrders()
+      // this.orders = fakeOrders();
     },
 
     editItem(item) {
@@ -161,10 +159,28 @@ export default {
       this.dialog = true;
     },
 
-    deleteItem(item) {
-      const index = this.orders.indexOf(item);
-      confirm("Are you sure you want to delete this item?") &&
-        this.orders.splice(index, 1);
+    async deleteItem(item) {
+      const orderId = item.id;
+      const confirmStatus = confirm(
+        "Are you sure you want to delete this item?"
+      );
+      if (confirmStatus) {
+        try {
+          const isSuccess = await orderService.deleteOrder(orderId);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Delete Successfully!"
+            });
+          }
+        } catch (error) {
+          if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data.message
+          });
+        }
+        }
+      }
     },
 
     close() {
@@ -193,6 +209,9 @@ export default {
     goToOrderDetailPage(order) {
       this.$router.push({ name: 'admin order', params: { orderId: order.orderId } });
     }
+  },
+   created() {
+    this.getData();
   }
 };
 </script>

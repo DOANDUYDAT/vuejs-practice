@@ -78,7 +78,7 @@
             </v-subheader>
           </v-col>
           <v-card-actions>
-            <v-btn class="mb-3 mx-auto" color="red" tile dark @click="order">Đặt hàng</v-btn>
+            <v-btn class="mb-3 mx-auto" color="red" tile dark @click="checkout">Đặt hàng</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -174,8 +174,8 @@ export default {
       this.address = this.userInfo.address;
       this.phone = this.userInfo.phone;
     },
-    async order() {
-      const { name, address, phone, note, products } = this;
+    async checkout() {
+      const { name, address, phone, note, products, total } = this;
       const order = {
         name,
         phone,
@@ -184,6 +184,8 @@ export default {
         products,
         total
       };
+      console.log(order);
+      
       try {
         const isSuccess = await this.$store.dispatch("cart/checkout", order);
         if (isSuccess) {

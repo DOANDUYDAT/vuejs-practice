@@ -43,7 +43,7 @@ async function getAllOrders() {
             const orders = data.map(e => {
                 return {
                     id: data.id,
-                    userId: data.user,
+                    user: data.user,
                     phone: data.phone,
                     name: data.name,
                     address: data.address,
@@ -70,7 +70,7 @@ async function createOrder(order) {
         name: order.name,
         phone: order.phone,
         address: order.address,
-        items: order.items,
+        items: order.products,
         note: order.note,
         total: order.total
     }
