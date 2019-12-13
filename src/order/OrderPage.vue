@@ -141,7 +141,7 @@ export default {
     address: "",
     phone: "",
     note: "",
-    userInfoInfo: {}
+    userInfo: {}
   }),
   computed: {
     ...mapState({
@@ -169,7 +169,7 @@ export default {
       return formatCurrency(total);
     },
     async getData() {
-      this.userInfo = await userInfoService.getProfile();
+      this.userInfo = await userService.getProfile();
       this.name = this.userInfo.first_name + this.userInfo.last_name;
       this.address = this.userInfo.address;
       this.phone = this.userInfo.phone;

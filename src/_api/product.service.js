@@ -83,6 +83,20 @@ async function getAllProducts() {
 async function createProduct(product) {
     console.log('createProduct');
     const auth = authHeader();
+    let formData = new FormData();
+    formData.append('supplier_id', product.supplierId);
+    formData.append('guarantee', product.guarantee);
+    formData.append('guarantee_des', product.guaranteeDes);
+    formData.append('name', product.name);
+    formData.append('color', product.color);
+    formData.append('screen', product.screen);
+    formData.append('resolution', product.resolution);
+    formData.append('front_camera', product.frontCamera);
+    for( var i = 0; i < product.images.length; i++ ){
+        let image = product.images[i];
+
+        formData.append('images[' + i + ']', image);
+      }
     const data = {
         supplier_id: product.supplierId,
         guarantee: product.guarantee,
@@ -106,15 +120,16 @@ async function createProduct(product) {
         description: product.description,
         images: product.images
     };
+    console.log(formData);
     console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/products/`,
         headers: {
-            'Content-Type': 'multipart/form-data, application/json',
+            'Content-Type': 'multipart/form-data',
             ...auth
         },
-        data: JSON.stringify(data)
+        data: formData
     };
     try {
         const response = await axios(options);
