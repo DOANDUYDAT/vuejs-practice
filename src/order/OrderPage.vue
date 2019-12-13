@@ -169,12 +169,6 @@ export default {
       return formatCurrency(total);
     },
     async getData() {
-<<<<<<< HEAD
-      this.user = await userService.getProfile();
-      this.name = this.user.first_name + ' ' +this.user.last_name;
-      this.address = this.user.address;
-      this.phone = this.user.phone;
-=======
       this.userInfo = await userService.getProfile();
       this.name = this.userInfo.first_name + this.userInfo.last_name;
       this.address = this.userInfo.address;
@@ -205,7 +199,6 @@ export default {
           });
         }
       }
->>>>>>> 576ad7856f6d0328c180eca6206c62edb586e077
     }
   },
   created() {
