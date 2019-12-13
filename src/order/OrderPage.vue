@@ -78,7 +78,7 @@
             </v-subheader>
           </v-col>
           <v-card-actions>
-            <v-btn class="mb-3 mx-auto" color="red" tile dark @click="order">Đặt hàng</v-btn>
+            <v-btn class="mb-3 mx-auto" color="red" tile dark @click="checkout">Đặt hàng</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -131,20 +131,17 @@
 </template>
 
 <script>
-import { userService } from "@/_api";
+import { userService, orderService } from "@/_api";
 import { mapGetters, mapState, mapMutations } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
 export default {
   data: () => ({
     valid: true,
     name: "",
-
     address: "",
-
     phone: "",
-
     note: "",
-    user: {}
+    userInfo: {}
   }),
   computed: {
     ...mapState({
@@ -172,10 +169,43 @@ export default {
       return formatCurrency(total);
     },
     async getData() {
+<<<<<<< HEAD
       this.user = await userService.getProfile();
       this.name = this.user.first_name + ' ' +this.user.last_name;
       this.address = this.user.address;
       this.phone = this.user.phone;
+=======
+      this.userInfo = await userService.getProfile();
+      this.name = this.userInfo.first_name + this.userInfo.last_name;
+      this.address = this.userInfo.address;
+      this.phone = this.userInfo.phone;
+    },
+    async checkout() {
+      const { name, address, phone, note, products, total } = this;
+      const order = {
+        name,
+        phone,
+        address,
+        note,
+        products,
+        total
+      };
+
+      try {
+        const isSuccess = await this.$store.dispatch("cart/checkout", order);
+        if (isSuccess) {
+          this.$store.dispatch("alert/success", {
+            message: "Checkout Successfully!"
+          });
+        }
+      } catch (error) {
+        if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data.message
+          });
+        }
+      }
+>>>>>>> 576ad7856f6d0328c180eca6206c62edb586e077
     }
   },
   created() {

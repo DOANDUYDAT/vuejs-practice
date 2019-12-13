@@ -1,5 +1,6 @@
-import shop from '../../_api/shop'
-import { formatCurrency } from '../../_api/format-currency'
+import shop from '@/_api/shop';
+import { orderService } from "@/_api";
+import { formatCurrency } from '@/_api/format-currency';
 // initial state
 // shape: [{ id, quantity }]
 const cart = JSON.parse(localStorage.getItem('cart'));
@@ -21,7 +22,7 @@ const getters = {
         return {
           id: product.id,
           name: product.name,
-          price: product.promotionalPrice ? product.promotionalPrice : product.retailPrice,
+          price: product.promotionalPrice ? product.promotionalPrice : product.listedPrice,
           image: product.images[0],
           quantity
         }
@@ -43,27 +44,45 @@ const getters = {
 
 // actions
 const actions = {
-  checkout({ commit, state }, products) {
+  async checkout({ commit, state }, order) {
     const savedCartItems = [...state.items]
     commit('setCheckoutStatus', null)
     // empty cart
     commit('setCartItems', { items: [] })
-    shop.buyProducts(
-      products,
-      () => {
+
+    try {
+      const isSuccess = await orderService.createOrder(order);
+      if (isSuccess) {
         commit('setCheckoutStatus', 'successful')
         // remove  item from stock
         products.forEach((product) => {
           commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
         })
         localStorage.removeItem('cart');
-      },
-      () => {
+        return true;
+      }
+    } catch (error) {
         commit('setCheckoutStatus', 'failed')
         // rollback to the cart saved before sending the request
         commit('setCartItems', { items: savedCartItems })
-      }
-    )
+    }
+
+    // shop.buyProducts(
+    //   products,
+    //   () => {
+    //     commit('setCheckoutStatus', 'successful')
+    //     // remove  item from stock
+    //     products.forEach((product) => {
+    //       commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
+    //     })
+    //     localStorage.removeItem('cart');
+    //   },
+    //   () => {
+    //     commit('setCheckoutStatus', 'failed')
+    //     // rollback to the cart saved before sending the request
+    //     commit('setCartItems', { items: savedCartItems })
+    //   }
+    // )
   },
 
   addProductToCart({ state, commit }, { product, quantity }) {

@@ -129,19 +129,25 @@ export default {
 
     async deleteItem(item) {
       const supplierId = item.id;
-      confirm("Are you sure you want to delete this item?");
-      try {
-        const isSuccess = await supplierService.deleteSupplier(supplierId);
-        if (isSuccess) {
-          await this.getData();
-          this.$store.dispatch("alert/success", {
-            message: "Delete Successfully!"
-          });
+      const confirmStatus = confirm(
+        "Are you sure you want to delete this item?"
+      );
+      if (confirmStatus) {
+        try {
+          const isSuccess = await supplierService.deleteSupplier(supplierId);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Delete Successfully!"
+            });
+          }
+        } catch (error) {
+          if (error.response) {
+            this.$store.dispatch("alert/error", {
+              message: error.response.data.message
+            });
+          }
         }
-      } catch (error) {
-        this.$store.dispatch("alert/error", {
-          message: error
-        });
       }
     },
 
@@ -182,9 +188,11 @@ export default {
             this.close();
           }
         } catch (error) {
-          this.$store.dispatch("alert/error", {
-            message: error
-          });
+          if (error.response) {
+            this.$store.dispatch("alert/error", {
+              message: error.response.data.message
+            });
+          }
         }
       }
     }

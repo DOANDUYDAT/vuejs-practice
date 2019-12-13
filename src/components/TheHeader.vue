@@ -6,7 +6,7 @@
     <v-container class="px-0">
       <v-row align="center" no-gutters>
         <v-col cols="3">
-          <v-avatar size="120">
+          <v-avatar size="120" to="/home">
             <v-img :src="require('@/_assets/image/logo.png')"></v-img>
           </v-avatar>
         </v-col>
@@ -106,9 +106,11 @@ export default {
           }
         }
       } catch (error) {
-        this.$store.dispatch("alert/error", {
-          message: error
-        });
+        if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data.message
+          });
+        }
       }
     },
     goToHomePage() {

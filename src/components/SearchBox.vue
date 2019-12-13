@@ -17,7 +17,7 @@
       @blur="onBlur"
       label="Search"
     ></v-text-field>
-    <v-expand-transition>
+    <!-- <v-expand-transition> -->
       <v-card v-if="itemsSearch.length && result" class="search__result mx-auto" :width="600" light>
         <v-list>
           <v-list-item-group v-model="search">
@@ -30,13 +30,13 @@
           </v-list-item-group>
         </v-list>
       </v-card>
-    </v-expand-transition>
+    <!-- </v-expand-transition> -->
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import { productService } from "@/_api";
+import { productService, searchService } from "@/_api";
 
 export default {
   data() {
@@ -83,8 +83,9 @@ export default {
       }
       this.loading = false;
     },
-    searchProduct() {
-      console.log(this.search);
+    async searchProduct() {
+      const query = this.search;
+      this.$router.push({ path: '/home', query: { search: query }});
     },
     async getData() {
       this.products = await productService.getAllProducts();
@@ -105,5 +106,6 @@ export default {
 @import "@/variables.scss";
 .search__result {
   position: fixed;
+  z-index: 999;
 }
 </style>
