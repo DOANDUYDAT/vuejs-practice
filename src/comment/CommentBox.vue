@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       comment: {
-        user: "",
+        name: "",
         content: ""
       }
     };
@@ -59,7 +59,7 @@ export default {
       }
     },
     resetInput() {
-      this.comment.user = "";
+      this.comment.name = "";
       this.comment.content = "";
     }
   }

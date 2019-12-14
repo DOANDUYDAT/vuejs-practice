@@ -293,7 +293,7 @@ async function createComment(comment, productId) {
     console.log('createComment');
     const auth = authHeader();
     const data = {
-        user: comment.user,
+        name: comment.name,
         content: comment.content
     };
     console.log(data);
