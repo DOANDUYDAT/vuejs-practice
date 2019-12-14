@@ -7,7 +7,8 @@ import _ from 'lodash';
 
 export const staffService = {
     createStaff,
-    updateStaff
+    updateStaff,
+    deleteStaff
 };
 
 const headers = {
@@ -22,7 +23,7 @@ async function createStaff(staff) {
         last_name: staff.lastName,
         first_name: staff.firstName,
         email: staff.email,
-        role: staff.role
+        group: staff.role
     };
     console.log(data);
     const auth = authHeader();
@@ -58,7 +59,7 @@ async function updateStaff(staffInfo) {
         last_name: staffInfo.lastName,
         first_name: staffInfo.firstName,
         email: staffInfo.email,
-        role: staffInfo.role
+        group: staffInfo.role
     }
     console.log(data);
     const options = {
@@ -69,6 +70,31 @@ async function updateStaff(staffInfo) {
             ...auth
         },
         data: JSON.stringify(data)
+    }
+    try {
+        const response = await axios(options);
+        console.log(response);
+        if (response.status === 200) {
+            console.log(response.data);
+            return true;
+        }
+
+    } catch (error) {
+        console.log(error.response);
+        throw error;
+    }
+}
+
+async function deleteStaff(staffId) {
+    console.log('deleteStaff');
+    const auth = authHeader();
+    const options = {
+        method: 'put',
+        url: `${config.apiUrl}/users/${staffId}`,
+        headers: {
+            ...headers,
+            ...auth
+        }
     }
     try {
         const response = await axios(options);

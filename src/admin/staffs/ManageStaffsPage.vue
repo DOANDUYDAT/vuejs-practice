@@ -73,7 +73,7 @@ export default {
   data: () => ({
     dialog: false,
     search: "",
-    roles: ["Staff", "Admin"],
+    roles: ["staff", "admin"],
     headers: [
       {
         text: "Staff Id",
@@ -82,8 +82,14 @@ export default {
         filterable: true
       },
       {
-        text: "Name",
-        value: "name",
+        text: "First Name",
+        value: "firstName",
+        sortable: true,
+        filterable: false
+      },
+      {
+        text: "Last Name",
+        value: "lastName",
         sortable: true,
         filterable: false
       },
@@ -95,13 +101,15 @@ export default {
     editedIndex: -1,
     editedItem: {
       id: 0,
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       role: ""
     },
     defaultItem: {
       id: 0,
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       role: ""
     }
@@ -124,31 +132,9 @@ export default {
   },
 
   methods: {
-    initialize() {
-      this.staffs = [
-        {
-          id: 1,
-          name: "Le Thanh",
-          email: "lethanh98@gmail.com",
-          role: "Staff"
-        },
-        {
-          id: 2,
-          name: "Duong Thoa",
-          email: "duongthoa98@gmail.com",
-          role: "Staff"
-        },
-        {
-          id: 3,
-          name: "Doan Dat",
-          email: "doandat98@gmail.com",
-          role: "Staff"
-        }
-      ];
-    },
     async getData() {
       const users = await userService.getAllUsers();
-      this.staffs = users.filter( e => e.role === 'staff');
+      this.staffs = users.filter(e => e.role === "staff");
     },
 
     editItem(item) {
@@ -157,10 +143,28 @@ export default {
       this.dialog = true;
     },
 
-    deleteItem(item) {
-      const index = this.staffs.indexOf(item);
-      confirm("Are you sure you want to delete this staff?") &&
-        this.staffs.splice(index, 1);
+    async deleteItem(item) {
+      const staff = item.id;
+      const confirmStatus = confirm(
+        "Are you sure you want to delete this item?"
+      );
+      if (confirmStatus) {
+        try {
+          const isSuccess = await staffService.deleteStaff(staffId);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Delete Successfully!"
+            });
+          }
+        } catch (error) {
+          if (error.response) {
+            this.$store.dispatch("alert/error", {
+              message: error.response.data.message
+            });
+          }
+        }
+      }
     },
 
     close() {
@@ -171,13 +175,23 @@ export default {
       }, 300);
     },
 
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.staffs[this.editedIndex], this.editedItem);
-      } else {
-        this.staffs.push(this.editedItem);
+    async save() {
+      const supplier = this.editedItem;
+      try {
+        const isSuccess = await staffService.updateStaff(staff);
+        console.log(isSuccess);
+        if (isSuccess) {
+          await this.getData();
+          this.$store.dispatch("alert/success", {
+            message: "Update Successfully!"
+          });
+          this.close();
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error.response.data
+        });
       }
-      this.close();
     }
   }
 };
