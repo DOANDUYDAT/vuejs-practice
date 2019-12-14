@@ -27,7 +27,7 @@
                 <td class="text-center mx-auto">
                   <v-img class="mx-auto" max-width="150px" max-height="200px" :src="product.image"></v-img>
                 </td>
-                <td class="text-center">{{ product.title }}</td>
+                <td class="text-center">{{ product.name }}</td>
 
                 <td class="text-center">
                   <v-card flat class="py-12">
@@ -74,7 +74,7 @@
                 </v-card-text>
               </td>
               <td class="text-center">
-                <span style="color: red" data-tongtien>{{ total }}đ</span>
+                <span style="color: red" data-tongtien>{{ formatCurrency(total) }}đ</span>
               </td>
             </tfoot>
           </v-simple-table>
@@ -147,6 +147,7 @@ export default {
       "decrementItemQuantity",
       "removeProductFromCart"
     ]),
+
     formatCurrency(total) {
       return formatCurrency(total);
     }

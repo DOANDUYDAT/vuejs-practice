@@ -119,7 +119,7 @@
                 </v-card-text>
               </td>
               <td class="text-end">
-                <span style="color: red" data-tongtien>{{ total }}đ</span>
+                <span style="color: red" data-tongtien>{{ formatCurrency(total) }}đ</span>
               </td>
             </tfoot>
           </v-simple-table>
@@ -170,7 +170,7 @@ export default {
     },
     async getData() {
       this.userInfo = await userService.getProfile();
-      this.name = this.userInfo.firstName + ' ' + this.userInfo.lastName;
+      this.name = this.userInfo.firstName + " " + this.userInfo.lastName;
       this.address = this.userInfo.address;
       this.phone = this.userInfo.phone;
     },
@@ -199,6 +199,9 @@ export default {
           });
         }
       }
+    },
+    formatCurrency(total) {
+      return formatCurrency(total);
     }
   },
   created() {

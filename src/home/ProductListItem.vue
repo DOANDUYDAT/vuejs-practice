@@ -25,7 +25,7 @@
         readonly
       ></v-rating>
       <p class="mb-0">{{ product.name }}</p>
-      <div class="py-2 font-weight-black">{{ product.price }}đ</div>
+      <div class="py-2 font-weight-black">{{ formatCurrency(product.price) }}đ</div>
     </v-card-text>
     <!-- <v-card-actions>
       <v-spacer></v-spacer>
@@ -84,7 +84,10 @@ export default {
     // }
   },
   methods: {
-    ...mapActions("cart", ["addProductToCart"])
+    ...mapActions("cart", ["addProductToCart"]),
+    formatCurrency(price) {
+      return formatCurrency(price);
+    }
   }
 };
 </script>
