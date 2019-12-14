@@ -45,11 +45,11 @@ export default {
       return _.isEmpty(this.product);
     },
     productImages() {
-      const images = this.product.images;
+      const images = [...this.product.images];
       let productImages = [];
       for (let i = 0; i < 6; i++) {
         if (i < images.length) {
-          productImages.push(images[i]);
+          productImages.push(images[i].image);
         }
       }
       return productImages;
@@ -60,7 +60,7 @@ export default {
       this.imageBig = image;
     },
     initImageBig() {
-      this.imageBig = this.product.images[0];
+      this.imageBig = this.product.images[0].image;
     }
   },
   watch: {
