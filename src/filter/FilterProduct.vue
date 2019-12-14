@@ -23,6 +23,48 @@
     <!-- </v-btn-toggle> -->
     <!-- <v-container fluid> -->
     <v-list>
+      <v-list-item>
+        <div>
+          <div class="layout mb10 mx10">
+            <div class="flex relative xs5">
+              <ValidationProvider
+                name="minPrice"
+                rules="required|numeric"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  v-model="minPrice"
+                  placeholder="Giá thấp nhất"
+                  counter="8"
+                  minlength="6"
+                  maxlength="8"
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+
+            <div class="flex d-flex align-center justify-center xs2">-</div>
+            <div class="flex relative xs5">
+              <ValidationProvider
+                name="maxPrice"
+                rules="required|numeric"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-text-field
+                  v-model="maxPrice"
+                  placeholder="Giá cao nhất"
+                  counter="8"
+                  minlength="6"
+                  maxlength="8"
+                ></v-text-field>
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+        </div>
+      </v-list-item>
       <template v-for="item in items">
         <v-list-group no-action :key="item.text">
           <template v-slot:activator>
@@ -69,8 +111,9 @@
 export default {
   data() {
     return {
+      minPrice: "",
+      maxPrice: "",
       filter: {
-        price: [],
         brand: [],
         color: [],
         ROM: [],
@@ -83,17 +126,17 @@ export default {
       //   loader: null,
       loading: false,
       items: [
-        {
-          text: "Giá",
-          model: "price",
-          children: [
-            { text: "Dưới 5.000.000" },
-            { text: "5.000.000 - 10.000.000" },
-            { text: "10.000.000 - 20.000.000" },
-            { text: "20.000.000 - 30.000.000" },
-            { text: "Trên 30.000.000" }
-          ]
-        },
+        // {
+        //   text: "Giá",
+        //   model: "price"
+        //   children: [
+        //     { text: "Dưới 5.000.000" },
+        //     { text: "5.000.000 - 10.000.000" },
+        //     { text: "10.000.000 - 20.000.000" },
+        //     { text: "20.000.000 - 30.000.000" },
+        //     { text: "Trên 30.000.000" }
+        //   ]
+        // },
         {
           text: "Thương hiệu",
           model: "brand",
@@ -207,7 +250,8 @@ export default {
       setTimeout(() => (this.loading = false), 1000);
     },
     resetFilter() {
-      this.filter.price = [];
+      this.minPrice = "";
+      this.maxPrice = "";
       this.filter.brand = [];
       this.filter.color = [];
       this.filter.ROM = [];
