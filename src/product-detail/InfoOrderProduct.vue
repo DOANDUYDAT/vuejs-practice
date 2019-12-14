@@ -18,11 +18,7 @@
     <v-divider></v-divider>
     <v-row>
       <v-col cols="3">Giá bán</v-col>
-      <v-col cols="9">{{ product.price }}đ</v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="3">Khuyến mãi</v-col>
-      <v-col cols="9"></v-col>
+      <v-col cols="9">{{ formatCurrency(product.price) }}đ</v-col>
     </v-row>
     <v-row>
       <v-col cols="3">Vận chuyển</v-col>
@@ -114,7 +110,10 @@ export default {
     decrementItemQuantity() {
       this.quantity--;
     },
-    ...mapActions("cart", ["addProductToCart"])
+    ...mapActions("cart", ["addProductToCart"]),
+    formatCurrency(price) {
+      return formatCurrency(price);
+    }
   },
 };
 </script>
