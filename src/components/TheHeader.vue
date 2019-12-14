@@ -36,6 +36,9 @@
             <v-list-item to="/account/orders">
               <v-list-item-title>Lịch sử đặt hàng</v-list-item-title>
             </v-list-item>
+            <v-list-item to="/admin" v-if="isAdminPermission">
+              <v-list-item-title>Trang quản trị</v-list-item-title>
+            </v-list-item>
             <v-list-item @click="logout">
               <v-list-item-title>Log Out</v-list-item-title>
             </v-list-item>
@@ -77,7 +80,9 @@ export default {
     SearchBox
   },
   data() {
-    return {};
+    return {
+      userInfo: {}
+    };
   },
 
   computed: {
@@ -86,7 +91,10 @@ export default {
       user: state => state.authentication.user
     }),
     fullName() {
-      return this.user.username;
+      return this.userInfo.firstName + " " + this.userInfo.lastName;
+    },
+    isAdminPermission() {
+      return this.user.groups[0].name === 'admin';
     }
   },
   methods: {
@@ -118,7 +126,13 @@ export default {
       // if (currentPath !== "/home") {
       this.$router.push({ path: "/home" });
       // }
+    },
+    async getData() {
+      this.userInfo = await userService.getProfile();
     }
+  },
+  created() {
+    this.getData();
   }
 };
 </script>
