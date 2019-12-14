@@ -45,13 +45,13 @@
                     <v-text-field v-model="editedItem.userId" label="User Id" disabled></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.username" label="User name" disabled></v-text-field>
+                    <v-text-field v-model="editedItem.userEmail" label="User Email" disabled></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
+                  <!-- <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.staffId" label="Staff Id" disabled></v-text-field>
-                  </v-col>
+                  </v-col> -->
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.date" label="Date" disabled></v-text-field>
+                    <v-text-field v-model="editedItem.createdAt" label="Date" disabled></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-select :items="status" v-model="editedItem.status" label="Status" outlined></v-select>
@@ -85,12 +85,12 @@
 <script>
 import { fakeOrders } from "@/_helpers/fake-orders";
 import { orderService } from "@/_api";
-
+import _ from 'lodash';
 export default {
   data: () => ({
     dialog: false,
     search: "",
-    status: ["Đang giao hàng", "Đã xác nhận", "Hoàn thành"],
+    status: ["Đang giao hàng", "Hoàn thành"],
     headers: [
       {
         text: "Id",
@@ -120,7 +120,7 @@ export default {
     editedItem: {
       id: 0,
       userId: 0,
-      username: "",
+      userEmail: "",
       // staffId: 0,
       createdAt: null,
       status: ""
@@ -128,7 +128,7 @@ export default {
     defaultItem: {
       id: 0,
       userId: 0,
-      username: "",
+      userEmail: "",
       // staffId: 0,
       createdAt: null,
       status: ""
@@ -212,7 +212,7 @@ export default {
 
     getColor (status) {
         if (status == "Đang giao hàng") return 'red'
-        else if (status == "Đã xác nhận") return 'orange'
+        else if (status == "XÁC NHẬN") return 'orange'
         else return 'green'
       },
 

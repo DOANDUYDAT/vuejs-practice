@@ -21,7 +21,7 @@
         </v-row>
         <v-row>
           <v-col cols="6"></v-col>
-          <v-col cols="6">Tổng tiền: {{ total }}đ</v-col>
+          <v-col cols="6">Tổng tiền: {{ formatCurrency(total) }}đ</v-col>
         </v-row>
 
         <v-card-actions>

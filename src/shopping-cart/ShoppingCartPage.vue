@@ -74,7 +74,7 @@
                 </v-card-text>
               </td>
               <td class="text-center">
-                <span style="color: red" data-tongtien>{{ total }}đ</span>
+                <span style="color: red" data-tongtien>{{ formatCurrency(total) }}đ</span>
               </td>
             </tfoot>
           </v-simple-table>
