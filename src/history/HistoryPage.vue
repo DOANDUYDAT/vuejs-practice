@@ -24,7 +24,11 @@
         :headers="headers"
         :items="orders"
         :search="search"
-      ></v-data-table>
+      >
+        <template v-slot:item.status="{ item }">
+          <v-chip :color="getColor(item.status)" dark>{{ item.status }}</v-chip>
+        </template></v-data-table
+      >
     </div>
     <div v-else class="headline text-center py-5">Bạn chưa có đơn hàng nào</div>
   </v-card>
@@ -65,6 +69,11 @@ export default {
     },
     async getData() {
       this.orders = await orderService.getAllOrders();
+    },
+    getColor(status) {
+      if (status === "Đang giao hàng") return "red";
+      else if (status === "XÁC NHẬN") return "orange";
+      else return "green";
     }
   },
   created() {

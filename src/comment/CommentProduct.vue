@@ -1,10 +1,14 @@
 <template>
   <v-container>
     <div class="headline mb-2">
-      <v-icon color="amber" class="mr-2">mdi-message-text-outline</v-icon>Bình luận
+      <v-icon color="amber" class="mr-2">mdi-message-text-outline</v-icon>Bình
+      luận
     </div>
-    <comment-box></comment-box>
-    <comment-list></comment-list>
+    <v-row no-gutters>
+      <v-col cols="8"
+        ><comment-box></comment-box> <comment-list></comment-list
+      ></v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -16,7 +20,7 @@ export default {
   components: {
     CommentList,
     CommentBox
-  },
+  }
 };
 </script>
 

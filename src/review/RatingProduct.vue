@@ -2,10 +2,10 @@
   <v-row>
     <v-col cols="5" v-if="product.id">
       <v-card class="mx-auto" height="100%" flat>
-        <v-img height="200px" :src="product.images[0]" contain></v-img>
+        <v-img height="200px" :src="product.images[0].image" contain></v-img>
         <v-card-text>
           <p>{{ product.title }}</p>
-          <v-row align="center">
+          <v-row justify="center">
             <div class="headline mx-3">{{ product.voting }}/5</div>
             <v-rating
               :value="product.voting"
@@ -42,7 +42,12 @@
           v-slot="{ errors }"
           :bails="false"
         >
-          <v-textarea outlined v-model="review.content" counter="300" label="Viết đánh giá ở đây"></v-textarea>
+          <v-textarea
+            outlined
+            v-model="review.content"
+            counter="300"
+            label="Viết đánh giá ở đây"
+          ></v-textarea>
           <span class="red--text">{{ errors[0] }}</span>
         </ValidationProvider>
         <div class="my-4">
@@ -50,7 +55,8 @@
             color="primary"
             @click="submit"
             :disabled="(review.vote > 0 ? false : true) || invalid"
-          >Gửi đánh giá</v-btn>
+            >Gửi đánh giá</v-btn
+          >
         </div>
       </ValidationObserver>
     </v-col>

@@ -9,8 +9,9 @@ import _ from 'lodash';
 
 export const importProductService = {
     createImportProduct,
-    getAllImports
-    
+    getAllImports,
+    getImport
+
 };
 
 
@@ -75,7 +76,52 @@ async function getAllImports() {
         console.log(response);
         if (response.status === 200) {
             console.log(response.data);
-            return true;
+            const data = response.data;
+            const d = new Date();
+            const allImports = data.map(e => {
+                const anImport = {
+                    id: e.id,
+                    createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at),
+                    items: e.items,
+                    total: e.total,
+                    user: e.user
+                }
+                return anImport;
+            })
+            return allImports;
+        }
+    } catch (error) {
+        console.log(error.response);
+        if (error) throw error;
+    }
+}
+
+async function getImport(importId) {
+    console.log('getImport');
+    const auth = authHeader();
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/imports/${importId}`,
+        headers: {
+            ...headers,
+            ...auth
+        }
+    };
+    try {
+        const response = await axios(options);
+        console.log(response);
+        if (response.status === 200) {
+            console.log(response.data);
+            const data = response.data;
+            const d = new Date();
+            const anImport = {
+                id: e.id,
+                createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at),
+                items: e.items,
+                total: e.total,
+                user: e.user
+            }
+            return anImport;
         }
     } catch (error) {
         console.log(error.response);

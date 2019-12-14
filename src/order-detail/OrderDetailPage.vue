@@ -5,24 +5,40 @@
         <span class="headline">Đơn hàng 1</span>
       </v-card-title>
     </v-toolbar>
-    <v-card-text class="px-10">Ngày đặt hàng 10/11/2019</v-card-text>
+    <v-card-text class="px-10"
+      >Ngày đặt hàng: {{ order.createdAt }}</v-card-text
+    >
     <v-simple-table>
       <thead>
         <tr>
           <th class="text-center" style="width:10%; font-size: 1rem;">STT</th>
           <th class="text-center" style="width:10%; font-size: 1rem;">ID</th>
-          <th class="text-center" style="width:15%; font-size: 1rem;">Hình ảnh</th>
-          <th class="text-center" style="width:40%; font-size: 1rem;">Tên sản phẩm</th>
-          <th class="text-center" style="width:10%; font-size: 1rem;">Số lượng</th>
-          <th class="text-center" style="width:15%; font-size: 1rem;">Đơn giá</th>
+          <th class="text-center" style="width:15%; font-size: 1rem;">
+            Hình ảnh
+          </th>
+          <th class="text-center" style="width:35%; font-size: 1rem;">
+            Tên sản phẩm
+          </th>
+          <th class="text-center" style="width:15%; font-size: 1rem;">
+            Số lượng
+          </th>
+          <th class="text-center" style="width:15%; font-size: 1rem;">
+            Đơn giá
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(product, index) in listProducts" :key="product.id">
           <td class="text-center">{{ index + 1 }}</td>
           <td class="text-center">{{ product.id }}</td>
-          <td>
-            <v-img contain :height="80" :width="80" class="mx-auto" :src="product.image"></v-img>
+          <td class="text-center">
+            <v-img
+              contain
+              :height="80"
+              :width="80"
+              class="mx-auto"
+              :src="product.image"
+            ></v-img>
           </td>
           <td class="text-center">{{ product.name }}</td>
           <td class="text-center">{{ product.quantity }}</td>
@@ -41,13 +57,16 @@
             </v-card-text>
           </td>
           <td class="text-center">
-            <span style="color: red" data-tongtien>{{ formatCurrency(total) }}đ</span>
+            <span style="color: red" data-tongtien
+              >{{ formatCurrency(total) }}đ</span
+            >
           </td>
         </tr>
       </tfoot>
     </v-simple-table>
   </v-card>
 </template>
+
 <script>
 import { mapState } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
@@ -82,8 +101,8 @@ export default {
           name: e.product.name,
           price: e.product.price,
           image: e.product.images[0].image
-        }
-      })
+        };
+      });
     }
   },
   created() {

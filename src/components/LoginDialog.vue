@@ -20,7 +20,11 @@
                   v-slot="{ errors }"
                   :bails="false"
                 >
-                  <v-text-field prepend-icon="mdi-email" label="Email" v-model="email"></v-text-field>
+                  <v-text-field
+                    prepend-icon="mdi-email"
+                    label="Email"
+                    v-model="email"
+                  ></v-text-field>
                   <span class="red--text">{{ errors[0] }}</span>
                   <!-- <ul>
                   <li v-for="error in errors"> {{ error}}</li>
@@ -51,7 +55,10 @@
             </v-row>
             <v-row align="center" justify="center" no-gutters>
               <v-col cols="12" md="5">
-                <v-checkbox v-model="remember" :label="'Duy trì đăng nhập'"></v-checkbox>
+                <v-checkbox
+                  v-model="remember"
+                  :label="'Duy trì đăng nhập'"
+                ></v-checkbox>
               </v-col>
               <v-col cols="12" md="3" class="text-md-end">
                 <a @click="goToForgetPasswordPage">Quên mật khẩu?</a>
@@ -64,7 +71,8 @@
                   class="layout justify-center white--text"
                   @click="submit"
                   :disabled="invalid"
-                >Login</v-btn>
+                  >Login</v-btn
+                >
               </v-card-actions>
             </v-col>
           </ValidationObserver>
@@ -125,7 +133,7 @@ export default {
       } catch (error) {
         if (error.response) {
           this.$store.dispatch("alert/error", {
-            message: error.response.data.message
+            message: error.response.data.detail
           });
         }
       }

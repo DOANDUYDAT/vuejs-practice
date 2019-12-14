@@ -3,8 +3,8 @@
     @click:row="goToImportProductDetailPage"
     :headers="headers"
     :items="importProducts"
-    :sort-by="['importProductId']"
-    item-key="importProductId"
+    :sort-by="['id']"
+    item-key="id"
     :sort-asc="[true]"
     :search="search"
   >
@@ -19,8 +19,9 @@
           color="gg-red"
           dark
           class="mx-4 white--text"
-          :to="{ name: 'admin addImportProduct'}"
-        >+ Nhập hàng</v-btn>
+          :to="{ name: 'admin addImportProduct' }"
+          >+ Nhập hàng</v-btn
+        >
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
@@ -51,13 +52,13 @@ export default {
     headers: [
       {
         text: "Mã nhập hàng",
-        value: "importProductId",
+        value: "id",
         sortable: false,
         filterable: true
       },
       {
         text: "Thời gian",
-        value: "time",
+        value: "createdAt",
         sortable: true,
         filterable: false
       },
@@ -71,20 +72,20 @@ export default {
     ],
     importProducts: [
       {
-        importProductId: 1,
-        time: "2019/10/20",
+        id: 1,
+        createdAt: "2019/10/20",
         staff: "Le Thanh",
         total: 222228900
       },
       {
-        importProductId: 2,
-        time: "2019/9/20",
+        id: 2,
+        createdAt: "2019/9/20",
         staff: "Duong Thoa",
         total: 222228900
       },
       {
-        importProductId: 3,
-        time: "2019/8/20",
+        id: 3,
+        createdAt: "2019/8/20",
         staff: "Doan Dat",
         total: 222228900
       }
@@ -97,14 +98,22 @@ export default {
     goToImportProductDetailPage(importProduct) {
       this.$router.push({
         name: "admin importProduct",
-        params: { importProductId: importProduct.importProductId }
+        params: { importProductId: importProduct.id }
       });
     },
     formatCurrency(total) {
       return formatCurrency(total);
     },
     async getData() {
-      this.imports = await importProductService.getAllImports();
+      const allImports = await importProductService.getAllImports();
+      this.importProducts = allImports.map(e => {
+        return {
+          total: e.total,
+          createdAt: e.createdAt,
+          id: e.id,
+          staff: e.user.first_name + " " + e.user.last_name
+        };
+      });
     }
   },
   created() {

@@ -43,7 +43,7 @@ import ReviewProduct from "@/review/ReviewProduct";
 import SuggestProduct from "./SuggestProduct";
 import CommentProduct from "@/comment/CommentProduct";
 import BreadcrumbBase from "@/components/BreadcrumbBase";
-import PostReview from './PostReview';
+import PostReview from "./PostReview";
 import { productService } from "@/_api";
 
 export default {
