@@ -252,10 +252,10 @@ async function resetPassword(email) {
     }
 }
 
-async function changePassword({ oldPasword, password }) {
+async function changePassword({ oldPassword, password }) {
     console.log('changePassword');
     const data = {
-        old_pasword: oldPasword,
+        old_password: oldPassword,
         password: password
     };
     console.log(data);

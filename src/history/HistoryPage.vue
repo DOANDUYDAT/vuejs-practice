@@ -60,7 +60,8 @@ export default {
   computed: {},
   methods: {
     goToOrderDetailPage(order) {
-      this.$router.push({ name: "orders", params: { id: order.id } });
+      console.log(order);
+      this.$router.push({ name: "orders", params: { orderId: order.id } });
     },
     async getData() {
       this.orders = await orderService.getAllOrders();
