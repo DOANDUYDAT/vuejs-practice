@@ -6,20 +6,19 @@
         <v-card-text>
           <p>{{ product.title }}</p>
           <v-row align="center">
-            <div class="headline mx-3">{{rating}}/5</div>
-            <div class="body-2">Có {{ number }} đánh giá</div>
+            <div class="headline mx-3">{{ product.voting }}/5</div>
+            <v-rating
+              :value="product.voting"
+              color="amber"
+              background-color="grey"
+              empty-icon="mdi-star-outline"
+              full-icon="mdi-star"
+              half-icon="mdi-star-half"
+              half-increments
+              small
+              readonly
+            ></v-rating>
           </v-row>
-          <v-rating
-            :value="rating"
-            color="amber"
-            background-color="grey"
-            empty-icon="mdi-star-outline"
-            full-icon="mdi-star"
-            half-icon="mdi-star-half"
-            half-increments
-            small
-            readonly
-          ></v-rating>
         </v-card-text>
       </v-card>
     </v-col>
@@ -66,7 +65,6 @@ export default {
   data() {
     return {
       rating: 3.5,
-      number: 25,
       review: {
         content: "",
         vote: 0

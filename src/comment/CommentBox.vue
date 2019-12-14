@@ -1,7 +1,7 @@
 <template>
   <ValidationObserver ref="observer" v-slot="{ invalid }" class="pa-5" tag="div">
     <ValidationProvider name="name" rules="required|max:50" v-slot="{ errors }" :bails="false">
-      <v-text-field label="Name" v-model="comment.user"></v-text-field>
+      <v-text-field label="Name" v-model="comment.name"></v-text-field>
       <span class="red--text">{{ errors[0] }}</span>
     </ValidationProvider>
     <ValidationProvider name="comment" rules="required|max:300" v-slot="{ errors }" :bails="false">

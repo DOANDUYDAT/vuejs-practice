@@ -154,8 +154,15 @@ export default {
     },
 
     editItem(item) {
+      console.log(item);
       this.editedIndex = this.orders.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      this.editedItem = Object.assign({}, {
+        id: item.id,
+        userId: item.user.id,
+        userEmail: item.user.email,
+        createdAt: item.createdAt,
+        status: item.status
+      });
       this.dialog = true;
     },
 

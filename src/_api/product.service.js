@@ -66,7 +66,7 @@ async function getAllProducts() {
                         count: e.count,
                         description: e.description,
                         images: e.images,
-                        voting: e.voting
+                        voting: e.voting ? e.voting : 0
                     };
                     return product;
                 });
@@ -164,7 +164,7 @@ async function getProduct(productId) {
                 count: data.count,
                 description: data.description,
                 images: data.images,
-                voting: data.voting
+                voting: data.voting ? data.voting : 0
             };
             return product;
         }
@@ -274,7 +274,7 @@ async function getAllComments(productId) {
                 allComments = data.map(e => {
                     const comment = {
                         id: e.id,
-                        user: e.user,
+                        name: e.name,
                         content: e.content,
                         createdAt: e.created_at
                     };

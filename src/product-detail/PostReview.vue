@@ -3,7 +3,7 @@
     <v-row no-gutters>
       <v-col cols="12">
         <div class="headline">Mô tả sản phẩm</div>
-        <div v-html="product.description" class="py-5"></div>
+        <div v-html="summaryPost" class="py-5"></div>
       </v-col>
     </v-row>
   </v-container>
@@ -16,6 +16,11 @@ export default {
       type: Object,
       required: true
     }
+  }, 
+  computed: {
+    summaryPost() {
+      return this.product.description.substr(0, 400);
+    }
   }
 };
 </script>
@@ -24,5 +29,6 @@ export default {
 @import "@/variables.scss";
 .container {
   background-color: $it-bg-in;
+  height: 100%;
 }
 </style>

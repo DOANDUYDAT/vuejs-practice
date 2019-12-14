@@ -1,9 +1,9 @@
 <template>
   <v-card tile  outlined class="px-5">
-    <v-card-title class="pt-1 pb-0">{{ comment.username }}</v-card-title>
+    <v-card-title class="pt-1 pb-0">{{ comment.name }}</v-card-title>
     <v-card-text class="pb-0">
       <div style="text-align: justify;" class="mt-2">{{ comment.content }}</div>
-      <div class="my-2 caption black--text">{{ comment.time }}</div>
+      <div class="my-2 caption black--text">{{ formatCreatedAt(comment.createdAt) }}</div>
     </v-card-text>
     <v-card-actions class="py-0">
       <v-btn text @click="show = !show">Trả lời</v-btn>
@@ -35,6 +35,12 @@ export default {
   },
   props: {
     comment: {}
+  }, 
+  methods: {
+    formatCreatedAt(date) {
+      const d = new Date();
+      return d.getFullYear(date) + '-' + Number(d.getMonth(date) + 1) + '-' + d.getDate(date);
+    }
   }
 };
 </script>

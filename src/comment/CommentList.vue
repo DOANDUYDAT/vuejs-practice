@@ -66,6 +66,9 @@ export default {
       this.allComments = await productService.getAllComments(productId);
       this.commentShow = this.initComment();
     }
+  }, 
+  created() {
+    this.getData();
   }
 };
 </script>

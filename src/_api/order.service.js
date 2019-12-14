@@ -51,7 +51,7 @@ async function getAllOrders() {
                     items: e.items,
                     note: e.note,
                     status: e.status,
-                    createdAt: d.getFullYear(data.created_at) + '-' + d.getMonth(data.created_at) + '-' + d.getDate(data.created_at) ,
+                    createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at) ,
                     total: e.total
                 }
             })
@@ -131,7 +131,7 @@ async function getOrder(orderId) {
                 items: data.items,
                 note: data.note,
                 status: data.status,
-                createdAt: d.getFullYear(data.created_at) + '-' + d.getMonth(data.created_at) + '-' + d.getDate(data.created_at) ,
+                createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at) ,
                 total: data.total
             };
             return order;
@@ -161,7 +161,7 @@ async function updateOrder(order) {
     try {
         const response = await axios(options);
         console.log(response);
-        if (response.status === 204) {
+        if (response.status === 200) {
             console.log(response.data);
             return true;
         }

@@ -14,7 +14,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
-        publicPath: '/'
+        publicPath: '/vuejs-practice/'
     },
     devtool: 'inline-source-map',
     devServer: {
