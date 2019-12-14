@@ -113,13 +113,13 @@ export default {
   data() {
     return {
       filter: {
-        minPrice: 0,
-        maxPrice: 0,
-        suppliers: [],
+        minPrice: "",
+        maxPrice: "",
+        supplier: [],
         color: [],
         rom: [],
         frontCamera: [],
-        backCamera: [],
+        rearCamera: [],
         system: [],
         ram: []
       },
@@ -269,8 +269,8 @@ export default {
       }
     },
     resetFilter() {
-      this.filter.minPrice = 0;
-      this.filter.maxPrice = 0;
+      this.filter.minPrice = "";
+      this.filter.maxPrice = "";
       this.filter.suppliers = [];
       this.filter.color = [];
       this.filter.rom = [];

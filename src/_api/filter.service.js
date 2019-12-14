@@ -21,7 +21,9 @@ async function filter(query) {
     const data = {
         max_price: query.maxPrice,
         min_price: query.minPrice,
-        ...query
+        ...query,
+        front_camera: query.frontCamera,
+        rear_camera: query.rearCamera
     };
     console.log(data);
     const options = {
@@ -32,11 +34,8 @@ async function filter(query) {
         },
         data: JSON.stringify(data)
     };
-    console.log('hello');
     try {
-        console.log('hello2');
         const response = await axios(options);
-        console.log('hello3');
         console.log(response);
         if (response.status === 200) {
             console.log(response.data);
