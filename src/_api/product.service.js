@@ -178,7 +178,7 @@ async function updateProduct(product) {
     console.log('updateProduct: ' + product.id);
     const auth = authHeader();
     let formData = new FormData();
-    formData.append('supplier_id', product.supplierId);
+    formData.append('supplier', product.supplier);
     formData.append('guarantee', product.guarantee);
     formData.append('guarantee_des', product.guaranteeDes);
     formData.append('name', product.name);
