@@ -18,18 +18,28 @@ export const filterService = {
 
 async function filter(query) {
     console.log('filter');
-    const data = {
+    let data = {
         max_price: query.maxPrice.length ? query.maxPrice : 'all',
         min_price: query.minPrice.length ? query.minPrice : 'all',
-        front_camera: query.frontCamera.length ? query.frontCamera : 'all',
-        rear_camera: query.rearCamera.length ? query.rearCamera : 'all',
-        rom: query.rom.length ? query.rom : 'all',
-        ram: query.ram.length ? query.ram : 'all',
-        color: query.color.length ? query.color : 'all',
-        supplier: query.supplier.length ? query.supplier : 'all',
-        operatingSystem: query.operatingSystem.length ? query.operatingSystem : 'all'
+        front_camera: query.frontCamera.length ? query.frontCamera : ['all'],
+        rear_camera: query.rearCamera.length ? query.rearCamera : ['all'],
+        rom: query.rom.length ? query.rom : ['all'],
+        ram: query.ram.length ? query.ram : ['all'],
+        color: query.color.length ? query.color : ['all'],
+        supplier: query.supplier.length ? query.supplier : ['all'],
+        operatingSystem: query.operatingSystem.length ? query.operatingSystem : ['all']
 
     };
+    if (query.minPrice.length) {
+        data = Object.assign(data, {
+            min_price: query.minPrice
+        })
+    }
+    if (query.maxPrice.length) {
+        data = Object.assign(data, {
+            max_price: query.maxPrice
+        })
+    }
     console.log(data);
     const options = {
         method: 'post',

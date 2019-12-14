@@ -253,7 +253,9 @@ export default {
     },
     async submit() {
       const query = this.filter;
+      console.log(query);
       const oldFilter = this.$route.query ? this.$route.query.filter : {};
+      console.log(JSON.stringify(oldFilter));
       this.resetFilter();
       if (!_.isEqual(query, oldFilter)) {
         this.$router.push({ path: "/home", query: { filter: query } });
