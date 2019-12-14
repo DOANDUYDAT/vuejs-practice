@@ -1,7 +1,10 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12" v-html="product.description"></v-col>
+    <v-row no-gutters>
+      <v-col cols="12">
+        <div class="headline">Mô tả sản phẩm</div>
+        <div v-html="product.description" class="py-5"></div>
+      </v-col>
     </v-row>
   </v-container>
 </template>

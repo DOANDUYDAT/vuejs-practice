@@ -172,7 +172,7 @@ export default {
       } catch (error) {
         if (error.response) {
           this.$store.dispatch("alert/error", {
-            message: error.response.data.message
+            message: error.response.data.detail
           });
         }
       }
@@ -180,12 +180,12 @@ export default {
     async getData() {
       this.user = await userService.getProfile();
       const user = this.user;
-      this.firstName = user.first_name;
-      this.lastName = user.last_name;
+      this.firstName = user.firstName;
+      this.lastName = user.lastName;
       this.phone = user.phone;
       this.email = user.email;
       this.address = user.address;
-      this.dateOfBirth = user.date_of_birth;
+      this.dateOfBirth = user.dateOfBirth;
       this.gender = user.gender;
     }
   },

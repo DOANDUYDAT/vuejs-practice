@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import { userService } from "@/_api";
+
 export default {
   data: () => ({
     dialog: false,
@@ -74,7 +76,7 @@ export default {
     headers: [
       {
         text: "User Id",
-        value: "userId",
+        value: "id",
         sortable: false,
         filterable: true
       },
@@ -90,7 +92,7 @@ export default {
 
       {
         text: "Birthday",
-        value: "birthday",
+        value: "dateOfBirth",
         align: "center",
         sortable: true,
         filterable: false
@@ -128,41 +130,50 @@ export default {
     }
   },
   created() {
-    this.initialize();
+    this.getData();
   },
 
   methods: {
-    initialize() {
-      this.users = [
-        {
-          userId: "001",
-          name: "Le Thanh",
-          email: "lethanh98@gmail.com",
-          phone: "0123456789",
-          address: "Truong Dinh, Hai Ba Trung",
-          birthday: "26/06/1998",
-          role: "User"
-        },
-        {
-          userId: "002",
-          name: "Duong Thoa",
-          email: "duongthoa98@gmail.com",
-          phone: "0123445566",
-          address: "Dai La, Hai Ba Trung",
-          birthday: "04/11/1998",
-          role: "User"
-        },
-        {
-          userId: "003",
-          name: "Doan Dat",
-          email: "doandat98@gmail.com",
-          phone: "0336221717",
-          address: "Phap Van",
-          birthday: "28/04/1998",
-          role: "User"
+    async getData() { 
+      const allUsers = await userService.getAllUsers();
+      this.users = allUsers.map(e => {
+        return {
+          ...e,
+          name: e.firstName + ' ' + e.lastName
         }
-      ];
+      });
     },
+    // initialize() {
+    //   this.users = [
+    //     {
+    //       userId: "001",
+    //       name: "Le Thanh",
+    //       email: "lethanh98@gmail.com",
+    //       phone: "0123456789",
+    //       address: "Truong Dinh, Hai Ba Trung",
+    //       birthday: "26/06/1998",
+    //       role: "User"
+    //     },
+    //     {
+    //       userId: "002",
+    //       name: "Duong Thoa",
+    //       email: "duongthoa98@gmail.com",
+    //       phone: "0123445566",
+    //       address: "Dai La, Hai Ba Trung",
+    //       birthday: "04/11/1998",
+    //       role: "User"
+    //     },
+    //     {
+    //       userId: "003",
+    //       name: "Doan Dat",
+    //       email: "doandat98@gmail.com",
+    //       phone: "0336221717",
+    //       address: "Phap Van",
+    //       birthday: "28/04/1998",
+    //       role: "User"
+    //     }
+    //   ];
+    // },
     editItem(item) {
       this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
