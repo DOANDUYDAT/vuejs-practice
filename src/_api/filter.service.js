@@ -7,20 +7,20 @@ import _ from 'lodash';
 
 
 
-export const searchService = {
-    search
+export const filterService = {
+    filter
 };
 
 
-async function search(query) {
-    console.log('search');
+async function filter(query) {
+    console.log('filter');
     const data = {
-        search: query
+        filter: query
     }
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/search/`,
+        url: `${config.apiUrl}/filter/`,
         headers: {
             ...headers,
         },

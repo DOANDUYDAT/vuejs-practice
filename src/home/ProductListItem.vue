@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-if="!checkProductEmpty"
+    v-if="product.id"
     hover
     height="100%"
     :max-width="maxWidthItem"
@@ -24,8 +24,8 @@
         dense
         readonly
       ></v-rating>
-      <p class="mb-0">{{ descriptionProduct }}</p>
-      <div class="py-2 font-weight-black">{{ priceProduct }}đ</div>
+      <p class="mb-0">{{ product.name }}</p>
+      <div class="py-2 font-weight-black">{{ product.price }}đ</div>
     </v-card-text>
     <!-- <v-card-actions>
       <v-spacer></v-spacer>
@@ -66,22 +66,22 @@ export default {
     }
   },
   computed: {
-    descriptionProduct() {
-      let description =
-        this.product.name.length < 30
-          ? this.product.name
-          : this.product.name.slice(0, 30) + "...";
-      return description;
-    },
-    priceProduct() {
-      let price = this.product.promotionalPrice.length
-        ? this.product.promotionalPrice
-        : this.product.retailPrice;
-      return formatCurrency(price);
-    },
-    checkProductEmpty() {
-      return _.isEmpty(this.product);
-    }
+    // descriptionProduct() {
+    //   let description =
+    //     this.product.name.length < 30
+    //       ? this.product.name
+    //       : this.product.name.slice(0, 30) + "...";
+    //   return description;
+    // },
+    // priceProduct() {
+    //   let price = this.product.promotionalPrice.length
+    //     ? this.product.promotionalPrice
+    //     : this.product.retailPrice;
+    //   return formatCurrency(price);
+    // },
+    // checkProductEmpty() {
+    //   return _.isEmpty(this.product);
+    // }
   },
   methods: {
     ...mapActions("cart", ["addProductToCart"])

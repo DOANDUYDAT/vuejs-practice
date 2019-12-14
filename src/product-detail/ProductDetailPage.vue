@@ -14,7 +14,9 @@
     </v-row>
 
     <v-row>
-      <v-col cols="8"></v-col>
+      <v-col cols="8">
+        <post-review :product="product"></post-review>
+      </v-col>
       <v-col cols="4">
         <spec-product-table :product="product"></spec-product-table>
       </v-col>
@@ -41,6 +43,7 @@ import ReviewProduct from "@/review/ReviewProduct";
 import SuggestProduct from "./SuggestProduct";
 import CommentProduct from "@/comment/CommentProduct";
 import BreadcrumbBase from "@/components/BreadcrumbBase";
+import PostReview from './PostReview';
 import { productService } from "@/_api";
 
 export default {
@@ -55,7 +58,8 @@ export default {
     ReviewProduct,
     SuggestProduct,
     CommentProduct,
-    BreadcrumbBase
+    BreadcrumbBase,
+    PostReview
   },
   computed: {},
   created() {

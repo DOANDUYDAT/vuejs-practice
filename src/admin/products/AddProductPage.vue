@@ -216,31 +216,6 @@ export default {
           text: "Cổng sạc",
           model: "chargingPort",
           type: "text"
-        },
-        {
-          text: "Loại sim",
-          model: "sim",
-          type: "text"
-        },
-        {
-          text: "Giá bán lẻ",
-          model: "retailPrice",
-          type: "number"
-        },
-        {
-          text: "Giá niêm yết",
-          model: "listedPrice",
-          type: "number"
-        },
-        {
-          text: "Giá khuyến mại",
-          model: "promotionalPrice",
-          type: "number"
-        },
-        {
-          text: "Số lượng",
-          model: "count",
-          type: "number"
         }
       ]
     };

@@ -59,12 +59,16 @@ export default {
         filterable: false
       },
       { text: "Name", value: "name", sortable: false, filterable: false },
-      { text: "ListedPrice", value: "listedPrice", sortable: true, filterable: false },
-      { text: "RetailPrice", value: "retailPrice", sortable: true, filterable: false },
-      { text: "PromotionPrice", value: "promotionalPrice", sortable: true, filterable: false },
+      {
+        text: "Import Price",
+        value: "importPrice",
+        sortable: true,
+        filterable: false
+      },
+      { text: "Price", value: "price", sortable: true, filterable: false },
       {
         text: "Quantity",
-        value: "count",
+        value: "quantity",
         sortable: true,
         filterable: false
       },
@@ -77,20 +81,24 @@ export default {
   methods: {
     async deleteItem(item) {
       const productId = item.id;
-      confirm("Are you sure you want to delete this item?");
-      try {
-        const isSuccess = await productService.deleteProduct(productId);
-        if (isSuccess) {
-          await this.getData();
-          this.$store.dispatch("alert/success", {
-            message: "Delete Successfully!"
-          });
-        }
-      } catch (error) {
-        if (error.response) {
-          this.$store.dispatch("alert/error", {
-            message: error.response.data.message
-          });
+      const confirmStatus = confirm(
+        "Are you sure you want to delete this item?"
+      );
+      if (confirmStatus) {
+        try {
+          const isSuccess = await productService.deleteProduct(productId);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Delete Successfully!"
+            });
+          }
+        } catch (error) {
+          if (error.response) {
+            this.$store.dispatch("alert/error", {
+              message: error.response.data.message
+            });
+          }
         }
       }
     },
@@ -103,7 +111,17 @@ export default {
     },
 
     async getData() {
-      this.products = await productService.getAllProducts();
+      const allProducts = await productService.getAllProducts();
+      this.products = allProducts.map(e => {
+        return {
+          id: e.id,
+          image: e.images[0],
+          name: e.name,
+          importPrice: e.importPrice,
+          price: e.price,
+          quantity: e.count
+        }
+      })
     }
   },
   created() {
