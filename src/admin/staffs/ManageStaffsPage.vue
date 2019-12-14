@@ -40,7 +40,10 @@
                     <v-text-field v-model="editedItem.id" label="Staff Id" outlined disabled></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.name" label="Name" outlined></v-text-field>
+                    <v-text-field v-model="editedItem.firstName" label="First Name" outlined></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.lastName" label="Last Name" outlined></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.email" label="Email" outlined></v-text-field>
@@ -68,7 +71,7 @@
 </template>
 
 <script>
-import { userService } from "@/_api";
+import { userService, staffService } from "@/_api";
 export default {
   data: () => ({
     dialog: false,
@@ -144,11 +147,15 @@ export default {
     },
 
     async deleteItem(item) {
-      const staff = item.id;
+      console.log('deleta');
+      console.log(item);
+      const staffId = item.id;
       const confirmStatus = confirm(
         "Are you sure you want to delete this item?"
       );
       if (confirmStatus) {
+        console.log(confirmStatus)
+        console.log('hello')
         try {
           const isSuccess = await staffService.deleteStaff(staffId);
           if (isSuccess) {
@@ -176,7 +183,7 @@ export default {
     },
 
     async save() {
-      const supplier = this.editedItem;
+      const staff = this.editedItem;
       try {
         const isSuccess = await staffService.updateStaff(staff);
         console.log(isSuccess);
@@ -189,7 +196,7 @@ export default {
         }
       } catch (error) {
         this.$store.dispatch("alert/error", {
-          message: error.response.data
+          message: error
         });
       }
     }

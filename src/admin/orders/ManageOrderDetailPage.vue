@@ -52,7 +52,7 @@
       </v-simple-table>
       <v-row justify="space-between">
         <v-col cols="12" md="3">
-          <v-row class="pl-4">Người mua: {{ order.user.id }}</v-row>
+          <v-row class="pl-4">Người mua: {{ order.user.first_name + ' ' + order.user.last_name}}</v-row>
           <v-row class="pl-4">Ngày mua: {{ order.createdAt }}</v-row>
           <v-row class="pl-4">Số điện thoại: {{ order.user.phone }}</v-row>
           <v-row class="pl-4">Phương thức thanh toán: Tiền mặt</v-row>
