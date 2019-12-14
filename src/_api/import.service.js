@@ -115,11 +115,11 @@ async function getImport(importId) {
             const data = response.data;
             const d = new Date();
             const anImport = {
-                id: e.id,
+                id: data.id,
                 createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at),
-                items: e.items,
-                total: e.total,
-                user: e.user
+                items: data.items,
+                total: data.total,
+                user: data.user
             }
             return anImport;
         }

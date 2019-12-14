@@ -21,7 +21,7 @@
               STT
             </th>
             <th class="text-center" style="width:10%; font-size: 1rem;">
-              Mã sản phẩm
+              ID
             </th>
             <th class="text-center" style="width:40%; font-size: 1rem;">
               Tên sản phẩm
@@ -85,7 +85,9 @@ export default {
   },
   computed: {
     nameStaff() {
-      return this.anImport.user.first_name + " " + this.anImport.user.last_name;
+      return this.anImport.user
+        ? this.anImport.user.first_name + " " + this.anImport.user.last_name
+        : "";
     }
   },
   methods: {
@@ -95,12 +97,12 @@ export default {
     async getData() {
       const importId = this.$route.params.importProductId;
       this.anImport = await importProductService.getImport(importId);
-      this.listProducts = this.anImport.map(e => {
+      this.listProducts = this.anImport.items.map(e => {
         return {
           id: e.product.id,
           quantity: e.quantity,
           name: e.product.name,
-          price: e.product.import_price
+          price: e.import_price
         };
       });
     }
