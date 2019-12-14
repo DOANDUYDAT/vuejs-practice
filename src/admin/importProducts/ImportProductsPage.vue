@@ -39,6 +39,7 @@
 
 <script>
 import { formatCurrency } from "@/_api/format-currency";
+import { importProductService } from "@/_api";
 export default {
   data: () => ({
     search: "",
@@ -96,7 +97,13 @@ export default {
     },
     formatCurrency(total) {
       return formatCurrency(total);
+    },
+    async getData() {
+      this.imports = await importProductService.getAllImports();
     }
+  },
+  created() {
+    this.getData();
   }
 };
 </script>

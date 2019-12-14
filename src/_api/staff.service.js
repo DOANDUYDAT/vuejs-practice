@@ -1,18 +1,14 @@
 import config from 'config';
-import axios from 'axios';
 import {
     authHeader
 } from '@/_helpers';
+import axios from 'axios';
 import _ from 'lodash';
 
-
-
-export const importProductService = {
-    createImportProduct,
-    getAllImports
-    
+export const staffService = {
+    createStaff,
+    updateStaff
 };
-
 
 const headers = {
     'Content-Type': 'application/json',
@@ -20,32 +16,27 @@ const headers = {
 
 }
 
-
-async function createImportProduct(importOrder) {
-    console.log('createImportProduct');
-    const auth = authHeader();
-    const items = importOrder.items.map(e => {
-        return {
-            product_id: e.id,
-            quantity: e.quantity,
-            import_price: e.importPrice,
-            price: e.price,
-        }
-    })
+async function createStaff(staff) {
+    console.log('createStaff');
     const data = {
-        items: items,
-        total: importOrder.total
-    }
+        last_name: staff.lastName,
+        first_name: staff.firstName,
+        email: staff.email,
+        role: staff.role
+    };
     console.log(data);
+    const auth = authHeader();
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/imports/`,
+        url: `${config.apiUrl}/users`,
         headers: {
             ...headers,
             ...auth
         },
         data: JSON.stringify(data)
     };
+    // const response = await axios(options);
+    // console.log(response);
     try {
         const response = await axios(options);
         console.log(response);
@@ -59,17 +50,26 @@ async function createImportProduct(importOrder) {
     }
 }
 
-async function getAllImports() {
-    console.log('getAllImports');
+
+async function updateStaff(staffInfo) {
+    console.log('updateStaff');
     const auth = authHeader();
+    const data = {
+        last_name: staffInfo.lastName,
+        first_name: staffInfo.firstName,
+        email: staffInfo.email,
+        role: staffInfo.role
+    }
+    console.log(data);
     const options = {
-        method: 'get',
-        url: `${config.apiUrl}/imports`,
+        method: 'put',
+        url: `${config.apiUrl}/users/${staffInfo.id}`,
         headers: {
             ...headers,
             ...auth
-        }
-    };
+        },
+        data: JSON.stringify(data)
+    }
     try {
         const response = await axios(options);
         console.log(response);
@@ -77,8 +77,9 @@ async function getAllImports() {
             console.log(response.data);
             return true;
         }
+
     } catch (error) {
         console.log(error.response);
-        if (error) throw error;
+        throw error;
     }
 }

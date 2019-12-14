@@ -2,8 +2,8 @@
   <v-data-table
     :headers="headers"
     :items="staffs"
-    :sort-by="['staffId']"
-    staff-key="staffId"
+    :sort-by="['id']"
+    staff-key="id"
     :sort-asc="[true]"
     :search="search"
   >
@@ -37,7 +37,7 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.staffId" label="Staff Id" outlined disabled></v-text-field>
+                    <v-text-field v-model="editedItem.id" label="Staff Id" outlined disabled></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.name" label="Name" outlined></v-text-field>
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { userService } from "@/_api";
 export default {
   data: () => ({
     dialog: false,
@@ -76,7 +77,7 @@ export default {
     headers: [
       {
         text: "Staff Id",
-        value: "staffId",
+        value: "id",
         sortable: false,
         filterable: true
       },
@@ -93,13 +94,13 @@ export default {
     staffs: [],
     editedIndex: -1,
     editedItem: {
-      staffId: 0,
+      id: 0,
       name: "",
       email: "",
       role: ""
     },
     defaultItem: {
-      staffId: 0,
+      id: 0,
       name: "",
       email: "",
       role: ""
@@ -119,31 +120,35 @@ export default {
   },
 
   created() {
-    this.initialize();
+    this.getData();
   },
 
   methods: {
     initialize() {
       this.staffs = [
         {
-          staffId: 1,
+          id: 1,
           name: "Le Thanh",
           email: "lethanh98@gmail.com",
           role: "Staff"
         },
         {
-          staffId: 2,
+          id: 2,
           name: "Duong Thoa",
           email: "duongthoa98@gmail.com",
           role: "Staff"
         },
         {
-          staffId: 3,
+          id: 3,
           name: "Doan Dat",
           email: "doandat98@gmail.com",
           role: "Staff"
         }
       ];
+    },
+    async getData() {
+      const users = await userService.getAllUsers();
+      this.staffs = users.filter( e => e.role === 'staff');
     },
 
     editItem(item) {

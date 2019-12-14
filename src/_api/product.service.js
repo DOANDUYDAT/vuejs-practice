@@ -198,12 +198,13 @@ async function updateProduct(product) {
     formData.append('description', product.description);
     for (var i = 0; i < product.images.length; i++) {
         let image = product.images[i];
-
-        formData.append('images[' + i + ']', image);
+        if (image.name && typeof image.name == 'string') {
+            formData.append('images[' + i + ']', image);
+        }
     }
-    for(var pair of formData.entries()) {
-        console.log(pair[0]+ ', '+ pair[1]); 
-     }
+    // for (var pair of formData.entries()) {
+    //     console.log(pair[0] + ', ' + pair[1]);
+    // }
     const options = {
         method: 'put',
         url: `${config.apiUrl}/products/${product.id}/`,
