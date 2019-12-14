@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { userService } from "@/_api";
+import { userService, staffService } from "@/_api";
 
 export default {
   data: () => ({
@@ -107,7 +107,7 @@ export default {
       },
       { text: "Actions", align: "center", value: "action", filterable: false }
     ],
-    roles: ["User", "Staff", "Admin"],
+    roles: ["user", "staff", "admin"],
     users: [],
     editedIndex: -1,
     editedItem: {
@@ -192,13 +192,23 @@ export default {
       }, 300);
     },
 
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.users[this.editedIndex], this.editedItem);
-      } else {
-        this.users.push(this.editedItem);
+    async save() {
+      const user = this.editedItem;
+      try {
+        const isSuccess = await staffService.updateStaff(user);
+        console.log(isSuccess);
+        if (isSuccess) {
+          await this.getData();
+          this.$store.dispatch("alert/success", {
+            message: "Update Successfully!"
+          });
+          this.close();
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error
+        });
       }
-      this.close();
     }
   }
 };

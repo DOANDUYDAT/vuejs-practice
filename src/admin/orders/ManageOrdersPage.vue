@@ -191,13 +191,23 @@ export default {
       }, 300);
     },
 
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.orders[this.editedIndex], this.editedItem);
-      } else {
-        this.orders.push(this.editedItem);
+    async save() {
+      const order = this.editedItem;
+      try {
+        const isSuccess = await orderService.updateOrder(order);
+        console.log(isSuccess);
+        if (isSuccess) {
+          await this.getData();
+          this.$store.dispatch("alert/success", {
+            message: "Update Successfully!"
+          });
+          this.close();
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error
+        });
       }
-      this.close();
     },
 
     getColor (status) {
@@ -207,7 +217,7 @@ export default {
       },
 
     goToOrderDetailPage(order) {
-      this.$router.push({ name: 'admin order', params: { orderId: order.orderId } });
+      this.$router.push({ name: 'admin order', params: { orderId: order.id } });
     }
   },
    created() {

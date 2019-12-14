@@ -40,18 +40,19 @@ async function getAllOrders() {
         if (response.status === 200) {
             console.log(response.data);
             const data = response.data;
+            const d = new Date();
             const orders = data.map(e => {
                 return {
-                    id: data.id,
-                    user: data.user,
-                    phone: data.phone,
-                    name: data.name,
-                    address: data.address,
-                    items: data.items,
-                    note: data.note,
-                    status: data.status,
-                    createdAt: data.create_at,
-                    total: data.total
+                    id: e.id,
+                    user: e.user,
+                    phone: e.phone,
+                    name: e.name,
+                    address: e.address,
+                    items: e.items,
+                    note: e.note,
+                    status: e.status,
+                    createdAt: d.getFullYear(data.created_at) + '-' + d.getMonth(data.created_at) + '-' + d.getDate(data.created_at) ,
+                    total: e.total
                 }
             })
             return orders;
@@ -120,6 +121,7 @@ async function getOrder(orderId) {
         if (response.status === 200) {
             console.log(response.data);
             const data = response.data;
+            const d = new Date();
             const order = {
                 id: data.id,
                 user: data.user,
@@ -129,7 +131,7 @@ async function getOrder(orderId) {
                 items: data.items,
                 note: data.note,
                 status: data.status,
-                createdAt: data.create_at,
+                createdAt: d.getFullYear(data.created_at) + '-' + d.getMonth(data.created_at) + '-' + d.getDate(data.created_at) ,
                 total: data.total
             };
             return order;

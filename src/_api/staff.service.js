@@ -29,7 +29,7 @@ async function createStaff(staff) {
     const auth = authHeader();
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/users`,
+        url: `${config.apiUrl}/users/`,
         headers: {
             ...headers,
             ...auth
@@ -64,7 +64,7 @@ async function updateStaff(staffInfo) {
     console.log(data);
     const options = {
         method: 'put',
-        url: `${config.apiUrl}/users/${staffInfo.id}`,
+        url: `${config.apiUrl}/users/${staffInfo.id}/`,
         headers: {
             ...headers,
             ...auth
@@ -89,8 +89,8 @@ async function deleteStaff(staffId) {
     console.log('deleteStaff');
     const auth = authHeader();
     const options = {
-        method: 'put',
-        url: `${config.apiUrl}/users/${staffId}`,
+        method: 'delete',
+        url: `${config.apiUrl}/users/${staffId}/`,
         headers: {
             ...headers,
             ...auth
@@ -99,7 +99,7 @@ async function deleteStaff(staffId) {
     try {
         const response = await axios(options);
         console.log(response);
-        if (response.status === 200) {
+        if (response.status === 204) {
             console.log(response.data);
             return true;
         }
