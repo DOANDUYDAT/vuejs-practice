@@ -181,8 +181,7 @@ async function getProfile() {
                 phone: data.phone,
                 address: data.address,
                 gender: data.gender,
-                dateOfBirth: data.date_of_birth,
-                role: e.groups[0].name
+                dateOfBirth: data.date_of_birth
             };
             return user;
         }

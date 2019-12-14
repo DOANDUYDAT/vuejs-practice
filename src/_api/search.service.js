@@ -5,6 +5,11 @@ import {
 } from '@/_helpers';
 import _ from 'lodash';
 
+const headers = {
+    'Content-Type': 'application/json',
+    // "Host": 'http://127.0.0.1:8000'
+
+}
 
 
 export const searchService = {
@@ -20,7 +25,7 @@ async function search(query) {
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/search/`,
+        url: `${config.apiUrl}/search`,
         headers: {
             ...headers,
         },

@@ -83,9 +83,14 @@ export default {
       }
       this.loading = false;
     },
-    async searchProduct() {
+    searchProduct() {
       const query = this.search;
-      this.$router.push({ path: "/home", query: { search: query } });
+      const url = `/home/search=${query}`;
+      const currentPath = this.$route.fullPath;
+      if (currentPath !== url) {
+        this.$router.push({ path: "/home", query: { search: query } });
+      }
+      
     },
     async getData() {
       this.products = await productService.getAllProducts();

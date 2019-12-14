@@ -52,12 +52,12 @@ export default {
         sortable: false,
         filterable: true
       },
-      {
-        text: "Image",
-        value: "image",
-        sortable: false,
-        filterable: false
-      },
+      // {
+      //   text: "Image",
+      //   value: "image",
+      //   sortable: false,
+      //   filterable: false
+      // },
       { text: "Name", value: "name", sortable: false, filterable: false },
       {
         text: "Import Price",
@@ -115,7 +115,6 @@ export default {
       this.products = allProducts.map(e => {
         return {
           id: e.id,
-          image: e.images[0],
           name: e.name,
           importPrice: e.importPrice,
           price: e.price,

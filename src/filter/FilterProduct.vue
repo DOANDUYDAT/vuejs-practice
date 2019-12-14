@@ -14,7 +14,7 @@
           class="white--text"
           :loading="loading"
           :disabled="loading"
-          @click="loader"
+          @click="submit"
           width="100%"
         >Áp dụng</v-btn>
       </v-col>
@@ -29,12 +29,12 @@
             <div class="flex relative xs5">
               <ValidationProvider
                 name="minPrice"
-                rules="required|numeric"
+                rules="numeric"
                 v-slot="{ errors }"
                 :bails="false"
               >
                 <v-text-field
-                  v-model="minPrice"
+                  v-model="filter.minPrice"
                   placeholder="Giá thấp nhất"
                   counter="8"
                   minlength="6"
@@ -48,12 +48,12 @@
             <div class="flex relative xs5">
               <ValidationProvider
                 name="maxPrice"
-                rules="required|numeric"
+                rules="numeric"
                 v-slot="{ errors }"
                 :bails="false"
               >
                 <v-text-field
-                  v-model="maxPrice"
+                  v-model="filter.maxPrice"
                   placeholder="Giá cao nhất"
                   counter="8"
                   minlength="6"
@@ -108,19 +108,20 @@
 </template>
 
 <script>
+import { supplierService, filterService } from "@/_api";
 export default {
   data() {
     return {
-      minPrice: "",
-      maxPrice: "",
       filter: {
-        brand: [],
+        minPrice: 0,
+        maxPrice: 0,
+        suppliers: [],
         color: [],
-        ROM: [],
+        rom: [],
         frontCamera: [],
         backCamera: [],
         system: [],
-        RAM: []
+        ram: []
       },
       //   toggle_exclusive: undefined,
       //   loader: null,
@@ -137,19 +138,19 @@ export default {
         //     { text: "Trên 30.000.000" }
         //   ]
         // },
-        {
-          text: "Thương hiệu",
-          model: "brand",
-          children: [
-            { text: "Sam Sung" },
-            { text: "iPhone" },
-            { text: "Xiaomi" },
-            { text: "Oppo" },
-            { text: "Realme" },
-            { text: "Huawei" },
-            { text: "NOKIA" }
-          ]
-        },
+        // {
+        //   text: "Thương hiệu",
+        //   model: "brand",
+        //   children: [
+        //     { text: "Sam Sung" },
+        //     { text: "iPhone" },
+        //     { text: "Xiaomi" },
+        //     { text: "Oppo" },
+        //     { text: "Realme" },
+        //     { text: "Huawei" },
+        //     { text: "NOKIA" }
+        //   ]
+        // },
         {
           text: "Màu sắc",
           model: "color",
@@ -171,7 +172,7 @@ export default {
         },
         {
           text: "Bộ nhớ trong",
-          model: "ROM",
+          model: "rom",
           children: [
             { text: "16GB" },
             { text: "32GB" },
@@ -231,7 +232,7 @@ export default {
         },
         {
           text: "RAM",
-          model: "RAM",
+          model: "ram",
           children: [
             { text: "2GB" },
             { text: "3GB" },
@@ -249,17 +250,57 @@ export default {
       this.loading = true;
       setTimeout(() => (this.loading = false), 1000);
     },
+    async submit() {
+      const query = this.filter;
+      try {
+        const isSuccess = await filterService.filter(query);
+        if (isSuccess) {
+          this.$store.dispatch("alert/success", {
+            message: "Update Successfully!"
+          });
+          this.resetFilter();
+        }
+      } catch (error) {
+        if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data.message
+          });
+        }
+      }
+    },
     resetFilter() {
-      this.minPrice = "";
-      this.maxPrice = "";
-      this.filter.brand = [];
+      this.filter.minPrice = 0;
+      this.filter.maxPrice = 0;
+      this.filter.suppliers = [];
       this.filter.color = [];
-      this.filter.ROM = [];
+      this.filter.rom = [];
       this.filter.frontCamera = [];
       this.filter.backCamera = [];
       this.filter.system = [];
-      this.filter.RAM = [];
+      this.filter.ram = [];
+    },
+    async getData() {
+      const allSuppliers = await supplierService.getAllSuppliers();
+      const suppliers = allSuppliers.map(e => {
+        return {
+          text: e.name
+        };
+      });
+      this.items.unshift(
+        Object.assign(
+          {},
+          {
+            text: "Thương hiệu",
+            model: "suppliers",
+            children: suppliers
+          }
+        )
+      );
     }
+  },
+
+  created() {
+    this.getData();
   }
 };
 </script>

@@ -262,8 +262,8 @@ export default {
         this.product.images.push(files[i]);
         let reader = new FileReader();
         reader.onload = function() {
-          // this.imagesShow.push({ image: reader.result});
-          this.imagesShow.push(reader.result);
+          this.imagesShow.push({ image: reader.result});
+          // this.imagesShow.push(reader.result);
         }.bind(this);
         reader.readAsDataURL(files[i]);
       }

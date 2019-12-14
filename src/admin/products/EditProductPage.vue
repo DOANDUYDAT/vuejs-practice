@@ -43,7 +43,7 @@
               tile
               :key="i"
             >
-              <v-img :src="image"></v-img>
+              <v-img :src="image.image"></v-img>
             </v-avatar>
           </div>
           <!-- </v-col>
@@ -228,7 +228,7 @@ export default {
     handleFileUpload(files) {
       this.product.images = [];
       for (let i = 0; i < files.length; i++) {
-        this.product.images.push({ image: files[i]});
+        this.product.images.push(files[i]);
         let reader = new FileReader();
         reader.onload = function() {
           this.imagesShow.push({ image: reader.result});

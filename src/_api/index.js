@@ -4,4 +4,4 @@ export * from './product.service';
 export * from './order.service';
 export * from './search.service';
 export * from './import.service';
-export * from './group.service';
+export * from './filter.service';
