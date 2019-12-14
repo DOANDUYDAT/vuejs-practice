@@ -5,7 +5,11 @@ import {
 } from '@/_helpers';
 import _ from 'lodash';
 
+const headers = {
+    'Content-Type': 'application/json',
+    // "Host": 'http://127.0.0.1:8000'
 
+}
 
 export const filterService = {
     filter
@@ -15,25 +19,30 @@ export const filterService = {
 async function filter(query) {
     console.log('filter');
     const data = {
-        filter: query
-    }
+        max_price: query.maxPrice,
+        min_price: query.minPrice,
+        ...query
+    };
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/filter/`,
+        url: `${config.apiUrl}/filter`,
         headers: {
             ...headers,
         },
         data: JSON.stringify(data)
     };
+    console.log('hello');
     try {
+        console.log('hello2');
         const response = await axios(options);
+        console.log('hello3');
         console.log(response);
         if (response.status === 200) {
             console.log(response.data);
             const data = response.data;
             let productsFilter = [];
-            if (data.length > 0) {
+            if (data.length) {
                 productsFilter = data.map(e => {
                     const product = {
                         id: e.id,
