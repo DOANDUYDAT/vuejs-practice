@@ -102,7 +102,7 @@
                   <v-img max-width="80px" max-height="80px" :src="product.image"></v-img>
                 </td>
                 <td class="text-center">
-                  {{ product.title }}
+                  {{ product.name }}
                   <br />
                   <b>x{{ product.quantity }}</b>
                 </td>
