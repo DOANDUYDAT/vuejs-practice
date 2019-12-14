@@ -32,9 +32,9 @@ async function filter(query) {
         if (response.status === 200) {
             console.log(response.data);
             const data = response.data;
-            let productsSearch = [];
+            let productsFilter = [];
             if (data.length > 0) {
-                productsSearch = data.map(e => {
+                productsFilter = data.map(e => {
                     const product = {
                         id: e.id,
                         supplier: e.supplier,
@@ -62,7 +62,7 @@ async function filter(query) {
                     return product;
                 });
             }
-            return productsSearch;
+            return productsFilter;
         }
     } catch (error) {
         console.log(error.response);

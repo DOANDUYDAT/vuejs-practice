@@ -216,11 +216,10 @@ export default {
       try {
         const isSuccess = await importProductService.createImportProduct(importOrder);
         if (isSuccess) {
-          this.$refs.observer.reset();
           this.$store.dispatch("alert/success", {
-            message: "Add Successfully!"
+            message: "Import Successfully!"
           });
-          this.resetInput();
+          this.itemSelected = [];
         }
       } catch (error) {
         if (error.response) {
