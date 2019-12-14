@@ -28,10 +28,14 @@
         </v-row>
         <v-row>
           <v-col cols="6"></v-col>
+<<<<<<< HEAD
           <v-col cols="6">
             Tổng tiền:
             <span style="color: red">{{ formatCurrency(total) }}đ</span>
           </v-col>
+=======
+          <v-col cols="6">Tổng tiền: {{ formatCurrency(total) }}đ</v-col>
+>>>>>>> 432ce24f6c01f48aca152754b84edfc38c0755a3
         </v-row>
 
         <v-card-actions>

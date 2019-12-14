@@ -21,7 +21,7 @@ import axios from "axios";
 import ProductListItem from "./ProductListItem";
 import SliderAds from "./SliderAds";
 import { mapState } from "vuex";
-import { searchService, productService } from "@/_api";
+import { searchService, productService, filterService } from "@/_api";
 
 export default {
   components: {
@@ -49,15 +49,44 @@ export default {
     //   products: state => state.products.allProducts
     // })
   },
+  
   methods: {
     async getData() {
-      const query = this.$route.query.search;
-      if (query) {
-       this.productsList = await searchService.search(query);
+      const query = this.$route.query;
+      console.log(query);
+
+      this.productsList = [];
+      if (query && query.filter) {
+        const filter = query.filter;
+        console.log(filter);
+        this.productsList = await filterService.filter(filter);
+      } else if (query && query.search) {
+        const search = query.search;
+        this.productsList = await searchService.search(search);
       } else {
         this.productsList = await productService.getAllProducts();
       }
+
+      // try {
+      //   const isSuccess = await filterService.filter(query);
+      //   if (isSuccess) {
+      //     this.$store.dispatch("alert/success", {
+      //       message: "Update Successfully!"
+      //     });
+      //     this.resetFilter();
+      //   }
+      // } catch (error) {
+      //   if (error.response) {
+      //     this.$store.dispatch("alert/error", {
+      //       message: error.response.data.message
+      //     });
+      //   }
+      // }
     }
+    
+  },
+  watch: {
+    $route: 'getData'
   },
   created() {
     this.getData();

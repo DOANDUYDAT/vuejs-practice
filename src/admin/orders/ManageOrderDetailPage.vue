@@ -26,7 +26,7 @@
             <td class="text-center">{{ index + 1 }}</td>
             <td class="text-center">{{ product.id }}</td>
             <td>
-              <v-img contain :height="80" :width="80" class="mx-auto" :src="product.images[0]"></v-img>
+              <v-img contain :height="80" :width="80" class="mx-auto" :src="product.image"></v-img>
             </td>
             <td class="text-left">{{ product.name }}</td>
             <td class="text-center">{{ product.quantity }}</td>
@@ -93,7 +93,7 @@ export default {
           quantity: e.quantity,
           name: e.product.name,
           price: e.product.price,
-          image: e.product.images[0]
+          image: e.product.images[0].image
         };
       });
     }

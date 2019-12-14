@@ -191,6 +191,7 @@ export default {
           this.$store.dispatch("alert/success", {
             message: "Checkout Successfully!"
           });
+          this.note = "";
         }
       } catch (error) {
         if (error.response) {
