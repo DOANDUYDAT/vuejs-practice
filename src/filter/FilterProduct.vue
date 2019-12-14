@@ -121,7 +121,7 @@ export default {
         rom: [],
         frontCamera: [],
         rearCamera: [],
-        system: [],
+        operatingSystem: [],
         ram: []
       },
       //   toggle_exclusive: undefined,
@@ -222,7 +222,7 @@ export default {
         },
         {
           text: "Hệ điều hành",
-          model: "system",
+          model: "operatingSystem",
           children: [
             { text: "Android 7.0" },
             { text: "Android 8.1" },
@@ -264,12 +264,12 @@ export default {
     resetFilter() {
       this.filter.minPrice = "";
       this.filter.maxPrice = "";
-      this.filter.suppliers = [];
+      this.filter.supplier = [];
       this.filter.color = [];
       this.filter.rom = [];
       this.filter.frontCamera = [];
-      this.filter.backCamera = [];
-      this.filter.system = [];
+      this.filter.rearCamera = [];
+      this.filter.operatingSystem = [];
       this.filter.ram = [];
     },
     async getData() {

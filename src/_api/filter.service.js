@@ -19,11 +19,16 @@ export const filterService = {
 async function filter(query) {
     console.log('filter');
     const data = {
-        max_price: query.maxPrice,
-        min_price: query.minPrice,
-        ...query,
-        front_camera: query.frontCamera,
-        rear_camera: query.rearCamera
+        max_price: query.maxPrice.length ? query.maxPrice : 'all',
+        min_price: query.minPrice.length ? query.minPrice : 'all',
+        front_camera: query.frontCamera.length ? query.frontCamera : 'all',
+        rear_camera: query.rearCamera.length ? query.rearCamera : 'all',
+        rom: query.rom.length ? query.rom : 'all',
+        ram: query.ram.length ? query.ram : 'all',
+        color: query.color.length ? query.color : 'all',
+        supplier: query.supplier.length ? query.supplier : 'all',
+        operatingSystem: query.operatingSystem.length ? query.operatingSystem : 'all'
+
     };
     console.log(data);
     const options = {
