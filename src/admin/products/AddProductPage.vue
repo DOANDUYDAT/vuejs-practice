@@ -9,56 +9,56 @@
       <v-row>
         <v-col cols="8">
           <ValidationObserver ref="observer" v-slot="{ invalid }" tag="div">
-          <v-row justify="center">
-            <v-col cols="12" md="3">
-              <v-subheader class="text-size">Thương hiệu</v-subheader>
-            </v-col>
-            <v-col cols="12" md="9">
-              <ValidationProvider
-                name="supplier"
-                rules="required"
-                v-slot="{ errors }"
-                :bails="false"
-              >
-                <v-select
-                  :items="listSelected"
-                  placeholder="Thương hiệu"
-                  v-model="supplierId"
-                  outlined
-                  hide-details
-                ></v-select>
-                <!-- <v-text-field
+            <v-row justify="center">
+              <v-col cols="12" md="3">
+                <v-subheader class="text-size">Thương hiệu</v-subheader>
+              </v-col>
+              <v-col cols="12" md="9">
+                <ValidationProvider
+                  name="supplier"
+                  rules="required"
+                  v-slot="{ errors }"
+                  :bails="false"
+                >
+                  <v-select
+                    :items="listSelected"
+                    placeholder="Thương hiệu"
+                    v-model="supplierId"
+                    outlined
+                    hide-details
+                  ></v-select>
+                  <!-- <v-text-field
                   :placeholder="item.text"
                   outlined
                   v-model="product[item.model]"
                   hide-details
-                ></v-text-field> -->
-                <span class="red--text">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </v-col>
-          </v-row>
-          <v-row justify="center" v-for="item in items" :key="item.text">
-            <v-col cols="12" md="3">
-              <v-subheader class="text-size">{{ item.text }}</v-subheader>
-            </v-col>
-            <v-col cols="12" md="9">
-              <ValidationProvider
-                :name="item.model"
-                rules="required"
-                v-slot="{ errors }"
-                :bails="false"
-              >
-                <v-text-field
-                  :placeholder="item.text"
-                  outlined
-                  :type="item.type"
-                  v-model="product[item.model]"
-                  hide-details
-                ></v-text-field>
-                <span class="red--text">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </v-col>
-          </v-row>
+                  ></v-text-field>-->
+                  <span class="red--text">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+            <v-row justify="center" v-for="item in items" :key="item.text">
+              <v-col cols="12" md="3">
+                <v-subheader class="text-size">{{ item.text }}</v-subheader>
+              </v-col>
+              <v-col cols="12" md="9">
+                <ValidationProvider
+                  :name="item.model"
+                  rules="required"
+                  v-slot="{ errors }"
+                  :bails="false"
+                >
+                  <v-text-field
+                    :placeholder="item.text"
+                    outlined
+                    :type="item.type"
+                    v-model="product[item.model]"
+                    hide-details
+                  ></v-text-field>
+                  <span class="red--text">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </v-col>
+            </v-row>
           </ValidationObserver>
         </v-col>
         <v-col cols="4">
@@ -99,9 +99,7 @@
       </v-row>
       <v-card-actions>
         <v-row>
-          <v-btn color="gg-red" class="mx-auto white--text" @click="submit"
-            >Submit</v-btn
-          >
+          <v-btn color="gg-red" class="mx-auto white--text" @click="submit">Submit</v-btn>
         </v-row>
       </v-card-actions>
     </v-card>
@@ -229,15 +227,15 @@ export default {
           return {
             text: e.name,
             value: e.id
-          }
-        })
+          };
+        });
       }
       return listSelected;
     }
   },
   methods: {
     async submit() {
-      const product = {...this.product, supplierId: this.supplierId};
+      const product = { ...this.product, supplierId: this.supplierId };
       try {
         const isSuccess = await productService.createProduct(product);
         if (isSuccess) {
@@ -262,7 +260,7 @@ export default {
         this.product.images.push(files[i]);
         let reader = new FileReader();
         reader.onload = function() {
-          this.imagesShow.push({ image: reader.result});
+          this.imagesShow.push({ image: reader.result });
           // this.imagesShow.push(reader.result);
         }.bind(this);
         reader.readAsDataURL(files[i]);

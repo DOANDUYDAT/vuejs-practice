@@ -7,28 +7,60 @@
     </v-toolbar>
     <v-row>
       <v-col cols="8">
-        <v-row justify="center" v-for="item in items" :key="item.text">
-          <v-col cols="12" md="3">
-            <v-subheader class="text-size">{{ item.text }}</v-subheader>
-          </v-col>
-          <v-col cols="12" md="9">
-            <ValidationProvider
-              :name="item.model"
-              rules="required"
-              v-slot="{ errors }"
-              :bails="false"
-            >
-              <v-text-field
-                :placeholder="item.text"
-                outlined
-                v-model="product[item.model]"
-                hide-details
-                :disabled="item.disabled ? item.disabled : disabled"
-              ></v-text-field>
-              <span class="red--text">{{ errors[0] }}</span>
-            </ValidationProvider>
-          </v-col>
-        </v-row>
+        <ValidationObserver ref="observer" v-slot="{ invalid }" tag="div">
+          <v-row justify="center">
+            <v-col cols="12" md="3">
+              <v-subheader class="text-size">Thương hiệu</v-subheader>
+            </v-col>
+            <v-col cols="12" md="9">
+              <ValidationProvider
+                name="supplier"
+                rules="required"
+                v-slot="{ errors }"
+                :bails="false"
+              >
+                <v-select
+                  :items="listSelected"
+                  placeholder="Thương hiệu"
+                  v-model="product.supplier"
+                  outlined
+                  hide-details
+                  :disabled="disabled"
+                ></v-select>
+                <!-- <v-text-field
+                  :placeholder="item.text"
+                  outlined
+                  v-model="product[item.model]"
+                  hide-details
+                ></v-text-field>-->
+                <span class="red--text">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+            <v-row justify="center" v-for="item in items" :key="item.text">
+              <v-col cols="12" md="3">
+                <v-subheader class="text-size">{{ item.text }}</v-subheader>
+              </v-col>
+              <v-col cols="12" md="9">
+                <ValidationProvider
+                  :name="item.model"
+                  rules="required"
+                  v-slot="{ errors }"
+                  :bails="false"
+                >
+                  <v-text-field
+                    :placeholder="item.text"
+                    outlined
+                    v-model="product[item.model]"
+                    hide-details
+                    :disabled="item.disabled ? item.disabled : disabled"
+                  ></v-text-field>
+                  <span class="red--text">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+          
+        </ValidationObserver>
       </v-col>
       <v-col cols="4">
         <div class="my-avatar">
@@ -97,6 +129,7 @@ export default {
   data() {
     return {
       suppliers: [],
+      supplierId: "",
       disabled: true,
       productId: null,
       imagesShow: [],
@@ -126,10 +159,10 @@ export default {
         description: "<h1>Some initial content</h1>"
       },
       items: [
-        {
-          text: "Thương hiệu",
-          model: "supplier"
-        },
+        // {
+        //   text: "Thương hiệu",
+        //   model: "supplier"
+        // },
         {
           text: "Bảo hành",
           model: "guarantee"
@@ -204,11 +237,25 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    listSelected() {
+      const suppliers = this.suppliers;
+      let listSelected = [];
+      if (suppliers.length > 0) {
+        listSelected = suppliers.map(e => {
+          return {
+            text: e.name,
+            value: e.name
+          };
+        });
+      }
+      return listSelected;
+    }
+  },
 
   methods: {
     async submit() {
-      const product = this.product;
+      const product = { ...this.product, supplierId: this.supplierId };
       try {
         const isSuccess = await productService.updateProduct(product);
         if (isSuccess) {
@@ -231,7 +278,7 @@ export default {
         this.product.images.push(files[i]);
         let reader = new FileReader();
         reader.onload = function() {
-          this.imagesShow.push({ image: reader.result});
+          this.imagesShow.push({ image: reader.result });
         }.bind(this);
         reader.readAsDataURL(files[i]);
       }
