@@ -20,7 +20,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search theo id của đơn hàng"
+          label="Search theo id hoặc trạng thái đơn hàng"
           color="it-blue-lighten"
           single-line
           hide-details
@@ -49,7 +49,7 @@
                   </v-col>
                   <!-- <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.staffId" label="Staff Id" disabled></v-text-field>
-                  </v-col> -->
+                  </v-col>-->
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.createdAt" label="Date" disabled></v-text-field>
                   </v-col>
@@ -85,7 +85,7 @@
 <script>
 import { fakeOrders } from "@/_helpers/fake-orders";
 import { orderService } from "@/_api";
-import _ from 'lodash';
+import _ from "lodash";
 export default {
   data: () => ({
     dialog: false,
@@ -112,7 +112,7 @@ export default {
       //   filterable: false
       // },
       { text: "Date", value: "createdAt", sortable: true, filterable: false },
-      { text: "Status", value: "status", sortable: true, filterable: false },
+      { text: "Status", value: "status", sortable: true, filterable: true },
       { text: "Actions", value: "action", sortable: false, filterable: false }
     ],
     orders: [],
@@ -149,7 +149,7 @@ export default {
   methods: {
     async getData() {
       // const allOrders = await orderService.getAllOrders();
-      this.orders = await orderService.getAllOrders()
+      this.orders = await orderService.getAllOrders();
       // this.orders = fakeOrders();
     },
 
@@ -175,10 +175,10 @@ export default {
           }
         } catch (error) {
           if (error.response) {
-          this.$store.dispatch("alert/error", {
-            message: error.response.data.message
-          });
-        }
+            this.$store.dispatch("alert/error", {
+              message: error.response.data.message
+            });
+          }
         }
       }
     },
@@ -210,17 +210,17 @@ export default {
       }
     },
 
-    getColor (status) {
-        if (status == "Đang giao hàng") return 'red'
-        else if (status == "XÁC NHẬN") return 'orange'
-        else return 'green'
-      },
+    getColor(status) {
+      if (status == "Đang giao hàng") return "red";
+      else if (status == "XÁC NHẬN") return "orange";
+      else return "green";
+    },
 
     goToOrderDetailPage(order) {
-      this.$router.push({ name: 'admin order', params: { orderId: order.id } });
+      this.$router.push({ name: "admin order", params: { orderId: order.id } });
     }
   },
-   created() {
+  created() {
     this.getData();
   }
 };

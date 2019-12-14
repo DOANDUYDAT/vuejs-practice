@@ -18,7 +18,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search with userId or Role"
+          label="Search theo Id hoặc quyền người dùng"
           color="it-blue-lighten"
           single-line
           hide-details
@@ -134,13 +134,13 @@ export default {
   },
 
   methods: {
-    async getData() { 
+    async getData() {
       const allUsers = await userService.getAllUsers();
       this.users = allUsers.map(e => {
         return {
           ...e,
-          name: e.firstName + ' ' + e.lastName
-        }
+          name: e.firstName + " " + e.lastName
+        };
       });
     },
     // initialize() {
