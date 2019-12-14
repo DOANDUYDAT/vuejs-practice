@@ -8,7 +8,8 @@ import _ from 'lodash';
 
 
 export const importProductService = {
-    createImportProduct
+    createImportProduct,
+    getAllImports
     
 };
 
@@ -49,6 +50,30 @@ async function createImportProduct(importOrder) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 201) {
+            console.log(response.data);
+            return true;
+        }
+    } catch (error) {
+        console.log(error.response);
+        if (error) throw error;
+    }
+}
+
+async function getAllImports() {
+    console.log('getAllImports');
+    const auth = authHeader();
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/imports`,
+        headers: {
+            ...headers,
+            ...auth
+        }
+    };
+    try {
+        const response = await axios(options);
+        console.log(response);
+        if (response.status === 200) {
             console.log(response.data);
             return true;
         }

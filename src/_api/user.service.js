@@ -258,6 +258,7 @@ async function changePassword({ oldPasword, password }) {
         old_pasword: oldPasword,
         password: password
     };
+    console.log(data);
     const auth = authHeader();
     const options = {
         method: 'post',

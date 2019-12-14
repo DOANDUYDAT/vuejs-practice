@@ -75,7 +75,7 @@
               tile
               :key="i"
             >
-              <v-img :src="image.image"></v-img>
+              <v-img :src="image"></v-img>
             </v-avatar>
           </div>
           <!-- </v-col>
@@ -151,9 +151,8 @@ export default {
         operatingSystem: "",
         chargingPort: "",
         sim: "",
-        retailPrice: 0,
-        listedPrice: 0,
-        promotionalPrice: 0,
+        price: 0,
+        importPrice: 0,
         count: 0,
         images: [],
         description: "<h1>Some initial content</h1>"
@@ -274,6 +273,7 @@ export default {
     },
     handleFileUpload(files) {
       this.product.images = [];
+      this.imagesShow = [];
       for (let i = 0; i < files.length; i++) {
         this.product.images.push(files[i]);
         let reader = new FileReader();
@@ -286,7 +286,13 @@ export default {
     async getData() {
       this.productId = this.$route.params.productId;
       this.suppliers = await supplierService.getAllSuppliers();
-      this.product = await productService.getProduct(this.productId);
+      const product = await productService.getProduct(this.productId);
+      let images = product.images.map(e => {
+        return e.image;
+      })
+      this.product = Object.assign({}, product, {
+        images
+      })
       this.imagesShow = [...this.product.images];
     }
   },

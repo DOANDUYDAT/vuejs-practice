@@ -2,8 +2,8 @@
   <v-data-table
     :headers="headers"
     :items="staffs"
-    :sort-by="['staffId']"
-    staff-key="staffId"
+    :sort-by="['id']"
+    staff-key="id"
     :sort-asc="[true]"
     :search="search"
   >
@@ -37,7 +37,7 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.staffId" label="Staff Id" outlined disabled></v-text-field>
+                    <v-text-field v-model="editedItem.id" label="Staff Id" outlined disabled></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.name" label="Name" outlined></v-text-field>
@@ -68,21 +68,28 @@
 </template>
 
 <script>
+import { userService } from "@/_api";
 export default {
   data: () => ({
     dialog: false,
     search: "",
-    roles: ["Staff", "Admin"],
+    roles: ["staff", "admin"],
     headers: [
       {
         text: "Staff Id",
-        value: "staffId",
+        value: "id",
         sortable: false,
         filterable: true
       },
       {
-        text: "Name",
-        value: "name",
+        text: "First Name",
+        value: "firstName",
+        sortable: true,
+        filterable: false
+      },
+      {
+        text: "Last Name",
+        value: "lastName",
         sortable: true,
         filterable: false
       },
@@ -93,14 +100,16 @@ export default {
     staffs: [],
     editedIndex: -1,
     editedItem: {
-      staffId: 0,
-      name: "",
+      id: 0,
+      firstName: "",
+      lastName: "",
       email: "",
       role: ""
     },
     defaultItem: {
-      staffId: 0,
-      name: "",
+      id: 0,
+      firstName: "",
+      lastName: "",
       email: "",
       role: ""
     }
@@ -119,31 +128,13 @@ export default {
   },
 
   created() {
-    this.initialize();
+    this.getData();
   },
 
   methods: {
-    initialize() {
-      this.staffs = [
-        {
-          staffId: 1,
-          name: "Le Thanh",
-          email: "lethanh98@gmail.com",
-          role: "Staff"
-        },
-        {
-          staffId: 2,
-          name: "Duong Thoa",
-          email: "duongthoa98@gmail.com",
-          role: "Staff"
-        },
-        {
-          staffId: 3,
-          name: "Doan Dat",
-          email: "doandat98@gmail.com",
-          role: "Staff"
-        }
-      ];
+    async getData() {
+      const users = await userService.getAllUsers();
+      this.staffs = users.filter(e => e.role === "staff");
     },
 
     editItem(item) {
@@ -152,10 +143,28 @@ export default {
       this.dialog = true;
     },
 
-    deleteItem(item) {
-      const index = this.staffs.indexOf(item);
-      confirm("Are you sure you want to delete this staff?") &&
-        this.staffs.splice(index, 1);
+    async deleteItem(item) {
+      const staff = item.id;
+      const confirmStatus = confirm(
+        "Are you sure you want to delete this item?"
+      );
+      if (confirmStatus) {
+        try {
+          const isSuccess = await staffService.deleteStaff(staffId);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Delete Successfully!"
+            });
+          }
+        } catch (error) {
+          if (error.response) {
+            this.$store.dispatch("alert/error", {
+              message: error.response.data.message
+            });
+          }
+        }
+      }
     },
 
     close() {
@@ -166,13 +175,23 @@ export default {
       }, 300);
     },
 
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.staffs[this.editedIndex], this.editedItem);
-      } else {
-        this.staffs.push(this.editedItem);
+    async save() {
+      const supplier = this.editedItem;
+      try {
+        const isSuccess = await staffService.updateStaff(staff);
+        console.log(isSuccess);
+        if (isSuccess) {
+          await this.getData();
+          this.$store.dispatch("alert/success", {
+            message: "Update Successfully!"
+          });
+          this.close();
+        }
+      } catch (error) {
+        this.$store.dispatch("alert/error", {
+          message: error.response.data
+        });
       }
-      this.close();
     }
   }
 };

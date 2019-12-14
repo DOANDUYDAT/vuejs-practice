@@ -22,7 +22,7 @@
                 <v-text-field
                   placeholder="First Name"
                   outlined
-                  v-model="firstName"
+                  v-model="staff.firstName"
                   counter="16"
                 ></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
@@ -43,7 +43,7 @@
                 <v-text-field
                   placeholder="Last Name"
                   outlined
-                  v-model="lastName"
+                  v-model="staff.lastName"
                   counter="16"
                 ></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
@@ -61,11 +61,7 @@
                 v-slot="{ errors }"
                 :bails="false"
               >
-                <v-text-field
-                  placeholder="Email"
-                  outlined
-                  v-model="email"
-                ></v-text-field>
+                <v-text-field placeholder="Email" outlined v-model="staff.email"></v-text-field>
                 <span class="red--text">{{ errors[0] }}</span>
               </ValidationProvider>
             </v-col>
@@ -75,16 +71,14 @@
               <v-subheader class="text-size ml-6 ml-6">Role</v-subheader>
             </v-col>
             <v-col cols="12" md="9">
-              <v-select :items="roles" v-model="role" placeholder="Role" outlined></v-select>
+              <v-select :items="roles" v-model="staff.role" placeholder="Role" outlined></v-select>
             </v-col>
           </v-row>
         </v-col>
       </v-row>
       <v-card-actions>
         <v-row>
-          <v-btn color="gg-red" class="mx-auto white--text" @click="submit"
-            >Submit</v-btn
-          >
+          <v-btn color="gg-red" class="mx-auto white--text" @click="submit">Submit</v-btn>
         </v-row>
       </v-card-actions>
     </v-card>
@@ -92,26 +86,39 @@
 </template>
 
 <script>
-import { VueEditor } from "vue2-editor";
+import { staffService } from "@/_api";
 
 export default {
-  components: {
-    VueEditor
-  },
-
   data() {
     return {
-      firstName: "",
-      lastName: "",
-      email: "",
-      roles: ["Staff", "Admin"],
-      role: ""
+      staff: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        role: ""
+      },
+      roles: ["staff", "admin"],
     };
   },
 
   methods: {
-    submit() {
-      console.log(this.content);
+    async submit() {
+      const staff = this.staff;
+      try {
+        const isSuccess = await staffService.createStaff(staff);
+        if (isSuccess) {
+          this.$store.dispatch("alert/success", {
+            message: "Create Staff Successfully!"
+          });
+          this.itemSelected = [];
+        }
+      } catch (error) {
+        if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data
+          });
+        }
+      }
     }
   }
 };

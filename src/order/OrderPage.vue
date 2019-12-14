@@ -170,7 +170,7 @@ export default {
     },
     async getData() {
       this.userInfo = await userService.getProfile();
-      this.name = this.userInfo.firstName + this.userInfo.lastName;
+      this.name = this.userInfo.firstName + ' ' + this.userInfo.lastName;
       this.address = this.userInfo.address;
       this.phone = this.userInfo.phone;
     },
