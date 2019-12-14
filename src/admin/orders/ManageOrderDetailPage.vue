@@ -14,7 +14,7 @@
         <thead>
           <tr>
             <th class="text-center" style="width:10%; font-size: 1rem;">STT</th>
-            <th class="text-center" style="width:10%; font-size: 1rem;">Mã sản phẩm</th>
+            <th class="text-center" style="width:10%; font-size: 1rem;">ID</th>
             <th class="text-center" style="width:15%; font-size: 1rem;">Hình ảnh</th>
             <th class="text-center" style="width:40%; font-size: 1rem;">Tên sản phẩm</th>
             <th class="text-center" style="width:10%; font-size: 1rem;">Số lượng</th>
@@ -28,7 +28,7 @@
             <td>
               <v-img contain :height="80" :width="80" class="mx-auto" :src="product.image"></v-img>
             </td>
-            <td class="text-left">{{ product.name }}</td>
+            <td class="text-center">{{ product.name }}</td>
             <td class="text-center">{{ product.quantity }}</td>
             <td class="text-center">{{ formatCurrency(product.price) }}đ</td>
           </tr>

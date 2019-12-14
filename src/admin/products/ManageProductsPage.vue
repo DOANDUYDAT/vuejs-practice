@@ -39,6 +39,7 @@
 <script>
 import { fakeOrders } from "@/_helpers/fake-orders";
 import { productService } from "@/_api";
+import { formatCurrency } from "@/_api/format-currency";
 
 export default {
   data: () => ({
@@ -116,11 +117,11 @@ export default {
         return {
           id: e.id,
           name: e.name,
-          importPrice: e.importPrice,
-          price: e.price,
+          importPrice: formatCurrency(e.importPrice),
+          price: formatCurrency(e.price),
           quantity: e.count
-        }
-      })
+        };
+      });
     }
   },
   created() {
