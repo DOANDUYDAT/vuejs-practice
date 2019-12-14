@@ -61,9 +61,8 @@ async function getAllProducts() {
                         pin: e.pin,
                         operatingSystem: e.operating_system,
                         chargingPort: e.charging_port,
-                        retailPrice: e.retail_price,
-                        listedPrice: e.listed_price,
-                        promotionalPrice: e.promotional_price,
+                        importPrice: data.import_price,
+                        price: data.price,
                         count: e.count,
                         description: e.description,
                         images: e.images,
@@ -92,36 +91,20 @@ async function createProduct(product) {
     formData.append('screen', product.screen);
     formData.append('resolution', product.resolution);
     formData.append('front_camera', product.frontCamera);
-    for( var i = 0; i < product.images.length; i++ ){
+    formData.append('rear_camera', product.rearCamera);
+    formData.append('chip', product.chip);
+    formData.append('ram', product.ram);
+    formData.append('rom', product.rom);
+    formData.append('pin', product.pin);
+    formData.append('operating_system', product.operatingSystem);
+    formData.append('charging_port', product.chargingPort);
+    formData.append('description', product.description);
+    for (var i = 0; i < product.images.length; i++) {
         let image = product.images[i];
 
         formData.append('images[' + i + ']', image);
-      }
-    const data = {
-        supplier_id: product.supplierId,
-        guarantee: product.guarantee,
-        guarantee_des: product.guaranteeDes,
-        name: product.name,
-        color: product.color,
-        screen: product.screen,
-        resolution: product.resolution,
-        front_camera: product.frontCamera,
-        rear_camera: product.rearCamera,
-        chip: product.chip,
-        ram: product.ram,
-        rom: product.rom,
-        pin: product.pin,
-        operating_system: product.operatingSystem,
-        charging_port: product.chargingPort,
-        retail_price: Number(product.retailPrice),
-        listed_price: Number(product.listedPrice),
-        promotional_price: Number(product.promotionalPrice),
-        count: Number(product.count),
-        description: product.description,
-        images: product.images
-    };
+    }
     console.log(formData);
-    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/products/`,
@@ -176,9 +159,8 @@ async function getProduct(productId) {
                 pin: data.pin,
                 operatingSystem: data.operating_system,
                 chargingPort: data.charging_port,
-                retailPrice: data.retail_price,
-                listedPrice: data.listed_price,
-                promotionalPrice: data.promotional_price,
+                importPrice: data.import_price,
+                price: data.price,
                 count: data.count,
                 description: data.description,
                 images: data.images,
@@ -195,38 +177,38 @@ async function getProduct(productId) {
 async function updateProduct(product) {
     console.log('updateProduct: ' + product.id);
     const auth = authHeader();
-    const data = {
-        supplier: product.supplier,
-        guarantee: product.guarantee,
-        guarantee_des: product.guaranteeDes,
-        name: product.name,
-        color: product.color,
-        screen: product.screen,
-        resolution: product.resolution,
-        front_camera: product.frontCamera,
-        rear_camera: product.rearCamera,
-        chip: product.chip,
-        ram: product.ram,
-        rom: product.rom,
-        pin: product.pin,
-        operating_system: product.operatingSystem,
-        charging_port: product.chargingPort,
-        retail_price: Number(product.retailPrice),
-        listed_price: Number(product.listedPrice),
-        promotional_price: Number(product.promotionalPrice),
-        count: Number(product.count),
-        description: product.description,
-        images: product.images
-    };
-    console.log(data);
+    let formData = new FormData();
+    formData.append('supplier_id', product.supplierId);
+    formData.append('guarantee', product.guarantee);
+    formData.append('guarantee_des', product.guaranteeDes);
+    formData.append('name', product.name);
+    formData.append('color', product.color);
+    formData.append('screen', product.screen);
+    formData.append('resolution', product.resolution);
+    formData.append('front_camera', product.frontCamera);
+    formData.append('rear_camera', product.rearCamera);
+    formData.append('chip', product.chip);
+    formData.append('ram', product.ram);
+    formData.append('rom', product.rom);
+    formData.append('pin', product.pin);
+    formData.append('operating_system', product.operatingSystem);
+    formData.append('charging_port', product.chargingPort);
+    formData.append('price', Number(product.price));
+    formData.append('description', product.description);
+    // for (var i = 0; i < product.images.length; i++) {
+    //     let image = product.images[i];
+
+    //     formData.append('images[' + i + ']', image);
+    // }
+    console.log(formData);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/products/${product.id}/`,
         headers: {
-            'Content-Type': 'multipart/form-data, application/json',
+            'Content-Type': 'multipart/form-data',
             ...auth
         },
-        data: JSON.stringify(data)
+        data: formData
     };
     try {
         const response = await axios(options);

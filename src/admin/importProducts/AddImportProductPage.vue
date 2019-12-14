@@ -93,10 +93,10 @@
           <v-col cols="1" class="text-center">
             {{ index + 1 }}
           </v-col>
-          <v-col cols="2" class="text-center">
+          <v-col cols="1" class="text-center">
             {{ item.id }}
           </v-col>
-          <v-col cols="3" class="text-center">
+          <v-col cols="2" class="text-center">
             {{ item.name }}
           </v-col>
           <v-col cols="1" class="text-center">
@@ -110,7 +110,16 @@
           </v-col>
           <v-col cols="2" class="text-center">
             <v-text-field
-              v-model="item.listedPrice"
+              v-model="item.importPrice"
+              type="number"
+              dense
+              hide-details
+              outlined
+            ></v-text-field>
+          </v-col>
+          <v-col cols="2" class="text-center">
+            <v-text-field
+              v-model="item.price"
               type="number"
               dense
               hide-details
@@ -134,7 +143,7 @@
             </v-card-text>
           </v-col>
           <v-col cols="2" class="text-right py-0">
-          <span class="red--text" data-tongtien>{{ total }} đ</span>
+          <span class="red--text" data-tongtien>{{ formatCurrency(total) }} đ</span>
           </v-col>
         </v-row>
         <v-row>
@@ -151,8 +160,8 @@
 
 <script>
 import { mapState } from "vuex";
-import { productService, userService } from "@/_api";
-import { formatCurrency } from "../../_api/format-currency";
+import { productService, userService, importProductService } from "@/_api";
+import { formatCurrency } from "@/_api/format-currency";
 export default {
   data() {
     return {
@@ -174,8 +183,9 @@ export default {
         return {
           id: e.id,
           name: e.name,
-          listedPrice: e.listedPrice,
-          count: e.count
+          importPrice: e.import_price,
+          price: e.price,
+          quantity: 0
         };
       });
       return productListToSearch;
@@ -184,19 +194,23 @@ export default {
       if (this.itemSelected.length) {
         let total = 0;
         this.itemSelected.forEach(item => {
-          const count = Number(item.count);
-          const listedPrice = Number(item.listedPrice);
-          total += count *  listedPrice;
+          const quantity = Number(item.quantity);
+          const importPrice = Number(item.importPrice);
+          total += quantity * importPrice;
         })
-        return formatCurrency(total);
+        return Number(total);
       }
     }
   },
   methods: {
     async submit() {
-      const product = {...this.product, supplierId: this.supplierId};
+      const { itemSelected, total } = this;
+      const importOrder = {
+        items: itemSelected,
+        total
+      }
       try {
-        const isSuccess = await productService.createProduct(product);
+        const isSuccess = await importProductService.createImportProduct(importOrder);
         if (isSuccess) {
           this.$refs.observer.reset();
           this.$store.dispatch("alert/success", {
@@ -244,14 +258,17 @@ export default {
       this.userInfo = await userService.getProfile();
     },
     sumMoney(item) {
-      const count = Number(item.count);
-      const listedPrice = Number(item.listedPrice);
-      return formatCurrency(count * listedPrice);
+      const quantity = Number(item.quantity);
+      const importPrice = Number(item.importPrice);
+      return formatCurrency(quantity * importPrice);
     },
     deleteItem(item) {
       const index = this.itemSelected.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
         this.itemSelected.splice(index, 1);
+    },
+    formatCurrency(total) {
+      return formatCurrency(total);
     }
   },
   created() {
