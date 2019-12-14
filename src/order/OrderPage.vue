@@ -170,7 +170,7 @@ export default {
     },
     async getData() {
       this.userInfo = await userService.getProfile();
-      this.name = this.userInfo.firstName + ' ' + this.userInfo.lastName;
+      this.name = this.userInfo.firstName + " " + this.userInfo.lastName;
       this.address = this.userInfo.address;
       this.phone = this.userInfo.phone;
     },
@@ -191,6 +191,7 @@ export default {
           this.$store.dispatch("alert/success", {
             message: "Checkout Successfully!"
           });
+          this.note = "";
         }
       } catch (error) {
         if (error.response) {
@@ -199,6 +200,9 @@ export default {
           });
         }
       }
+    },
+    formatCurrency(total) {
+      return formatCurrency(total);
     }
   },
   created() {

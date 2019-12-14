@@ -16,12 +16,26 @@
           <v-col cols="3">
             <v-img :height="60" contain :src="product.image"></v-img>
           </v-col>
-          <v-col cols="5">{{ product.name }}x{{ product.quantity }}</v-col>
+          <v-col cols="5">
+            {{ product.name }}
+            <br />
+            <b>
+              x
+              {{ product.quantity }}
+            </b>
+          </v-col>
           <v-col cols="4">{{ formatCurrency(product.price) }}đ</v-col>
         </v-row>
         <v-row>
           <v-col cols="6"></v-col>
+<<<<<<< HEAD
+          <v-col cols="6">
+            Tổng tiền:
+            <span style="color: red">{{ formatCurrency(total) }}đ</span>
+          </v-col>
+=======
           <v-col cols="6">Tổng tiền: {{ formatCurrency(total) }}đ</v-col>
+>>>>>>> 432ce24f6c01f48aca152754b84edfc38c0755a3
         </v-row>
 
         <v-card-actions>
@@ -60,7 +74,7 @@
 <script>
 import { mapGetters, mapState, mapMutations } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
-
+import _ from "lodash";
 export default {
   data() {
     return {
@@ -109,6 +123,10 @@ export default {
     formatCurrency(price) {
       return formatCurrency(price);
     },
+    formatCurrency(total) {
+      return formatCurrency(total);
+    },
+
     onMouseOver() {
       this.dialog = true;
     },
@@ -120,5 +138,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

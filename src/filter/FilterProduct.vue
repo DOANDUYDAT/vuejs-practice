@@ -108,6 +108,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import { supplierService, filterService } from "@/_api";
 export default {
   data() {
@@ -252,21 +253,13 @@ export default {
     },
     async submit() {
       const query = this.filter;
-      try {
-        const isSuccess = await filterService.filter(query);
-        if (isSuccess) {
-          this.$store.dispatch("alert/success", {
-            message: "Update Successfully!"
-          });
-          this.resetFilter();
-        }
-      } catch (error) {
-        if (error.response) {
-          this.$store.dispatch("alert/error", {
-            message: error.response.data.message
-          });
-        }
+      const oldFilter = this.$route.query ? this.$route.query.filter : {};
+      this.resetFilter();
+      if (!_.isEqual(query, oldFilter)) {
+        this.$router.push({ path: "/home", query: { filter: query } });
       }
+      
+      
     },
     resetFilter() {
       this.filter.minPrice = "";
@@ -291,7 +284,7 @@ export default {
           {},
           {
             text: "Thương hiệu",
-            model: "suppliers",
+            model: "supplier",
             children: suppliers
           }
         )

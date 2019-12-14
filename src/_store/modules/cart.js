@@ -23,7 +23,7 @@ const getters = {
           id: product.id,
           name: product.name,
           price: product.price,
-          image: product.images[0],
+          image: product.images[0].image,
           quantity
         }
       } else {
@@ -51,12 +51,13 @@ const actions = {
 
     try {
       const isSuccess = await orderService.createOrder(order);
+      console.log(isSuccess);
       if (isSuccess) {
-        commit('setCheckoutStatus', 'successful')
+        // commit('setCheckoutStatus', 'successful')
         // remove  item from stock
-        products.forEach((product) => {
-          commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
-        })
+        // products.forEach((product) => {
+        //   commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
+        // })
         localStorage.removeItem('cart');
         return true;
       }
@@ -64,6 +65,7 @@ const actions = {
         commit('setCheckoutStatus', 'failed')
         // rollback to the cart saved before sending the request
         commit('setCartItems', { items: savedCartItems })
+        throw error;
     }
 
     // shop.buyProducts(

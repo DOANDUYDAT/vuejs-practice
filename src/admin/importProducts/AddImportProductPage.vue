@@ -20,18 +20,12 @@
             @keyup.enter="searchProduct"
             append-icon="mdi-plus"
             prepend-inner-icon="mdi-magnify"
-
             @click:prepend-inner="searchProduct"
             @focus="querySelections"
             placeholder="Search"
           ></v-text-field>
           <v-expand-transition>
-            <v-card
-              v-if="itemsSuggest && result"
-              class="search__result mx-auto"
-              width="522"
-              light
-            >
+            <v-card v-if="itemsSuggest && result" class="search__result mx-auto" width="522" light>
               <v-card-text
                 class="subtitle-1 py-1 px-4"
                 v-for="item in itemsSuggest"
@@ -47,43 +41,30 @@
           </v-expand-transition>
         </div>
       </v-col>
-      <v-col cols="4" class="py-0 text-center">
-        Người nhập: {{ userInfo.firstName + " " + userInfo.lastName }}
-      </v-col>
+      <v-col
+        cols="4"
+        class="py-0 text-center"
+      >Người nhập: {{ userInfo.firstName + " " + userInfo.lastName }}</v-col>
     </v-row>
     <v-card>
       <v-toolbar color="it-green-lighten" dark flat dense>
         <!-- <v-card-title class="layout justify-center"> -->
         <v-row>
-          <v-col cols="1" class="py-0 text-center">
-            STT
-          </v-col>
+          <v-col cols class="py-0 text-center">STT</v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="1" class="py-0 text-center">
-            Mã sản phẩm
-          </v-col>
+          <v-col cols="1" class="py-0 text-center">ID</v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="2" class="py-0 text-center">
-            Tên sản phẩm
-          </v-col>
+          <v-col cols="2" class="py-0 text-center">Tên sản phẩm</v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="1" class="py-0 px-0 text-center">
-            Số lượng
-          </v-col>
+          <v-col cols="1" class="py-0 px-0 text-center">Số lượng</v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="2" class="py-0 text-center">
-            Giá nhập
-          </v-col>
+          <v-col cols="2" class="py-0 text-center">Giá nhập</v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="2" class="py-0 text-center">
-            Giá bán
-          </v-col>
+          <v-col cols="2" class="py-0 text-center">Giá bán</v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="2" class="py-0 text-center">
-            Thành tiền
-          </v-col>
+          <v-col cols="2" class="py-0 text-center">Thành tiền</v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="1" class="py-0 text-center"> </v-col>
+          <v-col cols="1" class="py-0 text-center"></v-col>
         </v-row>
         <!-- </v-card-title> -->
       </v-toolbar>
@@ -94,49 +75,21 @@
           class="product-item"
           align="center"
         >
+          <v-col cols="1" class="text-center">{{ index + 1 }}</v-col>
+          <v-col cols="1" class="text-center">{{ item.id }}</v-col>
+          <v-col cols="2" class="text-center">{{ item.name }}</v-col>
           <v-col cols="1" class="text-center">
-            {{ index + 1 }}
-          </v-col>
-          <v-col cols="1" class="text-center">
-            {{ item.id }}
+            <v-text-field v-model="item.quantity" type="number" dense hide-details outlined></v-text-field>
           </v-col>
           <v-col cols="2" class="text-center">
-            {{ item.name }}
-          </v-col>
-          <v-col cols="1" class="text-center">
-            <v-text-field
-              v-model="item.quantity"
-              type="number"
-              dense
-              hide-details
-              outlined
-            ></v-text-field>
+            <v-text-field v-model="item.importPrice" type="number" dense hide-details outlined></v-text-field>
           </v-col>
           <v-col cols="2" class="text-center">
-            <v-text-field
-              v-model="item.importPrice"
-              type="number"
-              dense
-              hide-details
-              outlined
-            ></v-text-field>
+            <v-text-field v-model="item.price" type="number" dense hide-details outlined></v-text-field>
           </v-col>
-          <v-col cols="2" class="text-center">
-            <v-text-field
-              v-model="item.price"
-              type="number"
-              dense
-              hide-details
-              outlined
-            ></v-text-field>
-          </v-col>
-          <v-col cols="2" class="text-right">
-            {{ sumMoney(item) }} đ
-          </v-col>
+          <v-col cols="2" class="text-right">{{ sumMoney(item) }} đ</v-col>
           <v-col cols="1" class="text-center">
-            <v-icon small @click.stop="deleteItem(item)" color="gg-red"
-              >mdi-trash-can-outline</v-icon
-            >
+            <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
           </v-col>
           <v-divider></v-divider>
         </v-row>
@@ -147,13 +100,12 @@
             </v-card-text>
           </v-col>
           <v-col cols="2" class="text-right py-0">
-          <span class="red--text" data-tongtien>{{ formatCurrency(total) }} đ</span>
+            <span class="red--text" data-tongtien>{{ formatCurrency(total) }} đ</span>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="11" class="text-end pt-0">
-          <v-btn color="gg-red" class="white--text" @click="submit"
-            >Nhập hàng</v-btn>
+            <v-btn color="gg-red" class="white--text" @click="submit">Nhập hàng</v-btn>
           </v-col>
           <v-col cols="1" class="pt-0"></v-col>
         </v-row>
@@ -201,7 +153,7 @@ export default {
           const quantity = Number(item.quantity);
           const importPrice = Number(item.importPrice);
           total += quantity * importPrice;
-        })
+        });
         return Number(total);
       }
     }
@@ -212,9 +164,11 @@ export default {
       const importOrder = {
         items: itemSelected,
         total
-      }
+      };
       try {
-        const isSuccess = await importProductService.createImportProduct(importOrder);
+        const isSuccess = await importProductService.createImportProduct(
+          importOrder
+        );
         if (isSuccess) {
           this.$store.dispatch("alert/success", {
             message: "Import Successfully!"
@@ -251,12 +205,12 @@ export default {
     chooseProduct(item) {
       this.result = false;
       if (this.itemSelected.find(e => e.id === item.id)) {
-        console.log('san pham da dc chon')
+        console.log("san pham da dc chon");
       } else {
         this.itemSelected.push(item);
       }
-      
-      this.search = '';
+
+      this.search = "";
     },
     async getData() {
       this.products = await productService.getAllProducts();

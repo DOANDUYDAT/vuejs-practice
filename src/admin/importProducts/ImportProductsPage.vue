@@ -15,7 +15,12 @@
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
-        <v-btn color="gg-red" dark class="mx-4 white--text" :to="{ name: 'admin addImportProduct'}">+ Nhập hàng</v-btn>
+        <v-btn
+          color="gg-red"
+          dark
+          class="mx-4 white--text"
+          :to="{ name: 'admin addImportProduct'}"
+        >+ Nhập hàng</v-btn>
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
@@ -28,7 +33,7 @@
         ></v-text-field>
         <!-- <template>
             <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
-          </template> -->
+        </template>-->
       </v-toolbar>
     </template>
     <template v-slot:item.total="{ item }">

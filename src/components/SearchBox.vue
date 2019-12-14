@@ -37,6 +37,7 @@
 <script>
 import { mapState } from "vuex";
 import { productService, searchService } from "@/_api";
+import _ from 'lodash';
 
 export default {
   data() {
@@ -85,11 +86,13 @@ export default {
     },
     searchProduct() {
       const query = this.search;
-      const url = `/home/search=${query}`;
-      const currentPath = this.$route.fullPath;
-      if (currentPath !== url) {
+      const oldSearch = this.$route.query.search ? this.$route.query.search : {};
+      this.result = false;
+      this.search = "";
+      if (!_.isEqual(query, oldSearch)) {
         this.$router.push({ path: "/home", query: { search: query } });
       }
+      
       
     },
     async getData() {
