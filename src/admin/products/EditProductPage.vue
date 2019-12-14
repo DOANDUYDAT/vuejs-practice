@@ -23,7 +23,7 @@
                 outlined
                 v-model="product[item.model]"
                 hide-details
-                :disabled="disabled"
+                :disabled="item.disabled ? item.disabled : disabled"
               ></v-text-field>
               <span class="red--text">{{ errors[0] }}</span>
             </ValidationProvider>
@@ -187,24 +187,18 @@ export default {
           model: "chargingPort"
         },
         {
-          text: "Loại sim",
-          model: "sim"
+          text: "Giá bán",
+          model: "price"
         },
         {
-          text: "Giá bán lẻ",
-          model: "retailPrice"
-        },
-        {
-          text: "Giá niêm yết",
-          model: "listedPrice"
-        },
-        {
-          text: "Giá khuyến mại",
-          model: "promotionalPrice"
+          text: "Giá nhập",
+          model: "importPrice",
+          disabled: true
         },
         {
           text: "Số lượng",
-          model: "count"
+          model: "count",
+          disabled: true
         }
       ]
     };
@@ -241,29 +235,6 @@ export default {
         }.bind(this);
         reader.readAsDataURL(files[i]);
       }
-    },
-    resetInput() {
-      this.product.supplier = "";
-      this.product.guarantee = "";
-      this.product.guaranteeDes = "";
-      this.product.name = "";
-      this.product.color = "";
-      this.product.screen = "";
-      this.product.resolution = "";
-      this.product.rearCamera = "";
-      this.product.frontCamera = "";
-      this.product.chip = "";
-      this.product.ram = "";
-      this.product.rom = "";
-      this.product.pin = "";
-      this.product.operatingSystem = "";
-      this.product.chargingPort = "";
-      this.product.sim = "";
-      this.product.retailPrice = 0;
-      this.product.listedPrice = 0;
-      this.product.promotionalPrice = 0;
-      this.product.description = "<h1>Some initial content</h1>";
-      this.product.images = [];
     },
     async getData() {
       this.productId = this.$route.params.productId;

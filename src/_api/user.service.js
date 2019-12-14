@@ -6,6 +6,7 @@ import axios from 'axios';
 import _ from 'lodash';
 
 export const userService = {
+    getAllUsers,
     login,
     logout,
     register,
@@ -21,7 +22,47 @@ const headers = {
 
 }
 
-
+async function getAllUsers() {
+    console.log('getAllUsers');
+    const auth = authHeader();
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/users`,
+        headers: {
+            ...headers,
+            ...auth
+        }
+    };
+    try {
+        const response = await axios(options);
+        console.log(response);
+        if (response.status === 200) {
+            console.log(response.data);
+            const data = response.data;
+            let allUsers = [];
+            if (data.length > 0) {
+                allUsers = data.map(e => {
+                    const user = {
+                        id: e.id,
+                        firstName: e.first_name,
+                        lastName: e.last_name,
+                        email: e.email,
+                        phone: e.phone,
+                        address: e.address,
+                        gender: e.gender,
+                        dateOfBirth: e.date_of_birth,
+                        role: e.groups[0].name
+                    };
+                    return user;
+                });
+            }
+            return allUsers;
+        }
+    } catch (error) {
+        console.log(error.response);
+        if (error) throw error;
+    }
+}
 
 async function login(email, password, remember) {
     console.log('login');
@@ -130,8 +171,19 @@ async function getProfile() {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            const user = response.data;
             console.log(response.data);
+            const data = response.data;
+            const user = {
+                id: data.id,
+                firstName: data.first_name,
+                lastName: data.last_name,
+                email: data.email,
+                phone: data.phone,
+                address: data.address,
+                gender: data.gender,
+                dateOfBirth: data.date_of_birth,
+                role: e.groups[0].name
+            };
             return user;
         }
     } catch (error) {

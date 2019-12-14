@@ -48,7 +48,7 @@
         </div>
       </v-col>
       <v-col cols="4" class="py-0 text-center">
-        Người nhập: {{ userInfo.first_name + " " + userInfo.last_name }}
+        Người nhập: {{ userInfo.firstName + " " + userInfo.lastName }}
       </v-col>
     </v-row>
     <v-card>
@@ -59,11 +59,11 @@
             STT
           </v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="2" class="py-0 text-center">
+          <v-col cols="1" class="py-0 text-center">
             Mã sản phẩm
           </v-col>
           <v-divider inset vertical></v-divider>
-          <v-col cols="3" class="py-0 text-center">
+          <v-col cols="2" class="py-0 text-center">
             Tên sản phẩm
           </v-col>
           <v-divider inset vertical></v-divider>
@@ -72,7 +72,11 @@
           </v-col>
           <v-divider inset vertical></v-divider>
           <v-col cols="2" class="py-0 text-center">
-            Đơn giá
+            Giá nhập
+          </v-col>
+          <v-divider inset vertical></v-divider>
+          <v-col cols="2" class="py-0 text-center">
+            Giá bán
           </v-col>
           <v-divider inset vertical></v-divider>
           <v-col cols="2" class="py-0 text-center">
@@ -101,7 +105,7 @@
           </v-col>
           <v-col cols="1" class="text-center">
             <v-text-field
-              v-model="item.count"
+              v-model="item.quantity"
               type="number"
               dense
               hide-details
@@ -183,7 +187,7 @@ export default {
         return {
           id: e.id,
           name: e.name,
-          importPrice: e.import_price,
+          importPrice: e.importPrice,
           price: e.price,
           quantity: 0
         };
@@ -219,9 +223,11 @@ export default {
           this.resetInput();
         }
       } catch (error) {
-        this.$store.dispatch("alert/error", {
-          message: error
-        });
+        if (error.response) {
+          this.$store.dispatch("alert/error", {
+            message: error.response.data
+          });
+        }
       }
     },
     querySelections() {

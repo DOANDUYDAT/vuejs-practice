@@ -16,19 +16,9 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <template v-if="product.promotionalPrice">
-      <v-row>
-        <v-col cols="3">Giá niêm yết</v-col>
-        <v-col cols="9">{{ price }}đ</v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="3">Giá khuyến mãi</v-col>
-        <v-col cols="9">{{ salePrice }}đ</v-col>
-      </v-row>
-    </template>
-    <v-row v-else>
-      <v-col cols="3">Giá bán lẻ</v-col>
-      <v-col cols="9">{{ oldPrice }}đ</v-col>
+    <v-row>
+      <v-col cols="3">Giá bán</v-col>
+      <v-col cols="9">{{ product.price }}đ</v-col>
     </v-row>
     <v-row>
       <v-col cols="3">Khuyến mãi</v-col>
@@ -82,7 +72,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      rating: 3.5,
+      // rating: 3.5,
       quantity: 1
     };
   },
@@ -93,27 +83,27 @@ export default {
     }
   },
   computed: {
-    oldPrice() {
-      let oldPrice = "";
-      if (this.product.retailPrice !== undefined) {
-        oldPrice = formatCurrency(this.product.retailPrice);
-      }
-      return oldPrice;
-    },
-    price() {
-      let price = "";
-      if (this.product.listedPrice !== undefined) {
-        price = formatCurrency(this.product.listedPrice);
-      }
-      return price;
-    },
-    salePrice() {
-      let salePrice = "";
-      if (this.product.promotionalPrice !== undefined) {
-        salePrice = formatCurrency(this.product.promotionalPrice);
-      }
-      return salePrice;
-    }
+    // oldPrice() {
+    //   let oldPrice = "";
+    //   if (this.product.retailPrice !== undefined) {
+    //     oldPrice = formatCurrency(this.product.retailPrice);
+    //   }
+    //   return oldPrice;
+    // },
+    // price() {
+    //   let price = "";
+    //   if (this.product.listedPrice !== undefined) {
+    //     price = formatCurrency(this.product.listedPrice);
+    //   }
+    //   return price;
+    // },
+    // salePrice() {
+    //   let salePrice = "";
+    //   if (this.product.promotionalPrice !== undefined) {
+    //     salePrice = formatCurrency(this.product.promotionalPrice);
+    //   }
+    //   return salePrice;
+    // }
   },
   methods: {
     incrementItemQuantity() {
