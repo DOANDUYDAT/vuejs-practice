@@ -96,13 +96,15 @@ export default {
           this.$store.dispatch("alert/success", {
             message: "Create Successfully!"
           });
-          this.resetInput();
+          const href = window.location.href;
+          window.location.assign(href);
+          
         }
         // this.dialog = false;
       } catch (error) {
         if (error.response) {
           this.$store.dispatch("alert/error", {
-            message: error.response.data.message
+            message: error.response.data.detail
           });
         }
       }

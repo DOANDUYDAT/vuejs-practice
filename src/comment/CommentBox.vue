@@ -48,7 +48,9 @@ export default {
           this.$store.dispatch("alert/success", {
             message: "Add Successfully!"
           });
-          this.resetInput();
+          const href = window.location.href;
+          window.location.assign(href);
+          // this.resetInput();
         }
       } catch (error) {
         if (error.response) {
