@@ -124,34 +124,8 @@ export default {
         operatingSystem: [],
         ram: []
       },
-      //   toggle_exclusive: undefined,
-      //   loader: null,
       loading: false,
       items: [
-        // {
-        //   text: "Giá",
-        //   model: "price"
-        //   children: [
-        //     { text: "Dưới 5.000.000" },
-        //     { text: "5.000.000 - 10.000.000" },
-        //     { text: "10.000.000 - 20.000.000" },
-        //     { text: "20.000.000 - 30.000.000" },
-        //     { text: "Trên 30.000.000" }
-        //   ]
-        // },
-        // {
-        //   text: "Thương hiệu",
-        //   model: "brand",
-        //   children: [
-        //     { text: "Sam Sung" },
-        //     { text: "iPhone" },
-        //     { text: "Xiaomi" },
-        //     { text: "Oppo" },
-        //     { text: "Realme" },
-        //     { text: "Huawei" },
-        //     { text: "NOKIA" }
-        //   ]
-        // },
         {
           text: "Màu sắc",
           model: "color",
@@ -255,36 +229,34 @@ export default {
       const filter = this.filter;
       const oldFilter = this.$route.query;
       let query = {};
-      if (filter.minPrice.length) {
+      if (filter.minPrice) {
         query = {...query, minPrice: filter.minPrice};
       }
-      if (filter.maxPrice.length) {
+      if (filter.maxPrice) {
         query = {...query, maxPrice: filter.maxPrice};
       }
       if (filter.supplier.length) {
-        query = {...query, supplier: filter.supplier};
+        query = {...query, supplier: filter.supplier.toString()};
       }
       if (filter.color.length) {
-        query = {...query, color: filter.color};
+        query = {...query, color: filter.color.toString()};
       }
       if (filter.rom.length) {
-        query = {...query, rom: filter.rom};
+        query = {...query, rom: filter.rom.toString()};
       }
       if (filter.ram.length) {
-        query = {...query, ram: filter.ram};
+        query = {...query, ram: filter.ram.toString()};
       }
       if (filter.frontCamera.length) {
-        query = {...query, frontCamera: filter.frontCamera};
+        query = {...query, frontCamera: filter.frontCamera.toString()};
       }
       if (filter.rearCamera.length) {
-        query = {...query, rearCamera: filter.rearCamera};
+        query = {...query, rearCamera: filter.rearCamera.toString()};
       }
       if (filter.operatingSystem.length) {
-        query = {...query, operatingSystem: filter.operatingSystem};
+        query = {...query, operatingSystem: filter.operatingSystem.toString()};
       }
-      this.resetFilter();
       if (!_.isEmpty(query) && !_.isEqual(query, oldFilter)) {
-        console.log('hello');
         this.$router.push({ path: "/filter", query: query });
       }
       
@@ -318,6 +290,37 @@ export default {
           }
         )
       );
+      this.getFilterInit();
+    },
+    getFilterInit() {
+      const query = this.$route.query;
+      if (query.minPrice) {
+        this.filter.minPrice = query.minPrice;
+      }
+      if (query.maxPrice) {
+        this.filter.maxPrice = query.maxPrice;
+      }
+      if (query.supplier) {
+        this.filter.supplier = query.supplier.split(',');
+      }
+      if (query.color) {
+        this.filter.color = query.color.split(',');
+      }
+      if (query.rom) {
+        this.filter.rom = query.rom.split(',');
+      }
+      if (query.ram) {
+        this.filter.ram = query.ram.split(',');
+      }
+      if (query.frontCamera) {
+        this.filter.frontCamera = query.frontCamera.split(',');
+      }
+      if (query.rearCamera) {
+        this.filter.rearCamera = filqueryer.rearCamera.split(',');
+      }
+      if (query.operatingSystem) {
+        this.filter.operatingSystem = query.operatingSystem.split(',');
+      }
     }
   },
 

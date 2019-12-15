@@ -64,24 +64,7 @@ export default {
       } else {
         this.productsList = await productService.getAllProducts();
       }
-
-      // try {
-      //   const isSuccess = await filterService.filter(query);
-      //   if (isSuccess) {
-      //     this.$store.dispatch("alert/success", {
-      //       message: "Update Successfully!"
-      //     });
-      //     this.resetFilter();
-      //   }
-      // } catch (error) {
-      //   if (error.response) {
-      //     this.$store.dispatch("alert/error", {
-      //       message: error.response.data.message
-      //     });
-      //   }
-      // }
-    }
-    
+    },
   },
   watch: {
     $route: 'getData'
