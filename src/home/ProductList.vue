@@ -52,17 +52,14 @@ export default {
   
   methods: {
     async getData() {
-      const query = this.$route.query;
-      console.log(query);
-
+      const path = this.$route.path;
       this.productsList = [];
-      if (query && query.filter) {
-        const filter = query.filter;
-        console.log(filter);
-        this.productsList = await filterService.filter(filter);
-      } else if (query && query.search) {
-        const search = query.search;
-        this.productsList = await searchService.search(search);
+      if (path === '/filter') {
+        const query = this.$route.query;
+        this.productsList = await filterService.filter(query);
+      } else if (path === '/search') {
+        const query = this.$route.query;
+        this.productsList = await searchService.search(query);
       } else {
         this.productsList = await productService.getAllProducts();
       }

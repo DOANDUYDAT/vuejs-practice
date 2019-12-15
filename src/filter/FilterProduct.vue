@@ -252,13 +252,40 @@ export default {
       setTimeout(() => (this.loading = false), 1000);
     },
     async submit() {
-      const query = this.filter;
-      console.log(query);
-      const oldFilter = this.$route.query ? this.$route.query.filter : {};
-      console.log(JSON.stringify(oldFilter));
+      const filter = this.filter;
+      const oldFilter = this.$route.query;
+      let query = {};
+      if (filter.minPrice.length) {
+        query = {...query, minPrice: filter.minPrice};
+      }
+      if (filter.maxPrice.length) {
+        query = {...query, maxPrice: filter.maxPrice};
+      }
+      if (filter.supplier.length) {
+        query = {...query, supplier: filter.supplier};
+      }
+      if (filter.color.length) {
+        query = {...query, color: filter.color};
+      }
+      if (filter.rom.length) {
+        query = {...query, rom: filter.rom};
+      }
+      if (filter.ram.length) {
+        query = {...query, ram: filter.ram};
+      }
+      if (filter.frontCamera.length) {
+        query = {...query, frontCamera: filter.frontCamera};
+      }
+      if (filter.rearCamera.length) {
+        query = {...query, rearCamera: filter.rearCamera};
+      }
+      if (filter.operatingSystem.length) {
+        query = {...query, operatingSystem: filter.operatingSystem};
+      }
       this.resetFilter();
-      if (!_.isEqual(query, oldFilter)) {
-        this.$router.push({ path: "/home", query: { filter: query } });
+      if (!_.isEmpty(query) && !_.isEqual(query, oldFilter)) {
+        console.log('hello');
+        this.$router.push({ path: "/filter", query: query });
       }
       
       

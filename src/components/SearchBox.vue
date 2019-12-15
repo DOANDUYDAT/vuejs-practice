@@ -90,7 +90,7 @@ export default {
       this.result = false;
       this.search = "";
       if (!_.isEqual(query, oldSearch)) {
-        this.$router.push({ path: "/home", query: { search: query } });
+        this.$router.push({ path: "/search", query: { search: query } });
       }
       
       

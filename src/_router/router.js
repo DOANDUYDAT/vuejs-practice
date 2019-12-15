@@ -74,6 +74,22 @@ const router = new VueRouter({
                     }
                 },
                 {
+                    path: 'filter',
+                    component: HomePage,
+                    name: 'filter',
+                    meta: {
+                        requiresRole: null
+                    }
+                },
+                {
+                    path: 'search',
+                    component: HomePage,
+                    name: 'search',
+                    meta: {
+                        requiresRole: null
+                    }
+                },
+                {
                     path: 'products/:productId',
                     component: ProductDetailPage,
                     name: 'product detail',

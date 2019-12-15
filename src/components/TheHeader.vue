@@ -133,6 +133,9 @@ export default {
   },
   created() {
     this.getData();
+  }, 
+  watch: {
+    $route: 'getData'
   }
 };
 </script>
