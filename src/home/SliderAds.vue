@@ -3,7 +3,7 @@
     <v-carousel-item
       v-for="product in topProduct"
       :key="product.id"
-      :src="product.images[0]"
+      :src="product.images[0].image"
       contain
     ></v-carousel-item>
   </v-carousel>

@@ -4,7 +4,8 @@
       <v-carousel-item
         v-for="product in topProduct"
         :key="product.id"
-        :src="product.images[0]"
+        :src="product.images[0].image"
+        :to="{ name: 'product detail', params: { productId: product.id } }"
         contain
       ></v-carousel-item>
     </v-carousel>
@@ -37,7 +38,7 @@ export default {
     topProduct() {
       let topProduct = [];
       // Lấy 5 sản phẩm mới nhất
-      if (this.productsList.length > 0) {
+      if (this.productsList.length) {
         for (let i = 0; i < 5; i++) {
           if (i >= this.productsList.length) break;
           topProduct.push(this.productsList[i]);
