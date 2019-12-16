@@ -1,6 +1,6 @@
 <template>
-  <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app color="gg-red" dark>
-    <v-app-bar-nav-icon @click.stop="changeDrawer" />
+  <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app color="gg-red" dark >
+    <v-app-bar-nav-icon @click.stop="changeDrawer" v-if="$vuetify.breakpoint.mdAndDown" />
     <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
       <span class="hidden-sm-and-down">Admin</span>
     </v-toolbar-title>

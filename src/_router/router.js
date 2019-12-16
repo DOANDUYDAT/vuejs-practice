@@ -197,21 +197,21 @@ const router = new VueRouter({
                     path: 'users',
                     component: ManageUsersPage,
                     meta: {
-                        requiresRole: ['staff', 'admin']
+                        requiresRole: ['admin']
                     }
                 },
                 {
                     path: 'staffs',
                     component: ManageStaffsPage,
                     meta: {
-                        requiresRole: ['staff', 'admin']
+                        requiresRole: ['admin']
                     }
                 },
                 {
                     path: 'add-staff',
                     component: AddStaffPage,
                     meta: {
-                        requiresRole: ['staff', 'admin']
+                        requiresRole: ['admin']
                     }
                 },
                 {

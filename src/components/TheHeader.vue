@@ -94,7 +94,7 @@ export default {
       return this.userInfo.firstName + " " + this.userInfo.lastName;
     },
     isAdminPermission() {
-      return this.user.groups[0].name === 'admin';
+      return this.user.groups[0].name === "admin";
     }
   },
   methods: {
@@ -132,10 +132,12 @@ export default {
     }
   },
   created() {
-    this.getData();
-  }, 
+    if (this.loggedIn) {
+      this.getData();
+    }
+  },
   watch: {
-    $route: 'getData'
+    $route: "getData"
   }
 };
 </script>
