@@ -34,6 +34,15 @@ export default {
     return {
       items: [
         {
+          text: "Quản lý nhóm",
+          children: [
+            {
+              text: "Danh sách nhóm",
+              link: "/admin/groups"
+            }
+          ]
+        },
+        {
           text: "Quản lý người dùng",
           children: [
             {
