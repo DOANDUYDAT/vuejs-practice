@@ -29,6 +29,7 @@ import ImportProductsPage from '@/admin/importProducts/ImportProductsPage';
 import ImportProductDetailPage from '@/admin/importProducts/ImportProductDetailPage';
 import AddImportProductPage from '@/admin/importProducts/AddImportProductPage';
 import ManageSuppliersPage from "@/admin/suppliers/ManageSuppliersPage";
+import ManageGroupsPage from "@/admin/groups/ManageGroupsPage";
 
 import NotPermission from '@/not-permission/NotPermission';
 import LoginPage from "@/login/LoginPage";
@@ -274,6 +275,13 @@ const router = new VueRouter({
                 {
                     path: "suppliers",
                     component: ManageSuppliersPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
+                    }
+                },
+                {
+                    path: "groups",
+                    component: ManageGroupsPage,
                     meta: {
                         requiresRole: ['staff', 'admin']
                     }
