@@ -28,7 +28,7 @@ async function createStaff(staff) {
     const auth = authHeader();
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/users/`,
+        url: `${config.apiUrl}/users/auth/`,
         headers: {
             ...headers,
             ...auth
@@ -61,7 +61,7 @@ async function updateStaff(staffInfo) {
     // console.log(data);
     const options = {
         method: 'put',
-        url: `${config.apiUrl}/users/${staffInfo.id}/`,
+        url: `${config.apiUrl}/users/auth/${staffInfo.id}/`,
         headers: {
             ...headers,
             ...auth
@@ -87,7 +87,7 @@ async function deleteStaff(staffId) {
     const auth = authHeader();
     const options = {
         method: 'delete',
-        url: `${config.apiUrl}/users/${staffId}/`,
+        url: `${config.apiUrl}/users/auth/${staffId}/`,
         headers: {
             ...headers,
             ...auth

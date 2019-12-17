@@ -26,7 +26,7 @@ async function getAllUsers() {
     const auth = authHeader();
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/users`,
+        url: `${config.apiUrl}/users/auth`,
         headers: {
             ...headers,
             ...auth

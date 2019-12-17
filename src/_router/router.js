@@ -283,7 +283,7 @@ const router = new VueRouter({
                     path: "groups",
                     component: ManageGroupsPage,
                     meta: {
-                        requiresRole: ['staff', 'admin']
+                        requiresRole: ['admin']
                     }
                 }
 
