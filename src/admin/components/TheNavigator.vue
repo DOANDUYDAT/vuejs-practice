@@ -4,10 +4,13 @@
       <template v-for="item in items">
         <v-list-group :key="item.text">
           <template v-slot:activator>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
             <v-list-item-title>{{ item.text }}</v-list-item-title>
           </template>
-          <v-list-item v-for="(child, i) in item.children" :key="i" :to="child.link">
-            <v-list-item-content>{{ child.text }}</v-list-item-content>
+          <v-list-item v-for="(child, i) in item.children" :key="i" :to="child.link">          
+            <v-list-item-content >{{ child.text }}</v-list-item-content>
           </v-list-item>
         </v-list-group>
       </template>
@@ -35,6 +38,7 @@ export default {
       items: [
         {
           text: "Quản lý nhóm",
+          icon: "mdi-account-group",
           children: [
             {
               text: "Danh sách nhóm",
@@ -44,6 +48,7 @@ export default {
         },
         {
           text: "Quản lý người dùng",
+          icon: "mdi-account",
           children: [
             {
               text: "Danh sách người dùng",
@@ -53,6 +58,7 @@ export default {
         },
         {
           text: "Quản lý nhân viên",
+          icon: "mdi-account-multiple",
           children: [
             {
               text: "Danh sách nhân viên",
@@ -66,6 +72,7 @@ export default {
         },
         {
           text: "Quản lý sản phẩm",
+          icon: "mdi-cube",
           children: [
             {
               text: "Danh sách sản phẩm",
@@ -79,6 +86,7 @@ export default {
         },
         {
           text: "Quản lý đơn hàng",
+          icon: "mdi-file",
           children: [
             {
               text: "Danh sách đơn hàng",
@@ -88,6 +96,7 @@ export default {
         },
         {
           text: "Quản lý nhà cung cấp",
+          icon: "mdi-replay",
           children: [
             {
               text: "Danh sách nhà cung cấp",
@@ -97,6 +106,7 @@ export default {
         },
         {
           text: "Quản lý nhập kho",
+          icon: "mdi-exit-to-app",
           children: [
             {
               text: "Danh sách phiếu nhập",
@@ -106,6 +116,7 @@ export default {
         },
         {
           text: "Thống kê thu chi",
+          icon: "mdi-poll-box",
           children: [
             {
               text: "Thoa thống kê",
