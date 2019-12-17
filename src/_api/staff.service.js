@@ -18,14 +18,13 @@ const headers = {
 }
 
 async function createStaff(staff) {
-    console.log('createStaff');
     const data = {
         last_name: staff.lastName,
         first_name: staff.firstName,
         email: staff.email,
         group: staff.role
     };
-    console.log(data);
+    // console.log(data);
     const auth = authHeader();
     const options = {
         method: 'post',
@@ -36,24 +35,22 @@ async function createStaff(staff) {
         },
         data: JSON.stringify(data)
     };
-    // const response = await axios(options);
-    // console.log(response);
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 201) {
-            console.log(response.data);
+            // console.log('createStaff done');
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('createStaff error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 
 async function updateStaff(staffInfo) {
-    console.log('updateStaff');
     const auth = authHeader();
     const data = {
         last_name: staffInfo.lastName,
@@ -61,7 +58,7 @@ async function updateStaff(staffInfo) {
         email: staffInfo.email,
         group: staffInfo.role
     }
-    console.log(data);
+    // console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/users/${staffInfo.id}/`,
@@ -73,20 +70,20 @@ async function updateStaff(staffInfo) {
     }
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('updateStaff done');
             return true;
         }
 
     } catch (error) {
-        console.log(error.response);
+        // console.log('updateStaff error');
+        // console.log(error.response);
         throw error;
     }
 }
 
 async function deleteStaff(staffId) {
-    console.log('deleteStaff');
     const auth = authHeader();
     const options = {
         method: 'delete',
@@ -98,14 +95,16 @@ async function deleteStaff(staffId) {
     }
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 204) {
-            console.log(response.data);
+            // console.log('deleteStaff done');
+            // console.log(response.data);
             return true;
         }
 
     } catch (error) {
-        console.log(error.response);
+        // console.log('deleteStaff error');
+        // console.log(error.response);
         throw error;
     }
 }

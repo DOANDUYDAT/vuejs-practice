@@ -23,7 +23,6 @@ const headers = {
 
 
 async function createImportProduct(importOrder) {
-    console.log('createImportProduct');
     const auth = authHeader();
     const items = importOrder.items.map(e => {
         return {
@@ -37,7 +36,7 @@ async function createImportProduct(importOrder) {
         items: items,
         total: importOrder.total
     }
-    console.log(data);
+    // console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/imports/`,
@@ -49,19 +48,19 @@ async function createImportProduct(importOrder) {
     };
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 201) {
-            console.log(response.data);
+            // console.log('createImportProduct done');
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('createImportProduct error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getAllImports() {
-    console.log('getAllImports');
     const auth = authHeader();
     const options = {
         method: 'get',
@@ -73,9 +72,9 @@ async function getAllImports() {
     };
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('getAllImports done');
             const data = response.data;
             const d = new Date();
             const allImports = data.map(e => {
@@ -91,13 +90,13 @@ async function getAllImports() {
             return allImports;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('getAllImports error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getImport(importId) {
-    console.log('getImport');
     const auth = authHeader();
     const options = {
         method: 'get',
@@ -109,9 +108,9 @@ async function getImport(importId) {
     };
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('getImport done');
             const data = response.data;
             const d = new Date();
             const anImport = {
@@ -124,7 +123,8 @@ async function getImport(importId) {
             return anImport;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('getImport error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }

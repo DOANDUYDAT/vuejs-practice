@@ -32,15 +32,15 @@ async function getAllSuppliers() {
     };
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log('getAllSuppliers done');
+            // console.log('getAllSuppliers done');
             let suppliers = response.data;
             return suppliers;
         }
     } catch (error) {
-        console.log('getAllSuppliers error');
-        console.log(error.response);
+        // console.log('getAllSuppliers error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
@@ -51,7 +51,7 @@ async function createSupplier(supplier) {
     const data = {
         name: supplier.name
     }
-    console.log(data);
+    // console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/suppliers/`,
@@ -63,20 +63,19 @@ async function createSupplier(supplier) {
     };
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 201) {
-            console.log('createSupplier done');
+            // console.log('createSupplier done');
             return true;
         }
     } catch (error) {
-        console.log('createSupplier error');
-        console.log(error.response);
+        // console.log('createSupplier error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getSupplier(supplierId) {
-    console.log('getSupplier: ' + supplierId);
     const options = {
         method: 'get',
         url: `${config.apiUrl}/suppliers/${supplierId}/`,
@@ -86,25 +85,25 @@ async function getSupplier(supplierId) {
     };
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('getSupplier done');
             let product = response.data;
             return product;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('getSupplier error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function updateSupplier(supplier) {
-    console.log('updateSupplier: ' + supplier.id);
     const auth = authHeader();
     const data = {
         name: supplier.name
     };
-    console.log(data);
+    // console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/suppliers/${supplier.id}/`,
@@ -116,19 +115,19 @@ async function updateSupplier(supplier) {
     };
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('updateSupplier done');
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('updateSupplier error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function deleteSupplier(supplierId) {
-    console.log('deleteSupplier: ' + supplierId);
     const auth = authHeader();
     const options = {
         method: 'delete',
@@ -140,13 +139,14 @@ async function deleteSupplier(supplierId) {
     }
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 204) {
-            console.log(response.data);
+            // console.log('deleteSupplier done');
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('deleteSupplier error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }

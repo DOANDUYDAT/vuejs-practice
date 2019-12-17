@@ -134,6 +134,7 @@ export default {
       );
       if (confirmStatus) {
         try {
+          console.log('deleteGroup');
           const isSuccess = await groupService.deleteGroup(groupId);
           if (isSuccess) {
             await this.getData();
@@ -144,7 +145,7 @@ export default {
         } catch (error) {
           if (error.response) {
             this.$store.dispatch("alert/error", {
-              message: error.response.data.message
+              message: error.response.data.detail
             });
           }
         }
@@ -163,8 +164,8 @@ export default {
       const group = this.editedItem;
       if (this.editedIndex > -1) {
         try {
+          console.log('updateGroup');
           const isSuccess = await groupService.updateGroup(group);
-          console.log(isSuccess);
           if (isSuccess) {
             await this.getData();
             this.$store.dispatch("alert/success", {
@@ -179,6 +180,7 @@ export default {
         }
       } else {
         try {
+          console.log('createGroup');
           const isSuccess = await groupService.createGroup(group);
           if (isSuccess) {
             await this.getData();
@@ -190,7 +192,7 @@ export default {
         } catch (error) {
           if (error.response) {
             this.$store.dispatch("alert/error", {
-              message: error.response.data.message
+              message: error.response.data.detail
             });
           }
         }
