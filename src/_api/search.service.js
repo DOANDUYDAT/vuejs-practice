@@ -17,18 +17,15 @@ export const searchService = {
 };
 
 
-async function search(query) {
-    const data = {
-        search: query
-    }
-    console.log(data);
+async function search(search) {
+    console.log(search);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/search`,
         headers: {
             ...headers,
         },
-        data: JSON.stringify(data)
+        data: JSON.stringify(search)
     };
     try {
         const response = await axios(options);
@@ -37,7 +34,7 @@ async function search(query) {
             console.log('search done');
             const data = response.data;
             let productsSearch = [];
-            if (data.length > 0) {
+            if (data.length) {
                 productsSearch = data.map(e => {
                     const product = {
                         id: e.id,

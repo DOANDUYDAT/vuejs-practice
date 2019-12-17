@@ -56,7 +56,8 @@ export default {
       const path = this.$route.path;
       this.productsList = [];
       if (path === '/filter') {
-        const query = this.$route.query;
+        // const query = this.$route.query;
+        const query = this.$route.fullPath;
         console.log('filter');
         this.productsList = await filterService.filter(query);
       } else if (path === '/search') {

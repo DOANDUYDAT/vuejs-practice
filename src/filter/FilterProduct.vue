@@ -228,38 +228,41 @@ export default {
     async submit() {
       const filter = this.filter;
       const oldFilter = this.$route.query;
-      let query = {};
-      if (filter.minPrice) {
-        query = {...query, minPrice: filter.minPrice};
-      }
-      if (filter.maxPrice) {
-        query = {...query, maxPrice: filter.maxPrice};
-      }
-      if (filter.supplier.length) {
-        query = {...query, supplier: filter.supplier.toString()};
-      }
-      if (filter.color.length) {
-        query = {...query, color: filter.color.toString()};
-      }
-      if (filter.rom.length) {
-        query = {...query, rom: filter.rom.toString()};
-      }
-      if (filter.ram.length) {
-        query = {...query, ram: filter.ram.toString()};
-      }
-      if (filter.frontCamera.length) {
-        query = {...query, frontCamera: filter.frontCamera.toString()};
-      }
-      if (filter.rearCamera.length) {
-        query = {...query, rearCamera: filter.rearCamera.toString()};
-      }
-      if (filter.operatingSystem.length) {
-        query = {...query, operatingSystem: filter.operatingSystem.toString()};
-      }
-      if (!_.isEmpty(query) && !_.isEqual(query, oldFilter)) {
-        this.$router.push({ path: "/filter", query: query });
-      }
+      // let query = {};
+      // if (filter.minPrice) {
+      //   query = {...query, minPrice: filter.minPrice};
+      // }
+      // if (filter.maxPrice) {
+      //   query = {...query, maxPrice: filter.maxPrice};
+      // }
+      // if (filter.supplier.length) {
+      //   query = {...query, supplier: filter.supplier.toString()};
+      // }
+      // if (filter.color.length) {
+      //   query = {...query, color: filter.color.toString()};
+      // }
+      // if (filter.rom.length) {
+      //   query = {...query, rom: filter.rom.toString()};
+      // }
+      // if (filter.ram.length) {
+      //   query = {...query, ram: filter.ram.toString()};
+      // }
+      // if (filter.frontCamera.length) {
+      //   query = {...query, frontCamera: filter.frontCamera.toString()};
+      // }
+      // if (filter.rearCamera.length) {
+      //   query = {...query, rearCamera: filter.rearCamera.toString()};
+      // }
+      // if (filter.operatingSystem.length) {
+      //   query = {...query, operatingSystem: filter.operatingSystem.toString()};
+      // }
+      // if (!_.isEmpty(query) && !_.isEqual(query, oldFilter)) {
+      //   this.$router.push({ path: "/filter", query: query });
+      // }
       
+      if (!_.isEmpty(filter) && !_.isEqual(filter, oldFilter)) {
+        this.$router.push({ path: "/filter", query: filter });
+      }
       
     },
     resetFilter() {
@@ -290,38 +293,38 @@ export default {
           }
         )
       );
-      this.getFilterInit();
+      // this.getFilterInit();
     },
-    getFilterInit() {
-      const query = this.$route.query;
-      if (query.minPrice) {
-        this.filter.minPrice = query.minPrice;
-      }
-      if (query.maxPrice) {
-        this.filter.maxPrice = query.maxPrice;
-      }
-      if (query.supplier) {
-        this.filter.supplier = query.supplier.split(',');
-      }
-      if (query.color) {
-        this.filter.color = query.color.split(',');
-      }
-      if (query.rom) {
-        this.filter.rom = query.rom.split(',');
-      }
-      if (query.ram) {
-        this.filter.ram = query.ram.split(',');
-      }
-      if (query.frontCamera) {
-        this.filter.frontCamera = query.frontCamera.split(',');
-      }
-      if (query.rearCamera) {
-        this.filter.rearCamera = filqueryer.rearCamera.split(',');
-      }
-      if (query.operatingSystem) {
-        this.filter.operatingSystem = query.operatingSystem.split(',');
-      }
-    }
+    // getFilterInit() {
+    //   const query = this.$route.query;
+    //   if (query.minPrice) {
+    //     this.filter.minPrice = query.minPrice;
+    //   }
+    //   if (query.maxPrice) {
+    //     this.filter.maxPrice = query.maxPrice;
+    //   }
+    //   if (query.supplier) {
+    //     this.filter.supplier = query.supplier.split(',');
+    //   }
+    //   if (query.color) {
+    //     this.filter.color = query.color.split(',');
+    //   }
+    //   if (query.rom) {
+    //     this.filter.rom = query.rom.split(',');
+    //   }
+    //   if (query.ram) {
+    //     this.filter.ram = query.ram.split(',');
+    //   }
+    //   if (query.frontCamera) {
+    //     this.filter.frontCamera = query.frontCamera.split(',');
+    //   }
+    //   if (query.rearCamera) {
+    //     this.filter.rearCamera = filqueryer.rearCamera.split(',');
+    //   }
+    //   if (query.operatingSystem) {
+    //     this.filter.operatingSystem = query.operatingSystem.split(',');
+    //   }
+    // }
   },
 
   created() {

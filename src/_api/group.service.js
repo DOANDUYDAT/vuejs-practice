@@ -24,11 +24,13 @@ const headers = {
 }
 
 async function getAllGroups() {
+    const auth = authHeader();
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/groups`,
+        url: `${config.apiUrl}/users/groups`,
         headers: {
-            ...headers
+            ...headers,
+            ...auth
         },
     };
     try {
@@ -77,11 +79,13 @@ async function createGroup(group) {
 }
 
 async function getGroup(groupId) {
+    const auth = authHeader();
     const options = {
         method: 'get',
         url: `${config.apiUrl}/users/groups/${groupId}/`,
         headers: {
-            ...headers
+            ...headers,
+            ...auth
         },
     };
     try {
@@ -129,7 +133,6 @@ async function updateGroup(group) {
 }
 
 async function deleteGroup(groupId) {
-    
     const auth = authHeader();
     const options = {
         method: 'delete',
@@ -169,6 +172,7 @@ async function getAllPermissions() {
         if (response.status === 200) {
             console.log(response.data);
             console.log('getAllPermissions done');
+            const permissions = response.data;
             return permissions;
         }
     } catch (error) {

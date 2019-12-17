@@ -70,6 +70,7 @@ import _ from "lodash";
 
 export default {
   data: () => ({
+    allPermissions: [],
     dialog: false,
     search: "",
     headers: [
@@ -119,6 +120,7 @@ export default {
   methods: {
     async getData() {
       this.groups = await groupService.getAllGroups();
+      this.allPermissions = await groupService.getAllPermissions();
     },
 
     editItem(item) {

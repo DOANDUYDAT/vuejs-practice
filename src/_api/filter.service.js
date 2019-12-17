@@ -19,12 +19,12 @@ export const filterService = {
 async function filter(filter) {
     console.log(filter);
     const options = {
-        method: 'post',
-        url: `${config.apiUrl}/filter`,
+        method: 'get',
+        url: `${config.apiUrl}${filter}`,
         headers: {
             ...headers,
         },
-        data: JSON.stringify(filter)
+        // data: JSON.stringify(filter)
     };
     try {
         const response = await axios(options);

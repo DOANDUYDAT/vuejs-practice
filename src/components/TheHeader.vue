@@ -138,7 +138,7 @@ export default {
     this.getData();
   },
   watch: {
-    $route: "getData"
+    loggedIn: "getData"
   }
 };
 </script>
