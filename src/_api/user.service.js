@@ -23,7 +23,6 @@ const headers = {
 }
 
 async function getAllUsers() {
-    console.log('getAllUsers');
     const auth = authHeader();
     const options = {
         method: 'get',
@@ -35,9 +34,9 @@ async function getAllUsers() {
     };
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('getAllUsers done');
             const data = response.data;
             let allUsers = [];
             if (data.length > 0) {
@@ -59,18 +58,18 @@ async function getAllUsers() {
             return allUsers;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('getAllUsers error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function login(email, password, remember) {
-    console.log('login');
     const data = {
         email,
         password
     }
-    console.log(data);
+    // console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/login`,
@@ -82,23 +81,22 @@ async function login(email, password, remember) {
     try {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log(response.data);
+            // console.log('login done');
             let user = response.data;
             localStorage.setItem('user', JSON.stringify(user));
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('login error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function logout() {
-
-    console.log('logout');
     const auth = authHeader();
     // remove user from local storage to log user out
     const options = {
@@ -111,27 +109,27 @@ async function logout() {
     }
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('logout done');
             localStorage.removeItem('user');
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('logout error');
+        // console.log(error.response);
         throw error;
     }
 }
 
 async function register(userInfo) {
-    console.log('register');
     const data = {
         last_name: userInfo.lastName,
         first_name: userInfo.firstName,
         email: userInfo.email,
         password: userInfo.password
     };
-    console.log(data);
+    // console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/register`,
@@ -144,20 +142,19 @@ async function register(userInfo) {
     // console.log(response);
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 201) {
-            console.log(response.data);
+            // console.log('register done');
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('register error');
+        // console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getProfile() {
-
-    console.log('getProfile');
     const auth = authHeader();
     const options = {
         method: 'get',
@@ -169,9 +166,9 @@ async function getProfile() {
     }
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('getProfile done');
             const data = response.data;
             const user = {
                 id: data.id,
@@ -186,13 +183,13 @@ async function getProfile() {
             return user;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('getProfile error');
+        // console.log(error.response);
         throw error;
     }
 }
 
 async function updateProfile(userInfo) {
-    console.log('updateProfile');
     const auth = authHeader();
     const data = {
         last_name: userInfo.lastName,
@@ -214,20 +211,20 @@ async function updateProfile(userInfo) {
     }
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('updateProfile done');
             return true;
         }
 
     } catch (error) {
-        console.log(error.response);
+        // console.log('updateProfile error');
+        // console.log(error.response);
         throw error;
     }
 }
 
 async function resetPassword(email) {
-    console.log('resetPassword');
     const data = {
         email: email
     };
@@ -241,24 +238,24 @@ async function resetPassword(email) {
     }
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('resetPassword done');
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('resetPassword error');
+        // console.log(error.response);
         throw error;
     }
 }
 
 async function changePassword({ oldPassword, password }) {
-    console.log('changePassword');
     const data = {
         old_password: oldPassword,
         password: password
     };
-    console.log(data);
+    // console.log(data);
     const auth = authHeader();
     const options = {
         method: 'post',
@@ -271,13 +268,14 @@ async function changePassword({ oldPassword, password }) {
     }
     try {
         const response = await axios(options);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            // console.log('changePassword done');
             return true;
         }
     } catch (error) {
-        console.log(error.response);
+        // console.log('changePassword error');
+        // console.log(error.response);
         throw error;
     }
 }

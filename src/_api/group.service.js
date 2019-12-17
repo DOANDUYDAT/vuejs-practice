@@ -10,10 +10,10 @@ import _ from 'lodash';
 export const groupService = {
     getAllGroups,
     createGroup,
-    // getGroup,
-    // updateGroup,
-    // deleteGroup,
-    // getAllPermissions
+    getGroup,
+    updateGroup,
+    deleteGroup,
+    getAllPermissions
 };
 
 
@@ -24,7 +24,6 @@ const headers = {
 }
 
 async function getAllGroups() {
-    console.log('getAllGroups');
     const options = {
         method: 'get',
         url: `${config.apiUrl}/groups`,
@@ -36,11 +35,12 @@ async function getAllGroups() {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('getAllGroups done');
             let groups = response.data;
             return groups;
         }
     } catch (error) {
+        console.log('getAllGroups error');
         console.log(error.response);
         if (error) throw error;
     }
@@ -48,7 +48,6 @@ async function getAllGroups() {
 
 
 async function createGroup(group) {
-    console.log('createGroup');
     const auth = authHeader();
     const data = {
         name: group.name
@@ -56,7 +55,7 @@ async function createGroup(group) {
     console.log(data);
     const options = {
         method: 'post',
-        url: `${config.apiUrl}/suppliers/`,
+        url: `${config.apiUrl}/users/groups/`,
         headers: {
             ...headers,
             ...auth
@@ -67,20 +66,20 @@ async function createGroup(group) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 201) {
-            console.log(response.data);
+            console.log('createGroup done');
             return true;
         }
     } catch (error) {
+        console.log('createGroup error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
-async function getSupplier(supplierId) {
-    console.log('getSupplier: ' + supplierId);
+async function getGroup(groupId) {
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/suppliers/${supplierId}/`,
+        url: `${config.apiUrl}/users/groups/${groupId}/`,
         headers: {
             ...headers
         },
@@ -89,26 +88,26 @@ async function getSupplier(supplierId) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('getGroup done');
             let product = response.data;
             return product;
         }
     } catch (error) {
+        console.log('getGroup error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
-async function updateSupplier(supplier) {
-    console.log('updateSupplier: ' + supplier.id);
+async function updateGroup(group) {
     const auth = authHeader();
     const data = {
-        name: supplier.name
+        name: group.name
     };
     console.log(data);
     const options = {
         method: 'put',
-        url: `${config.apiUrl}/suppliers/${supplier.id}/`,
+        url: `${config.apiUrl}/users/groups/${group.id}/`,
         headers: {
             ...headers,
             ...auth
@@ -119,21 +118,22 @@ async function updateSupplier(supplier) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('updateGroup done');
             return true;
         }
     } catch (error) {
+        console.log('updateGroup error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
-async function deleteSupplier(supplierId) {
-    console.log('deleteSupplier: ' + supplierId);
+async function deleteGroup(groupId) {
+    
     const auth = authHeader();
     const options = {
         method: 'delete',
-        url: `${config.apiUrl}/suppliers/${supplierId}/`,
+        url: `${config.apiUrl}/users/groups/${groupId}/`,
         headers: {
             ...headers,
             ...auth
@@ -143,21 +143,21 @@ async function deleteSupplier(supplierId) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 204) {
-            console.log(response.data);
+            console.log('deleteGroup done');
             return true;
         }
     } catch (error) {
+        console.log('deleteGroup error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getAllPermissions() {
-    console.log('getAllPermissions');
     const auth = authHeader();
     const options = {
         method: 'get',
-        url: `${config.apiUrl}/permissions`,
+        url: `${config.apiUrl}/users/permissions`,
         headers: {
             ...headers,
             ...auth
@@ -168,10 +168,11 @@ async function getAllPermissions() {
         console.log(response);
         if (response.status === 200) {
             console.log(response.data);
-            let permissions = response.data;
+            console.log('getAllPermissions done');
             return permissions;
         }
     } catch (error) {
+        console.log('getAllPermissions error');
         console.log(error.response);
         if (error) throw error;
     }
