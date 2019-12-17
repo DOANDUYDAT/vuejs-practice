@@ -57,11 +57,14 @@ export default {
       this.productsList = [];
       if (path === '/filter') {
         const query = this.$route.query;
+        console.log('filter');
         this.productsList = await filterService.filter(query);
       } else if (path === '/search') {
         const query = this.$route.query;
+        console.log('search');
         this.productsList = await searchService.search(query);
       } else {
+        console.log('getAllProducts');
         this.productsList = await productService.getAllProducts();
       }
     },

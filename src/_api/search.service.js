@@ -18,7 +18,6 @@ export const searchService = {
 
 
 async function search(query) {
-    console.log('search');
     const data = {
         search: query
     }
@@ -35,7 +34,7 @@ async function search(query) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('search done');
             const data = response.data;
             let productsSearch = [];
             if (data.length > 0) {
@@ -70,6 +69,7 @@ async function search(query) {
             return productsSearch;
         }
     } catch (error) {
+        console.log('search error');
         console.log(error.response);
         if (error) throw error;
     }

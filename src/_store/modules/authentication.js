@@ -3,22 +3,23 @@ import {
 } from '@/_api';
 
 
-let initialState = null;
+
 const user = JSON.parse(localStorage.getItem('user'));
+let initState = { status: { loggedIn: false }, user: null };
+
 if (user) {
     const tokenCreated = user.created;
     const currentDate = Date.now();
     // check nếu token quá hạn 1 ngày, tính theo milliseconds
     if (currentDate - Date.parse(tokenCreated) >= 86400000) {
         localStorage.removeItem('user');
-        initialState = { status: {}, user: null };
     } else {
-        initialState = { status: { loggedIn: true }, user };
+        initState = { status: { loggedIn: true }, user };
     }
 }
 
 
-const state = initialState;
+const state = initState;
 
 const getters = {};
 

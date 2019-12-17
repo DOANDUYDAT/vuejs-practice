@@ -128,13 +128,14 @@ export default {
       // }
     },
     async getData() {
-      this.userInfo = await userService.getProfile();
+      if (this.loggedIn) {
+        console.log('getProfile');
+        this.userInfo = await userService.getProfile();
+      }
     }
   },
   created() {
-    if (this.loggedIn) {
-      this.getData();
-    }
+    this.getData();
   },
   watch: {
     $route: "getData"

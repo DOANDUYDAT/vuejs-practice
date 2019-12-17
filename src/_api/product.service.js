@@ -27,7 +27,6 @@ const headers = {
 }
 
 async function getAllProducts() {
-    console.log('getAllProducts');
     const options = {
         method: 'get',
         url: `${config.apiUrl}/products`,
@@ -39,7 +38,7 @@ async function getAllProducts() {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('getAllProducts done');
             const data = response.data;
             let allProducts = [];
             if (data.length > 0) {
@@ -74,13 +73,13 @@ async function getAllProducts() {
             return allProducts;
         }
     } catch (error) {
+        console.log('getAllProducts error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function createProduct(product) {
-    console.log('createProduct');
     const auth = authHeader();
     let formData = new FormData();
     formData.append('supplier_id', product.supplierId);
@@ -118,17 +117,17 @@ async function createProduct(product) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 201) {
-            console.log(response.data);
+            console.log('createProduct done');
             return true;
         }
     } catch (error) {
+        console.log('createProduct error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getProduct(productId) {
-    console.log('getProduct: ' + productId);
     const options = {
         method: 'get',
         url: `${config.apiUrl}/products/${productId}`,
@@ -140,7 +139,7 @@ async function getProduct(productId) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('getProduct done');
             const data = response.data;
             const product = {
                 id: data.id,
@@ -169,15 +168,14 @@ async function getProduct(productId) {
             return product;
         }
     } catch (error) {
+        console.log('getProduct error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function updateProduct(product) {
-    console.log('updateProduct: ' + product.id);
     const auth = authHeader();
-    console.log(product);
     let formData = new FormData();
     formData.append('supplier', product.supplier);
     formData.append('guarantee', product.guarantee);
@@ -202,9 +200,7 @@ async function updateProduct(product) {
             formData.append('images[' + i + ']', image);
         }
     }
-    // for (var pair of formData.entries()) {
-    //     console.log(pair[0] + ', ' + pair[1]);
-    // }
+
     const options = {
         method: 'put',
         url: `${config.apiUrl}/products/${product.id}/`,
@@ -218,11 +214,11 @@ async function updateProduct(product) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-
-            console.log(response.data);
+            console.log('updateProduct done');
             return true;
         }
     } catch (error) {
+        console.log('updateProduct error');
         console.log(error.response);
         if (error) throw error;
     }
@@ -230,7 +226,6 @@ async function updateProduct(product) {
 
 
 async function deleteProduct(productId) {
-    console.log('deleteProduct: ' + productId);
     const auth = authHeader();
     const options = {
         method: 'delete',
@@ -244,18 +239,17 @@ async function deleteProduct(productId) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 204) {
-
-            console.log(response.data);
+            console.log('deleteProduct done');
             return true;
         }
     } catch (error) {
+        console.log('deleteProduct error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getAllComments(productId) {
-    console.log('getAllComments: ' + productId);
     const options = {
         method: 'get',
         url: `${config.apiUrl}/products/${productId}/comments`,
@@ -267,7 +261,7 @@ async function getAllComments(productId) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('getAllComments done');
             const data = response.data;
             let allComments = [];
             if (data.length > 0) {
@@ -284,13 +278,13 @@ async function getAllComments(productId) {
             return allComments;
         }
     } catch (error) {
+        console.log('getAllComments error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function createComment(comment, productId) {
-    console.log('createComment');
     const auth = authHeader();
     const data = {
         name: comment.name,
@@ -310,17 +304,17 @@ async function createComment(comment, productId) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 201) {
-            console.log(response.data);
+            console.log('createComment done');
             return true;
         }
     } catch (error) {
+        console.log('createComment error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function getAllReviews(productId) {
-    console.log('getAllReviews: ' + productId);
     const options = {
         method: 'get',
         url: `${config.apiUrl}/products/${productId}/votes`,
@@ -332,8 +326,7 @@ async function getAllReviews(productId) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-
-            console.log(response.data);
+            console.log('getAllReviews done');
             const data = response.data;
             let allComments = [];
             if (data.length > 0) {
@@ -350,13 +343,13 @@ async function getAllReviews(productId) {
             return allComments;
         }
     } catch (error) {
+        console.log('getAllReviews error');
         console.log(error.response);
         if (error) throw error;
     }
 }
 
 async function createReview(review, productId) {
-    console.log('createReview');
     const auth = authHeader();
     const data = {
         content: review.content,
@@ -376,10 +369,11 @@ async function createReview(review, productId) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 201) {
-            console.log(response.data);
+            console.log('createReview done');
             return true;
         }
     } catch (error) {
+        console.log('createReview error');
         console.log(error.response);
         if (error) throw error;
     }

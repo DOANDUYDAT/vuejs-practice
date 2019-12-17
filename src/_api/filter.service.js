@@ -17,7 +17,6 @@ export const filterService = {
 
 
 async function filter(filter) {
-    console.log('filter');
     console.log(filter);
     const options = {
         method: 'post',
@@ -31,7 +30,7 @@ async function filter(filter) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('filter done');
             const data = response.data;
             let productsFilter = [];
             if (data.length) {
@@ -66,6 +65,7 @@ async function filter(filter) {
             return productsFilter;
         }
     } catch (error) {
+        console.log('filter error')
         console.log(error.response);
         if (error) throw error;
     }

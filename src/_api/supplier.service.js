@@ -23,7 +23,6 @@ const headers = {
 }
 
 async function getAllSuppliers() {
-    console.log('getAllSuppliers');
     const options = {
         method: 'get',
         url: `${config.apiUrl}/suppliers`,
@@ -35,11 +34,12 @@ async function getAllSuppliers() {
         const response = await axios(options);
         console.log(response);
         if (response.status === 200) {
-            console.log(response.data);
+            console.log('getAllSuppliers done');
             let suppliers = response.data;
             return suppliers;
         }
     } catch (error) {
+        console.log('getAllSuppliers error');
         console.log(error.response);
         if (error) throw error;
     }
@@ -47,7 +47,6 @@ async function getAllSuppliers() {
 
 
 async function createSupplier(supplier) {
-    console.log('createSupplier');
     const auth = authHeader();
     const data = {
         name: supplier.name
@@ -66,10 +65,11 @@ async function createSupplier(supplier) {
         const response = await axios(options);
         console.log(response);
         if (response.status === 201) {
-            console.log(response.data);
+            console.log('createSupplier done');
             return true;
         }
     } catch (error) {
+        console.log('createSupplier error');
         console.log(error.response);
         if (error) throw error;
     }
