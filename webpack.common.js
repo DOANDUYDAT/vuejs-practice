@@ -3,10 +3,10 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
-    mode: 'development',
     entry: {
         app: './src/main.js',
     },
@@ -15,11 +15,6 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
         publicPath: '/'
-    },
-    devtool: 'inline-source-map',
-    devServer: {
-        contentBase: './dist/',
-        historyApiFallback: true,
     },
     resolve: {
         extensions: ['.js', '.vue'],
@@ -64,9 +59,11 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'vue-style-loader',
+                    process.env.NODE_ENV !== 'production'
+                        ? 'vue-style-loader'
+                        : MiniCssExtractPlugin.loader,
                     'css-loader'
-                ],
+                ]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -97,11 +94,14 @@ module.exports = {
             template: 'index.html',
             inject: true
         }),
+        new MiniCssExtractPlugin({
+            filename: 'style.css'
+        })
     ],
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://127.0.0.1:8000'
+            apiUrl: 'http://it4421.pythonanywhere.com/'
         })
     }
 };

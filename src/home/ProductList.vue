@@ -4,7 +4,7 @@
       <v-carousel-item
         v-for="product in topProduct"
         :key="product.id"
-        :src="product.images[0].image"
+        :src="product.images.length ? product.images[0].image : '' "
         :to="{ name: 'product detail', params: { productId: product.id } }"
         contain
       ></v-carousel-item>

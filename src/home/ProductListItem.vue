@@ -9,7 +9,7 @@
     exact
   >
     <!-- eager giúp force các ảnh được load hết -->
-    <v-img :height="heightImage" :src="product.images[0].image" contain eager></v-img>
+    <v-img :height="heightImage" :src="product.images.length ? product.images[0].image : ''" contain eager></v-img>
 
     <v-card-text class="py-0">
       <v-rating
