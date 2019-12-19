@@ -2,44 +2,52 @@
   <v-container class="mx-auto">
     <div class="headline">Thông số kỹ thuật</div>
 
-    <v-row
-      ><v-col cols="12"><b>Thông tin chung</b></v-col>
+    <v-row>
+      <v-col cols="12">
+        <b>Thông tin chung</b>
+      </v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-row
-      ><v-col cols="5">Thương hiệu</v-col>
+    <v-row>
+      <v-col cols="5">Thương hiệu</v-col>
       <v-col cols="7">{{ product.supplier }}</v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-row
-      ><v-col cols="5">Bảo hành</v-col>
-      <v-col cols="7">{{ product.guarantee }}</v-col> </v-row
-    ><v-divider></v-divider>
-    <v-row
-      ><v-col cols="5">Mô tả bảo hành</v-col>
-      <v-col cols="7">{{ product.guaranteeDes }}</v-col> </v-row
-    ><v-divider></v-divider>
-
-    <v-row
-      ><v-col cols="5">Tên</v-col>
-      <v-col cols="7">{{ product.name }}</v-col></v-row
-    ><v-divider></v-divider>
-    <v-row
-      ><v-col cols="5">Màu sắc</v-col>
-      <v-col cols="7">{{ product.color }}</v-col></v-row
-    >
-    <v-row
-      ><v-col cols="12"><b>Màn hình</b></v-col>
+    <v-row>
+      <v-col cols="5">Bảo hành</v-col>
+      <v-col cols="7">{{ product.guarantee }}</v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-row
-      ><v-col cols="5">Loại màn hình</v-col>
-      <v-col cols="7">{{ product.screen }}</v-col></v-row
-    ><v-divider></v-divider>
+    <v-row>
+      <v-col cols="5">Mô tả bảo hành</v-col>
+      <v-col cols="7">{{ product.guaranteeDes }}</v-col>
+    </v-row>
+    <v-divider></v-divider>
+
+    <v-row>
+      <v-col cols="5">Tên</v-col>
+      <v-col cols="7">{{ product.name }}</v-col>
+    </v-row>
+    <v-divider></v-divider>
+    <v-row>
+      <v-col cols="5">Màu sắc</v-col>
+      <v-col cols="7">{{ product.color }}</v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <b>Màn hình</b>
+      </v-col>
+    </v-row>
+    <v-divider></v-divider>
+    <v-row>
+      <v-col cols="5">Loại màn hình</v-col>
+      <v-col cols="7">{{ product.screen }}</v-col>
+    </v-row>
+    <v-divider></v-divider>
     <v-row>
       <v-col cols="5">Độ phân giải</v-col>
-      <v-col cols="7">{{ product.resolution }}</v-col></v-row
-    >
+      <v-col cols="7">{{ product.resolution }}</v-col>
+    </v-row>
 
     <v-row justify="center">
       <v-dialog v-model="dialog" max-width="600">
@@ -48,9 +56,7 @@
         </template>
         <v-card tile class="spec-product">
           <v-toolbar flat>
-            <v-toolbar-title class="flex-grow-1 text-center headline"
-              >Thông số kỹ thuật</v-toolbar-title
-            >
+            <v-toolbar-title class="flex-grow-1 text-center headline">Thông số kỹ thuật</v-toolbar-title>
             <v-btn icon @click="dialog = false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
@@ -78,10 +84,6 @@
                     <td>Mô tả bảo hành</td>
                     <td>{{ product.guaranteeDes }}</td>
                   </tr>
-                  <!-- <tr>
-                    <td>Nhóm sản phẩm</td>
-                    <td>{{ specProduct.thong_tin_chung.nhom_san_pham }}</td>
-                  </tr> -->
                   <tr>
                     <td>Tên</td>
                     <td>{{ product.name }}</td>
@@ -154,10 +156,6 @@
                     <td>Cổng sạc</td>
                     <td>{{ product.chargingPort }}</td>
                   </tr>
-                  <!-- <tr>
-                    <td>Loại sim</td>
-                    <td>{{ specProduct.cau_hinh.loai_sim }}</td>
-                  </tr> -->
                 </tbody>
               </template>
             </v-simple-table>
@@ -185,9 +183,7 @@ export default {
     }
   },
   computed: {
-    specProduct() {
-      return this.product.thong_so_ky_thuat;
-    }
+
   }
 };
 </script>

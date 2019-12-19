@@ -47,9 +47,11 @@ export default {
     productImages() {
       const images = [...this.product.images];
       let productImages = [];
-      for (let i = 0; i < 6; i++) {
-        if (i < images.length) {
-          productImages.push(images[i].image);
+      if (images.length) {
+        for (let i = 0; i < 6; i++) {
+          if (i < images.length) {
+            productImages.push(images[i].image);
+          }
         }
       }
       return productImages;
@@ -60,7 +62,9 @@ export default {
       this.imageBig = image;
     },
     initImageBig() {
-      this.imageBig = this.product.images[0].image;
+      this.imageBig = this.product.images.length
+        ? this.product.images[0].image
+        : "";
     }
   },
   watch: {

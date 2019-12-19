@@ -97,7 +97,7 @@ export default {
         } catch (error) {
           if (error.response) {
             this.$store.dispatch("alert/error", {
-              message: error.response.data.message
+              message: error.response.data.detail
             });
           }
         }

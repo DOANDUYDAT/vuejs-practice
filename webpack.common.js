@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 
 module.exports = {
@@ -96,12 +98,13 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: 'style.css'
-        })
+        }),
+        new BundleAnalyzerPlugin()
     ],
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://it4421.pythonanywhere.com/'
+            apiUrl: 'http://vanhaychutot.pythonanywhere.com/'
         })
     }
 };

@@ -100,7 +100,7 @@ export default {
           quantity: e.quantity,
           name: e.product.name,
           price: e.product.price,
-          image: e.product.images[0].image
+          image: e.product.images.length ? e.product.images[0].image : ""
         };
       });
     }

@@ -23,7 +23,7 @@ const getters = {
           id: product.id,
           name: product.name,
           price: product.price,
-          image: product.images[0].image,
+          image: product.images.length ? product.images[0].image : "",
           quantity
         }
       } else {

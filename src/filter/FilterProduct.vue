@@ -228,41 +228,41 @@ export default {
     async submit() {
       const filter = this.filter;
       const oldFilter = this.$route.query;
-      // let query = {};
-      // if (filter.minPrice) {
-      //   query = {...query, minPrice: filter.minPrice};
-      // }
-      // if (filter.maxPrice) {
-      //   query = {...query, maxPrice: filter.maxPrice};
-      // }
-      // if (filter.supplier.length) {
-      //   query = {...query, supplier: filter.supplier.toString()};
-      // }
-      // if (filter.color.length) {
-      //   query = {...query, color: filter.color.toString()};
-      // }
-      // if (filter.rom.length) {
-      //   query = {...query, rom: filter.rom.toString()};
-      // }
-      // if (filter.ram.length) {
-      //   query = {...query, ram: filter.ram.toString()};
-      // }
-      // if (filter.frontCamera.length) {
-      //   query = {...query, frontCamera: filter.frontCamera.toString()};
-      // }
-      // if (filter.rearCamera.length) {
-      //   query = {...query, rearCamera: filter.rearCamera.toString()};
-      // }
-      // if (filter.operatingSystem.length) {
-      //   query = {...query, operatingSystem: filter.operatingSystem.toString()};
-      // }
-      // if (!_.isEmpty(query) && !_.isEqual(query, oldFilter)) {
-      //   this.$router.push({ path: "/filter", query: query });
-      // }
-      
-      if (!_.isEmpty(filter) && !_.isEqual(filter, oldFilter)) {
-        this.$router.push({ path: "/filter", query: filter });
+      let query = {};
+      if (filter.minPrice) {
+        query = {...query, min_price: filter.minPrice};
       }
+      if (filter.maxPrice) {
+        query = {...query, max_price: filter.maxPrice};
+      }
+      if (filter.supplier.length) {
+        query = {...query, supplier: filter.supplier};
+      }
+      if (filter.color.length) {
+        query = {...query, color: filter.color};
+      }
+      if (filter.rom.length) {
+        query = {...query, rom: filter.rom};
+      }
+      if (filter.ram.length) {
+        query = {...query, ram: filter.ram};
+      }
+      if (filter.frontCamera.length) {
+        query = {...query, front_camera: filter.frontCamera};
+      }
+      if (filter.rearCamera.length) {
+        query = {...query, rear_camera: filter.rearCamera};
+      }
+      if (filter.operatingSystem.length) {
+        query = {...query, operating_system: filter.operatingSystem};
+      }
+      if (!_.isEmpty(query) && !_.isEqual(query, oldFilter)) {
+        this.$router.push({ path: "/filter", query: query });
+      }
+      
+      // if (!_.isEmpty(filter) && !_.isEqual(filter, oldFilter)) {
+      //   this.$router.push({ path: "/filter", query: filter });
+      // }
       
     },
     resetFilter() {
