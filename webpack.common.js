@@ -16,7 +16,13 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
-        publicPath: '/'
+        chunkFilename: '[name].bundle.js',
+        publicPath: '/vuejs-practice/'
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
     },
     resolve: {
         extensions: ['.js', '.vue'],
@@ -61,9 +67,15 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    process.env.NODE_ENV !== 'production'
-                        ? 'vue-style-loader'
-                        : MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            // only enable hot in development
+                            hmr: process.env.NODE_ENV === 'development',
+                            // if hmr does not work, this is a forceful method.
+                            reloadAll: true,
+                        },
+                    },
                     'css-loader'
                 ]
             },
@@ -97,7 +109,11 @@ module.exports = {
             inject: true
         }),
         new MiniCssExtractPlugin({
-            filename: 'style.css'
+            // Options similar to the same options in webpackOptions.output
+            // all options are optional
+            filename: '[name].css',
+            chunkFilename: '[name].css',
+            ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
         new BundleAnalyzerPlugin()
     ],
