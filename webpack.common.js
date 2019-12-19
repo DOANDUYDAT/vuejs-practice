@@ -28,9 +28,9 @@ module.exports = {
         extensions: ['.js', '.vue'],
         alias: {
             // If using the runtime only build
-            // vue$: 'vue/dist/vue.runtime.esm.js' // 'vue/dist/vue.runtime.common.js' for webpack 1
+            vue$: 'vue/dist/vue.runtime.esm.js', // 'vue/dist/vue.runtime.common.js' for webpack 1
             // Or if using full build of Vue (runtime + compiler)
-            'vue$': 'vue/dist/vue.esm.js',     // 'vue/dist/vue.common.js' for webpack 1
+            // 'vue$': 'vue/dist/vue.esm.js',     // 'vue/dist/vue.common.js' for webpack 1
             '@': path.resolve(__dirname, 'src'),
 
         }
@@ -79,18 +79,18 @@ module.exports = {
                     'css-loader'
                 ]
             },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: 'fonts/'
-                        }
-                    }
-                ],
-            },
+            // {
+            //     test: /\.(woff|woff2|eot|ttf|otf)$/,
+            //     use: [
+            //         {
+            //             loader: 'file-loader',
+            //             options: {
+            //                 name: '[name].[ext]',
+            //                 outputPath: 'fonts/'
+            //             }
+            //         }
+            //     ],
+            // },
             {
                 test: /\.(png|svg|jpg|gif|ico)$/,
                 use: [

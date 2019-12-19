@@ -7,7 +7,7 @@
           class="center"
           max-width="600"
           max-height="400"
-          :src="require('@/_assets/image/404-eror.jpg')"
+          :src="require('@/_assets/image/404-error.jpg')"
         ></v-img>
         <v-row justify="center" class="mt-2">
           <div>
