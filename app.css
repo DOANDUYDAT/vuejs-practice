@@ -1,0 +1,175 @@
+
+.profile[data-v-aebda5ee] {
+  display: block;
+  margin: auto;
+}
+.my-avatar[data-v-aebda5ee] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .v-data-table td{
+  height: 100px;
+} */
+
+
+ul[data-v-7cd2fb1a] {
+  position: fixed;
+  right: 0;
+  z-index: 999;
+  /* left: 0; */
+}
+li[data-v-7cd2fb1a] {
+  list-style: none;
+  animation: navLinkFade-data-v-7cd2fb1a 0.5s;
+}
+@keyframes navLinkFade-data-v-7cd2fb1a {
+from {
+    opacity: 0;
+    transform: translateX(50px);
+}
+to {
+    opacity: 1;
+    transform: translateX(0px);
+}
+}
+
+
+.text-size[data-v-01548bc1] {
+  font-size: 1rem;
+}
+
+
+.text-size[data-v-5648491f] {
+  font-size: 1rem;
+}
+
+
+.text-size[data-v-6453cd42] {
+  font-size: 1rem;
+}
+.epp-btn[data-v-6453cd42] {
+  width: 6rem;
+}
+.text-editor[data-v-6453cd42] {
+  padding-left: 32px;
+}
+
+
+/*# sourceMappingURL=app.css.map*/
