@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!checkProductEmpty">
+  <v-container v-if="product.id">
     <div class="headline py-3">Sản phẩm tương tự</div>
     <!-- mandatory yêu cầu 1 value luôn được chọn, giúp slide tự cuộn lại khi thay đổi list slide-item -->
     <v-slide-group mandatory show-arrows>
@@ -11,7 +11,7 @@
 </template>
 <script>
 import ProductListItem from "@/home/ProductListItem";
-import _ from "lodash";
+// import _ from "lodash";
 import { mapState } from "vuex";
 
 export default {
@@ -34,9 +34,9 @@ export default {
     ...mapState({
       products: state => state.products.allProducts
     }),
-    checkProductEmpty() {
-      return _.isEmpty(this.product);
-    },
+    // checkProductEmpty() {
+    //   return _.isEmpty(this.product);
+    // },
     suggestProduct() {
       return this.suggestProductFollowBrand;
     },

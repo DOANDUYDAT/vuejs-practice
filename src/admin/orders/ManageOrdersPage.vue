@@ -85,7 +85,7 @@
 <script>
 import { fakeOrders } from "@/_helpers/fake-orders";
 import { orderService } from "@/_api";
-import _ from "lodash";
+// import _ from "lodash";
 export default {
   data: () => ({
     dialog: false,

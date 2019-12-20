@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import _ from "lodash";
+// import _ from "lodash";
 export default {
   data() {
     return {
@@ -35,7 +35,7 @@ export default {
       for (let i = 1; i < fullPath.length; i++) {
         to = to + '/' + fullPath[i]
         this.itemsBreadcrumb.push({
-          text: _.capitalize(fullPath[i]),
+          text: fullPath[i].upperCase(),
           disabled: i < fullPath.length - 1 ? false : true,
           exact: true,
           to: to

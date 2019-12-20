@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 
@@ -17,7 +17,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
         chunkFilename: '[name].bundle.js',
-        publicPath: '/vuejs-practice/'
+        publicPath: '/'
     },
     optimization: {
         splitChunks: {
@@ -28,9 +28,9 @@ module.exports = {
         extensions: ['.js', '.vue'],
         alias: {
             // If using the runtime only build
-            vue$: 'vue/dist/vue.runtime.esm.js', // 'vue/dist/vue.runtime.common.js' for webpack 1
+            // vue$: 'vue/dist/vue.runtime.esm.js', // 'vue/dist/vue.runtime.common.js' for webpack 1
             // Or if using full build of Vue (runtime + compiler)
-            // 'vue$': 'vue/dist/vue.esm.js',     // 'vue/dist/vue.common.js' for webpack 1
+            'vue$': 'vue/dist/vue.esm.js',     // 'vue/dist/vue.common.js' for webpack 1
             '@': path.resolve(__dirname, 'src'),
 
         }
@@ -79,18 +79,18 @@ module.exports = {
                     'css-loader'
                 ]
             },
-            // {
-            //     test: /\.(woff|woff2|eot|ttf|otf)$/,
-            //     use: [
-            //         {
-            //             loader: 'file-loader',
-            //             options: {
-            //                 name: '[name].[ext]',
-            //                 outputPath: 'fonts/'
-            //             }
-            //         }
-            //     ],
-            // },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ],
+            },
             {
                 test: /\.(png|svg|jpg|gif|ico)$/,
                 use: [
@@ -115,12 +115,12 @@ module.exports = {
             chunkFilename: '[name].css',
             ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
-        new BundleAnalyzerPlugin()
+        // new BundleAnalyzerPlugin()
     ],
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://vanhaychutot.pythonanywhere.com/'
+            apiUrl: 'http://vanhaychutot.pythonanywhere.com'
         })
     }
 };

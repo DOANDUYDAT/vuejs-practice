@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!checkProductEmpty">
+  <v-container v-if="product.id">
     <v-row>
       <v-col cols="12">
         <v-img height="auto" width="auto" contain :src="imageBig"></v-img>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import _ from "lodash";
+// import _ from "lodash";
 
 export default {
   data() {
@@ -41,9 +41,9 @@ export default {
     }
   },
   computed: {
-    checkProductEmpty() {
-      return _.isEmpty(this.product);
-    },
+    // checkProductEmpty() {
+    //   return _.isEmpty(this.product);
+    // },
     productImages() {
       const images = [...this.product.images];
       let productImages = [];

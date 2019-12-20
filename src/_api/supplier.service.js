@@ -32,15 +32,15 @@ async function getAllSuppliers() {
     };
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('getAllSuppliers done');
+            console.log('getAllSuppliers done');
             let suppliers = response.data;
             return suppliers;
         }
     } catch (error) {
-        // console.log('getAllSuppliers error');
-        // console.log(error.response);
+        console.log('getAllSuppliers error');
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -51,7 +51,7 @@ async function createSupplier(supplier) {
     const data = {
         name: supplier.name
     }
-    // console.log(data);
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/suppliers/`,
@@ -63,14 +63,14 @@ async function createSupplier(supplier) {
     };
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 201) {
-            // console.log('createSupplier done');
+            console.log('createSupplier done');
             return true;
         }
     } catch (error) {
-        // console.log('createSupplier error');
-        // console.log(error.response);
+        console.log('createSupplier error');
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -85,15 +85,15 @@ async function getSupplier(supplierId) {
     };
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('getSupplier done');
+            console.log('getSupplier done');
             let product = response.data;
             return product;
         }
     } catch (error) {
-        // console.log('getSupplier error');
-        // console.log(error.response);
+        console.log('getSupplier error');
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -103,7 +103,7 @@ async function updateSupplier(supplier) {
     const data = {
         name: supplier.name
     };
-    // console.log(data);
+    console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/suppliers/${supplier.id}/`,
@@ -115,14 +115,14 @@ async function updateSupplier(supplier) {
     };
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('updateSupplier done');
+            console.log('updateSupplier done');
             return true;
         }
     } catch (error) {
-        // console.log('updateSupplier error');
-        // console.log(error.response);
+        console.log('updateSupplier error');
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -139,14 +139,14 @@ async function deleteSupplier(supplierId) {
     }
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 204) {
-            // console.log('deleteSupplier done');
+            console.log('deleteSupplier done');
             return true;
         }
     } catch (error) {
-        // console.log('deleteSupplier error');
-        // console.log(error.response);
+        console.log('deleteSupplier error');
+        console.log(error.response);
         if (error) throw error;
     }
 }

@@ -34,9 +34,9 @@ async function getAllUsers() {
     };
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('getAllUsers done');
+            console.log('getAllUsers done');
             const data = response.data;
             let allUsers = [];
             if (data.length > 0) {
@@ -58,8 +58,8 @@ async function getAllUsers() {
             return allUsers;
         }
     } catch (error) {
-        // console.log('getAllUsers error');
-        // console.log(error.response);
+        console.log('getAllUsers error');
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -69,7 +69,7 @@ async function login(email, password, remember) {
         email,
         password
     }
-    // console.log(data);
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/login`,
@@ -81,17 +81,17 @@ async function login(email, password, remember) {
     try {
         const response = await axios(options);
         // login successful if there's a jwt token in the response
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            // console.log('login done');
+            console.log('login done');
             let user = response.data;
             localStorage.setItem('user', JSON.stringify(user));
             return true;
         }
     } catch (error) {
-        // console.log('login error');
-        // console.log(error.response);
+        console.log('login error');
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -109,15 +109,15 @@ async function logout() {
     }
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('logout done');
+            console.log('logout done');
             localStorage.removeItem('user');
             return true;
         }
     } catch (error) {
-        // console.log('logout error');
-        // console.log(error.response);
+        console.log('logout error');
+        console.log(error.response);
         throw error;
     }
 }
@@ -129,7 +129,7 @@ async function register(userInfo) {
         email: userInfo.email,
         password: userInfo.password
     };
-    // console.log(data);
+    console.log(data);
     const options = {
         method: 'post',
         url: `${config.apiUrl}/users/register`,
@@ -138,18 +138,16 @@ async function register(userInfo) {
         },
         data: JSON.stringify(data)
     };
-    // const response = await axios(options);
-    // console.log(response);
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 201) {
-            // console.log('register done');
+            console.log('register done');
             return true;
         }
     } catch (error) {
-        // console.log('register error');
-        // console.log(error.response);
+        console.log('register error');
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -166,9 +164,9 @@ async function getProfile() {
     }
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('getProfile done');
+            console.log('getProfile done');
             const data = response.data;
             const user = {
                 id: data.id,
@@ -183,8 +181,8 @@ async function getProfile() {
             return user;
         }
     } catch (error) {
-        // console.log('getProfile error');
-        // console.log(error.response);
+        console.log('getProfile error');
+        console.log(error.response);
         throw error;
     }
 }
@@ -211,15 +209,15 @@ async function updateProfile(userInfo) {
     }
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('updateProfile done');
+            console.log('updateProfile done');
             return true;
         }
 
     } catch (error) {
-        // console.log('updateProfile error');
-        // console.log(error.response);
+        console.log('updateProfile error');
+        console.log(error.response);
         throw error;
     }
 }
@@ -236,16 +234,17 @@ async function resetPassword(email) {
         },
         data: JSON.stringify(data)
     }
+    console.log(data);
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('resetPassword done');
+            console.log('resetPassword done');
             return true;
         }
     } catch (error) {
-        // console.log('resetPassword error');
-        // console.log(error.response);
+        console.log('resetPassword error');
+        console.log(error.response);
         throw error;
     }
 }
@@ -255,7 +254,7 @@ async function changePassword({ oldPassword, password }) {
         old_password: oldPassword,
         password: password
     };
-    // console.log(data);
+    console.log(data);
     const auth = authHeader();
     const options = {
         method: 'post',
@@ -268,14 +267,14 @@ async function changePassword({ oldPassword, password }) {
     }
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('changePassword done');
+            console.log('changePassword done');
             return true;
         }
     } catch (error) {
-        // console.log('changePassword error');
-        // console.log(error.response);
+        console.log('changePassword error');
+        console.log(error.response);
         throw error;
     }
 }

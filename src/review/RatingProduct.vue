@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import _ from "lodash";
+// import _ from "lodash";
 import { productService } from "@/_api";
 
 export default {
