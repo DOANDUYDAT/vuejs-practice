@@ -128,7 +128,7 @@ export default {
           });
           if (isSuccess) {
             this.$store.dispatch("alert/success", {
-              message: "Reset Password successfully!"
+              message: "Change Password successfully!"
             });
           }
         }

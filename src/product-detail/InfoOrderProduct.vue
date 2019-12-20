@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h2>{{ product.name }}</h2>
+        <h2>{{ fullName }}</h2>
         <v-rating
           :value="product.voting"
           color="amber"
@@ -79,6 +79,9 @@ export default {
     }
   },
   computed: {
+    fullName() {
+      return "Điện thoại " + this.product.supplier + " " + this.product.name + " " + this.product.rom + " (" + this.product.color + ")";
+    },
     // oldPrice() {
     //   let oldPrice = "";
     //   if (this.product.retailPrice !== undefined) {

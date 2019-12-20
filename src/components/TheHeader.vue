@@ -6,9 +6,11 @@
     <v-container class="px-0">
       <v-row align="center" no-gutters>
         <v-col cols="3">
-          <v-avatar size="120" to="/home">
+          <router-link to="/home">
+          <v-avatar size="120">
             <v-img :src="require('@/_assets/image/logo.png')"></v-img>
           </v-avatar>
+          </router-link>
         </v-col>
         <v-col cols="5">
           <search-box></search-box>
