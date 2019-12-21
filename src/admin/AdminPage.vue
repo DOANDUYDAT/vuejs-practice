@@ -29,6 +29,6 @@ export default {
     TheHeader,
     BreadcrumbBase,
     AlertList
-  },
+  }
 };
 </script>
