@@ -49,7 +49,6 @@ async function getStatistic(time) {
             console.log('getStatistic done');
             let data = response.data;
             let statistic = {
-                exportProductSum: data.export_product_sum,
                 exportTotalSum: data.export_total_sum,
                 exportProductMax: data.export_product_max,
                 importProductSum: data.import_product_sum,

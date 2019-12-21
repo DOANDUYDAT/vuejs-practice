@@ -1,0 +1,113 @@
+{
+    "import_total_sum": null,
+    "import_product_max": null,
+    "export_total_sum": 10900000,
+    "export_product_max": [
+        {
+            "id": 1,
+            "supplier": "APPLE",
+            "images": [
+                {
+                    "image": "http://vanhaychutot.pythonanywhere.com/media/product/1565250777.0543509_190800204-2.jpg"
+                }
+            ],
+            "votes": [
+                {
+                    "id": 1,
+                    "user": {
+                        "id": 2,
+                        "groups": [],
+                        "password": "pbkdf2_sha256$180000$lL42xolMbgXv$eOTapVfrgwHfQXc412URIShsNedyOv7NkawjprAuAY8=",
+                        "last_login": "2019-12-21T22:29:51.726654+07:00",
+                        "is_superuser": true,
+                        "first_name": "",
+                        "last_name": "",
+                        "is_staff": true,
+                        "is_active": true,
+                        "date_joined": "2019-12-19T21:13:20.236679+07:00",
+                        "email": "admin2@gmail.com",
+                        "username": "admin",
+                        "phone": null,
+                        "address": null,
+                        "gender": "Nam",
+                        "date_of_birth": null,
+                        "verificate_code": null,
+                        "user_permissions": []
+                    },
+                    "vote": 5,
+                    "content": "ngon",
+                    "product": 1
+                }
+            ],
+            "comments": [],
+            "guarantee": "",
+            "guarantee_des": "",
+            "name": "J3",
+            "color": "",
+            "screen": "",
+            "resolution": "",
+            "front_camera": "",
+            "rear_camera": "",
+            "chip": "",
+            "ram": "",
+            "rom": "",
+            "pin": "",
+            "operating_system": "",
+            "charging_port": "",
+            "price": 0,
+            "import_price": 0,
+            "count": 0,
+            "description": ""
+        },
+        {
+            "id": 2,
+            "supplier": "SAMSUNG",
+            "images": [],
+            "votes": [],
+            "comments": [],
+            "guarantee": "",
+            "guarantee_des": "",
+            "name": "G5",
+            "color": "",
+            "screen": "",
+            "resolution": "",
+            "front_camera": "",
+            "rear_camera": "",
+            "chip": "",
+            "ram": "",
+            "rom": "",
+            "pin": "",
+            "operating_system": "",
+            "charging_port": "",
+            "price": 5,
+            "import_price": 0,
+            "count": 0,
+            "description": ""
+        },
+        {
+            "id": 4,
+            "supplier": "APPLE",
+            "images": [],
+            "votes": [],
+            "comments": [],
+            "guarantee": "",
+            "guarantee_des": "",
+            "name": "b",
+            "color": "",
+            "screen": "",
+            "resolution": "",
+            "front_camera": "",
+            "rear_camera": "",
+            "chip": "",
+            "ram": "",
+            "rom": "",
+            "pin": "",
+            "operating_system": "",
+            "charging_port": "",
+            "price": 0,
+            "import_price": 0,
+            "count": 0,
+            "description": ""
+        }
+    ]
+}

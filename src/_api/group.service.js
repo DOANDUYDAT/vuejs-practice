@@ -52,7 +52,8 @@ async function getAllGroups() {
 async function createGroup(group) {
     const auth = authHeader();
     const data = {
-        name: group.name
+        name: group.name,
+        permissions: group.permissions
     }
     console.log(data);
     const options = {
@@ -106,7 +107,8 @@ async function getGroup(groupId) {
 async function updateGroup(group) {
     const auth = authHeader();
     const data = {
-        name: group.name
+        name: group.name,
+        permissions: group.permissions
     };
     console.log(data);
     const options = {
