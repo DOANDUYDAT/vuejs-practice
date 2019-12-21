@@ -59,9 +59,7 @@
               </v-card-text>
             </td>
             <td class="text-center">
-              <span style="color: red" data-tongtien
-                >{{ formatCurrency(order.total) }}đ</span
-              >
+              <span style="color: red" data-tongtien>{{ order.total }}đ</span>
             </td>
           </tr>
         </tfoot>
@@ -117,7 +115,16 @@ export default {
         return {
           id: e.product.id,
           quantity: e.quantity,
-          name: "Điện thoại " + e.product.supplier + " " + e.product.name + " " + e.product.rom + " (" + e.product.color + ")",
+          name:
+            "Điện thoại " +
+            e.product.supplier +
+            " " +
+            e.product.name +
+            " " +
+            e.product.rom +
+            " (" +
+            e.product.color +
+            ")",
           price: e.product.price,
           image: e.product.images[0].image
         };
