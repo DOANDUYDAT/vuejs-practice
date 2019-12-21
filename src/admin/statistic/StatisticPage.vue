@@ -29,7 +29,8 @@ export default {
         year: new Date().getFullYear(),
       },
       statistic: null,
-      datacollection: null,
+      datacollectionBar: null,
+      datacollectionPie: null,
       months: [
         { text: 'Tháng 1', value: 1 },
         { text: 'Tháng 2', value: 2 },
@@ -55,24 +56,53 @@ export default {
     BarChart
   },
   methods: {
+    setDataBarChart(statistic) {
+      this.datacollectionBar = {
+        labels: ['Import', 'Export'],
+        datasets: [
+          {
+            label: 'Import',
+            backgroundColor: 'red',
+            data: statistic.importTotalSum
+          }, {
+            label: 'Export',
+            backgroundColor: 'blue',
+            data: statistic.exportTotalSum
+          }
+        ]
+      }
+    },
+    setDataPieChart(statistic) {
+      const labels = statistic.exportProductMax.map(e => {
+        return e.supplier + ' ' + e.name
+      })
+      const datasets = statistic.exportProductMax.map(e => {
+        return {
+          label: e.product.supplier + ' ' + e.product.name,
+          backgroundColor: this.randomColor(),
+          data: e.quantity
+        }
+      })
+      this.datacollectionBar = {
+        labels,
+        datasets
+      }
+    },
+    randomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    },
     async getData() {
       let time = this.time;
       console.log('getStatistic');
       this.statistic = await statisticService.getStatistic(time);
-      this.datacollection = {
-          labels: ['Import', 'Export'],
-          datasets: [
-            {
-              label: 'Import',
-              backgroundColor: 'red',
-              data: this.statistic.importTotalSum
-            }, {
-              label: 'Export',
-              backgroundColor: 'blue',
-              data: this.statistic.exportTotalSum
-            }
-          ]
-        }
+      const statistic = this.statistic;
+      this.setDataBarChart(statistic);
+      this.setDataPieChart(statistic);
     }
   }, created() {
     this.getData();
