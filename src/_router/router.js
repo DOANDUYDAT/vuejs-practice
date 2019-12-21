@@ -30,6 +30,7 @@ import ImportProductDetailPage from '@/admin/importProducts/ImportProductDetailP
 import AddImportProductPage from '@/admin/importProducts/AddImportProductPage';
 import ManageSuppliersPage from "@/admin/suppliers/ManageSuppliersPage";
 import ManageGroupsPage from "@/admin/groups/ManageGroupsPage";
+import StatisticPage from "@/admin/statistic/StatisticPage";
 
 import NotPermission from '@/not-permission/NotPermission';
 import LoginPage from "@/login/LoginPage";
@@ -284,6 +285,13 @@ const router = new VueRouter({
                     component: ManageGroupsPage,
                     meta: {
                         requiresRole: ['admin']
+                    }
+                },
+                {
+                    path: "statistic",
+                    component: StatisticPage,
+                    meta: {
+                        requiresRole: ['staff', 'admin']
                     }
                 }
 

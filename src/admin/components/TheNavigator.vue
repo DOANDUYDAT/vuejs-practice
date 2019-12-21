@@ -1,5 +1,9 @@
 <template>
-  <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+  <v-navigation-drawer
+    v-model="drawer"
+    :clipped="$vuetify.breakpoint.lgAndUp"
+    app
+  >
     <v-list>
       <template v-for="item in items">
         <v-list-group :key="item.text">
@@ -9,8 +13,12 @@
             </v-list-item-icon>
             <v-list-item-title>{{ item.text }}</v-list-item-title>
           </template>
-          <v-list-item v-for="(child, i) in item.children" :key="i" :to="child.link">          
-            <v-list-item-content >{{ child.text }}</v-list-item-content>
+          <v-list-item
+            v-for="(child, i) in item.children"
+            :key="i"
+            :to="child.link"
+          >
+            <v-list-item-content>{{ child.text }}</v-list-item-content>
           </v-list-item>
         </v-list-group>
       </template>
@@ -96,7 +104,7 @@ export default {
         },
         {
           text: "Quản lý nhà cung cấp",
-          icon: "mdi-replay",
+          icon: "mdi-home-group",
           children: [
             {
               text: "Danh sách nhà cung cấp",
@@ -119,12 +127,8 @@ export default {
           icon: "mdi-poll-box",
           children: [
             {
-              text: "Thoa thống kê",
-              link: "/admin/suppliers"
-            },
-            {
-              text: "Thành thống kê",
-              link: "/admin/suppliers"
+              text: "Biểu đồ thống kê",
+              link: "/admin/statistic"
             }
           ]
         }

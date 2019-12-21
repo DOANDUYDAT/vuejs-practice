@@ -1,11 +1,11 @@
 <template>
   <div class="my-chart">
-    <monthly-income></monthly-income>
+    <!-- <monthly-income></monthly-income> -->
   </div>
 </template>
 
 <script>
-import MonthlyIncome from "@/admin/components/MonthlyIncome"
+// import MonthlyIncome from "@/admin/components/MonthlyIncome"
 
 export default {
   data() {
@@ -17,7 +17,7 @@ export default {
     
   },
   components: {
-    MonthlyIncome
+    // MonthlyIncome
   }
 };
 </script>

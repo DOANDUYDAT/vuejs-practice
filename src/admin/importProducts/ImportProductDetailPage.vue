@@ -41,7 +41,7 @@
           <tr v-for="(product, index) in listProducts" :key="product.id">
             <td class="text-center">{{ index + 1 }}</td>
             <td class="text-center">{{ product.id }}</td>
-            <td class="text-left">{{ product.name }}</td>
+            <td class="text-center">{{ product.name }}</td>
             <td class="text-center">{{ product.quantity }}</td>
             <td class="text-center">{{ formatCurrency(product.price) }}đ</td>
             <td class="text-center">

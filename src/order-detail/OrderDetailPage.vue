@@ -5,9 +5,20 @@
         <span class="headline">Đơn hàng 1</span>
       </v-card-title>
     </v-toolbar>
-    <v-card-text class="px-10"
-      >Ngày đặt hàng: {{ order.createdAt }}</v-card-text
-    >
+    <v-card-text>
+      <v-row no-gutters>
+        <v-col cols="6">Ngày đặt hàng: {{ order.createdAt }}</v-col>
+        <v-col cols="6">Người nhận: {{ order.name }}</v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col cols="6">Số điện thoại: {{ order.phone }}</v-col>
+        <v-col cols="6">Địa chỉ: {{ order.address }}</v-col></v-row
+      >
+      <v-row no-gutters>
+        <v-col cols="12">Ghi chú: {{ order.note }} </v-col>
+      </v-row>
+    </v-card-text>
+    <!-- <v-row class="pl-4">Ngày nhận dự kiến: 07/11/2019</v-row> -->
     <v-simple-table>
       <thead>
         <tr>

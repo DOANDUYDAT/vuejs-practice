@@ -35,7 +35,7 @@ export default {
       for (let i = 1; i < fullPath.length; i++) {
         to = to + '/' + fullPath[i]
         this.itemsBreadcrumb.push({
-          text: fullPath[i].upperCase(),
+          text: fullPath[i].toUpperCase(),
           disabled: i < fullPath.length - 1 ? false : true,
           exact: true,
           to: to

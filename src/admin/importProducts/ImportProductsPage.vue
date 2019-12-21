@@ -71,24 +71,24 @@ export default {
       { text: "Tổng tiền", value: "total", sortable: true, filterable: false }
     ],
     importProducts: [
-      {
-        id: 1,
-        createdAt: "2019/10/20",
-        staff: "Le Thanh",
-        total: 222228900
-      },
-      {
-        id: 2,
-        createdAt: "2019/9/20",
-        staff: "Duong Thoa",
-        total: 222228900
-      },
-      {
-        id: 3,
-        createdAt: "2019/8/20",
-        staff: "Doan Dat",
-        total: 222228900
-      }
+      // {
+      //   id: 1,
+      //   createdAt: "2019/10/20",
+      //   staff: "Le Thanh",
+      //   total: 222228900
+      // },
+      // {
+      //   id: 2,
+      //   createdAt: "2019/9/20",
+      //   staff: "Duong Thoa",
+      //   total: 222228900
+      // },
+      // {
+      //   id: 3,
+      //   createdAt: "2019/8/20",
+      //   staff: "Doan Dat",
+      //   total: 222228900
+      // }
     ]
   }),
 

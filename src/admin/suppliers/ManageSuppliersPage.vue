@@ -13,7 +13,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search with Id or Name"
+          label="Search theo id hoặc tên"
           color="it-blue-lighten"
           single-line
           hide-details
@@ -39,7 +39,11 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="12">
-                    <v-text-field v-model="editedItem.name" outlined placeholder="Name"></v-text-field>
+                    <v-text-field
+                      v-model="editedItem.name"
+                      outlined
+                      placeholder="Name"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -56,8 +60,16 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      <v-icon small class="mr-2" @click.stop="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
-      <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
+      <v-icon
+        small
+        class="mr-2"
+        @click.stop="editItem(item)"
+        color="it-blue-lighten"
+        >mdi-pencil</v-icon
+      >
+      <v-icon small @click.stop="deleteItem(item)" color="gg-red"
+        >mdi-trash-can-outline</v-icon
+      >
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="getData">Reset</v-btn>

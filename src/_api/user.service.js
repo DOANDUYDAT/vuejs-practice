@@ -50,7 +50,7 @@ async function getAllUsers() {
                         address: e.address,
                         gender: e.gender,
                         dateOfBirth: e.date_of_birth,
-                        role: e.groups[0].name
+                        role: e.groups.length ? e.groups[0].name : ''
                     };
                     return user;
                 });

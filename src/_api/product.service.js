@@ -335,7 +335,8 @@ async function getAllReviews(productId) {
                         id: e.id,
                         user: e.user,
                         content: e.content,
-                        createdAt: e.created_at
+                        createdAt: e.created_at,
+                        vote: e.vote
                     };
                     return comment;
                 })
@@ -353,7 +354,7 @@ async function createReview(review, productId) {
     const auth = authHeader();
     const data = {
         content: review.content,
-        vote: review.vote
+        vote: Number(review.vote)
     };
     console.log(data);
     const options = {

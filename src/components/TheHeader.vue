@@ -96,7 +96,7 @@ export default {
       return this.userInfo.firstName + " " + this.userInfo.lastName;
     },
     isAdminPermission() {
-      return this.user.groups[0].name === "admin";
+      return  this.user.groups ? this.user.groups[0].name === "admin" : false;
     }
   },
   methods: {
@@ -118,7 +118,7 @@ export default {
       } catch (error) {
         if (error.response) {
           this.$store.dispatch("alert/error", {
-            message: error.response.data.message
+            message: error.response.data.detail
           });
         }
       }
