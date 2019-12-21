@@ -1,7 +1,7 @@
 <template>
   <v-col>
     <v-row align="center">
-      <v-col cols="2" class="py-0 text-center">
+      <v-col cols="3" class="py-0 text-center">
         <!-- <v-subheader class="headline bold">Nhập hàng</v-subheader> -->
         <v-card-title class="pt-2">
           <span class="headline mb-2">Nhập hàng</span>
@@ -25,7 +25,12 @@
             placeholder="Search"
           ></v-text-field>
           <v-expand-transition>
-            <v-card v-if="itemsSuggest && result" class="search__result mx-auto" width="522" light>
+            <v-card
+              v-if="itemsSuggest && result"
+              class="search__result mx-auto"
+              width="522"
+              light
+            >
               <v-card-text
                 class="subtitle-1 py-1 px-4"
                 v-for="item in itemsSuggest"
@@ -41,10 +46,9 @@
           </v-expand-transition>
         </div>
       </v-col>
-      <v-col
-        cols="4"
-        class="py-0 text-center"
-      >Người nhập: {{ userInfo.firstName + " " + userInfo.lastName }}</v-col>
+      <v-col cols="3" class="py-0 text-center"
+        >Người nhập: {{ userInfo.firstName + " " + userInfo.lastName }}</v-col
+      >
     </v-row>
     <v-card>
       <v-toolbar color="it-green-lighten" dark flat dense>
@@ -79,17 +83,37 @@
           <v-col cols="1" class="text-center">{{ item.id }}</v-col>
           <v-col cols="2" class="text-center">{{ item.name }}</v-col>
           <v-col cols="1" class="text-center">
-            <v-text-field v-model="item.quantity" type="number" dense hide-details outlined></v-text-field>
+            <v-text-field
+              v-model="item.quantity"
+              type="number"
+              dense
+              hide-details
+              outlined
+            ></v-text-field>
           </v-col>
           <v-col cols="2" class="text-center">
-            <v-text-field v-model="item.importPrice" type="number" dense hide-details outlined></v-text-field>
+            <v-text-field
+              v-model="item.importPrice"
+              type="number"
+              dense
+              hide-details
+              outlined
+            ></v-text-field>
           </v-col>
           <v-col cols="2" class="text-center">
-            <v-text-field v-model="item.price" type="number" dense hide-details outlined></v-text-field>
+            <v-text-field
+              v-model="item.price"
+              type="number"
+              dense
+              hide-details
+              outlined
+            ></v-text-field>
           </v-col>
           <v-col cols="2" class="text-right">{{ sumMoney(item) }} đ</v-col>
           <v-col cols="1" class="text-center">
-            <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
+            <v-icon small @click.stop="deleteItem(item)" color="gg-red"
+              >mdi-trash-can-outline</v-icon
+            >
           </v-col>
           <v-divider></v-divider>
         </v-row>
@@ -100,12 +124,16 @@
             </v-card-text>
           </v-col>
           <v-col cols="2" class="text-right py-0">
-            <span class="red--text" data-tongtien>{{ formatCurrency(total) }} đ</span>
+            <span class="red--text" data-tongtien
+              >{{ formatCurrency(total) }} đ</span
+            >
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="11" class="text-end pt-0">
-            <v-btn color="gg-red" class="white--text" @click="submit">Nhập hàng</v-btn>
+            <v-btn color="gg-red" class="white--text" @click="submit"
+              >Nhập hàng</v-btn
+            >
           </v-col>
           <v-col cols="1" class="pt-0"></v-col>
         </v-row>
@@ -138,7 +166,16 @@ export default {
       let productListToSearch = this.products.map(e => {
         return {
           id: e.id,
-          name: "Điện thoại " + e.supplier + " " + e.name + " " + e.rom + " (" + e.color + ")",
+          name:
+            "Điện thoại " +
+            e.supplier +
+            " " +
+            e.name +
+            " " +
+            e.rom +
+            " (" +
+            e.color +
+            ")",
           importPrice: e.importPrice,
           price: e.price,
           quantity: 0
