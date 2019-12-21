@@ -89,7 +89,6 @@ export default {
     async submit() {
       const review = this.review;
       const productId = this.$route.params.productId;
-      console.log(review);
       try {
         const isSuccess = await productService.createReview(review, productId);
         if (isSuccess) {

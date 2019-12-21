@@ -1,6 +1,6 @@
 <template>
   <v-card outlined tile class="px-6">
-    <v-card-title class="pt-1 pb-0">{{ review.user }}</v-card-title>
+    <v-card-title class="pt-1 pb-0">{{ userName }}</v-card-title>
     <v-card-text class="pb-0">
       <v-rating
         :value="review.vote"
@@ -40,6 +40,11 @@ export default {
     review: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    userName() {
+      return this.review.user.first_name + ' ' + this.review.user.last_name;
     }
   }
 };

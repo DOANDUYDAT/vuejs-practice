@@ -119,12 +119,8 @@ export default {
           icon: "mdi-poll-box",
           children: [
             {
-              text: "Thoa thống kê",
-              link: "/admin/suppliers"
-            },
-            {
-              text: "Thành thống kê",
-              link: "/admin/suppliers"
+              text: "Biểu đồ thống kê",
+              link: "/admin/statistic"
             }
           ]
         }
