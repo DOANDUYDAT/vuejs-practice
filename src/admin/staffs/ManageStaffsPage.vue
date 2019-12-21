@@ -157,7 +157,6 @@ export default {
       );
       if (confirmStatus) {
         console.log(confirmStatus)
-        console.log('hello')
         try {
           const isSuccess = await staffService.deleteStaff(staffId);
           if (isSuccess) {
