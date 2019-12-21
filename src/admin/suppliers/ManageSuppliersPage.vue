@@ -10,15 +10,8 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search theo id hoặc tên"
-          color="it-blue-lighten"
-          single-line
-          hide-details
-        ></v-text-field>
-
+        <v-toolbar-title>Danh sách nhà cung cấp</v-toolbar-title>
+        <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
@@ -26,7 +19,7 @@
 
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="gg-red" dark v-on="on">+ Thêm nhà cung cấp</v-btn>
+            <v-btn color="gg-red" class="mx-4 white--text" dark v-on="on">+ Thêm nhà cung cấp</v-btn>
           </template>
           <v-card>
             <v-toolbar color="gg-red" dark flat>
@@ -56,7 +49,16 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          outlined
+          dense
+          placeholder="Search theo mã hoặc tên"
+          color="it-blue-lighten"
+          single-line
+          hide-details
+        ></v-text-field>
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">

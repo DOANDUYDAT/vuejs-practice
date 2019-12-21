@@ -10,23 +10,16 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search with Id or Name"
-          color="it-blue-lighten"
-          single-line
-          hide-details
-        ></v-text-field>
-
+        <v-toolbar-title>Danh sách nhóm</v-toolbar-title>
+        <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
-
+        
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="gg-red" dark v-on="on">+ Thêm group</v-btn>
+            <v-btn color="gg-red" class="mx-4 white--text" dark v-on="on">+ Thêm group</v-btn>
           </template>
           <v-card>
             <v-toolbar color="gg-red" dark flat>
@@ -59,7 +52,8 @@
                         v-model="editedItem.role"
                         :items="roles"
                         multiple
-                        label="Role"
+                        outlined
+                        placeholder="Role"
                       >
                         <template v-slot:selection="{ role, index }">
                           <v-chip v-if="index === 0">
@@ -80,7 +74,16 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          outlined
+          dense
+          placeholder="Search with Id or Name"
+          color="it-blue-lighten"
+          single-line
+          hide-details
+        ></v-text-field>
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">

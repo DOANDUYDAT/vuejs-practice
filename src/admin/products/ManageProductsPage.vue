@@ -11,7 +11,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-toolbar-title>CRUD Products</v-toolbar-title>
+        <v-toolbar-title>Danh sách sản phẩm</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
@@ -20,7 +20,9 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search theo id của sản phẩm"
+          outlined
+          dense
+          placeholder="Search theo mã sản phẩm"
           color="it-blue-lighten"
           single-line
           hide-details

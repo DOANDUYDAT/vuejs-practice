@@ -69,7 +69,7 @@
           </td>
           <td class="text-center">
             <span style="color: red" data-tongtien
-              >{{ formatCurrency(total) }}đ</span
+              >{{ total }}đ</span
             >
           </td>
         </tr>

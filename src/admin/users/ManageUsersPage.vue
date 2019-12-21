@@ -9,7 +9,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-toolbar-title>CRUD Users</v-toolbar-title>
+        <v-toolbar-title>Danh sách người dùng</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
@@ -18,7 +18,9 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search theo Id hoặc quyền người dùng"
+          outlined
+          dense
+          placeholder="Search theo mã hoặc quyền người dùng"
           color="it-blue-lighten"
           single-line
           hide-details

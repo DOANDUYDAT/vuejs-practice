@@ -9,7 +9,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-toolbar-title>CRUD Staffs</v-toolbar-title>
+        <v-toolbar-title>Danh sách nhân viên</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
@@ -18,7 +18,9 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search theo id của nhân viên"
+          outlined
+          dense
+          placeholder="Search theo mã nhân viên"
           color="it-blue-lighten"
           single-line
           hide-details

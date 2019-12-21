@@ -26,7 +26,7 @@ export default {
       let fullPath = this.$route.fullPath;
       fullPath = fullPath.split("/");
       this.itemsBreadcrumb.push({
-        text: "Home",
+        text: "HOME",
         disabled: false,
         exact: true,
         to: "/home"
