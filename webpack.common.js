@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 
@@ -16,13 +16,19 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
+        chunkFilename: '[name].bundle.js',
         publicPath: '/'
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
     },
     resolve: {
         extensions: ['.js', '.vue'],
         alias: {
             // If using the runtime only build
-            // vue$: 'vue/dist/vue.runtime.esm.js' // 'vue/dist/vue.runtime.common.js' for webpack 1
+            // vue$: 'vue/dist/vue.runtime.esm.js', // 'vue/dist/vue.runtime.common.js' for webpack 1
             // Or if using full build of Vue (runtime + compiler)
             'vue$': 'vue/dist/vue.esm.js',     // 'vue/dist/vue.common.js' for webpack 1
             '@': path.resolve(__dirname, 'src'),
@@ -61,9 +67,15 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    process.env.NODE_ENV !== 'production'
-                        ? 'vue-style-loader'
-                        : MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            // only enable hot in development
+                            hmr: process.env.NODE_ENV === 'development',
+                            // if hmr does not work, this is a forceful method.
+                            reloadAll: true,
+                        },
+                    },
                     'css-loader'
                 ]
             },
@@ -97,14 +109,18 @@ module.exports = {
             inject: true
         }),
         new MiniCssExtractPlugin({
-            filename: 'style.css'
+            // Options similar to the same options in webpackOptions.output
+            // all options are optional
+            filename: '[name].css',
+            chunkFilename: '[name].css',
+            ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
-        new BundleAnalyzerPlugin()
+        // new BundleAnalyzerPlugin()
     ],
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://vanhaychutot.pythonanywhere.com/'
+            apiUrl: 'http://vanhaychutot.pythonanywhere.com'
         })
     }
 };

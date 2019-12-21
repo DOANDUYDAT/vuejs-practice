@@ -128,14 +128,14 @@ export default {
           });
           if (isSuccess) {
             this.$store.dispatch("alert/success", {
-              message: "Reset Password successfully!"
+              message: "Change Password successfully!"
             });
           }
         }
       } catch (error) {
         if (error.response) {
           this.$store.dispatch("alert/error", {
-            message: error.response.data.message
+            message: error.response.data.detail
           });
         }
       }

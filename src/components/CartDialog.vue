@@ -70,7 +70,7 @@
 <script>
 import { mapGetters, mapState, mapMutations } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
-import _ from "lodash";
+// import _ from "lodash";
 export default {
   data() {
     return {
@@ -116,9 +116,6 @@ export default {
       "decrementItemQuantity",
       "removeProductFromCart"
     ]),
-    formatCurrency(price) {
-      return formatCurrency(price);
-    },
     formatCurrency(total) {
       return formatCurrency(total);
     },

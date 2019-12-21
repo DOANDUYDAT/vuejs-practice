@@ -24,7 +24,7 @@ async function createStaff(staff) {
         email: staff.email,
         group: staff.role
     };
-    // console.log(data);
+    console.log(data);
     const auth = authHeader();
     const options = {
         method: 'post',
@@ -37,14 +37,14 @@ async function createStaff(staff) {
     };
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 201) {
-            // console.log('createStaff done');
+            console.log('createStaff done');
             return true;
         }
     } catch (error) {
-        // console.log('createStaff error');
-        // console.log(error.response);
+        console.log('createStaff error');
+        console.log(error.response);
         if (error) throw error;
     }
 }
@@ -58,7 +58,7 @@ async function updateStaff(staffInfo) {
         email: staffInfo.email,
         group: staffInfo.role
     }
-    // console.log(data);
+    console.log(data);
     const options = {
         method: 'put',
         url: `${config.apiUrl}/users/auth/${staffInfo.id}/`,
@@ -70,15 +70,15 @@ async function updateStaff(staffInfo) {
     }
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 200) {
-            // console.log('updateStaff done');
+            console.log('updateStaff done');
             return true;
         }
 
     } catch (error) {
-        // console.log('updateStaff error');
-        // console.log(error.response);
+        console.log('updateStaff error');
+        console.log(error.response);
         throw error;
     }
 }
@@ -95,16 +95,16 @@ async function deleteStaff(staffId) {
     }
     try {
         const response = await axios(options);
-        // console.log(response);
+        console.log(response);
         if (response.status === 204) {
-            // console.log('deleteStaff done');
-            // console.log(response.data);
+            console.log('deleteStaff done');
+            console.log(response.data);
             return true;
         }
 
     } catch (error) {
-        // console.log('deleteStaff error');
-        // console.log(error.response);
+        console.log('deleteStaff error');
+        console.log(error.response);
         throw error;
     }
 }

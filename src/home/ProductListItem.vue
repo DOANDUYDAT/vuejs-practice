@@ -41,7 +41,7 @@
 <script>
 import { mapActions } from "vuex";
 import { formatCurrency } from "../_api/format-currency";
-import _ from "lodash";
+// import _ from "lodash";
 
 export default {
   data() {
