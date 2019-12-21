@@ -30,38 +30,35 @@
 
             <v-card-text>
               <v-container>
-                <v-row>
+                 <v-row v-if="editedItem.id">
                   <v-col cols="3">
-                    <v-subheader><b>Name:</b></v-subheader>
+                    <v-subheader>
+                      <b>Id:</b>
+                    </v-subheader>
                   </v-col>
                   <v-col cols="9">
-                    <v-text-field
-                      v-model="editedItem.name"
-                      outlined
-                      placeholder="Name"
-                    ></v-text-field>
+                    <v-text-field v-model="editedItem.id" outlined placeholder="Id" disabled></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="3">
+                    <v-subheader>
+                      <b>Name:</b>
+                    </v-subheader>
+                  </v-col>
+                  <v-col cols="9">
+                    <v-text-field v-model="editedItem.name" outlined placeholder="Name"></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row align="center" no-gutters>
-                  <v-col cols="12" sm="3">
-                    <v-subheader><b>Role:</b></v-subheader>
-                  </v-col>
-                  <v-col cols="12" sm="9">
-                    <v-container align="center">
-                      <v-select
-                        v-model="editedItem.role"
-                        :items="roles"
-                        multiple
-                        outlined
-                        placeholder="Role"
-                      >
-                        <template v-slot:selection="{ role, index }">
-                          <v-chip v-if="index === 0">
-                            <span>{{ editedItem.role }}</span>
-                          </v-chip>
-                        </template>
-                      </v-select>
-                    </v-container>
+                  <v-col cols="12">
+                    <v-select
+                      v-model="editedItem.permissions"
+                      :items="listPermission"
+                      chips
+                      label="Permissions"
+                      multiple
+                    ></v-select>
                   </v-col>
                 </v-row>
               </v-container>
@@ -87,16 +84,8 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      <v-icon
-        small
-        class="mr-2"
-        @click.stop="editItem(item)"
-        color="it-blue-lighten"
-        >mdi-pencil</v-icon
-      >
-      <v-icon small @click.stop="deleteItem(item)" color="gg-red"
-        >mdi-trash-can-outline</v-icon
-      >
+      <v-icon small class="mr-2" @click.stop="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
+      <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="getData">Reset</v-btn>
@@ -110,6 +99,7 @@ import { groupService } from "@/_api";
 export default {
   data: () => ({
     allPermissions: [],
+    listPermission: [],
     dialog: false,
     search: "",
     roles: ["user", "staff", "admin"],
@@ -128,13 +118,6 @@ export default {
         sortable: false,
         filterable: true
       },
-      {
-        text: "Role Name",
-        value: "role",
-        align: "left",
-        sortable: false,
-        filterable: true
-      },
       { text: "Actions", align: "left", value: "action", filterable: false }
     ],
     groups: [],
@@ -142,12 +125,12 @@ export default {
     editedItem: {
       id: "",
       name: "",
-      role: []
+      permissions: []
     },
     defaultItem: {
       id: "",
       name: "",
-      role: []
+      permissions: []
     }
   }),
 
@@ -170,6 +153,14 @@ export default {
     async getData() {
       this.groups = await groupService.getAllGroups();
       this.allPermissions = await groupService.getAllPermissions();
+      this.listPermission = this.allPermissions.map(e => {
+        return {
+          value: e.id,
+          text: e.name
+        }
+      }
+
+      );
     },
 
     editItem(item) {
