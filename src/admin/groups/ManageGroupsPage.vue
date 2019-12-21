@@ -38,8 +38,36 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="12">
-                    <v-text-field v-model="editedItem.name" outlined placeholder="Name"></v-text-field>
+                  <v-col cols="3">
+                    <v-subheader><b>Name:</b></v-subheader>
+                  </v-col>
+                  <v-col cols="9">
+                    <v-text-field
+                      v-model="editedItem.name"
+                      outlined
+                      placeholder="Name"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row align="center" no-gutters>
+                  <v-col cols="12" sm="3">
+                    <v-subheader><b>Role:</b></v-subheader>
+                  </v-col>
+                  <v-col cols="12" sm="9">
+                    <v-container align="center">
+                      <v-select
+                        v-model="editedItem.role"
+                        :items="roles"
+                        multiple
+                        label="Role"
+                      >
+                        <template v-slot:selection="{ role, index }">
+                          <v-chip v-if="index === 0">
+                            <span>{{ editedItem.role }}</span>
+                          </v-chip>
+                        </template>
+                      </v-select>
+                    </v-container>
                   </v-col>
                 </v-row>
               </v-container>
@@ -56,8 +84,16 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      <v-icon small class="mr-2" @click.stop="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
-      <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
+      <v-icon
+        small
+        class="mr-2"
+        @click.stop="editItem(item)"
+        color="it-blue-lighten"
+        >mdi-pencil</v-icon
+      >
+      <v-icon small @click.stop="deleteItem(item)" color="gg-red"
+        >mdi-trash-can-outline</v-icon
+      >
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="getData">Reset</v-btn>
@@ -73,6 +109,7 @@ export default {
     allPermissions: [],
     dialog: false,
     search: "",
+    roles: ["user", "staff", "admin"],
     headers: [
       {
         text: "Group ID",
@@ -88,17 +125,26 @@ export default {
         sortable: false,
         filterable: true
       },
+      {
+        text: "Role Name",
+        value: "role",
+        align: "left",
+        sortable: false,
+        filterable: true
+      },
       { text: "Actions", align: "left", value: "action", filterable: false }
     ],
     groups: [],
     editedIndex: -1,
     editedItem: {
       id: "",
-      name: ""
+      name: "",
+      role: []
     },
     defaultItem: {
       id: "",
-      name: ""
+      name: "",
+      role: []
     }
   }),
 
@@ -136,7 +182,7 @@ export default {
       );
       if (confirmStatus) {
         try {
-          console.log('deleteGroup');
+          console.log("deleteGroup");
           const isSuccess = await groupService.deleteGroup(groupId);
           if (isSuccess) {
             await this.getData();
@@ -166,7 +212,7 @@ export default {
       const group = this.editedItem;
       if (this.editedIndex > -1) {
         try {
-          console.log('updateGroup');
+          console.log("updateGroup");
           const isSuccess = await groupService.updateGroup(group);
           if (isSuccess) {
             await this.getData();
@@ -182,7 +228,7 @@ export default {
         }
       } else {
         try {
-          console.log('createGroup');
+          console.log("createGroup");
           const isSuccess = await groupService.createGroup(group);
           if (isSuccess) {
             await this.getData();
