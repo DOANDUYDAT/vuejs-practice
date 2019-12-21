@@ -57,7 +57,7 @@ export default {
       let productListSearch = this.products.map(e => {
         return {
           id: e.id,
-          name: e.name
+          name: "Điện thoại " + e.supplier + " " + e.product.name + " " + e.rom + " (" + e.color + ")"
         };
       });
       return productListSearch;

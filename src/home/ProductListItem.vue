@@ -24,7 +24,7 @@
         dense
         readonly
       ></v-rating>
-      <p class="mb-0">{{ product.name }}</p>
+      <p class="mb-0">{{ fullName }}</p>
       <div class="py-2 font-weight-black">{{ formatCurrency(product.price) }}đ</div>
     </v-card-text>
     <!-- <v-card-actions>
@@ -66,6 +66,9 @@ export default {
     }
   },
   computed: {
+    fullName() {
+      return "Điện thoại " + this.product.supplier + " " + this.product.name + " " + this.product.rom + " (" + this.product.color + ")";
+    },
     // descriptionProduct() {
     //   let description =
     //     this.product.name.length < 30

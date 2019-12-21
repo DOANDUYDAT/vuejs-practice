@@ -2,23 +2,23 @@
   <v-footer absolute padless app dark>
     <v-card flat tile width="100%">
       <v-row no-gutters>
-        <v-col cols="6" class="text-center">
-          <v-card-text>
+        <v-col cols="6" class="text-center py-0">
+          <v-card-text class="pb-0">
             <b>Công Ty Cổ Phần Thương Mại - Dịch Vụ Bách Khoa</b>
           </v-card-text>
         </v-col>
-        <v-col cols="6" class="text-center">
-          <v-card-text>
+        <v-col cols="6" class="text-center py-0">
+          <v-card-text class="pb-0">
             <b>Địa chỉ: Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội</b>
           </v-card-text>
         </v-col>
       </v-row>
       <v-row no-gutters>
-        <v-col cols="6" class="text-center">
-          <v-card-text>© 2016 - 2019 /GPĐKKD số 0123456 do Sở KHĐT TP.HN cấp</v-card-text>
+        <v-col cols="6" class="text-center py-0">
+          <v-card-text class="pt-0">© 2016 - 2019 /GPĐKKD số 0123456 do Sở KHĐT TP.HN cấp</v-card-text>
         </v-col>
-        <v-col cols="6" class="text-center">
-          <v-card-text>Hotline: 01238888</v-card-text>
+        <v-col cols="6" class="text-center py-0">
+          <v-card-text class="pt-0">Hotline: 01238888</v-card-text>
         </v-col>
       </v-row>
       <!-- <v-card-text class="white--text">

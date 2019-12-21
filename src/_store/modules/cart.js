@@ -21,7 +21,7 @@ const getters = {
         const product = products.find(product => product.id == id);
         return {
           id: product.id,
-          name: product.name,
+          name: "Điện thoại " + product.supplier + " " + product.name + " " + product.rom + " (" + product.color + ")",
           price: product.price,
           image: product.images.length ? product.images[0].image : "",
           quantity

@@ -116,7 +116,7 @@ export default {
       this.products = allProducts.map(e => {
         return {
           id: e.id,
-          name: e.name,
+          name: "Điện thoại " + e.supplier + " " + e.name + " " + e.rom + " (" + e.color + ")" ,
           importPrice: formatCurrency(e.importPrice),
           price: formatCurrency(e.price),
           quantity: e.count

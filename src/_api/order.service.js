@@ -4,6 +4,7 @@ import {
     authHeader
 } from '@/_helpers';
 import _ from 'lodash';
+import { formatCurrency } from "@/_api/format-currency";
 
 
 
@@ -51,7 +52,7 @@ async function getAllOrders() {
                     note: e.note,
                     status: e.status,
                     createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at) ,
-                    total: e.total
+                    total: formatCurrency(e.total)
                 }
             })
             return orders;
@@ -131,7 +132,7 @@ async function getOrder(orderId) {
                 note: data.note,
                 status: data.status,
                 createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at) ,
-                total: data.total
+                total: formatCurrency(data.total)
             };
             return order;
         }

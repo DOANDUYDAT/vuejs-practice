@@ -101,7 +101,7 @@ export default {
         return {
           id: e.product.id,
           quantity: e.quantity,
-          name: e.product.name,
+          name: "Điện thoại " + e.product.supplier + " " + e.product.name + " " + e.product.rom + " (" + e.product.color + ")",
           price: e.import_price
         };
       });
