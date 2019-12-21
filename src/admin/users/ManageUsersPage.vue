@@ -182,11 +182,11 @@ export default {
       this.dialog = true;
     },
     async deleteItem(item) {
-      console.log('deleta');
+      console.log('delete');
       console.log(item);
-      const staffId = item.id;
+      const userId = item.id;
       const confirmStatus = confirm(
-        "Are you sure you want to delete this item?"
+        "Are you sure you want to delete this user?"
       );
       if (confirmStatus) {
         console.log(confirmStatus)

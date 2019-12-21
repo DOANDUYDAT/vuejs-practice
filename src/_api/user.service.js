@@ -13,7 +13,8 @@ export const userService = {
     getProfile,
     updateProfile,
     resetPassword,
-    changePassword
+    changePassword,
+    deleteUser
 };
 
 const headers = {
@@ -249,7 +250,10 @@ async function resetPassword(email) {
     }
 }
 
-async function changePassword({ oldPassword, password }) {
+async function changePassword({
+    oldPassword,
+    password
+}) {
     const data = {
         old_password: oldPassword,
         password: password
@@ -274,6 +278,32 @@ async function changePassword({ oldPassword, password }) {
         }
     } catch (error) {
         console.log('changePassword error');
+        console.log(error.response);
+        throw error;
+    }
+}
+
+async function deleteUser(userId) {
+    const auth = authHeader();
+    const options = {
+        method: 'delete',
+        url: `${config.apiUrl}/users/auth/${userId}/`,
+        headers: {
+            ...headers,
+            ...auth
+        }
+    }
+    try {
+        const response = await axios(options);
+        console.log(response);
+        if (response.status === 204) {
+            console.log('deleteUser done');
+            console.log(response.data);
+            return true;
+        }
+
+    } catch (error) {
+        console.log('deleteUser error');
         console.log(error.response);
         throw error;
     }
