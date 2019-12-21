@@ -138,7 +138,7 @@ export default {
       let productListToSearch = this.products.map(e => {
         return {
           id: e.id,
-          name: e.name,
+          name: "Điện thoại " + e.supplier + " " + e.name + " " + e.rom + " (" + e.color + ")",
           importPrice: e.importPrice,
           price: e.price,
           quantity: 0

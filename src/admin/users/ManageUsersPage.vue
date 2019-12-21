@@ -181,10 +181,31 @@ export default {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-    deleteItem(item) {
-      const index = this.users.indexOf(item);
-      confirm("Are you sure you want to delete this user?") &&
-        this.users.splice(index, 1);
+    async deleteItem(item) {
+      console.log('deleta');
+      console.log(item);
+      const staffId = item.id;
+      const confirmStatus = confirm(
+        "Are you sure you want to delete this item?"
+      );
+      if (confirmStatus) {
+        console.log(confirmStatus)
+        try {
+          const isSuccess = await userService.deleteUser(userId);
+          if (isSuccess) {
+            await this.getData();
+            this.$store.dispatch("alert/success", {
+              message: "Delete Successfully!"
+            });
+          }
+        } catch (error) {
+          if (error.response) {
+            this.$store.dispatch("alert/error", {
+              message: error.response.data.message
+            });
+          }
+        }
+      }
     },
     close() {
       this.dialog = false;

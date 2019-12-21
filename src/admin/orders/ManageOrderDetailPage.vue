@@ -59,7 +59,9 @@
               </v-card-text>
             </td>
             <td class="text-center">
-              <span style="color: red" data-tongtien>{{ order.total }}đ</span>
+              <span style="color: red" data-tongtien
+                >{{ order.total }}đ</span
+              >
             </td>
           </tr>
         </tfoot>
