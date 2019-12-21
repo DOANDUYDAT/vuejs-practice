@@ -11,11 +11,15 @@
         <v-btn class="gg-red white--text">VIEW</v-btn>
       </v-col>
     </v-row>
+    <v-row>
+      <bar-chart :chart-data="datacollection"></bar-chart>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import { statisticService } from '@/_api';
+import BarChart from './BarChart';
 
 export default {
   data() {
@@ -25,6 +29,7 @@ export default {
         year: new Date().getFullYear(),
       },
       statistic: null,
+      datacollection: null,
       months: [
         { text: 'Tháng 1', value: 1 },
         { text: 'Tháng 2', value: 2 },
@@ -46,11 +51,28 @@ export default {
       ]
     }
   },
+  components: {
+    BarChart
+  },
   methods: {
     async getData() {
       let time = this.time;
       console.log('getStatistic');
       this.statistic = await statisticService.getStatistic(time);
+      this.datacollection = {
+          labels: ['Import', 'Export'],
+          datasets: [
+            {
+              label: 'Import',
+              backgroundColor: 'red',
+              data: this.statistic.importTotalSum
+            }, {
+              label: 'Export',
+              backgroundColor: 'blue',
+              data: this.statistic.exportTotalSum
+            }
+          ]
+        }
     }
   }, created() {
     this.getData();
