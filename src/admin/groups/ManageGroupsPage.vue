@@ -16,10 +16,12 @@
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
-        
+
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="gg-red" class="mx-4 white--text" dark v-on="on">+ Thêm group</v-btn>
+            <v-btn color="gg-red" class="mx-4 white--text" dark v-on="on"
+              >+ Thêm group</v-btn
+            >
           </template>
           <v-card>
             <v-toolbar color="gg-red" dark flat>
@@ -30,14 +32,19 @@
 
             <v-card-text>
               <v-container>
-                 <v-row v-if="editedItem.id">
+                <v-row v-if="editedItem.id">
                   <v-col cols="3">
                     <v-subheader>
                       <b>Id:</b>
                     </v-subheader>
                   </v-col>
                   <v-col cols="9">
-                    <v-text-field v-model="editedItem.id" outlined placeholder="Id" disabled></v-text-field>
+                    <v-text-field
+                      v-model="editedItem.id"
+                      outlined
+                      placeholder="Id"
+                      disabled
+                    ></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -47,7 +54,11 @@
                     </v-subheader>
                   </v-col>
                   <v-col cols="9">
-                    <v-text-field v-model="editedItem.name" outlined placeholder="Name"></v-text-field>
+                    <v-text-field
+                      v-model="editedItem.name"
+                      outlined
+                      placeholder="Name"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row align="center" no-gutters>
@@ -76,7 +87,7 @@
           append-icon="mdi-magnify"
           outlined
           dense
-          placeholder="Search with Id or Name"
+          placeholder="Search theo mã hoặc tên group"
           color="it-blue-lighten"
           single-line
           hide-details
@@ -84,8 +95,16 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      <v-icon small class="mr-2" @click.stop="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
-      <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon>
+      <v-icon
+        small
+        class="mr-2"
+        @click.stop="editItem(item)"
+        color="it-blue-lighten"
+        >mdi-pencil</v-icon
+      >
+      <v-icon small @click.stop="deleteItem(item)" color="gg-red"
+        >mdi-trash-can-outline</v-icon
+      >
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="getData">Reset</v-btn>
@@ -157,10 +176,8 @@ export default {
         return {
           value: e.id,
           text: e.name
-        }
-      }
-
-      );
+        };
+      });
     },
 
     editItem(item) {
