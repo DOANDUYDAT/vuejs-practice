@@ -22,7 +22,7 @@
         @click:row="goToOrderDetailPage"
         style="font-size: 1rem;"
         :headers="headers"
-        :items="orders"
+        :items="listOrders"
         :search="search"
       >
         <template v-slot:item.status="{ item }">
