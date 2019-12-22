@@ -72,7 +72,7 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      <v-icon small class="mr-2" @click.stop="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
+      <v-icon v-if="item.status !== 'Hoàn thành'" small class="mr-2" @click.stop="editItem(item)" color="it-blue-lighten">mdi-pencil</v-icon>
       <!-- <v-icon small @click.stop="deleteItem(item)" color="gg-red">mdi-trash-can-outline</v-icon> -->
     </template>
     <template v-slot:no-data>
@@ -185,7 +185,7 @@ export default {
         } catch (error) {
           if (error.response) {
             this.$store.dispatch("alert/error", {
-              message: error.response.data.message
+              message: error.response.data.detail
             });
           }
         }

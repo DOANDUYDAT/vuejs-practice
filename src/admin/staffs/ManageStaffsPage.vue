@@ -171,7 +171,7 @@ export default {
     },
 
     async deleteItem(item) {
-      console.log("deleta");
+      console.log("delete");
       console.log(item);
       const staffId = item.id;
       const confirmStatus = confirm(
@@ -190,7 +190,7 @@ export default {
         } catch (error) {
           if (error.response) {
             this.$store.dispatch("alert/error", {
-              message: error.response.data.message
+              message: error.response.data.detail
             });
           }
         }

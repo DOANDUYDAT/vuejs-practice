@@ -54,13 +54,15 @@ export default {
   },
   computed: {
     productListSearch() {
-      let productListSearch = this.products.map(e => {
-        return {
-          id: e.id,
-          name: "Điện thoại " + e.supplier + " " + e.product.name + " " + e.rom + " (" + e.color + ")"
-        };
-      });
-      return productListSearch;
+      if (this.products.length) {
+        let productListSearch = this.products.map(e => {
+          return {
+            id: e.id,
+            name: "Điện thoại " + e.supplier + " " + e.name + " " + e.rom + " (" + e.color + ")"
+          };
+        });
+        return productListSearch;
+      }
     },
     itemsSearch() {
       return this.items.slice(0, 6);
@@ -73,7 +75,7 @@ export default {
       this.loading = true;
       // Simulated ajax query
 
-      if (search) {
+      if (search && this.productListSearch) {
         this.result = true;
         this.items = this.productListSearch.filter(e => {
           // return (e || "").toLowerCase().indexOf((v || "").toLowerCase()) > -1;
@@ -92,8 +94,8 @@ export default {
       if (!_.isEqual(query, oldSearch)) {
         this.$router.push({ path: "/search", query: { search: query } });
       }
-      
-      
+
+
     },
     async getData() {
       this.products = await productService.getAllProducts();
@@ -110,7 +112,7 @@ export default {
       if (currentPath !== url) {
         this.$router.push(url);
       }
-      
+
     }
   },
   created() {

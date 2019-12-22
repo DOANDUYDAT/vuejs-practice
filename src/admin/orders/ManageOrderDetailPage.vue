@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card v-if="order.id">
     <!-- <v-toolbar> -->
     <v-card-title class="flex-grow-1">
       <span class="headline">Chi tiết đơn hàng {{ order.id }}</span>
@@ -66,7 +66,7 @@
           </tr>
         </tfoot>
       </v-simple-table>
-      <v-row justify="space-between">
+      <v-row justify="space-between" >
         <v-col cols="12" md="3">
           <v-row class="pl-4"
             >Người mua:
@@ -97,7 +97,8 @@ export default {
   data() {
     return {
       order: {},
-      listProducts: []
+      listProducts: [],
+      userInfo: {}
     };
   },
   computed: {

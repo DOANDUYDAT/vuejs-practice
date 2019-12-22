@@ -38,7 +38,14 @@ async function getAllGroups() {
         console.log(response);
         if (response.status === 200) {
             console.log('getAllGroups done');
-            let groups = response.data;
+            let data = response.data;
+            let groups = data.map(e => {
+                return {
+                    name: e.name,
+                    id: e.id,
+                    permissions: e.permissions.map( per => per.id)
+                }
+            })
             return groups;
         }
     } catch (error) {

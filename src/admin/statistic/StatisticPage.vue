@@ -12,7 +12,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <bar-chart :chart-data="datacollection"></bar-chart>
+      <bar-chart :chart-data="datacollectionBar"></bar-chart>
     </v-row>
   </v-container>
 </template>
@@ -29,7 +29,7 @@ export default {
         year: new Date().getFullYear(),
       },
       statistic: null,
-      datacollectionBar: null,
+      datacollectionBar: {},
       datacollectionPie: null,
       months: [
         { text: 'Tháng 1', value: 1 },
@@ -58,36 +58,37 @@ export default {
   methods: {
     setDataBarChart(statistic) {
       this.datacollectionBar = {
-        labels: ['Import', 'Export'],
+        labels: ['Thu Chi'],
         datasets: [
           {
             label: 'Import',
             backgroundColor: 'red',
-            data: statistic.importTotalSum
-          }, {
+            data: [statistic.importTotalSum, 0]
+          },
+          {
             label: 'Export',
             backgroundColor: 'blue',
-            data: statistic.exportTotalSum
+            data: [statistic.exportTotalSum, 0]
           }
         ]
       }
     },
-    setDataPieChart(statistic) {
-      const labels = statistic.exportProductMax.map(e => {
-        return e.supplier + ' ' + e.name
-      })
-      const datasets = statistic.exportProductMax.map(e => {
-        return {
-          label: e.product.supplier + ' ' + e.product.name,
-          backgroundColor: this.randomColor(),
-          data: e.quantity
-        }
-      })
-      this.datacollectionBar = {
-        labels,
-        datasets
-      }
-    },
+    // setDataPieChart(statistic) {
+    //   const labels = statistic.exportProductMax.map(e => {
+    //     return e.supplier + ' ' + e.name
+    //   })
+    //   const datasets = statistic.exportProductMax.map(e => {
+    //     return {
+    //       label: e.product.supplier + ' ' + e.product.name,
+    //       backgroundColor: this.randomColor(),
+    //       data: e.quantity
+    //     }
+    //   })
+    //   this.datacollectionBar = {
+    //     labels,
+    //     datasets
+    //   }
+    // },
     randomColor() {
       const letters = '0123456789ABCDEF';
       let color = '#';
@@ -102,7 +103,7 @@ export default {
       this.statistic = await statisticService.getStatistic(time);
       const statistic = this.statistic;
       this.setDataBarChart(statistic);
-      this.setDataPieChart(statistic);
+      // this.setDataPieChart(statistic);
     }
   }, created() {
     this.getData();

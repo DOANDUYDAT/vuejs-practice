@@ -67,6 +67,7 @@
                       v-model="editedItem.permissions"
                       :items="listPermission"
                       chips
+                      outlined
                       label="Permissions"
                       multiple
                     ></v-select>
@@ -234,7 +235,7 @@ export default {
           }
         } catch (error) {
           this.$store.dispatch("alert/error", {
-            message: error
+            message: error.response.data.detail
           });
         }
       } else {

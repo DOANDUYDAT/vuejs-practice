@@ -96,7 +96,7 @@ export default {
       return this.userInfo.firstName + " " + this.userInfo.lastName;
     },
     isAdminPermission() {
-      return  this.user.groups ? this.user.groups[0].name === "admin" : false;
+      return  this.user.groups ? this.user.groups[0].name === "admin" || this.user.groups[0].name === 'staff' : false;
     }
   },
   methods: {

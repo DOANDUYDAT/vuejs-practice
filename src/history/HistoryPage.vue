@@ -36,7 +36,7 @@
 
 <script>
 import { formatCurrency } from "../_api/format-currency";
-import { orderService } from "@/_api";
+import { orderService, userService } from "@/_api";
 
 export default {
   data() {
@@ -58,7 +58,9 @@ export default {
           value: "status"
         }
       ],
-      orders: []
+      orders: [], 
+      listOrders: [],
+      userInfo: {}
     };
   },
   computed: {},
@@ -69,6 +71,9 @@ export default {
     },
     async getData() {
       this.orders = await orderService.getAllOrders();
+      this.userInfo = await userService.getProfile();
+      const orders = this.orders;
+      this.listOrders = orders.filter(e => e.user.id === this.userInfo.id)
     },
     getColor(status) {
       if (status === "Đang giao hàng") return "red";

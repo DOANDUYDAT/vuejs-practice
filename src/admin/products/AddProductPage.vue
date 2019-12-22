@@ -74,7 +74,7 @@
                 tile
                 :key="i"
               >
-                <v-img :src="image"></v-img>
+                <v-img :src="image.image"></v-img>
               </v-avatar>
             </div>
             <!-- </v-col>
@@ -83,12 +83,12 @@
           <!-- <input type="file" ref="file" accept="image/*" v-on:change="handleFileUpload()"/> -->
           <v-file-input
             multiple
-            show-size
             prepend-icon="mdi-camera"
             @change="handleFileUpload"
             accept="image/*"
             full-width
             label="Thêm ảnh"
+            
           ></v-file-input>
         </v-col>
       </v-row>
@@ -118,6 +118,7 @@ export default {
 
   data() {
     return {
+      initialValue: '',
       suppliers: [],
       supplierId: "",
       imagesShow: [],
@@ -248,13 +249,14 @@ export default {
       } catch (error) {
         if (error.response) {
           this.$store.dispatch("alert/error", {
-            message: error.response.data.message
+            message: error.response.data.detail
           });
         }
       }
     },
     handleFileUpload(files) {
       this.product.images = [];
+      this.imagesShow = [];
       for (let i = 0; i < files.length; i++) {
         // this.product.images.push({ image: files[i]});
         this.product.images.push(files[i]);
@@ -289,6 +291,7 @@ export default {
       this.product.count = 0;
       this.product.description = "<h1>Some initial content</h1>";
       this.product.images = [];
+      this.imagesShow = [];
     },
     async getData() {
       this.suppliers = await supplierService.getAllSuppliers();

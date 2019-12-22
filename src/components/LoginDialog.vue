@@ -71,6 +71,7 @@
                   class="layout justify-center white--text"
                   @click="submit"
                   :disabled="invalid"
+                  :loading="loading"
                   >Login</v-btn
                 >
               </v-card-actions>
@@ -88,6 +89,7 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
+      loading: false,
       dialog: false,
       email: "",
       showPassword: false,
@@ -113,6 +115,7 @@ export default {
         const isValid = await this.$refs.observer.validate();
         if (isValid) {
           const { email, password, remember } = this;
+          this.loading = true;
           const isSuccess = await this.$store.dispatch("authentication/login", {
             email,
             password,
@@ -123,6 +126,7 @@ export default {
             this.$store.dispatch("alert/success", {
               message: "Login Successfully!"
             });
+            this.loading = false;
             this.dialog = false;
             const fullPath = this.$route.query.redirect;
             if (fullPath) {

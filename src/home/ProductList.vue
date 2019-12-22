@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="productsList.length">
     <v-carousel cycle height="350" show-arrows-on-hover hide-delimiter-background>
       <v-carousel-item
         v-for="product in topProduct"
@@ -12,6 +12,13 @@
     <v-row no-gutters>
       <v-col v-for="product in productsList" :key="product.id" cols="12" sm="6" md="4" lg="3">
         <product-list-item :product="product"></product-list-item>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container v-else>
+    <v-row>
+      <v-col cols="12" class="headline text-center">
+        Không có sản phẩm nào
       </v-col>
     </v-row>
   </v-container>

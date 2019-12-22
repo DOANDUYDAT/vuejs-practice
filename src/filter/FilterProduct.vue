@@ -229,6 +229,7 @@ export default {
       const filter = this.filter;
       const oldFilter = this.$route.query;
       let query = {};
+      this.loader();
       if (filter.minPrice) {
         query = {...query, min_price: filter.minPrice};
       }
@@ -258,6 +259,8 @@ export default {
       }
       if (!_.isEmpty(query) && !_.isEqual(query, oldFilter)) {
         this.$router.push({ path: "/filter", query: query });
+      } else {
+        this.$router.push({ name: 'home'});
       }
       
       // if (!_.isEmpty(filter) && !_.isEqual(filter, oldFilter)) {
@@ -293,38 +296,38 @@ export default {
           }
         )
       );
-      // this.getFilterInit();
+      this.getFilterInit();
     },
-    // getFilterInit() {
-    //   const query = this.$route.query;
-    //   if (query.minPrice) {
-    //     this.filter.minPrice = query.minPrice;
-    //   }
-    //   if (query.maxPrice) {
-    //     this.filter.maxPrice = query.maxPrice;
-    //   }
-    //   if (query.supplier) {
-    //     this.filter.supplier = query.supplier.split(',');
-    //   }
-    //   if (query.color) {
-    //     this.filter.color = query.color.split(',');
-    //   }
-    //   if (query.rom) {
-    //     this.filter.rom = query.rom.split(',');
-    //   }
-    //   if (query.ram) {
-    //     this.filter.ram = query.ram.split(',');
-    //   }
-    //   if (query.frontCamera) {
-    //     this.filter.frontCamera = query.frontCamera.split(',');
-    //   }
-    //   if (query.rearCamera) {
-    //     this.filter.rearCamera = filqueryer.rearCamera.split(',');
-    //   }
-    //   if (query.operatingSystem) {
-    //     this.filter.operatingSystem = query.operatingSystem.split(',');
-    //   }
-    // }
+    getFilterInit() {
+      const query = this.$route.query;
+      if (query.minPrice) {
+        this.filter.minPrice = query.minPrice;
+      }
+      if (query.maxPrice) {
+        this.filter.maxPrice = query.maxPrice;
+      }
+      if (query.supplier) {
+        this.filter.supplier = query.supplier;
+      }
+      if (query.color) {
+        this.filter.color = query.color;
+      }
+      if (query.rom) {
+        this.filter.rom = query.rom;
+      }
+      if (query.ram) {
+        this.filter.ram = query.ram;
+      }
+      if (query.frontCamera) {
+        this.filter.frontCamera = query.frontCamera;
+      }
+      if (query.rearCamera) {
+        this.filter.rearCamera = filqueryer.rearCamera;
+      }
+      if (query.operatingSystem) {
+        this.filter.operatingSystem = query.operatingSystem;
+      }
+    }
   },
 
   created() {

@@ -13,7 +13,7 @@
         <v-container>
           <ValidationObserver ref="observer" v-slot="{ invalid }" tag="form">
             <v-row align="center" justify="center">
-              <v-col cols="12" md="5" class="py-0">
+              <v-col cols="12" md="5" class=" py-0">
                 <ValidationProvider
                   name="first name"
                   rules="required|alpha"
@@ -27,7 +27,7 @@
               <!-- <v-col cols="12" sm="6" md="4">
               <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
               </v-col>-->
-              <v-col cols="12" md="5" class="py-0">
+              <v-col cols="12" md="5" class="py-0 ">
                 <ValidationProvider
                   name="last name"
                   rules="required|alpha"
@@ -98,6 +98,7 @@
                   class="layout justify-center white--text"
                   @click="submit"
                   :disabled="invalid"
+                  :loading="loading"
                 >Register</v-btn>
               </v-card-actions>
             </v-col>
@@ -115,6 +116,7 @@ import { userService } from "@/_api";
 export default {
   data() {
     return {
+      loading: flase,
       dialog: false,
       email: "",
       confirmPassword: "",
@@ -140,13 +142,16 @@ export default {
           };
 
           // console.log(userInfo);
+          this.loading = true;
           const isSuccess = await userService.register(userInfo);
           if (isSuccess) {
             this.$store.dispatch("alert/success", {
               message: "Register successfully!"
             });
             this.resetInput();
+            this.loading = false;
             this.dialog = false;
+            
           }
         }
       } catch (error) {

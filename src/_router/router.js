@@ -31,6 +31,7 @@ import AddImportProductPage from '@/admin/importProducts/AddImportProductPage';
 import ManageSuppliersPage from "@/admin/suppliers/ManageSuppliersPage";
 import ManageGroupsPage from "@/admin/groups/ManageGroupsPage";
 import StatisticPage from "@/admin/statistic/StatisticPage";
+import RandomChart from "@/admin/statistic/RandomChart";
 
 import NotPermission from '@/not-permission/NotPermission';
 import LoginPage from "@/login/LoginPage";
