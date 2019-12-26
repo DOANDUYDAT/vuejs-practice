@@ -101,12 +101,14 @@ export default {
   },
   methods: {
     ...mapActions({
-      logoutAction: "authentication/logout"
+      logoutAction: "authentication/logout",
+      clearCart: 'cart/clearCart'
     }),
     async logout() {
       try {
         const isSuccess = await this.logoutAction();
         if (isSuccess) {
+          this.clearCart();
           this.$store.dispatch("alert/success", {
             message: "You are log out!"
           });

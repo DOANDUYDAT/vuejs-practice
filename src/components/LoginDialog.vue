@@ -136,6 +136,7 @@ export default {
         }
       } catch (error) {
         if (error.response) {
+          this.loading = false;
           this.$store.dispatch("alert/error", {
             message: error.response.data.detail
           });

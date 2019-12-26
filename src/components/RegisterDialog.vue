@@ -116,7 +116,7 @@ import { userService } from "@/_api";
 export default {
   data() {
     return {
-      loading: flase,
+      loading: false,
       dialog: false,
       email: "",
       confirmPassword: "",
@@ -151,11 +151,12 @@ export default {
             this.resetInput();
             this.loading = false;
             this.dialog = false;
-            
+
           }
         }
       } catch (error) {
         if (error.response) {
+          this.loading = false;
           this.$store.dispatch("alert/error", {
             message: error.response.data.detail
           });

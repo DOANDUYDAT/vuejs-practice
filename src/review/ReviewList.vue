@@ -40,19 +40,19 @@ export default {
       return Math.ceil(this.reviewFollowStar.length / 3);
     },
     review_5_Star() {
-      return this.allReviews.filter(review => review.rating === 5);
+      return this.allReviews.filter(review => review.vote === 5);
     },
     review_4_Star() {
-      return this.allReviews.filter(review => review.rating === 4);
+      return this.allReviews.filter(review => review.vote === 4);
     },
     review_3_Star() {
-      return this.allReviews.filter(review => review.rating === 3);
+      return this.allReviews.filter(review => review.vote === 3);
     },
     review_2_Star() {
-      return this.allReviews.filter(review => review.rating === 2);
+      return this.allReviews.filter(review => review.vote === 2);
     },
     review_1_Star() {
-      return this.allReviews.filter(review => review.rating === 1);
+      return this.allReviews.filter(review => review.vote === 1);
     },
     reviewFollowStar() {
       let reviewFollowStar = [];

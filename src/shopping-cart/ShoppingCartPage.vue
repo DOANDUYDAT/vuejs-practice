@@ -37,7 +37,7 @@
                         <v-btn-toggle dense>
                           <v-btn
                             :disabled="product.quantity > 1 ? false : true"
-                            @click="decrementItemQuantity({ id: product.id, quantity: 1 })"
+                            @click="decrementItem({ id: product.id, quantity: 1 })"
                             min-width="2rem"
                           >
                             <span>-</span>
@@ -46,7 +46,7 @@
                             <span>{{ product.quantity > 1 ? product.quantity : 1 }}</span>
                           </v-btn>
                           <v-btn
-                            @click="incrementItemQuantity({ id: product.id, quantity: 1 })"
+                            @click="incrementItem({ id: product.id, quantity: 1 })"
                             min-width="2rem"
                           >
                             <span>+</span>
@@ -150,6 +150,22 @@ export default {
 
     formatCurrency(total) {
       return formatCurrency(total);
+    },
+    incrementItem({ id, quantity }) {
+      const product = this.products.find(e => e.id === id);
+      if (product.count >= product.quantity + quantity) {
+        this.incrementItemQuantity({ id, quantity });
+      } else {
+        this.$store.dispatch("alert/error", {
+          message: "Không đủ số lượng"
+        });
+      }
+    },
+    decrementItem({ id, quantity }) {
+      const product = this.products.find(e => e.id === id);
+      if (product.quantity - quantity > 0) {
+        this.decrementItemQuantity({ id, quantity });
+      }
     }
   }
 };

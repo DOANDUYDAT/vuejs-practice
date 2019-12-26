@@ -262,11 +262,11 @@ export default {
       } else {
         this.$router.push({ name: 'home'});
       }
-      
+
       // if (!_.isEmpty(filter) && !_.isEqual(filter, oldFilter)) {
       //   this.$router.push({ path: "/filter", query: filter });
       // }
-      
+
     },
     resetFilter() {
       this.filter.minPrice = "";
@@ -296,10 +296,11 @@ export default {
           }
         )
       );
-      this.getFilterInit();
+      // this.getFilterInit();
     },
     getFilterInit() {
       const query = this.$route.query;
+      this.resetFilter();
       if (query.minPrice) {
         this.filter.minPrice = query.minPrice;
       }
@@ -329,7 +330,9 @@ export default {
       }
     }
   },
-
+  // watch() {
+  //   // this.getFilterInit()
+  // },
   created() {
     this.getData();
   }

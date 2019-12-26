@@ -113,7 +113,9 @@ async function logout() {
         console.log(response);
         if (response.status === 200) {
             console.log('logout done');
+            localStorage.removeItem('cart');
             localStorage.removeItem('user');
+
             return true;
         }
     } catch (error) {

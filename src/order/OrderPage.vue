@@ -93,7 +93,7 @@
                 <th class="text-center" style="width:30%"></th>
                 <th class="text-center" style="width:50%"></th>
                 <th class="text-center" style="width:20%"></th>
-            
+
               </tr>-->
             </thead>
             <tbody>
@@ -180,10 +180,12 @@ export default {
         name,
         phone,
         address,
-        note,
         products,
         total
       };
+      if (note) {
+        order = {...order, note}
+      }
 
       try {
         const isSuccess = await this.$store.dispatch("cart/checkout", order);

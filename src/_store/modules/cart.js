@@ -24,7 +24,8 @@ const getters = {
           name: "Điện thoại " + product.supplier + " " + product.name + " " + product.rom + " (" + product.color + ")",
           price: product.price,
           image: product.images.length ? product.images[0].image : "",
-          quantity
+          quantity,
+          count: product.count
         }
       } else {
         return [];
@@ -62,28 +63,11 @@ const actions = {
         return true;
       }
     } catch (error) {
-        commit('setCheckoutStatus', 'failed')
-        // rollback to the cart saved before sending the request
-        commit('setCartItems', { items: savedCartItems })
-        throw error;
+      commit('setCheckoutStatus', 'failed')
+      // rollback to the cart saved before sending the request
+      commit('setCartItems', { items: savedCartItems })
+      throw error;
     }
-
-    // shop.buyProducts(
-    //   products,
-    //   () => {
-    //     commit('setCheckoutStatus', 'successful')
-    //     // remove  item from stock
-    //     products.forEach((product) => {
-    //       commit('products/decrementProductInventory', { id: product.id, quantity: product.quantity }, { root: true })
-    //     })
-    //     localStorage.removeItem('cart');
-    //   },
-    //   () => {
-    //     commit('setCheckoutStatus', 'failed')
-    //     // rollback to the cart saved before sending the request
-    //     commit('setCartItems', { items: savedCartItems })
-    //   }
-    // )
   },
 
   addProductToCart({ state, commit }, { product, quantity }) {
@@ -101,6 +85,9 @@ const actions = {
     } else {
       commit('pushProductToCart', { id: product.id, quantity: quantity });
     }
+  },
+  clearCart({ commit }) {
+    commit('clearCart')
   }
 }
 
@@ -128,6 +115,7 @@ const mutations = {
   incrementItemQuantity(state, { id, quantity }) {
     const cartItem = state.items.find(item => item.id === id)
     cartItem.quantity += quantity;
+
     const cart = { items: state.items };
     localStorage.setItem('cart', JSON.stringify(cart));
   },
@@ -135,6 +123,7 @@ const mutations = {
   decrementItemQuantity(state, { id, quantity }) {
     const cartItem = state.items.find(item => item.id === id)
     cartItem.quantity -= quantity;
+
     const cart = { items: state.items };
     localStorage.setItem('cart', JSON.stringify(cart));
   },
@@ -145,6 +134,9 @@ const mutations = {
 
   setCheckoutStatus(state, status) {
     state.checkoutStatus = status
+  },
+  clearCart(state) {
+    state.items = []
   }
 }
 
