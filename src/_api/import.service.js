@@ -76,11 +76,11 @@ async function getAllImports() {
         if (response.status === 200) {
             console.log('getAllImports done');
             const data = response.data;
-            const d = new Date();
             const allImports = data.map(e => {
+                const d = new Date(e.created_at);
                 const anImport = {
                     id: e.id,
-                    createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at),
+                    createdAt: d.getFullYear() + '-' + Number(d.getMonth() + 1) + '-' + d.getDate(),
                     items: e.items,
                     total: e.total,
                     user: e.user
@@ -112,10 +112,10 @@ async function getImport(importId) {
         if (response.status === 200) {
             console.log('getImport done');
             const data = response.data;
-            const d = new Date();
+            const d = new Date(data.created_at);
             const anImport = {
                 id: data.id,
-                createdAt: d.getFullYear(data.created_at) + '-' + Number(d.getMonth(data.created_at) + 1) + '-' + d.getDate(data.created_at),
+                createdAt: d.getFullYear() + '-' + Number(d.getMonth() + 1) + '-' + d.getDate(),
                 items: data.items,
                 total: data.total,
                 user: data.user
