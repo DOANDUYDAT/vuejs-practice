@@ -8,7 +8,7 @@
         <v-select :items="years" label="Năm" v-model="time.year"></v-select>
       </v-col>
       <v-col cols="3">
-        <v-btn class="gg-red white--text">VIEW</v-btn>
+        <v-btn class="gg-red white--text" @click="getData">VIEW</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -44,16 +44,26 @@ export default {
         { text: 'Tháng 10', value: 10 },
         { text: 'Tháng 11', value: 11 },
         { text: 'Tháng 12', value: 12 }
-      ],
-      years: [
-        { text: 'Năm 2017', value: 2017 },
-        { text: 'Năm 2018', value: 2018 },
-        { text: 'Năm 2019', value: 2019 }
       ]
     }
   },
   components: {
     BarChart
+  },
+  computed: {
+    years() {
+      const d = new Date();
+      const currentYear = d.getFullYear();
+      let years = [];
+      for (let i = 0; i < 5; i++) {
+        let year = currentYear - i
+        years.push({
+          text: 'Năm ' + year,
+          value: year
+        })
+      }
+      return years
+    }
   },
   methods: {
     setDataBarChart(statistic) {
