@@ -5,7 +5,7 @@
         <div class="headline">Mô tả sản phẩm</div>
         <template v-if="!fullPost">
           <div v-html="summaryPost" class="py-5"></div>
-          <v-btn small @click="fullPost = true">Xem chi tiết</v-btn>
+          <v-btn small @click="fullPost = true" class="my-5">Xem chi tiết</v-btn>
         </template>
         <template v-else>
           <div v-html="product.description" class="py-5"></div>

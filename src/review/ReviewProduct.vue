@@ -4,7 +4,7 @@
       <v-icon color="amber" class="mr-2">mdi-star-outline</v-icon>Đánh giá sản phẩm
     </div>
 
-    <rating-product :product="product"></rating-product>
+    <!-- <rating-product :product="product"></rating-product> -->
     <review-list></review-list>
   </v-container>
 </template>
