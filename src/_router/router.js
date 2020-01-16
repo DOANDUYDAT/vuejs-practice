@@ -33,6 +33,8 @@ import ManageGroupsPage from "@/admin/groups/ManageGroupsPage";
 import StatisticPage from "@/admin/statistic/StatisticPage";
 import RandomChart from "@/admin/statistic/RandomChart";
 
+import ActiveAccountPage from "@/account/ActiveAccountPage";
+
 import NotPermission from '@/not-permission/NotPermission';
 import LoginPage from "@/login/LoginPage";
 
@@ -180,6 +182,15 @@ const router = new VueRouter({
                         requiresRole: null
                     }
                 },
+
+                {
+                    path: 'active-account',
+                    component: ActiveAccountPage,
+                    name: 'active account',
+                    meta: {
+                        requiresRole: null
+                    }
+                }
             ]
         },
 

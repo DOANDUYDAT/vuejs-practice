@@ -14,7 +14,8 @@ export const userService = {
     updateProfile,
     resetPassword,
     changePassword,
-    deleteUser
+    deleteUser,
+    activeAccount
 };
 
 const headers = {
@@ -306,6 +307,31 @@ async function deleteUser(userId) {
 
     } catch (error) {
         console.log('deleteUser error');
+        console.log(error.response);
+        throw error;
+    }
+}
+
+async function activeAccount(email, code) {
+    const auth = authHeader();
+    const options = {
+        method: 'get',
+        url: `${config.apiUrl}/users/register?email=${email}&verificate_code=${code}`,
+        headers: {
+            ...headers
+        }
+    }
+    try {
+        const response = await axios(options);
+        console.log(response);
+        if (response.status === 200) {
+            console.log('activeAccount done');
+            console.log(response.data);
+            return true;
+        }
+
+    } catch (error) {
+        console.log('activeAccount error');
         console.log(error.response);
         throw error;
     }
