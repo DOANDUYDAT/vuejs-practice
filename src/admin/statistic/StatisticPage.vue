@@ -12,7 +12,12 @@
       </v-col>
     </v-row>
     <v-row>
-      <bar-chart :chart-data="datacollectionBar"></bar-chart>
+      <v-col cols="6">
+        <bar-chart :chart-data="datacollectionBar"></bar-chart>
+      </v-col>
+      <v-col cols="6">
+        <pie-chart :chart-data="datacollectionPie"></pie-chart>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -20,6 +25,8 @@
 <script>
 import { statisticService } from '@/_api';
 import BarChart from './BarChart';
+import PieChart from './PieChart';
+
 
 export default {
   data() {
@@ -30,7 +37,7 @@ export default {
       },
       statistic: null,
       datacollectionBar: {},
-      datacollectionPie: null,
+      datacollectionPie: {},
       months: [
         { text: 'Tháng 1', value: 1 },
         { text: 'Tháng 2', value: 2 },
@@ -48,7 +55,8 @@ export default {
     }
   },
   components: {
-    BarChart
+    BarChart,
+    PieChart
   },
   computed: {
     years() {
@@ -72,33 +80,34 @@ export default {
         datasets: [
           {
             label: 'Import',
-            backgroundColor: 'red',
-            data: [statistic.importTotalSum, 0]
+            backgroundColor: this.randomColor(),
+            data: [statistic.importTotalSum / 1000000, 0]
           },
           {
             label: 'Export',
-            backgroundColor: 'blue',
-            data: [statistic.exportTotalSum, 0]
+            backgroundColor: this.randomColor(),
+            data: [statistic.exportTotalSum / 1000000, 0]
           }
         ]
       }
     },
-    // setDataPieChart(statistic) {
-    //   const labels = statistic.exportProductMax.map(e => {
-    //     return e.supplier + ' ' + e.name
-    //   })
-    //   const datasets = statistic.exportProductMax.map(e => {
-    //     return {
-    //       label: e.product.supplier + ' ' + e.product.name,
-    //       backgroundColor: this.randomColor(),
-    //       data: e.quantity
-    //     }
-    //   })
-    //   this.datacollectionBar = {
-    //     labels,
-    //     datasets
-    //   }
-    // },
+    setDataPieChart(statistic) {
+      const labels = statistic.exportProductMax.map(e => {
+        return e.supplier + ' ' + e.name
+      })
+      let datasets = [{
+        backgroundColor: [],
+        data: []
+      }]
+      statistic.exportProductMax.forEach(e => {
+        datasets[0].backgroundColor.push(this.randomColor())
+        datasets[0].data.push(e.quantity)
+      })
+      this.datacollectionPie = {
+        labels,
+        datasets
+      }
+    },
     randomColor() {
       const letters = '0123456789ABCDEF';
       let color = '#';
@@ -113,7 +122,7 @@ export default {
       this.statistic = await statisticService.getStatistic(time);
       const statistic = this.statistic;
       this.setDataBarChart(statistic);
-      // this.setDataPieChart(statistic);
+      this.setDataPieChart(statistic);
     }
   }, created() {
     this.getData();
